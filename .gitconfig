@@ -7,3 +7,5 @@
         email = andrewdcato@gmail.com
 [push]
         default = matching
+[core]
+        editor = 'vim'
