@@ -7,48 +7,66 @@ export ZSH=/Users/andrewcato/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="geometry/geometry"
+# ZSH_THEME="bullet-train/bullet-train"
+# ZSH_THEME="statusline/statusline"
+# BULLETTRAIN_PROMPT_ORDER=(
+#   time
+#   status
+#   context
+#   dir
+#   git
+# )
+#
+# BULLETTRAIN_CONTEXT_DEFAULT_USER=none
+# BULLETTRAIN_TIME_12HR=true
+# BULLETTRAIN_PROMPT_CHAR='\uf0da '
 
 # Theme Config
-POWERLEVEL9K_MODE='awesome-fontconfig'
+#POWERLEVEL9K_MODE='awesome-fontconfig'
+GEOMETRY_PROMPT_PLUGINS=(virtualenv exec_time git node)
+GEOMETRY_COLOR_NODE_NPM_VERSION="green"
+GEOMETRY_COLOR_DIR="cyan"
+GEOMETRY_COLOR_PROMPT="yellow"
 
 # Custom Formats and Icons
-POWERLEVEL9K_TIME_FORMAT="\ue12e %D{%I:%M \uf073 %m/%d/%Y}"
-POWERLEVEL9K_BATTERY_ICON='\uf1e6 '
-POWERLEVEL9K_OK_ICON='\u2713'
-POWERLEVEL9K_FAIL_ICON='\u2717'
+#POWERLEVEL9K_TIME_FORMAT="\ue12e %D{%I:%M \uf073 %m/%d/%Y}"
+#POWERLEVEL9K_BATTERY_ICON='\uf1e6 '
+#POWERLEVEL9K_OK_ICON='\u2713'
+#POWERLEVEL9K_FAIL_ICON='\u2717'
 
 # Customize Prompt
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status os_icon dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(nvm node_version rvm battery time)
-# POWERLEVEL9K_STATUS_VERBOSE=false
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status os_icon dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(nvm node_version rvm battery time)
+#POWERLEVEL9K_STATUS_VERBOSE=false
 
 # Custom Colors
-POWERLEVEL9K_OS_ICON_BACKGROUND="white"
-POWERLEVEL9K_OS_ICON_FOREGROUND="blue"
-POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='white'
-POWERLEVEL9K_RVM_VISUAL_IDENTIFIER_COLOR='red'
-POWERLEVEL9K_RVM_FOREGROUND='white'
+#POWERLEVEL9K_OS_ICON_BACKGROUND="white"
+#POWERLEVEL9K_OS_ICON_FOREGROUND="blue"
+#POWERLEVEL9K_DIR_HOME_FOREGROUND="white"
+#POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
+#POWERLEVEL9K_DIR_DEFAULT_FOREGROUND='white'
+#POWERLEVEL9K_RVM_VISUAL_IDENTIFIER_COLOR='red'
+#POWERLEVEL9K_RVM_FOREGROUND='white'
 
 
 # Battery Settings / Colors
-POWERLEVEL9K_BATTERY_LOW_THRESHOLD='10'
-POWERLEVEL9K_BATTERY_CHARGING_BACKGROUND='yellow'
-POWERLEVEL9K_BATTERY_CHARGING_FOREGROUND='white'
-POWERLEVEL9K_BATTERY_CHARGED_BACKGROUND='green'
-POWERLEVEL9K_BATTERY_CHARGED_FOREGROUND='white'
-POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND='yellow'
-POWERLEVEL9K_BATTERY_LOW_BACKGROUND='red'
+#POWERLEVEL9K_BATTERY_LOW_THRESHOLD='10'
+#POWERLEVEL9K_BATTERY_CHARGING_BACKGROUND='yellow'
+#POWERLEVEL9K_BATTERY_CHARGING_FOREGROUND='white'
+#POWERLEVEL9K_BATTERY_CHARGED_BACKGROUND='green'
+#POWERLEVEL9K_BATTERY_CHARGED_FOREGROUND='white'
+#POWERLEVEL9K_BATTERY_DISCONNECTED_BACKGROUND='yellow'
+#POWERLEVEL9K_BATTERY_LOW_BACKGROUND='red'
 
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX='\uf0da '
+#POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+#POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
+#POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX='\uf0da '
 
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_SHORTEN_DELIMITER=".."
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_middle"
+#POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+#POWERLEVEL9K_SHORTEN_DELIMITER=".."
+#POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_middle"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -67,7 +85,7 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_middle"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -92,7 +110,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow brew nvm osx rvm zsh-syntax-highlighting)
+plugins=(git git-flow brew nvm docker)
 
 source $ZSH/oh-my-zsh.sh
 
