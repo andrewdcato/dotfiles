@@ -1,0 +1,9 @@
+[filter "lfs"]
+        clean = git-lfs clean %f
+        smudge = git-lfs smudge %f
+        required = true
+[user]
+        name = Andrew Cato
+        email = andrewdcato@gmail.com
+[push]
+        default = matching
