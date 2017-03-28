@@ -1,0 +1,27 @@
+Host sb
+  HostName 50.116.31.222
+  User andrewcato
+
+Host lms
+  HostName 96.126.118.103
+  User andrewcato
+
+Host ci
+  HostName 66.228.53.197
+  User andrewcato
+
+Host mail
+  HostName 45.33.119.108
+  User andrewcato
+
+Host docusign
+  HostName 45.33.119.120
+  User andrewcato
+
+Host db1
+  HostName 198.58.103.194
+  User andrewcato
+
+Host db2
+  HostName 198.58.127.178
+  User andrewcato
