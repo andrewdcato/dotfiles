@@ -4,9 +4,10 @@ execute pathogen#infect()
 " Set some sensible defaults
 syntax enable
 filetype plugin indent on
-set colorcolumn=90
+set colorcolumn=120
 set number
-set nowrap
+set wrap
+set linebreak
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -16,7 +17,7 @@ set showmatch
 
 " GUI customization
 set background=dark
-set guifont=Oerator\ Mono\ Book:h18
+set guifont=Operator\ Mono\ Book:h14
 colorscheme solarized
 let NERDTreeShowHidden=1
 set noshowmode
