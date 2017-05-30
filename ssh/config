@@ -2,9 +2,13 @@ Host sb
   HostName 50.116.31.222
   User andrewcato
 
-Host lms
+Host lms-old
   HostName 96.126.118.103
   User andrewcato
+
+Host lms
+  HostName 45.33.21.108
+  User acato
 
 Host ci
   HostName 66.228.53.197
@@ -18,10 +22,18 @@ Host docusign
   HostName 45.33.119.120
   User andrewcato
 
-Host db1
+Host db1-old
   HostName 198.58.103.194
   User andrewcato
 
-Host db2
+Host db1
+  HostName 45.33.3.43
+  User acato
+
+Host db2-old
   HostName 198.58.127.178
   User andrewcato
+
+Host db2
+  HostName 45.33.29.67
+  User acato
