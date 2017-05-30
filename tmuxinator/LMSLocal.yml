@@ -1,0 +1,17 @@
+# ~/.tmuxinator/LMSLocal.yml
+
+name: LMSLocal
+root: ~/surety/lead-management-system
+
+windows:
+  - Logs:
+    pre: git fetch
+    panes:
+      - coffee app.coffee
+  - Git:
+  - Run Reports:
+    - cd reports
+  - Mailer Service:
+    pre: cd ../surety-mailer && git fetch
+    panes:
+      - node index.js
