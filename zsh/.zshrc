@@ -6,8 +6,12 @@ export ZSH=/Users/andrewcato/.oh-my-zsh
 # Set default user account for themes that recognize this
 export DEFAULT_USER="andrewcato"
 export PAGER="most"
+export EDITOR='vim'
 
-# Set name of the theme to load. Optionally, if you set this to "random"
+# Load tmuxinator
+source ~/.bin/tmuxinator.zsh
+
+#Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="geometry/geometry"
