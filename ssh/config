@@ -18,9 +18,13 @@ Host mail
   HostName 45.33.119.108
   User andrewcato
 
-Host docusign
+Host docusign-old
   HostName 45.33.119.120
   User andrewcato
+
+Host docusign
+  HostName 173.255.205.95
+  User acato
 
 Host db1-old
   HostName 198.58.103.194
