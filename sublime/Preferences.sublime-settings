@@ -1,0 +1,44 @@
+{
+	"auto_indent"               : true,
+	"binary_file_patterns"      :
+	[
+		"node_modules/",
+		"node_modules/*"
+	],
+	"bold_folder_labels"        : true,
+	"caret_extra_bottom"        : 2,
+	"caret_extra_top"           : 2,
+	"caret_extra_width"         : 3,
+	"caret_style"               : "phase",
+	"close_windows_when_empty"  : true,
+	"color_scheme"              : "Packages/Theme - Cobalt2/cobalt2.tmTheme",
+	"fade_fold_buttons"         : false,
+	"font_face"                 : "Operator Mono",
+	"font_options"              :
+	[
+		"subpixel_antialias"
+	],
+	"font_size"                 : 14,
+	"highlight_line"            : true,
+	"highlight_modified_tabs"   : true,
+	"ignored_packages"          :
+	[
+		"Vintage"
+	],
+	"indent_guide_options"      :
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom"       : 1,
+	"line_padding_top"          : 1,
+	"sidebar_xlarge"            : true,
+	"tab_size"                  : 2,
+	"theme"                     : "Cobalt2.sublime-theme",
+	"translate_tabs_to_spaces"  : true,
+	"trim_automatic_white_space": true,
+	"use_tab_stops"             : true,
+	"wide_caret"                : true,
+	"word_wrap"                 : true,
+	"wrap_width"                : 100
+}

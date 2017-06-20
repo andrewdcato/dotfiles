@@ -1,0 +1,46 @@
+<snippet>
+  <content><![CDATA[
+require '../public/javascript/lib/extensions'
+
+${1:modelName}   = require '../models/${1:modelName}'
+
+logger  = require '../services/logger'
+connStr = require( '../configuration' ).env( 'production' ).mongo
+toCsv   = require 'to-csv'
+fs      = require 'fs'
+
+require( 'mongoose' ).connect connStr, ( e ) -> if e then throw e
+
+logger.info 'Connected to MongoDB; running query...'
+
+start      = new Date( '1/1/16' ).setHours(0,0,0,0)
+end        = new Date( '2/28/17' ).setHours(11,59,59,59)
+fileName   = '${2:fileName}.csv'
+${3:modelName}Query  = { 'arrival' : { $gte : start, $lte : end } }
+${3:modelName}Stream = ${1:modelName}.find( ${3:modelName}Query ).stream()
+
+${3:modelName}Stream.on 'error', () ->
+  logger.error e.stack
+  process.exit( 1 )
+
+contents = []
+count    = 0
+
+${3:modelName}Stream.on 'data', ( ${3:modelName} ) ->
+  contents.push {
+    // DATA GOES HERE
+  }
+  logger.info count++
+
+${3:modelName}Stream.on 'end', () ->
+  fs.writeFileSync fileName, toCsv( contents )
+  logger.info 'Records written to file: ' + fileName
+  process.exit( 0 )
+
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>datastream</tabTrigger>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <scope>source.coffee</scope>
+  <description>Datastream boilerplate for a report</description>
+</snippet>
