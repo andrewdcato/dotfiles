@@ -14,13 +14,20 @@ source ~/.bin/tmuxinator.zsh
 #Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="geometry/geometry"
+ZSH_THEME="lambda/lambda-mod"
 
 # Theme Config
 GEOMETRY_PROMPT_PLUGINS=(docker_machine exec_time git)
 GEOMETRY_COLOR_NODE_NPM_VERSION="green"
 GEOMETRY_COLOR_DIR="cyan"
 GEOMETRY_COLOR_PROMPT="yellow"
+BULLETTRAIN_PROMPT_ORDER=(
+  git
+  context
+  dir
+  time
+)
+
 
 # Disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
@@ -38,23 +45,13 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow brew nvm docker)
-
+plugins=(git git-flow nvm rvm)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # Add NVM
 source ~/.nvm/nvm.sh
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
