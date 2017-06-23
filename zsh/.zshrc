@@ -16,19 +16,6 @@ source ~/.bin/tmuxinator.zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="lambda/lambda-mod"
 
-# Theme Config
-GEOMETRY_PROMPT_PLUGINS=(docker_machine exec_time git)
-GEOMETRY_COLOR_NODE_NPM_VERSION="green"
-GEOMETRY_COLOR_DIR="cyan"
-GEOMETRY_COLOR_PROMPT="yellow"
-BULLETTRAIN_PROMPT_ORDER=(
-  git
-  context
-  dir
-  time
-)
-
-
 # Disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
@@ -45,7 +32,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow nvm rvm git_auto_status)
+plugins=(git git-flow zsh-syntax-highlighting sublime npm nvm rvm rake brew vagrant)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
