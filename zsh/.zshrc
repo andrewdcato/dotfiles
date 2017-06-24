@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/andrewcato/.oh-my-zsh
 # Set default user account for themes that recognize this
@@ -11,13 +8,10 @@ export EDITOR='vim'
 # Load tmuxinator
 source ~/.bin/tmuxinator.zsh
 
-# Manually load Pure
-autoload -U promptinit; promptinit
-
 #Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="lambda/lambda-mod"
+ZSH_THEME="lambda/lambda-mod"
 
 # Disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
@@ -33,17 +27,15 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-flow zsh-syntax-highlighting sublime nvm rvm rake brew vagrant)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Add NVM
+# Add NVM and RVM
 source ~/.nvm/nvm.sh
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-prompt pure
+
+source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
