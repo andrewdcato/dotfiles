@@ -11,10 +11,13 @@ export EDITOR='vim'
 # Load tmuxinator
 source ~/.bin/tmuxinator.zsh
 
+# Manually load Pure
+autoload -U promptinit; promptinit
+
 #Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="lambda/lambda-mod"
+# ZSH_THEME="lambda/lambda-mod"
 
 # Disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
@@ -42,3 +45,5 @@ source ~/.nvm/nvm.sh
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+prompt pure
