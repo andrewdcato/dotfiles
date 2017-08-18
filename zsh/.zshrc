@@ -4,38 +4,53 @@ export ZSH=/Users/andrewcato/.oh-my-zsh
 export DEFAULT_USER="andrewcato"
 export PAGER="most"
 export EDITOR='vim'
+# This *has* to be the last thing added to path or it'll break
+export PATH="$PATH:$HOME/.rvm/bin"
 
-# Load tmuxinator
+# Load Custom things
 source ~/.bin/tmuxinator.zsh
+source ~/.nvm/nvm.sh
+source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 
-#Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="lambda/lambda-mod"
-
-# Disable auto-setting terminal title.
+# OMZ customization
+ZSH_THEME="spaceship"
 DISABLE_AUTO_TITLE="true"
-
-# Enable command auto-correction.
 ENABLE_CORRECTION="true"
-
-# Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
-
-# Disable marking untracked files under VCS as dirty. This makes repository status check # for large repositories much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git git-flow zsh-syntax-highlighting sublime nvm rvm rake brew vagrant)
+# You have to load this *after* declaring plugins or it won't work...odd
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
+# Theme Customizations
+SPACESHIP_PROMPT_ORDER=(
+  user          # Username section
+  host          # Hostname section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  #package       # Package version
+  node          # Node.js section
+  ruby          # Ruby section
+  golang        # Go section
+  docker        # Docker section
+  exec_time     # Execution time
+  time          # Time stamps
+  line_sep      # Line break
+  char          # Prompt character
+)
 
-# Add NVM and RVM
-source ~/.nvm/nvm.sh
-export PATH="$PATH:$HOME/.rvm/bin"
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_12HR="true"
+SPACESHIP_RUBY_SYMBOL="💎  "
 
-
-source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+# Custom Aliases
+alias bump="./bump.sh"
+alias gpt="git push && git push --tags"
+alias szshrc="source ~/.zshrc"
+alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
+# Kill all docker containers with "none" tags
+alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
