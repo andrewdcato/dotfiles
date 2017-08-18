@@ -26,18 +26,14 @@ Host docusign
   HostName 173.255.205.95
   User acato
 
-Host db1-old
-  HostName 198.58.103.194
-  User andrewcato
-
 Host db1
   HostName 45.33.3.43
   User acato
 
-Host db2-old
-  HostName 198.58.127.178
-  User andrewcato
-
 Host db2
   HostName 45.33.29.67
+  User acato
+
+Host db3
+  HostName ec2-18-220-43-107.us-east-2.compute.amazonaws.com
   User acato
