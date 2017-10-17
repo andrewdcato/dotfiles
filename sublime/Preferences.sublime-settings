@@ -11,7 +11,7 @@
 	"caret_extra_width": 3,
 	"caret_style": "phase",
 	"close_windows_when_empty": true,
-	"color_scheme": "Packages/Theme - Cobalt2/cobalt2.tmTheme",
+	"color_scheme": "Packages/Materialize/schemes/Material Solarized Dark.tmTheme",
 	"fade_fold_buttons": false,
 	"font_face": "Operator Mono",
 	"font_options":
@@ -34,7 +34,7 @@
 	"line_padding_top": 1,
 	"sidebar_xlarge": true,
 	"tab_size": 2,
-	"theme": "Cobalt2.sublime-theme",
+	"theme": "Adaptive.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": true,
 	"use_tab_stops": true,
