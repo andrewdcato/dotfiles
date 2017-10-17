@@ -1,0 +1,34 @@
+# ~/.tmuxinator/SBcom.yml
+
+name: SBcom
+root: ~/surety
+
+windows:
+  - Git:
+    - cd surety-bonds-static
+    - git fetch && git pull && git status
+  - Vagrant:
+    - cd surety-bonds-static
+    - sleep 3
+    - vagrant up
+    - sleep 20
+    - vagrant ssh
+    - sleep 5
+    - cd /vagrant
+    - rake generatePreview
+  - Apache Logs:
+    - cd surety-bonds-static
+    - sleep 30
+    - vagrant ssh
+    - sleep 10
+    - sudo tail -f /var/log/apache2/error.log
+  - Connect Git:
+    - cd surety-bonds-connect && git fetch && git pull && git status
+  - Connect Logs:
+    - cd surety-bonds-connect
+    - sleep 15
+    - rackup
+  - LMS:
+    - cd lead-management-system
+    - git checkout develop
+    - coffee app.coffee
