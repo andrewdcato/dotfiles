@@ -5,7 +5,7 @@ root: ~/surety/lead-management-system
 
 windows:
   - Logs:
-    - git fetch && git pull && git status && coffee app.coffee
+    - git fetch && git pull && git status && npm start
   - Git:
   - Run Reports:
     - cd reports

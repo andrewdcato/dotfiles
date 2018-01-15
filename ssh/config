@@ -3,11 +3,11 @@ Host sb
   User andrewcato
 
 Host lms-old
-  HostName 96.126.118.103
-  User andrewcato
+  HostName 45.33.21.108
+  User acato
 
 Host lms
-  HostName 45.33.21.108
+  HostName 198.58.126.216
   User acato
 
 Host ci

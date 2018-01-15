@@ -28,6 +28,9 @@ windows:
     - cd surety-bonds-connect
     - sleep 15
     - rackup
+  - Connect Ngrok:
+    - sleep 30
+    - ngrok http 9292
   - LMS:
     - cd lead-management-system
     - git checkout develop
