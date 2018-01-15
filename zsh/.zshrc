@@ -32,7 +32,7 @@ SPACESHIP_PROMPT_ORDER=(
   host          # Hostname section
   dir           # Current directory section
   git           # Git section (git_branch + git_status)
-  #package       # Package version
+  # package       # Package version
   node          # Node.js section
   ruby          # Ruby section
   golang        # Go section
@@ -50,6 +50,7 @@ SPACESHIP_RUBY_SYMBOL="💎  "
 # Custom Aliases
 alias bump="./bump.sh"
 alias gpt="git push && git push --tags"
+alias gfp="git fetch && git pull"
 alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
 # Kill all docker containers with "none" tags
