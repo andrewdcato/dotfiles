@@ -23,6 +23,9 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"GitGutter",
+		"Material Theme",
+		"SublimeLinter",
 		"Vintage"
 	],
 	"indent_guide_options":
