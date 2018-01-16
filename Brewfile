@@ -33,6 +33,7 @@ brew 'wget'
 # Development
 brew 'nvm'
 brew 'tmux'
+brew 'git-flow'
 
 # Apps
 cask 'alfred'
