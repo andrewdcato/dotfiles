@@ -1,13 +1,17 @@
 #!/bin/sh
 echo "Setting up your Mac..."
 
-if test ! $(which brew)
-    echo "Installing Homebrew..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if test ! $(which brew); then
+  echo "Installing Homebrew..."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+  echo "Homebrew's already installed!"
 fi
 
 # Do all the Homebrew installations
 brew update
+brew tap homebrew/bundle
+brew bundle
 
 # Install Node Carbon
 nvm install 8
@@ -19,19 +23,21 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh
 
 # Install Tmuxinator
-gem install tmuxinator
+sudo gem install tmuxinator
 
 # Symlink all the things!
 echo "Symlinking zshrc..."
 rm ~/.zshrc
-ln -s ~/.dotfiles/zsh/zshrc ~/.zshrc
+ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 source ~/.zshrc
 
 echo "Symlinking vimrc"
-ln -s ~/.dotfiles/vim/vimrc ~/.vimrc
+rm ~/.vimrc
+ln -s ~/.dotfiles/vim/.vimrc ~/.vimrc
 source ~/.vimrc
 
 echo "Symlinking Tmux"
+rm ~/.tmux.conf
 ln -s ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 source ~/.tmux.conf
 

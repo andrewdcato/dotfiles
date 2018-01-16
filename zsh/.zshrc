@@ -55,3 +55,12 @@ alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
 # Kill all docker containers with "none" tags
 alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
+
+
+source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+
+
+source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+
+
+source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
