@@ -1,9 +1,16 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/andrewcato/.oh-my-zsh
+# Ensure proper color scheme is used
+export TERM=screen-256color
 # Set default user account for themes that recognize this
 export DEFAULT_USER="andrewcato"
 export PAGER="most"
 export EDITOR='vim'
+
+# Hack for running mongodb@3.4 as 'mongo'
+export PATH="/usr/local/opt/mongodb@3.4/bin:$PATH"
+
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # This *has* to be the last thing added to path or it'll break
 export PATH="$PATH:$HOME/.rvm/bin"
 
@@ -14,6 +21,7 @@ source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 
 # OMZ customization
 ZSH_THEME="spaceship"
+ZSH_TMUX_AUTOSTART_ONCE="true"
 DISABLE_AUTO_TITLE="true"
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
@@ -22,7 +30,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow zsh-syntax-highlighting sublime nvm rvm rake brew vagrant)
+plugins=(git git-flow zsh-syntax-highlighting zsh-autocomplete nvm brew vagrant tmux)
 # You have to load this *after* declaring plugins or it won't work...odd
 source $ZSH/oh-my-zsh.sh
 
@@ -32,7 +40,7 @@ SPACESHIP_PROMPT_ORDER=(
   host          # Hostname section
   dir           # Current directory section
   git           # Git section (git_branch + git_status)
-  # package       # Package version
+  package       # Package version
   node          # Node.js section
   ruby          # Ruby section
   golang        # Go section
@@ -55,12 +63,5 @@ alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
 # Kill all docker containers with "none" tags
 alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
-
-
-source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-
-
-source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
-
-
-source "/Users/andrewcato/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+# Link Ngrok executable
+alias ngrok="~/.dotfiles/ngrok"
