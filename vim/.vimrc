@@ -1,7 +1,5 @@
-" Automatically include Pathogen plugins
 execute pathogen#infect()
 
-" Set some sensible defaults
 syntax enable
 filetype plugin indent on
 set colorcolumn=120
@@ -15,50 +13,32 @@ set smartindent
 set autoindent
 set showmatch
 
-" GUI customization
 set background=dark
 set guifont=Operator\ Mono\ Book:h14
 colorscheme solarized
 
-" Allow for Operator Mono italics
-hi htmlArg gui=italic
-hi Comment gui=italic
-hi Type    gui=italic
-hi htmlArg cterm=italic
-hi Comment cterm=italic
-hi Type    cterm=italic
-
-
 let NERDTreeShowHidden=1
 set noshowmode
 
-" Code folding
 set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
 
-" Set leader character
 let mapleader=" "
-
-" Custom commands
-map <leader>s :source ~/.vimrc<cr>
+map <Leader>s :source ~/.vimrc<CR>
 nnoremap <Leader><Leader> :e#<CR>
 nnoremap <Leader>r :CommandTFlush<CR>
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>j :NERDTreeFind<CR>
+nmap <Leader>n :NERDTreeToggle<CR>
+nmap <Leader>j :NERDTreeFind<CR>
 
-" NERDTree a little smarter
 let NERDTreeMapActivateNode='<right>'
 let NERDTreeIgnore=['\.DS_Store', '\~$', '\.swp']
 
-" Set up Airline
 let g:airline_theme='dark'
 let g:airline#extensions#tabline#enabled = 1
 
-" Keep more shit in RAM, bc it isn't 1987
 set hidden
 set history=100
 
-" Strip whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
