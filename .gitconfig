@@ -1,12 +1,12 @@
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-        required = true
+  required = true
 	process = git-lfs filter-process
 [user]
 	name = Andrew Cato
 	email = andrewdcato@gmail.com
 [push]
-        default = matching
+  default = matching
 [core]
-        editor = 'vim'
+  editor = 'vim'
