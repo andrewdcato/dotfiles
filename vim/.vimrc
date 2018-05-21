@@ -13,9 +13,7 @@ set smartindent
 set autoindent
 set showmatch
 
-set background=dark
 set guifont=Operator\ Mono\ Book:h14
-colorscheme solarized
 
 let NERDTreeShowHidden=1
 set noshowmode
