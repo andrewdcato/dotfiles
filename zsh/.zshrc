@@ -58,10 +58,33 @@ SPACESHIP_RUBY_SYMBOL="💎  "
 # Custom Aliases
 alias bump="./bump.sh"
 alias gpt="git push && git push --tags"
-alias gfp="git fetch && git pull"
+alias gfpub="git flow feature publish $(git branch | sed -n '/\* feature\//s///p')"
 alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
 # Kill all docker containers with "none" tags
 alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
 # Link Ngrok executable
 alias ngrok="~/.dotfiles/ngrok"
+# Ngrok shortcuts
+alias nlms='ngrok http -subdomain=sb1-lms 3000'
+alias nconnect='ngrok http -subdomain=sb1-connect 9292'
+
+# Force NVM to load the specified version of Node
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
