@@ -10,3 +10,7 @@
   default = matching
 [core]
   editor = 'vim'
+[diff]
+	submodule = log
+[submodule]
+	recurse = true

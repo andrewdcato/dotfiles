@@ -43,8 +43,6 @@ SPACESHIP_PROMPT_ORDER=(
   package       # Package version
   node          # Node.js section
   ruby          # Ruby section
-  golang        # Go section
-  docker        # Docker section
   exec_time     # Execution time
   time          # Time stamps
   line_sep      # Line break
@@ -60,7 +58,21 @@ alias bump="./bump.sh"
 alias gpt="git push && git push --tags"
 alias gfpub="git flow feature publish $(git branch | sed -n '/\* feature\//s///p')"
 alias szshrc="source ~/.zshrc"
-alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
+alias zshrc="vim ~/.dotfiles/zsh/.zshrc"i
+
+# Adds & commits
+function ac() {
+  git add .
+  git commit -m "$1"
+
+}
+# Add, commit, & push
+function acp(){
+  git add .
+  git commit -m "$1"
+  git push
+}
+
 # Kill all docker containers with "none" tags
 alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
 # Link Ngrok executable
