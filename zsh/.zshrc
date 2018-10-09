@@ -58,19 +58,34 @@ alias bump="./bump.sh"
 alias gpt="git push && git push --tags"
 alias gfpub="git flow feature publish $(git branch | sed -n '/\* feature\//s///p')"
 alias szshrc="source ~/.zshrc"
-alias zshrc="vim ~/.dotfiles/zsh/.zshrc"i
+alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
 
 # Adds & commits
-function ac() {
+function ac(){
   git add .
   git commit -m "$1"
-
 }
+
 # Add, commit, & push
 function acp(){
   git add .
   git commit -m "$1"
   git push
+}
+
+# Changes to SB Static directory, runs compiler, and notifies when done
+function buildPreview(){
+  cd ~/surety/surety-bonds-static
+  vagrant up
+  vagrant ssh -c "cd /vagrant; rake generatePreview; exit"
+  osascript -e 'display notification "Site preview compiled at 10.2.2.2!" with title "Compilation Complete!"'
+}
+
+function buildSite(){
+  cd ~/surety/surety-bonds-static
+  vagrant up
+  vagrant ssh -c "cd /vagrant; rake generate_site; exit"
+  osascript -e 'display notification "Full site compiled at 10.2.2.2!" with title "Compilation Complete!"'
 }
 
 # Kill all docker containers with "none" tags
@@ -79,7 +94,8 @@ alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
 alias ngrok="~/.dotfiles/ngrok"
 # Ngrok shortcuts
 alias nlms='ngrok http -subdomain=sb1-lms 3000'
-alias nconnect='ngrok http -subdomain=sb1-connect 9292'
+alias nconnect='ngrok http -subdomain=sb1-connect 5000'
+alias nem='ngrok http -subdomain=sb1-ews 5500'
 
 # Force NVM to load the specified version of Node
 autoload -U add-zsh-hook
