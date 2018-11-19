@@ -8,6 +8,27 @@ else
   echo "Homebrew's already installed!"
 fi
 
+if test ! $(which pip); then
+  echo "Installing pip..."
+  sudo easy_install pip
+else
+  echo "Pip is already installed!"
+fi
+
+if test ! $(which ansible); then
+  echo "Installing Ansible..."
+  sudo pip install ansible
+else
+  echo "Ansible is already installed!"
+fi
+
+if test ! $(which nvm); then
+  echo "Installing NVM..."
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+else
+  echo "NVM is already installed!"
+fi
+
 # Do all the Homebrew installations
 brew update
 brew tap homebrew/bundle
