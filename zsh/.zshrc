@@ -30,7 +30,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow zsh-syntax-highlighting zsh-autocomplete nvm brew vagrant tmux)
+plugins=(git git-flow zsh-syntax-highlighting zsh-autocomplete zsh-autosuggestions nvm brew vagrant tmux)
 # You have to load this *after* declaring plugins or it won't work...odd
 source $ZSH/oh-my-zsh.sh
 
