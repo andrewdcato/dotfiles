@@ -1,0 +1,43 @@
+Host sb
+  HostName 50.116.31.222
+  User andrewcato
+
+Host lms
+  HostName 198.58.126.216
+  User acato
+
+Host lms-services
+  HostName 3.18.21.123
+  User acato
+
+Host beta
+  HostName 18.219.67.113
+  User acato
+
+Host ci
+  HostName 66.228.53.197
+  User andrewcato
+
+Host connect-beta
+  HostName ec2-18-219-62-226.us-east-2.compute.amazonaws.com
+  User acato
+
+Host connect
+  HostName 13.59.191.55
+  User acato
+
+Host mail
+  HostName 45.33.119.108
+  User andrewcato
+
+Host db1
+  HostName 45.33.3.43
+  User acato
+
+Host db2
+  HostName 45.33.29.67
+  User acato
+
+Host db3
+  HostName ec2-18-220-43-107.us-east-2.compute.amazonaws.com
+  User acato
