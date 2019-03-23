@@ -10,15 +10,15 @@ Host lms-services
   HostName 3.18.21.123
   User acato
 
-Host beta
-  HostName 18.219.67.113
-  User acato
-
 Host ci
   HostName 66.228.53.197
   User andrewcato
 
-Host connect-beta
+Host ci-aws
+  HostName 3.18.50.113
+  User acato
+
+Host lms-services-beta
   HostName ec2-18-219-62-226.us-east-2.compute.amazonaws.com
   User acato
 
@@ -40,4 +40,8 @@ Host db2
 
 Host db3
   HostName ec2-18-220-43-107.us-east-2.compute.amazonaws.com
+  User acato
+
+Host db-beta
+  HostName 52.15.106.156
   User acato
