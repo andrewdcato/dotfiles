@@ -97,6 +97,9 @@ alias nlms='ngrok http -subdomain=sb1-lms 3000'
 alias nconnect='ngrok http -subdomain=sb1-connect 5000'
 alias nem='ngrok http -subdomain=sb1-ews 5500'
 
+# Ansible Aliases
+alias lmsBounce='cd ~/surety/ansible; ansible-playbook -i ./inventory -K bounceApps.yml --limit=lms'
+
 # Force NVM to load the specified version of Node
 autoload -U add-zsh-hook
 load-nvmrc() {

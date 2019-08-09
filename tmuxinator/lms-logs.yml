@@ -1,0 +1,35 @@
+# ~/.tmuxinator/lms-logs.yml
+
+name: lms-logs
+
+# Optional tmux socket
+# socket_name: foo
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: editor
+
+# Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+startup_pane: 4
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux resize-pane -L 20
+
+windows:
+  - logs:
+      layout: 87c1,208x60,0,0{65x60,0,0[65x30,0,0,0,65x14,0,31,1,65x14,0,46,4],142x60,66,0,2}
+      pre: ssh lms
+      panes:
+        - htop:
+          - clear; htop
+        - scheduledEmails:
+          - clear; tail -f /var/log/scheduled_emails
+        - policyEmails:
+          - clear; tail -f /var/log/policy_emails
+        - appLogs:
+          - clear; watchlogs
