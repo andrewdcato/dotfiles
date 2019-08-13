@@ -98,7 +98,16 @@ alias nconnect='ngrok http -subdomain=sb1-connect 5000'
 alias nem='ngrok http -subdomain=sb1-ews 5500'
 
 # Ansible Aliases
-alias lmsBounce='cd ~/surety/ansible; ansible-playbook -i ./inventory -K bounceApps.yml --limit=lms'
+export ANS_DIR="/Users/andrewcato/surety/ansible"
+export PROD_INV="$ANS_DIR/inventory/production"
+export STAG_INV="$ANS_DIR/inventory/staging"
+
+# Takes an arg to limit bounces via hostname
+function bounce(){
+  ansible-playbook -K -i $ANS_DIR/inventory --limit="$1" $ANS_DIR/bounceApps.yml
+}
+
+alias pingAll="ansible-playbook -K -i $PROD_INV -i $STAG_INV $ANS_DIR/ping.yml"
 
 # Force NVM to load the specified version of Node
 autoload -U add-zsh-hook
