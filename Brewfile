@@ -33,6 +33,7 @@ brew 'wget'
 brew 'nvm'
 brew 'tmux'
 brew 'git-flow'
+brew 'python3'
 
 # Apps
 cask 'alfred'
@@ -45,6 +46,12 @@ cask 'vagrant'
 cask 'virtualbox'
 cask 'virtualbox-extension-pack'
 cask 'visual-studio-code'
+cask 'postbox'
+cask 'bettertouchtool'
+cask 'box-drive'
+cask 'daisydisk'
+cask 'google-drive-file-stream'
+cask 'google-chat'
 
 # Fonts
 cask 'font-source-code-pro-for-powerline'
