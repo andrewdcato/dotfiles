@@ -1,7 +1,10 @@
-execute pathogen#infect()
+execute pathogen#infect('/Users/andrewcato/.dotfiles/vim/bundle/{}')
 
 syntax enable
 filetype plugin indent on
+
+colorscheme cobalt2
+
 set colorcolumn=120
 set number
 set wrap
@@ -13,7 +16,7 @@ set smartindent
 set autoindent
 set showmatch
 
-set guifont=Operator\ Mono\ Book:h14
+set guifont=Operator\ Mono\ Lig:h14
 
 let NERDTreeShowHidden=1
 set noshowmode

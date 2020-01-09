@@ -13,4 +13,11 @@
 [diff]
 	submodule = log
 [submodule]
-	recurse = true
+  recurse = true
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true

@@ -89,13 +89,16 @@ function buildSite(){
 }
 
 # Kill all docker containers with "none" tags
-alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
+#alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
+
 # Link Ngrok executable
 alias ngrok="~/.dotfiles/ngrok"
+
 # Ngrok shortcuts
 alias nlms='ngrok http -subdomain=sb1-lms 3000'
 alias nconnect='ngrok http -subdomain=sb1-connect 5000'
 alias nem='ngrok http -subdomain=sb1-ews 5500'
+alias nams='ngrok http -subdomain=sb1-ams 5001'
 
 # Ansible Aliases
 export ANS_DIR="/Users/andrewcato/surety/ansible"
