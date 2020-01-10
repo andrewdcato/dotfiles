@@ -3,8 +3,6 @@ execute pathogen#infect('/Users/andrewcato/.dotfiles/vim/bundle/{}')
 syntax enable
 filetype plugin indent on
 
-colorscheme cobalt2
-
 set colorcolumn=120
 set number
 set wrap

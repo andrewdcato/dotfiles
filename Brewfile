@@ -4,6 +4,7 @@ tap 'caskroom/eid'
 tap 'caskroom/fonts'
 tap 'caskroom/versions'
 tap 'homebrew/dupes'
+tap 'koekeishiya/formulae'
 
 # Install ZSH
 brew 'zsh'
@@ -35,6 +36,11 @@ brew 'tmux'
 brew 'git-flow'
 brew 'python3'
 
+# Utilities
+brew 'ranger'
+brew 'yabai'
+brew 'highlight'
+
 # Apps
 cask 'alfred'
 cask 'docker'
@@ -61,4 +67,4 @@ cask 'font-source-serif-pro'
 
 # Install Mac App Store apps
 mas '1Password', id: 443987910
-mas 'Tweetbot', id: 557168941
+
