@@ -30,7 +30,17 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-flow zsh-syntax-highlighting zsh-autocomplete zsh-autosuggestions nvm brew vagrant tmux)
+plugins=(
+  ansible
+  brew
+  git
+  git-flow
+  nvm
+  tmux
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
 # You have to load this *after* declaring plugins or it won't work...odd
 source $ZSH/oh-my-zsh.sh
 
@@ -43,16 +53,20 @@ SPACESHIP_PROMPT_ORDER=(
   package       # Package version
   node          # Node.js section
   ruby          # Ruby section
+  terraform
   exec_time     # Execution time
   time          # Time stamps
+  battery
   line_sep      # Line break
   char          # Prompt character
 )
 
 SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_12HR="true"
-SPACESHIP_RUBY_SYMBOL="💎  "
-
+SPACESHIP_TIME_12HR=true
+SPACESHIP_NODE_DEFAULT_VERSION='v8.9.4'
+SPACESHIP_BATTERY_SHOW=true
+SPACESHIP_BATTERY_THRESHOLD=50
+SPACESHIP_EXIT_CODE_SHOW=true
 # Custom Aliases
 alias bump="./bump.sh"
 alias gpt="git push && git push --tags"
