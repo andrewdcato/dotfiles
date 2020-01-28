@@ -8,7 +8,7 @@ export PAGER="most"
 export EDITOR='vim'
 
 # Hack for running mongodb@3.4 as 'mongo'
-export PATH="/usr/local/opt/mongodb@3.4/bin:$PATH"
+export PATH="/usr/local/opt/mongodb@4.0/bin:$PATH"
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 # This *has* to be the last thing added to path or it'll break

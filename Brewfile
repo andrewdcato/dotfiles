@@ -4,6 +4,7 @@ tap 'caskroom/eid'
 tap 'caskroom/fonts'
 tap 'caskroom/versions'
 tap 'homebrew/dupes'
+tap 'homebrew/cask-fonts'
 tap 'koekeishiya/formulae'
 
 # Install ZSH
@@ -40,6 +41,7 @@ brew 'python3'
 brew 'ranger'
 brew 'yabai'
 brew 'highlight'
+brew 'font-hack-nerd-font'
 
 # Apps
 cask 'alfred'

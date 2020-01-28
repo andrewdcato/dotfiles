@@ -23,7 +23,7 @@ startup_pane: 4
 windows:
   - logs:
       layout: 87c1,208x60,0,0{65x60,0,0[65x30,0,0,0,65x14,0,31,1,65x14,0,46,4],142x60,66,0,2}
-      pre: ssh lms
+      pre: ssh lms-new
       panes:
         - htop:
           - clear; htop

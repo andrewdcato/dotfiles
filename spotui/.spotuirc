@@ -1,0 +1,10 @@
+[spotify_api]
+user_name = andrewdcato
+; register an application here: https://developer.spotify.com/dashboard/login
+client_id = 4bafe4cfe8bb4ef69eb4af678e287fe6
+client_secret = 1d5c62010c4b42ed9dbc46f8a712df70
+redirect_uri = http://localhost:8888/auth
+
+[other]
+config_version = 1
+

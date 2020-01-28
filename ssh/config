@@ -54,18 +54,22 @@ Host sync
   HostName 3.134.6.176
   User acato
 
-Host db1-test
-  HostName 18.217.75.2
+Host db1-new
+  HostName 13.59.33.234
   User acato
 
-Host db2-test
-  HostName 18.217.140.63
+Host db2-new
+  HostName 18.221.121.111
   User acato
 
-Host db3-test
-  HostName 18.219.109.90
+Host db3-new
+  HostName 18.217.141.125
   User acato
 
-Host db-testbed
-  HostName 3.14.64.70
+Host lms-new
+  HostName 18.217.1.182
+  User acato
+
+Host mailer-new
+  HostName 18.217.96.77
   User acato
