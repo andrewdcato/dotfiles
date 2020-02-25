@@ -2,7 +2,7 @@ Host sb
   HostName 50.116.31.222
   User acato
 
-Host lms
+Host lms-old
   HostName 198.58.126.216
   User acato
 
@@ -26,19 +26,19 @@ Host connect
   HostName 13.59.191.55
   User acato
 
-Host mail
+Host mailer-old
   HostName 45.33.119.108
   User acato
 
-Host db1
+Host db1-old
   HostName 45.33.3.43
   User acato
 
-Host db2
+Host db2-old
   HostName 45.33.29.67
   User acato
 
-Host db3
+Host db3-old
   HostName 18.220.43.107
   User acato
 
@@ -54,22 +54,22 @@ Host sync
   HostName 3.134.6.176
   User acato
 
-Host db1-new
+Host db1
   HostName 13.59.33.234
   User acato
 
-Host db2-new
+Host db2
   HostName 18.221.121.111
   User acato
 
-Host db3-new
+Host db3
   HostName 18.217.141.125
   User acato
 
-Host lms-new
+Host lms
   HostName 18.217.1.182
   User acato
 
-Host mailer-new
+Host mailer
   HostName 18.217.96.77
   User acato

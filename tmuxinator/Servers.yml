@@ -4,74 +4,43 @@ name: Servers
 root: ~/
 
 windows:
-  - LMS:
-      layout: 0bd9,178x45,0,0{89x45,0,0,0,88x45,90,0[88x22,90,0,5,88x22,90,23,6]}
+  - lms:
+      layout: 87c1,208x60,0,0{65x60,0,0[65x30,0,0,0,65x14,0,31,1,65x14,0,46,4],142x60,66,0,2}
       pre: ssh lms
       panes:
-        - watchlogs:
-          - watchlogs
         - htop:
-          - htop
-        - iotop:
-          - sudo iotop
-  - SBcom:
-      layout: 0bd9,178x45,0,0{89x45,0,0,0,88x45,90,0[88x22,90,0,5,88x22,90,23,6]}
-      pre: ssh sb
+          - clear; htop
+        - scheduledEmails:
+          - clear; tail -f /var/log/scheduled_emails
+        - policyEmails:
+          - clear; tail -f /var/log/policy_emails
+        - appLogs:
+          - clear; watchlogs
+  - 360:
+      layout: 49e3,314x78,0,0[314x39,0,0{118x39,0,0,11,195x39,119,0,15},314x38,0,40{118x38,0,40,12,195x38,119,40,13}]
       panes:
-        - sudo tail -f /var/log/apache2/error.log
-        - htop
-        - sudo iotop
-  - DocuSign:
-      layout: 0bd9,178x45,0,0{89x45,0,0,0,88x45,90,0[88x22,90,0,5,88x22,90,23,6]}
-      pre: ssh docusign
+        - htopAMS:
+          - ssh lms-services -t htop
+        - logsAMS:
+          - ssh lms-services -t watchlogs-ams
+        - htopSync:
+          - ssh sync -t htop
+        - logsSync:
+          - ssh sync -t watchlogs
+  - dbs:
+      layout: c464,314x78,0,0[314x25,0,0{118x25,0,0,10,195x25,119,0,22},314x25,0,26{118x25,0,26,16,195x25,119,26,21},314x26,0,52{118x26,0,52,17,195x26,119,52,20}]
       panes:
-        - watchlogs:
-          - watchlogs
-        - htop:
-          - htop
-        - iotop:
-          - sudo iotop
-  - MailerService:
-      layout: 2bad,286x70,0,0{143x70,0,0,6,142x70,144,0[142x27,144,0,7,142x21,144,28,8,142x20,144,50,9]}
-      pre: ssh mail
-      panes:
-        - logs:
-          - sudo su node
-          - pm2 logs
-        - htop:
-          - htop
-        - monit:
-          - sudo su node
-          - pm2 monit
-        - iotop:
-          - sudo iotop
-  - DB1:
-      layout: 0bd9,178x45,0,0{89x45,0,0,0,88x45,90,0[88x22,90,0,5,88x22,90,23,6]}
-      pre: ssh db1
-      panes:
-        - logs:
-          - tail -F /var/log/mongodb/mongod.log
-        - htop:
-          - htop
-        - iotop:
-          - sudo iotop
-  - DB2:
-      layout: 0bd9,178x45,0,0{89x45,0,0,0,88x45,90,0[88x22,90,0,5,88x22,90,23,6]}
-      pre: ssh db2
-      panes:
-        - logs:
-          - tail -F /var/log/mongodb/mongod.log
-        - htop:
-          - htop
-        - iotop:
-          - sudo iotop
-  - Jenkins:
-      layout: 0bd9,178x45,0,0{89x45,0,0,0,88x45,90,0[88x22,90,0,5,88x22,90,23,6]}
-      pre: ssh ci
-      panes:
-        - junk:
-          -
-        - htop:
-          - htop
-        - iotop:
-          - sudo iotop
+        - htopDB1:
+          - ssh db1 -t htop
+        - db1:
+          - ssh db1
+        - htopDB2:
+          - ssh db2 -t htop
+        - db2:
+          - ssh db2
+        - htopDB3:
+          - ssh db3 -t htop
+        - db3:
+          - ssh db3
+
+

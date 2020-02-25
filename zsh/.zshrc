@@ -69,6 +69,7 @@ SPACESHIP_BATTERY_THRESHOLD=50
 SPACESHIP_EXIT_CODE_SHOW=true
 # Custom Aliases
 alias bump="./bump.sh"
+alias vim="nvim"
 alias gpt="git push && git push --tags"
 alias gfpub="git flow feature publish $(git branch | sed -n '/\* feature\//s///p')"
 alias szshrc="source ~/.zshrc"
