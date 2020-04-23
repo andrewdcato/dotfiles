@@ -49,5 +49,7 @@ yabai -m rule --add app="^Messages$" manage=off
 yabai -m rule --add app="^Postbox$" manage=off
 yabai -m rule --add app="^Spotify$" manage=off
 yabai -m rule --add app="^MongoDB Compass$" manage=off
+yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="^RingCentral Meetings$" manage=off
 
 echo "yabai configuration loaded.."

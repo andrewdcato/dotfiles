@@ -26,24 +26,12 @@ Host connect
   HostName 13.59.191.55
   User acato
 
-Host mailer-old
-  HostName 45.33.119.108
-  User acato
-
-Host db1-old
-  HostName 45.33.3.43
-  User acato
-
-Host db2-old
-  HostName 45.33.29.67
-  User acato
-
-Host db3-old
-  HostName 18.220.43.107
+Host db-beta-old
+  HostName 52.15.106.156
   User acato
 
 Host db-beta
-  HostName 52.15.106.156
+  HostName 18.191.222.77
   User acato
 
 Host surety360
@@ -72,4 +60,8 @@ Host lms
 
 Host mailer
   HostName 18.217.96.77
+  User acato
+
+Host s360-trav
+  HostName 3.14.68.91
   User acato

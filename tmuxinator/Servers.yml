@@ -6,16 +6,16 @@ root: ~/
 windows:
   - lms:
       layout: 87c1,208x60,0,0{65x60,0,0[65x30,0,0,0,65x14,0,31,1,65x14,0,46,4],142x60,66,0,2}
-      pre: ssh lms
+      pre: ssh lms; clear
       panes:
         - htop:
-          - clear; htop
+          - htop
         - scheduledEmails:
-          - clear; tail -f /var/log/scheduled_emails
+          - tail -f /var/log/scheduled_emails
         - policyEmails:
-          - clear; tail -f /var/log/policy_emails
+          - tail -f /var/log/policy_emails
         - appLogs:
-          - clear; watchlogs
+          - watchlogs
   - 360:
       layout: 49e3,314x78,0,0[314x39,0,0{118x39,0,0,11,195x39,119,0,15},314x38,0,40{118x38,0,40,12,195x38,119,40,13}]
       panes:
