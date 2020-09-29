@@ -4,29 +4,30 @@ name: Servers
 root: ~/
 
 windows:
-  - lms:
+  - lms-js:
       layout: 87c1,208x60,0,0{65x60,0,0[65x30,0,0,0,65x14,0,31,1,65x14,0,46,4],142x60,66,0,2}
-      pre: ssh lms; clear
+      pre: ssh lms
       panes:
         - htop:
-          - htop
+          - clear; printf '\033]2;htop\033\\'; htop
         - scheduledEmails:
-          - tail -f /var/log/scheduled_emails
+          - clear; printf '\033]2;Lead Scheduled Emails\033\\'; tail -f /var/log/scheduled_emails
         - policyEmails:
-          - tail -f /var/log/policy_emails
+          - clear; printf '\033]2;Policy Scheduled Emails\033\\'; tail -f /var/log/policy_emails
         - appLogs:
-          - watchlogs
+          - clear; printf '\033]2;App Logs\033\\'; watchlogs
+
   - 360:
       layout: 49e3,314x78,0,0[314x39,0,0{118x39,0,0,11,195x39,119,0,15},314x38,0,40{118x38,0,40,12,195x38,119,40,13}]
       panes:
         - htopAMS:
-          - ssh lms-services -t htop
+          - ssh lms-services -t "clear; printf '\033]2;htop-lms-services\033\\'; htop"
         - logsAMS:
-          - ssh lms-services -t watchlogs-ams
+          - ssh lms-services -t "clear; printf '\033]2;watchlogs-ams service\033\\'; watchlogs-ams"
         - htopSync:
-          - ssh sync -t htop
+          - ssh sync -t "clear; printf '\033]2;htop-sync\033\\'; htop"
         - logsSync:
-          - ssh sync -t watchlogs
+          - ssh sync -t "clear; printf '\033]2;watchlogs-sync\033\\'; watchlogs"
   - dbs:
       layout: c464,314x78,0,0[314x25,0,0{118x25,0,0,10,195x25,119,0,22},314x25,0,26{118x25,0,26,16,195x25,119,26,21},314x26,0,52{118x26,0,52,17,195x26,119,52,20}]
       panes:

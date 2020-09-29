@@ -1,7 +1,16 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/andrewcato/.oh-my-zsh
+
 # Ensure proper color scheme is used
 export TERM=screen-256color
+
 # Set default user account for themes that recognize this
 export DEFAULT_USER="andrewcato"
 export PAGER="most"
@@ -67,6 +76,7 @@ SPACESHIP_NODE_DEFAULT_VERSION='v8.9.4'
 SPACESHIP_BATTERY_SHOW=true
 SPACESHIP_BATTERY_THRESHOLD=50
 SPACESHIP_EXIT_CODE_SHOW=true
+
 # Custom Aliases
 alias bump="./bump.sh"
 alias vim="nvim"
@@ -74,6 +84,7 @@ alias gpt="git push && git push --tags"
 alias gfpub="git flow feature publish $(git branch | sed -n '/\* feature\//s///p')"
 alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.dotfiles/zsh/.zshrc"
+alias gitClean="git branch --merged | egrep -v \"(^\*|master|develop|production)\" | xargs git branch -d"
 
 # Adds & commits
 function ac(){
@@ -147,3 +158,7 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
