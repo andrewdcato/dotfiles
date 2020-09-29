@@ -2,8 +2,8 @@ Host sb
   HostName 50.116.31.222
   User acato
 
-Host lms-old
-  HostName 198.58.126.216
+Host lms
+  HostName 3.14.69.38
   User acato
 
 Host lms-services
@@ -26,12 +26,8 @@ Host connect
   HostName 13.59.191.55
   User acato
 
-Host db-beta-old
-  HostName 52.15.106.156
-  User acato
-
 Host db-beta
-  HostName 18.191.222.77
+  HostName 18.221.82.47
   User acato
 
 Host surety360
@@ -51,10 +47,10 @@ Host db2
   User acato
 
 Host db3
-  HostName 18.217.141.125
+  HostName 3.137.163.93
   User acato
 
-Host lms
+Host lms-uat
   HostName 18.217.1.182
   User acato
 
@@ -62,6 +58,3 @@ Host mailer
   HostName 18.217.96.77
   User acato
 
-Host s360-trav
-  HostName 3.14.68.91
-  User acato

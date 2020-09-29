@@ -36,6 +36,8 @@ brew 'nvm'
 brew 'tmux'
 brew 'git-flow'
 brew 'python3'
+brew 'git-recent'
+
 
 # Utilities
 brew 'ranger'
