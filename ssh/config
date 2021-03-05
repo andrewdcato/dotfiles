@@ -10,6 +10,10 @@ Host lms-services
   HostName 3.18.21.123
   User acato
 
+Host lms-services-v2
+  HostName 3.134.6.176
+  User acato
+
 Host ci
   HostName 66.228.53.197
   User acato
@@ -20,6 +24,10 @@ Host ci-aws
 
 Host lms-services-beta
   HostName 18.219.62.226
+  User acato
+
+Host lms-services-beta-v2
+  HostName 13.58.1.28
   User acato
 
 Host connect
@@ -35,7 +43,7 @@ Host surety360
   User acato
 
 Host sync
-  HostName 3.134.6.176
+  HostName 18.188.228.214
   User acato
 
 Host db1

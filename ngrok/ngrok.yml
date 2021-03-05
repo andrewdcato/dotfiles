@@ -1,0 +1,21 @@
+authtoken: 1lyguRr1vfv3UR98e0QgHIZV7mw_4X1qgz5MorTzFsUMZYdLx
+console_ui: true
+console_ui_color: transparent
+log: /var/log/ngrok.log
+
+tunnels:
+  connect:
+    proto: http
+    addr: 5000
+    hostname: connect-cato.ngrok.io
+
+  docusign:
+    proto: http
+    addr: 8000
+    hostname: docusign-cato.ngrok.io
+
+  static:
+    proto: http
+    addr: 8080
+    subdomain: static.acato
+

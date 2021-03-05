@@ -20,6 +20,8 @@ export EDITOR='vim'
 export PATH="/usr/local/opt/mongodb@4.0/bin:$PATH"
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="${PATH}:${HOME}/.local/bin/"
+
 # This *has* to be the last thing added to path or it'll break
 export PATH="$PATH:$HOME/.rvm/bin"
 
@@ -118,11 +120,11 @@ function buildSite(){
 #alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
 
 # Link Ngrok executable
-alias ngrok="~/.dotfiles/ngrok"
+alias ngrok="~/.dotfiles/ngrok/ngrok"
 
 # Ngrok shortcuts
 alias nlms='ngrok http -subdomain=sb1-lms 3000'
-alias nconnect='ngrok http -subdomain=sb1-connect 5000'
+alias nconnect='ngrok http -hostname=cato-con.ngrok.io 5000'
 alias nem='ngrok http -subdomain=sb1-ews 5500'
 alias nams='ngrok http -subdomain=sb1-ams 5001'
 
