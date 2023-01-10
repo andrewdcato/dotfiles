@@ -11,7 +11,8 @@ return nvimtree.setup({
 	filters = { dotfiles = false },		-- show hidden files
 	sort_by = 'name',
 	view = { adaptive_size = true },
-	actions = {
+	git = { ignore = false },					-- show .gitignore-ed files	
+ 	actions = {
 		open_file = {
 			window_picker = {
 				enable = false
