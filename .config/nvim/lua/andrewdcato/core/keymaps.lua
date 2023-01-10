@@ -39,3 +39,7 @@ keymap.set("n", "<leader>fc", ":Telescope grep_string<CR>")
 keymap.set("n", "<leader>fb", ":Telescope buffers<CR>")
 keymap.set("n", "<leader>fh", ":Telescope help_tags")
 
+-- lazygit
+keymap.set("n", "<leader>gg", ":LazyGit<CR>")
+keymap.set("n", "<leader>gc", ":LazyGitConfig<CR>")
+
