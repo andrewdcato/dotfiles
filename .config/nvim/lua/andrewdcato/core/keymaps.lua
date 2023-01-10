@@ -31,3 +31,11 @@ keymap.set("n", "<leader>-", "<C-x>") -- decrement numbers
 -- nvim-tree
 keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>") -- open tree
 keymap.set("n", "<leader>j", ":NvimTreeFindFile<CR>") -- find files
+
+-- telescope
+keymap.set("n", "<leader>ff", ":Telescope find_files<CR>")
+keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>")
+keymap.set("n", "<leader>fc", ":Telescope grep_string<CR>")
+keymap.set("n", "<leader>fb", ":Telescope buffers<CR>")
+keymap.set("n", "<leader>fh", ":Telescope help_tags")
+

@@ -1,4 +1,5 @@
--- Packer configrequire("andrewdcato.plugins")
+-- Packer config
+require("andrewdcato.plugins")
 
 -- Core options
 require("andrewdcato.core.colors")

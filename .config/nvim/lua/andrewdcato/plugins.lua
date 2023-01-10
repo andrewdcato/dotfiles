@@ -50,6 +50,7 @@ return packer.startup(function(use)
 
 	-- Git plugins
 	use("f-person/git-blame.nvim")	-- inline git blame
+	use("kdheepak/lazygit.nvim")
 	use({
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -60,7 +61,11 @@ return packer.startup(function(use)
 	-- General workflow
 	use("nvim-tree/nvim-tree.lua")
 	use("numToStr/Comment.nvim")
-	
+
+	-- Fuzzy finder
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- improves sorting perf
+	use({ "nvim-telescope/telescope.nvim", tag = "0.1.0" })
+
 	if packer_boostrap then
 		require("packer").sync()
 	end
