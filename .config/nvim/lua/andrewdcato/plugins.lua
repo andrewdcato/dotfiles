@@ -26,6 +26,18 @@ if not packer_installed then
 	return
 end
 
+-- have packer use a floating window instead of sidebar
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ 
+				border = "rounded",
+				style = "minimal"
+			})
+		end,
+	},
+})
+
 return packer.startup(function(use)
 	-- Packer is magic and can manage itself
 	use("wbthomason/packer.nvim")
@@ -47,8 +59,9 @@ return packer.startup(function(use)
 
 	-- Statusline
 	use("nvim-lualine/lualine.nvim")
-
-	-- Git plugins
+  use({ 'akinsho/bufferline.nvim', tag = "v3.*" })
+	
+  -- Git plugins
 	use("f-person/git-blame.nvim")	-- inline git blame
 	use("kdheepak/lazygit.nvim")
 	use({
@@ -87,7 +100,8 @@ return packer.startup(function(use)
 
 			-- Snippets
 			{'L3MON4D3/LuaSnip'},
-			-- Snippet Collection (Optional)
+
+      -- Snippet Collection (Optional)
 			{'rafamadriz/friendly-snippets'},
 		}
 	})
