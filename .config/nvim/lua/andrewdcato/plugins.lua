@@ -61,6 +61,8 @@ return packer.startup(function(use)
 	-- General workflow
 	use("nvim-tree/nvim-tree.lua")
 	use("numToStr/Comment.nvim")
+  use("folke/which-key.nvim")
+	use("windwp/nvim-autopairs")
 
 	-- Fuzzy finder
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- improves sorting perf
