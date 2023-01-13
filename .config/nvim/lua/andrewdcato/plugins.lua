@@ -56,11 +56,12 @@ return packer.startup(function(use)
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
 	use("kyazdani42/nvim-web-devicons")
 	use("ellisonleao/gruvbox.nvim")
+  use("EdenEast/nightfox.nvim")
 
 	-- Statusline
-	use("nvim-lualine/lualine.nvim")
-  use({ 'akinsho/bufferline.nvim', tag = "v3.*" })
-	
+  use("nanozuki/tabby.nvim")
+  use("feline-nvim/feline.nvim")
+
   -- Git plugins
 	use("f-person/git-blame.nvim")	-- inline git blame
 	use("kdheepak/lazygit.nvim")

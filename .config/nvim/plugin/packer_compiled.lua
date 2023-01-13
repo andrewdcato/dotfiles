@@ -84,11 +84,6 @@ _G.packer_plugins = {
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ["bufferline.nvim"] = {
-    loaded = true,
-    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -113,6 +108,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["feline.nvim"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/feline.nvim",
+    url = "https://github.com/feline-nvim/feline.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -145,11 +145,6 @@ _G.packer_plugins = {
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
     url = "https://github.com/VonHeikemen/lsp-zero.nvim"
   },
-  ["lualine.nvim"] = {
-    loaded = true,
-    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/lualine.nvim",
-    url = "https://github.com/nvim-lualine/lualine.nvim"
-  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -159,6 +154,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -206,6 +206,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
+  },
+  ["tabby.nvim"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/tabby.nvim",
+    url = "https://github.com/nanozuki/tabby.nvim"
   },
   ["telescope-fzf-native.nvim"] = {
     loaded = true,
