@@ -77,6 +77,7 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim")
   use("folke/which-key.nvim")
 	use("windwp/nvim-autopairs")
+  use("norcalli/nvim-colorizer.lua")
 
 	-- Fuzzy finder
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- improves sorting perf
