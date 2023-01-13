@@ -30,7 +30,7 @@ end
 packer.init({
 	display = {
 		open_fn = function()
-			return require("packer.util").float({ 
+			return require("packer.util").float({
 				border = "rounded",
 				style = "minimal"
 			})
@@ -107,7 +107,7 @@ return packer.startup(function(use)
 		}
 	})
 
-	if packer_boostrap then
+	if packer_bootstrap then
 		require("packer").sync()
 	end
 end)
