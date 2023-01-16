@@ -6,28 +6,28 @@ end
 lsp.preset("recommended")
 
 local servers = {
-	'ansiblels',
-	'cssls',
-	'cssmodules_ls',
-	'dockerls',
-	'eslint',
-	'html',
-	'jsonls',
-  'sumneko_lua',
-	'tailwindcss',
-	'terraformls',
-	'tsserver',
-	'yamlls'
+	"ansiblels",
+	"cssls",
+	"cssmodules_ls",
+	"dockerls",
+	"eslint",
+	"html",
+	"jsonls",
+  "sumneko_lua",
+	"tailwindcss",
+	"terraformls",
+	"tsserver",
+	"yamlls"
 }
 
 lsp.ensure_installed(servers)
 
--- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
+-- Fix Undefined global "vim"
+lsp.configure("sumneko_lua", {
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = { 'vim' }
+				globals = { "vim" }
 			}
 		}
 	}
@@ -40,12 +40,11 @@ end
 
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+  ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+  ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+  ["<C-y>"] = cmp.mapping.confirm({ select = true }),
   ["<C-Space>"] = cmp.mapping.complete(),
 })
-
 
 lsp.setup_nvim_cmp({
   mapping = cmp_mappings
@@ -54,10 +53,10 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
 	suggest_lsp_servers = true,
 	sign_icons = {
-		error = 'E',
-		warn = 'W',
-    hint = 'H',
-    info = 'I'
+		error = "", -- \uF686
+		warn = "",  -- \uF685
+    hint = "",  -- \uF64E
+    info = ""   -- \uF67D
   }
 })
 
@@ -66,7 +65,7 @@ lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
   if client.name == "eslint" then
-    vim.cmd.LspStop('eslint')
+    vim.cmd.LspStop("eslint")
     return
   end
 
