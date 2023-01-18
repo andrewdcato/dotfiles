@@ -43,3 +43,12 @@ keymap.set("n", "<leader>fh", ":Telescope help_tags")
 keymap.set("n", "<leader>gg", ":LazyGit<CR>")
 keymap.set("n", "<leader>gc", ":LazyGitConfig<CR>")
 
+-- nvim-dap
+keymap.set("n", "<F5>", ":lua require('dap').continue()<CR>")
+keymap.set("n", "<F10>", ":lua require('dap').step_over()<CR>")
+keymap.set("n", "<F11>", ":lua require('dap').step_into()<CR>")
+keymap.set("n", "<F12>", ":lua require('dap').step_out()<CR>")
+keymap.set("n", "<leader>b", ":lua require('dap').toggle_breakpoint()<CR>")
+
+-- nvim-dap-ui
+keymap.set("n", "<leader>dt", ":lua require('dapui').toggle()<CR>")
