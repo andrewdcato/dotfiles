@@ -108,6 +108,19 @@ return packer.startup(function(use)
 		}
 	})
 
+  -- Debugger
+  use("mfussenegger/nvim-dap")
+  use("mxsdev/nvim-dap-vscode-js")
+  use("rcarriga/nvim-dap-ui")
+  use("theHamsta/nvim-dap-virtual-text")
+  use("nvim-telescope/telescope-dap.nvim")
+  use({
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npm run compile",
+    tag = 'v1.74.1'  -- you *must* specify this tag; newer versions have breaking bugs
+  })
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end

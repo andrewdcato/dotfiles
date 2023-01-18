@@ -9,3 +9,4 @@ require("andrewdcato.core.keymaps")
 -- Plugins
 require("andrewdcato.plugins.tabby")
 require("andrewdcato.plugins.feline")
+require("andrewdcato.plugins.nvim-dap")
