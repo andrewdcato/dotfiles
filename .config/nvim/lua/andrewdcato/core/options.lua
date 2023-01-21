@@ -10,6 +10,7 @@ local options = {
 	smartindent = true,
 	backspace = "indent,eol,start",
 	scrolloff = 8,										-- keep X lines around the cursor at all times
+  pumblend = 20,
 
 	-- text wrapping
 	textwidth = 0,

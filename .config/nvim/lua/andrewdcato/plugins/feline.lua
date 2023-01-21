@@ -38,6 +38,8 @@ local hex = function(n)
   if n then
     return fmt("#%06x", n)
   end
+
+  return ''
 end
 
 ---Parse `style` string into nvim_set_hl options
