@@ -140,11 +140,6 @@ _G.packer_plugins = {
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
     url = "https://github.com/kdheepak/lazygit.nvim"
   },
-  ["lsp-zero.nvim"] = {
-    loaded = true,
-    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
-    url = "https://github.com/VonHeikemen/lsp-zero.nvim"
-  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -159,6 +154,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
     url = "https://github.com/EdenEast/nightfox.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -232,6 +232,11 @@ _G.packer_plugins = {
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["popup.nvim"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/popup.nvim",
+    url = "https://github.com/nvim-lua/popup.nvim"
+  },
   ["tabby.nvim"] = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/tabby.nvim",
@@ -251,6 +256,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["vim-illuminate"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/vim-illuminate",
+    url = "https://github.com/RRethy/vim-illuminate"
   },
   ["vscode-js-debug"] = {
     loaded = false,
