@@ -53,6 +53,7 @@ end
 local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
+
 	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -81,12 +82,25 @@ M.on_attach = function(client, bufnr)
 
 	lsp_keymaps(bufnr)
 
-  local status_ok, illuminate = pcall(require, "illuminate")
-	if not status_ok then
+	local illuminate_ok, illuminate = pcall(require, "illuminate")
+	if not illuminate_ok then
 		return
 	end
 
-  illuminate.on_attach(client)
+	illuminate.on_attach(client)
+
+	local navic_ok, navic = pcall(require, "nvim-navic")
+	if not navic_ok then
+		return
+	end
+
+	if client.server_capabilities.documentSymbolProvider then
+		navic.setup({
+			highlight = true,
+			separator = "  ",
+		})
+		navic.attach(client, bufnr)
+	end
 end
 
 return M

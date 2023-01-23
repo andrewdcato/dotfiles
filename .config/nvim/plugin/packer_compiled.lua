@@ -140,6 +140,11 @@ _G.packer_plugins = {
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/lazygit.nvim",
     url = "https://github.com/kdheepak/lazygit.nvim"
   },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -149,6 +154,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["modes.nvim"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/modes.nvim",
+    url = "https://github.com/mvllow/modes.nvim"
   },
   ["nightfox.nvim"] = {
     loaded = true,
@@ -199,6 +209,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-navic"] = {
+    loaded = true,
+    path = "/Users/andrewcato/.local/share/nvim/site/pack/packer/start/nvim-navic",
+    url = "https://github.com/SmiteshP/nvim-navic"
   },
   ["nvim-tree.lua"] = {
     loaded = true,

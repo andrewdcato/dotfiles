@@ -58,10 +58,13 @@ return packer.startup(function(use)
 	use("kyazdani42/nvim-web-devicons")
 	use("ellisonleao/gruvbox.nvim")
 	use("EdenEast/nightfox.nvim")
+	use({ "mvllow/modes.nvim", tag = "v0.2.0" })
+	use("SmiteshP/nvim-navic")
 
 	-- Statusline
 	use("nanozuki/tabby.nvim")
 	use("feline-nvim/feline.nvim")
+	use("nvim-lualine/lualine.nvim")
 
 	-- Git plugins
 	use("f-person/git-blame.nvim") -- inline git blame

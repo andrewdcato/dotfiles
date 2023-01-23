@@ -3,14 +3,14 @@ local options = {
 	relativenumber = true,
 	number = true,
 	showmatch = true,
-	colorcolumn = '120',
+	colorcolumn = "120",
 	termguicolors = true,
-	background = "dark",							-- force dark mode in themes that support it
+	background = "dark", -- force dark mode in themes that support it
 	signcolumn = "yes",
 	smartindent = true,
 	backspace = "indent,eol,start",
-	scrolloff = 8,										-- keep X lines around the cursor at all times
-  pumblend = 20,
+	scrolloff = 8, -- keep X lines around the cursor at all times
+	pumblend = 20,
 
 	-- text wrapping
 	textwidth = 0,
@@ -22,16 +22,16 @@ local options = {
 	tabstop = 2,
 	softtabstop = 2,
 	shiftwidth = 2,
-	expandtab = true,									-- convert tabs to spaces like a civilized person
+	expandtab = true, -- convert tabs to spaces like a civilized person
 
-  -- search tweaks
-	ignorecase = true,								-- make search case-insensitive
-	smartcase = true,									-- make search case-sensitive when starting w/capitals
+	-- search tweaks
+	ignorecase = true, -- make search case-insensitive
+	smartcase = true, -- make search case-sensitive when starting w/capitals
 }
 
 for key, value in pairs(options) do
-	vim.opt[key] = value;
-end	
+	vim.opt[key] = value
+end
 
 -- Clipboard
 vim.opt.clipboard:append("unnamedplus") -- use the system clipboard when yanking text
