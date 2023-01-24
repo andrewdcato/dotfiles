@@ -20,6 +20,9 @@ lualine.setup({
 			right = " ",
 			left = " ",
 		},
+		disabled_filetypes = {
+			statusline = { "alpha" },
+		},
 	},
 	sections = {
 		lualine_a = { "mode" },

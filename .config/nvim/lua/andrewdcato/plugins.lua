@@ -60,6 +60,7 @@ return packer.startup(function(use)
 	use("EdenEast/nightfox.nvim")
 	use({ "mvllow/modes.nvim", tag = "v0.2.0" })
 	use("SmiteshP/nvim-navic")
+	use("goolord/alpha-nvim")
 
 	-- Statusline
 	use("nanozuki/tabby.nvim")

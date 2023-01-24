@@ -11,6 +11,8 @@ local options = {
 	backspace = "indent,eol,start",
 	scrolloff = 8, -- keep X lines around the cursor at all times
 	pumblend = 20,
+	showmode = false,
+	cursorline = true,
 
 	-- text wrapping
 	textwidth = 0,
