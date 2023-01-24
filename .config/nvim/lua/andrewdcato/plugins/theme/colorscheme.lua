@@ -25,6 +25,21 @@ nightfox.setup({
 			strings = "italic,bold",
 			comments = "italic",
 		},
+		inverse = { -- Inverse highlight for different types
+			match_paren = false,
+			visual = true,
+			search = false,
+		},
+		modules = {
+			["dap-ui"] = true,
+			gitsigns = true,
+			modes = true,
+			navic = true,
+			nvimtree = true,
+			telescope = true,
+			treesitter = true,
+			whichkey = true,
+		},
 	},
 })
 
