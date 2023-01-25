@@ -373,7 +373,7 @@ local c = {
 	},
 	lsp_status = {
 		provider = function()
-			return vim.tbl_count(vim.lsp.buf_get_clients(0)) == 0 and "" or " ◦ "
+			return require("lsp-status").status()
 		end,
 		hl = "UserSLStatus",
 		left_sep = { str = "", hl = "UserSLStatusBg", always_visible = true },
