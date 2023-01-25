@@ -33,6 +33,7 @@ nightfox.setup({
 		modules = {
 			["dap-ui"] = true,
 			gitsigns = true,
+			lsp_saga = true,
 			modes = true,
 			navic = true,
 			nvimtree = true,

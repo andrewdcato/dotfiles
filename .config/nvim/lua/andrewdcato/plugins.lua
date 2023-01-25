@@ -97,6 +97,7 @@ return packer.startup(function(use)
 	use("jose-elias-alvarez/null-ls.nvim")
 	use("RRethy/vim-illuminate")
 	use("glepnir/lspsaga.nvim")
+	use("nvim-lua/lsp-status.nvim")
 
 	-- Autocompletion
 	use("hrsh7th/nvim-cmp")
