@@ -91,11 +91,12 @@ return packer.startup(function(use)
 	use({ "nvim-telescope/telescope.nvim", tag = "0.1.0" })
 
 	-- LSP and Formatting
-	use({ "neovim/nvim-lspconfig" })
-	use({ "williamboman/mason-lspconfig.nvim" })
-	use({ "williamboman/mason.nvim" })
-	use({ "jose-elias-alvarez/null-ls.nvim" })
-	use({ "RRethy/vim-illuminate" })
+	use("neovim/nvim-lspconfig")
+	use("williamboman/mason-lspconfig.nvim")
+	use("williamboman/mason.nvim")
+	use("jose-elias-alvarez/null-ls.nvim")
+	use("RRethy/vim-illuminate")
+	use("glepnir/lspsaga.nvim")
 
 	-- Autocompletion
 	use("hrsh7th/nvim-cmp")
