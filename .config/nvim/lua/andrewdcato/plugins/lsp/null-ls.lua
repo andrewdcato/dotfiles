@@ -9,8 +9,28 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
 	debug = false,
 	sources = {
-		formatting.prettier,
-		formatting.eslint,
+		formatting.prettier.with({
+			filetypes = {
+				"javascriptreact",
+				"javascript.jsx",
+				"typescriptreact",
+				"typescript.tsx",
+				"css",
+				"scss",
+				"less",
+				"html",
+				"json",
+				"yaml",
+				"markdown",
+				"graphql",
+			},
+		}),
+		formatting.eslint_d.with({
+			filetypes = {
+				"javascript",
+				"typescript",
+			},
+		}),
 		formatting.stylua,
 	},
 	on_attach = function(client, bufnr)

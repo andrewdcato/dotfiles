@@ -63,6 +63,13 @@ M.on_attach = function(client, bufnr)
 	if not illuminate_ok then
 		return
 	end
+	illuminate.configure({
+		filetypes_denylist = {
+			"NvimTree",
+			"alpha",
+			"lspsagaoutline",
+		},
+	})
 
 	illuminate.on_attach(client)
 
