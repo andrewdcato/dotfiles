@@ -61,6 +61,7 @@ return packer.startup(function(use)
 	use({ "mvllow/modes.nvim", tag = "v0.2.0" })
 	use("SmiteshP/nvim-navic")
 	use("goolord/alpha-nvim")
+	use("lukas-reineke/indent-blankline.nvim")
 
 	-- Statusline
 	use("nanozuki/tabby.nvim")
