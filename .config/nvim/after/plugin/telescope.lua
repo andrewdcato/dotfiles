@@ -1,10 +1,10 @@
-local telescope_installed, telescope = pcall(require, "telescope")
-if not telescope_installed then
+local telescope_ok, telescope = pcall(require, "telescope")
+if not telescope_ok then
 	return
 end
 
-local actions_configured, actions = pcall(require, "telescope.actions")
-if not actions_configured then
+local actions_ok, actions = pcall(require, "telescope.actions")
+if not actions_ok then
 	return
 end
 
@@ -14,8 +14,15 @@ local extensions = {
 	"packer",
 }
 
+local pickers = {
+	find_files = {
+		hidden = true,
+	},
+}
+
 telescope.setup({
 	extensions,
+	pickers,
 	defaults = {
 		mappings = {
 			i = {
