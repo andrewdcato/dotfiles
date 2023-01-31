@@ -41,43 +41,8 @@ navic.setup({
 	icons = kind_icons,
 	highlight = true,
 	safe_output = true,
-	separator = "  ",
+	separator = "  ",
 })
-
-local custom_fname = require("lualine.components.filename"):extend()
-local highlight = require("lualine.highlight")
-local default_status_colors = { saved = "#228B22", modified = "#C70039" }
-
-function custom_fname:init(options)
-	custom_fname.super.init(self, options)
-
-	self.status_colors = {
-		saved = highlight.create_component_highlight_group(
-			{ fg = default_status_colors.saved },
-			"filename_status_saved",
-			self.options
-		),
-		modified = highlight.create_component_highlight_group(
-			{ fg = default_status_colors.modified },
-			"filename_status_modified",
-			self.options
-		),
-	}
-
-	if self.options.color == nil then
-		self.options.color = ""
-	end
-end
-
-function custom_fname:update_status()
-	local data = custom_fname.super.update_status(self)
-
-	data = highlight.component_format_highlight(
-		vim.bo.modified and self.status_colors.modified or self.status_colors.saved
-	) .. data
-
-	return data
-end
 
 local function diff_source()
 	local gitsigns = vim.b.gitsigns_status_dict
@@ -98,7 +63,7 @@ local diff_component = {
 }
 
 local navic_component = {
-	custom_fname,
+	"filename",
 	{
 		navic.get_location,
 		cond = navic.is_available,
@@ -107,16 +72,18 @@ local navic_component = {
 }
 
 local disabled_filetypes = {
-	statusline = { "Alpha", "lspsagaoutline" },
+	statusline = { "alpha", "lspsagaoutline" },
 	winbar = { "alpha", "lspsagaoutline" },
 }
+
+vim.opt.laststatus = 3
 
 lualine.setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
-		component_separators = { left = "", right = "" },
-		section_separators = { right = " ", left = " " },
+		theme = "nord",
+		component_separators = { left = "", right = "" },
+		section_separators = { right = " ", left = " " },
 		disabled_filetypes = disabled_filetypes,
 	},
 	sections = {
