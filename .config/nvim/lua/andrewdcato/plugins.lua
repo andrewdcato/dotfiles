@@ -55,21 +55,20 @@ return packer.startup(function(use)
 	})
 
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
-	use("kyazdani42/nvim-web-devicons")
+	use("nvim-tree/nvim-web-devicons")
 	use("ellisonleao/gruvbox.nvim")
 	use("EdenEast/nightfox.nvim")
-	use({ "mvllow/modes.nvim", tag = "v0.2.0" })
+	use("shaunsingh/nord.nvim")
+	use("mvllow/modes.nvim")
 	use("SmiteshP/nvim-navic")
 	use("goolord/alpha-nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 
 	-- Statusline
-	use("nanozuki/tabby.nvim")
-	use("feline-nvim/feline.nvim")
+	use("akinsho/bufferline.nvim")
 	use("nvim-lualine/lualine.nvim")
 
 	-- Git plugins
-	use("f-person/git-blame.nvim") -- inline git blame
 	use("kdheepak/lazygit.nvim")
 	use({
 		"lewis6991/gitsigns.nvim",
@@ -84,7 +83,23 @@ return packer.startup(function(use)
 	use("folke/which-key.nvim")
 	use("windwp/nvim-autopairs")
 	use("norcalli/nvim-colorizer.lua")
-
+	use("folke/trouble.nvim")
+	use({
+		"alexghergh/nvim-tmux-navigation",
+		config = function()
+			require("nvim-tmux-navigation").setup({
+				disable_when_zoomed = true, -- defaults to false
+				keybindings = {
+					left = "<C-h>",
+					down = "<C-j>",
+					up = "<C-k>",
+					right = "<C-l>",
+					last_active = "<C-\\>",
+					next = "<C-Space>",
+				},
+			})
+		end,
+	})
 	-- Telescope
 	use("nvim-telescope/telescope-packer.nvim")
 	use("nvim-telescope/telescope-file-browser.nvim")
@@ -99,6 +114,7 @@ return packer.startup(function(use)
 	use("RRethy/vim-illuminate")
 	use("glepnir/lspsaga.nvim")
 	use("nvim-lua/lsp-status.nvim")
+	use("onsails/lspkind.nvim")
 
 	-- Autocompletion
 	use("hrsh7th/nvim-cmp")
