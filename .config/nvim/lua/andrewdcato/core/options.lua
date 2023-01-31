@@ -12,7 +12,7 @@ local options = {
 	scrolloff = 8, -- keep X lines around the cursor at all times
 	pumblend = 20,
 	showmode = false,
-	cursorline = true,
+	cursorline = false,
 
 	-- text wrapping
 	textwidth = 0,
@@ -32,7 +32,7 @@ local options = {
 }
 
 for key, value in pairs(options) do
-	vim.opt[key] = value
+	vim.o[key] = value
 end
 
 -- Clipboard
