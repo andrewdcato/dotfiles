@@ -1,11 +1,11 @@
 local mason_installed, mason = pcall(require, "mason")
 if not mason_installed then
-  return
+	return
 end
 
 local mason_lspconfig_installed, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not mason_lspconfig_installed then
-  return
+	return
 end
 
 local servers = {
@@ -16,11 +16,12 @@ local servers = {
 	"eslint",
 	"html",
 	"jsonls",
-  "sumneko_lua",
+	"prismals",
+	"sumneko_lua",
 	"tailwindcss",
 	"terraformls",
 	"tsserver",
-	"yamlls"
+	"yamlls",
 }
 
 local settings = {

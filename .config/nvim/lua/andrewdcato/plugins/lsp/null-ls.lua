@@ -32,6 +32,7 @@ null_ls.setup({
 			},
 		}),
 		formatting.stylua,
+		formatting.prismaFmt,
 	},
 	on_attach = function(client, bufnr)
 		if client.supports_method("textDocument/formatting") then

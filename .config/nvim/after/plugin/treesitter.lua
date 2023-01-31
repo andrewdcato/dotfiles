@@ -14,10 +14,13 @@ return treesitter.setup({
 		"jsdoc",
 		"lua",
 		"markdown",
+		"markdown_inline",
+		"prisma",
 		"typescript",
 		"vim",
 		"yaml",
 	},
 	sync_install = false, -- force async install
-	highlight = { endable = true }, -- enable extension
+	highlight = { enabled = true }, -- enable extension
+	indentation = { enabled = true },
 })
