@@ -15,7 +15,10 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 return nvimtree.setup({
-	filters = { dotfiles = false }, -- show hidden files
+	filters = {
+		custom = { "^\\.git*" },
+		dotfiles = false, -- show hidden files
+	},
 	update_focused_file = {
 		enable = true,
 		update_cwd = true,
