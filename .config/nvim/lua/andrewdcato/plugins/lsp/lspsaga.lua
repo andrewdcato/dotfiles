@@ -35,7 +35,8 @@ keymap("i", "<C-k>", "<cmd>Lspsaga signature_help<CR>", opts)
 
 -- GoTos
 keymap("n", "gp", "<cmd>Lspsaga peek_definition<CR>", opts)
-keymap("n", "gd", "<cmd>Lspsaga lsp_finder<CR>", opts)
+keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", opts)
+keymap("n", "gd", "<cmd>Lspsaga goto_definition<CR>")
 keymap("n", "<leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
 keymap("n", "<leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
 

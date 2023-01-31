@@ -1,55 +1,64 @@
 -- Map leader to a space
 vim.g.mapleader = " "
 
-local keymap = vim.keymap
+local opts = { noremap = true, silent = true }
+local keymap = vim.keymap.set
 
 -- Navigation
 -- Move through splits w/ CTRL + {h,j,k,l}
-keymap.set("n", "<C-h>", "<C-w>h")
-keymap.set("n", "<C-j>", "<C-w>j")
-keymap.set("n", "<C-k>", "<C-w>k")
-keymap.set("n", "<C-l>", "<C-w>l")
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Window splits
-keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
-keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
-keymap.set("n", "<leader>se", "<C-w>=") -- make splits equal
-keymap.set("n", "<leader>sx", ":close<CR>") -- close current split
+keymap("n", "<leader>sv", "<C-w>v", opts) -- split window vertically
+keymap("n", "<leader>sh", "<C-w>s", opts) -- split window horizontally
+keymap("n", "<leader>se", "<C-w>=", opts) -- make splits equal
+keymap("n", "<leader>sx", ":close<CR>", opts) -- close current split
 
 -- Tabs
-keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
-keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
-keymap.set("n", "<leader>tn", ":tabn<CR>") -- move to next tab
-keymap.set("n", "<leader>tp", ":tabp<CR>") -- move to prev tab
+keymap("n", "<leader>to", ":tabnew<CR>", opts) -- open new tab
+keymap("n", "<leader>tx", ":tabclose<CR>", opts) -- close current tab
+keymap("n", "<leader>tn", ":tabn<CR>", opts) -- move to next tab
+keymap("n", "<leader>tp", ":tabp<CR>", opts) -- move to prev tab
 
 -- General remaps
-keymap.set("n", "<leader>nh", ":nohl<CR>") -- clear search higlights
-keymap.set("n", "<leader>+", "<C-a>") -- increment numbers
-keymap.set("n", "<leader>-", "<C-x>") -- decrement numbers
+keymap("n", "<leader>nh", ":nohl<CR>", opts) -- clear search higlights
+keymap("n", "<leader>+", "<C-a>", opts) -- increment numbers
+keymap("n", "<leader>-", "<C-x>", opts) -- decrement numbers
 
 -- Plugin keymaps
 -- nvim-tree
-keymap.set("n", "<leader>t", ":NvimTreeToggle<CR>") -- open tree
-keymap.set("n", "<leader>j", ":NvimTreeFindFile<CR>") -- find files
+keymap("n", "<leader>t", ":NvimTreeToggle<CR>", opts) -- open tree
+keymap("n", "<leader>j", ":NvimTreeFindFile<CR>", opts) -- find files
 
 -- telescope
-keymap.set("n", "<leader>ff", ":Telescope find_files<CR>")
-keymap.set("n", "<leader>fs", ":Telescope live_grep<CR>")
-keymap.set("n", "<leader>fc", ":Telescope grep_string<CR>")
-keymap.set("n", "<leader>fb", ":Telescope buffers<CR>")
-keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>")
-keymap.set("n", "<leader>fp", ":Telescope packer<CR>")
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>fs", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fc", ":Telescope grep_string<CR>", opts)
+keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
+keymap("n", "<leader>fp", ":Telescope packer<CR>", opts)
 
 -- lazygit
-keymap.set("n", "<leader>gg", ":LazyGit<CR>")
-keymap.set("n", "<leader>gc", ":LazyGitConfig<CR>")
+keymap("n", "<leader>gg", ":LazyGit<CR>", opts)
+keymap("n", "<leader>gc", ":LazyGitConfig<CR>", opts)
 
 -- nvim-dap
-keymap.set("n", "<F5>", ":lua require('dap').continue()<CR>")
-keymap.set("n", "<F10>", ":lua require('dap').step_over()<CR>")
-keymap.set("n", "<F11>", ":lua require('dap').step_into()<CR>")
-keymap.set("n", "<F12>", ":lua require('dap').step_out()<CR>")
-keymap.set("n", "<leader>b", ":lua require('dap').toggle_breakpoint()<CR>")
+keymap("n", "<F5>", ":lua require('dap')continue()", opts)
+keymap("n", "<F10>", ":lua require('dap')step_over()", opts)
+keymap("n", "<F11>", ":lua require('dap')step_into()", opts)
+keymap("n", "<F12>", ":lua require('dap')step_out()", opts)
+keymap("n", "<leader>b", ":lua require('dap')toggle_breakpoint()", opts)
 
 -- nvim-dap-ui
-keymap.set("n", "<leader>dt", ":lua require('dapui').toggle()<CR>")
+keymap("n", "<leader>dt", ":lua require('dapui')toggle()", opts)
+
+-- trouble
+keymap("n", "<leader>xx", ":TroubleToggle<cr>", opts)
+keymap("n", "<leader>xw", ":TroubleToggle workspace_diagnostics<cr>", opts)
+keymap("n", "<leader>xd", ":TroubleToggle document_diagnostics<cr>", opts)
+keymap("n", "<leader>xq", ":TroubleToggle quickfix<cr>", opts)
+keymap("n", "<leader>xl", ":TroubleToggle loclist<cr>", opts)
+keymap("n", "gR", ":TroubleToggle lsp_references<cr>", opts)
