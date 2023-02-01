@@ -3,63 +3,23 @@ if not installed then
 	return
 end
 
-local navic_installed, navic = pcall(require, "nvim-navic")
-if not navic_installed then
-	return
-end
-
-local kind_icons = {
-	File = " ",
-	Module = " ",
-	Namespace = " ",
-	Package = " ",
-	Class = " ",
-	Method = "m ",
-	Property = " ",
-	Field = " ",
-	Constructor = " ",
-	Enum = " ",
-	Interface = " ",
-	Function = " ",
-	Variable = " ",
-	Constant = " ",
-	String = " ",
-	Number = " ",
-	Boolean = " ",
-	Array = " ",
-	Object = " ",
-	Key = " ",
-	Null = "ﳠ ",
-	EnumMember = " ",
-	Struct = " ",
-	Event = " ",
-	Operator = " ",
-	TypeParameter = " ",
-}
-
-navic.setup({
-	icons = kind_icons,
-	highlight = true,
-	safe_output = true,
-	separator = "  ",
-})
-
-local function diff_source()
-	local gitsigns = vim.b.gitsigns_status_dict
-	if gitsigns then
-		return {
-			added = gitsigns.added,
-			modified = gitsigns.changed,
-			removed = gitsigns.removed,
-		}
-	end
-end
+local navic = require("andrewdcato.plugins.statusline.nvim-navic")
 
 local branch_component = { "b:gitsigns_head", icon = "" }
 
 local diff_component = {
 	"diff",
-	source = diff_source,
+	source = function()
+		local gitsigns = vim.b.gitsigns_status_dict
+		if gitsigns then
+			return {
+				added = gitsigns.added,
+				modified = gitsigns.modified,
+				removed = gitsigns.removed,
+			}
+		end
+	end,
+	symbols = { added = " ", modified = " ", removed = " " },
 }
 
 local navic_component = {
@@ -87,7 +47,12 @@ lualine.setup({
 		disabled_filetypes = disabled_filetypes,
 	},
 	sections = {
-		lualine_a = { "mode" },
+		lualine_a = {
+			{
+				"mode",
+				icon = "",
+			},
+		},
 		lualine_b = {
 			branch_component,
 			diff_component,
