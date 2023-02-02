@@ -22,6 +22,16 @@ local diff_component = {
 	symbols = { added = " ", modified = " ", removed = " " },
 }
 
+local diagnostics_component = {
+	"diagnostics",
+	{
+		sources = { "nvim_lsp", "nvim_diagnostic" },
+		symbols = { error = "", warn = "", info = "", hint = "" },
+		colored = true,
+		update_on_insert = true,
+	},
+}
+
 local navic_component = {
 	"filename",
 	{
@@ -51,13 +61,12 @@ lualine.setup({
 			{
 				"mode",
 				icon = "",
+				fmt = function(str)
+					return str:sub(1, 3):lower()
+				end,
 			},
 		},
-		lualine_b = {
-			branch_component,
-			diff_component,
-			"diagnostics",
-		},
+		lualine_b = { branch_component, diff_component, diagnostics_component },
 		lualine_c = navic_component,
 		lualine_x = { "encoding", "fileformat", "filetype" },
 		lualine_y = { "progress" },
