@@ -70,12 +70,7 @@ return packer.startup(function(use)
 
 	-- Git plugins
 	use("kdheepak/lazygit.nvim")
-	use({
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
-	})
+	use("lewis6991/gitsigns.nvim")
 
 	-- General workflow
 	use("nvim-tree/nvim-tree.lua")
