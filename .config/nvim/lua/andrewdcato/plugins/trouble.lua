@@ -3,4 +3,6 @@ if not trouble_ok then
 	return
 end
 
-trouble.setup()
+trouble.setup({
+	use_diagnostic_signs = true,
+})

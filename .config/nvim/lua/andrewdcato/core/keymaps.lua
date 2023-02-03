@@ -1,64 +1,109 @@
 -- Map leader to a space
 vim.g.mapleader = " "
 
-local opts = { noremap = true, silent = true }
-local keymap = vim.keymap.set
+-- Maps defined w/WhichKey
+local installed, wk = pcall(require, "which-key")
+if not installed then
+	return
+end
 
--- Navigation
--- Move through splits w/ CTRL + {h,j,k,l}
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- **********************************************************
+--  whick-key defaults all keyamps to the following:
+--      silent = true
+--      noremap = true
+--      mode = "n"
+--      buffer = nil
+--
+--  Unless otherwise specified, assume these defaults!
+-- **********************************************************
 
--- Window splits
-keymap("n", "<leader>sv", "<C-w>v", opts) -- split window vertically
-keymap("n", "<leader>sh", "<C-w>s", opts) -- split window horizontally
-keymap("n", "<leader>se", "<C-w>=", opts) -- make splits equal
-keymap("n", "<leader>sx", ":close<CR>", opts) -- close current split
+-- General maps
+wk.register({
+	["<leader>+"] = { "<C-a>", "Increment Number Under Cursor" },
+	["<leader>-"] = { "<C-x>", "Decrement Number Under Cursor" },
+	["<leader>nh"] = { "<cmd>nohl<cr>", "Hide search highlights", noremap = false },
+	["<leader>t"] = { "<cmd>NvimTreeToggle<cr>", "Open File Tree", noremap = false },
+	["<leader>j"] = { "<cmd>NvimTreeFindFile<cr>", "Search File Tree", noremap = false },
+})
 
--- Tabs
-keymap("n", "<leader>to", ":tabnew<CR>", opts) -- open new tab
-keymap("n", "<leader>tx", ":tabclose<CR>", opts) -- close current tab
-keymap("n", "<leader>tn", ":tabn<CR>", opts) -- move to next tab
-keymap("n", "<leader>tp", ":tabp<CR>", opts) -- move to prev tab
+-- Debugger keymaps
+wk.register({
+	["<F5>"] = { "<cmd>lua require('dap').continue()<cr>", " Debugger: Continue " },
+	["<F10>"] = { "<cmd>lua require('dap').step_over()<cr>", " Debugger: Step Over " },
+	["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", " Debugger: Step Into " },
+	["<F12>"] = { "<cmd>lua require('dap').step_out()<cr>", " Debugger: Step Out " },
+	["b"] = { "<cmd>lua require('dap')toggle_breakpoint()<cr>", " Debugger: Toggle Breakpoint " },
+	["<leader>dt"] = { "<cmd>lua require('dapui).toggle()<cr>", " Debugger: Toggle DapUI Window " },
+})
 
--- General remaps
-keymap("n", "<leader>nh", ":nohl<CR>", opts) -- clear search higlights
-keymap("n", "<leader>+", "<C-a>", opts) -- increment numbers
-keymap("n", "<leader>-", "<C-x>", opts) -- decrement numbers
+-- Telescope keymaps
+wk.register({
+	["<leader>f"] = {
+		name = "Telescope ",
+		b = { "<cmd>Telescope buffers<cr>", "﬘ Search Open Buffers" },
+		c = { "<cmd>Telescope grep_string<cr>", " Search Current Word" },
+		f = { "<cmd>Telescope find_files<cr>", " Search Current Directory" },
+		g = { "<cmd>Telescope git_files<cr>", " Search Git Files" },
+		h = { "<cmd>Telescope help_tags<cr>", " Search 'Help' Tags" },
+		p = { "<cmd>Telescope packer<cr>", " Search Packer README Files" },
+		r = { "<cmd>Telescope oldfiles<cr>", " Open Recent Files" },
+		s = { "<cmd>Telescope live_grep<cr>", " Live Grep Search" },
+	},
+})
 
--- Plugin keymaps
--- nvim-tree
-keymap("n", "<leader>t", ":NvimTreeToggle<CR>", opts) -- open tree
-keymap("n", "<leader>j", ":NvimTreeFindFile<CR>", opts) -- find files
+-- Git keymaps
+wk.register({
+	["<leader>g"] = {
+		name = "Git Things ",
+		g = { "<cmd>LazyGit<cr>", "Open Window" },
+		c = { "<cmd>LazyGitConfig<cr>", "Edit Config" },
+	},
+})
 
--- telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fs", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fc", ":Telescope grep_string<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
-keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope packer<CR>", opts)
+-- Window / Split Management
+wk.register({
+	["<C-h>"] = { "<C-w>h", "Move to split to the left" },
+	["<C-j>"] = { "<C-w>j", "Move to split below" },
+	["<C-k>"] = { "<C-w>k", "Move to split above" },
+	["<C-l>"] = { "<C-w>l", "Move to split o the right" },
+	["<leader>s"] = {
+		name = "Window Splits ",
+		e = { "<C-w>=", "Make Splits Equal" },
+		h = { "<C-w>s", "Split Window Horizontally" },
+		v = { "<C-w>v", "Split Window Vertically" },
+		x = { "<cmd>close<cr>", "Close Current Split" },
+	},
+	["<leader>t"] = {
+		name = "Tab Management 裡",
+		n = { "<cmd>tabn<cr>", "Move to Next Tab" },
+		o = { "<cmd>tabnew<cr>", "Open New Tab" },
+		p = { "<cmd>tabp<cr>", "Move to Previous Tab" },
+		x = { "<cmd>tabclose<cr>", "Close Current Tab" },
+	},
+})
 
--- lazygit
-keymap("n", "<leader>gg", ":LazyGit<CR>", opts)
-keymap("n", "<leader>gc", ":LazyGitConfig<CR>", opts)
+-- trouble.nvim
+wk.register({
+	["<leader>x"] = {
+		name = "Trouble 飯",
+		x = { "<cmd>TroubleToggle<cr>", "Trouble: Toggle Main Window" },
+		w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble: Toggle Workspace Diagnostics" },
+		d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble: Toggle Document Diagnostics" },
+		q = { "<cmd>TroubleToggle quickfix<cr>", "Trouble: Toggle Quickfix List" },
+		l = { "<cmd>TroubleToggle lsp_references<cr>", "Trouble: Toggle LSP References" },
+		L = { "<cmd>TroubleToggle loclist<cr>", "Trouble: Toggle LocList" },
+	},
+})
 
--- nvim-dap
-keymap("n", "<F5>", ":lua require('dap')continue()", opts)
-keymap("n", "<F10>", ":lua require('dap')step_over()", opts)
-keymap("n", "<F11>", ":lua require('dap')step_into()", opts)
-keymap("n", "<F12>", ":lua require('dap')step_out()", opts)
-keymap("n", "<leader>b", ":lua require('dap')toggle_breakpoint()", opts)
-
--- nvim-dap-ui
-keymap("n", "<leader>dt", ":lua require('dapui')toggle()", opts)
-
--- trouble
-keymap("n", "<leader>xx", ":TroubleToggle<cr>", opts)
-keymap("n", "<leader>xw", ":TroubleToggle workspace_diagnostics<cr>", opts)
-keymap("n", "<leader>xd", ":TroubleToggle document_diagnostics<cr>", opts)
-keymap("n", "<leader>xq", ":TroubleToggle quickfix<cr>", opts)
-keymap("n", "<leader>xl", ":TroubleToggle loclist<cr>", opts)
-keymap("n", "gR", ":TroubleToggle lsp_references<cr>", opts)
+wk.setup({
+	window = {
+		winblend = 10,
+	},
+	layout = {
+		align = "center",
+		spacing = 5,
+	},
+	disable = {
+		filetypes = { "TelescopePrompt" },
+	},
+})
