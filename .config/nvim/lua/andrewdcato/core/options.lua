@@ -1,5 +1,6 @@
 local options = {
 	-- base ui config
+	guifont = { "JetBrainsMono Nerd Font", "h14" },
 	relativenumber = true,
 	number = true,
 	showmatch = true,
@@ -32,11 +33,25 @@ local options = {
 }
 
 for key, value in pairs(options) do
-	vim.o[key] = value
+	vim.opt[key] = value
 end
 
 -- Clipboard
 vim.opt.clipboard:append("unnamedplus") -- use the system clipboard when yanking text
 
 -- Misc
+vim.opt.guicursor = "a:block-Cursor" -- block cursor in all modes
+vim.opt.guicursor = "i-v:blinkon10" -- blink the cursor in insert or visual mode
 vim.opt.iskeyword:append("-") -- changes the "-" character to be considered part of the word
+
+-- Use nvim-notify as default for notifications
+local notify_ok, notify = pcall(require, "notify")
+if notify_ok then
+	notify.setup({
+		render = "compact",
+		stages = "fade",
+		fps = 60,
+	})
+
+	vim.notify = notify
+end

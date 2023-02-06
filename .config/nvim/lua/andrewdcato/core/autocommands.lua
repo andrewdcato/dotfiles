@@ -14,3 +14,10 @@ vim.api.nvim_create_autocmd("CursorHold", {
 		vim.diagnostic.open_float(nil, opts)
 	end,
 })
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "MasonUpdateAllComplete",
+	callback = function()
+		vim.notify("mason-update-all has updated all language servers!")
+	end,
+})
