@@ -1,19 +1,16 @@
 -- Packer config
 require("andrewdcato.plugins")
 
--- Core options
-require("andrewdcato.core.colors")
-require("andrewdcato.core.options")
-require("andrewdcato.core.keymaps")
-
 -- Plugins
-require("andrewdcato.plugins.theme")
+require("andrewdcato.plugins.ui")
 require("andrewdcato.plugins.nvim-dap")
 require("andrewdcato.plugins.nvim-cmp")
 require("andrewdcato.plugins.lsp")
-require("andrewdcato.plugins.statusline")
-require("andrewdcato.plugins.bufferline")
 require("andrewdcato.plugins.alpha")
+
+-- Core options
+require("andrewdcato.core.options")
+require("andrewdcato.core.keymaps")
 
 -- Autocommands
 require("andrewdcato.core.autocommands")
