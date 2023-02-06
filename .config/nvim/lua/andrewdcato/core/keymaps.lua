@@ -45,6 +45,7 @@ wk.register({
 		f = { "<cmd>Telescope find_files<cr>", " Search Current Directory" },
 		g = { "<cmd>Telescope git_files<cr>", " Search Git Files" },
 		h = { "<cmd>Telescope help_tags<cr>", " Search 'Help' Tags" },
+		n = { "<cmd>Telescope notify<cr>", " Search Notifications" },
 		p = { "<cmd>Telescope packer<cr>", " Search Packer README Files" },
 		r = { "<cmd>Telescope oldfiles<cr>", " Open Recent Files" },
 		s = { "<cmd>Telescope live_grep<cr>", " Live Grep Search" },

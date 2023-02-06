@@ -12,6 +12,7 @@ local extensions = {
 	"fzf",
 	"file_browser",
 	"packer",
+	"notify",
 }
 
 local pickers = {
@@ -59,3 +60,4 @@ telescope.setup({
 telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 telescope.load_extension("packer")
+telescope.load_extension("notify")
