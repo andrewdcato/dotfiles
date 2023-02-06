@@ -48,8 +48,8 @@ vim.opt.iskeyword:append("-") -- changes the "-" character to be considered part
 local notify_ok, notify = pcall(require, "notify")
 if notify_ok then
 	notify.setup({
+		background_color = "#000000",
 		render = "compact",
-		stages = "fade",
 		fps = 60,
 	})
 
