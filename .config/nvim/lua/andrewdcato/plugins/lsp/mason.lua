@@ -1,10 +1,20 @@
-local mason_installed, mason = pcall(require, "mason")
-if not mason_installed then
+local mason_ok, mason = pcall(require, "mason")
+if not mason_ok then
 	return
 end
 
-local mason_lspconfig_installed, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not mason_lspconfig_installed then
+local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lspconfig_ok then
+	return
+end
+
+local mason_update_all_ok, mason_update_all = pcall(require, "mason-update-all")
+if not mason_update_all_ok then
+	return
+end
+
+local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_ok then
 	return
 end
 
@@ -43,10 +53,7 @@ mason_lspconfig.setup({
 	automatic_installation = true,
 })
 
-local lspconfig_installed, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_installed then
-	return
-end
+mason_update_all.setup()
 
 local opts = {}
 

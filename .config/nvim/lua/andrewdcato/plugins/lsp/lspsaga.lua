@@ -5,7 +5,7 @@ end
 
 lspsaga.setup({
 	ui = {
-		winblend = 30,
+		winblend = 10,
 		border = "rounded",
 	},
 	symbol_in_winbar = {

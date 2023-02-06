@@ -59,20 +59,6 @@ M.on_attach = function(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = false
 	end
 
-	local illuminate_ok, illuminate = pcall(require, "illuminate")
-	if not illuminate_ok then
-		return
-	end
-	illuminate.configure({
-		filetypes_denylist = {
-			"NvimTree",
-			"alpha",
-			"lspsagaoutline",
-		},
-	})
-
-	illuminate.on_attach(client)
-
 	local lspstatus_ok, lspstatus = pcall(require, "lsp-status")
 	if not lspstatus_ok then
 		return
@@ -81,8 +67,9 @@ M.on_attach = function(client, bufnr)
 	lspstatus.register_progress()
 	lspstatus.on_attach(client)
 
+	-- Attach nvim-navic to buffer's LSP instance
 	if client.server_capabilities.documentSymbolProvider then
-		require("andrewdcato.plugins.statusline.nvim-navic").attach(client, bufnr)
+		require("andrewdcato.plugins.ui.statusline.nvim-navic").attach(client, bufnr)
 	end
 end
 
