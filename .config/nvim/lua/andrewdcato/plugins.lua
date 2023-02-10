@@ -59,8 +59,8 @@ return packer.startup(function(use)
 	use("ellisonleao/gruvbox.nvim")
 	use("EdenEast/nightfox.nvim")
 	use("shaunsingh/nord.nvim")
+	use("folke/tokyonight.nvim")
 	use("mvllow/modes.nvim")
-	use("SmiteshP/nvim-navic")
 	use("goolord/alpha-nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use("rcarriga/nvim-notify")
@@ -68,12 +68,25 @@ return packer.startup(function(use)
 	-- Statusline
 	use("akinsho/bufferline.nvim")
 	use("nvim-lualine/lualine.nvim")
-
+	use("nanozuki/tabby.nvim")
+	use({
+		"utilyre/barbecue.nvim",
+		tag = "*",
+		requires = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		after = "nvim-web-devicons",
+		config = function()
+			require("barbecue").setup()
+		end,
+	})
 	-- Git plugins
 	use("kdheepak/lazygit.nvim")
 	use("lewis6991/gitsigns.nvim")
 
 	-- General workflow
+	use("folke/todo-comments.nvim")
 	use("nvim-tree/nvim-tree.lua")
 	use("numToStr/Comment.nvim")
 	use("folke/which-key.nvim")
@@ -99,6 +112,7 @@ return packer.startup(function(use)
 	-- Telescope
 	use("nvim-telescope/telescope-packer.nvim")
 	use("nvim-telescope/telescope-file-browser.nvim")
+	use("nvim-telescope/telescope-project.nvim")
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- improves sorting perf
 	use({ "nvim-telescope/telescope.nvim", tag = "0.1.0" })
 
