@@ -13,6 +13,14 @@ local extensions = {
 	"file_browser",
 	"packer",
 	"notify",
+	project = {
+		base_dirs = {
+			"~/.dotfiles",
+			"~/surety",
+			"~/projects",
+		},
+		sync_with_nvim_tree = true,
+	},
 }
 
 local pickers = {
@@ -21,10 +29,18 @@ local pickers = {
 	},
 }
 
+local layout_config = {
+	prompt_position = "top",
+	width = 0.85,
+	height = 0.85,
+}
+
 telescope.setup({
 	extensions,
 	pickers,
 	defaults = {
+		layout_config = layout_config,
+		color_devicons = true,
 		mappings = {
 			i = {
 				["<C-n>"] = actions.cycle_history_next,
@@ -61,3 +77,4 @@ telescope.load_extension("fzf")
 telescope.load_extension("file_browser")
 telescope.load_extension("packer")
 telescope.load_extension("notify")
+telescope.load_extension("project")
