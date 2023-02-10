@@ -18,6 +18,6 @@ vim.api.nvim_create_autocmd("CursorHold", {
 vim.api.nvim_create_autocmd("User", {
 	pattern = "MasonUpdateAllComplete",
 	callback = function()
-		vim.notify("mason-update-all has updated all language servers!")
+		vim.notify("mason-update-all has updated all language servers!", "info", { title = "Mason Plugins" })
 	end,
 })
