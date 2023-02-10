@@ -24,6 +24,8 @@ wk.register({
 	["<leader>nh"] = { "<cmd>nohl<cr>", "Hide search highlights", noremap = false },
 	["<leader>t"] = { "<cmd>NvimTreeToggle<cr>", "Open File Tree", noremap = false },
 	["<leader>j"] = { "<cmd>NvimTreeFindFile<cr>", "Search File Tree", noremap = false },
+	["<leader>]t"] = { "<cmd>lua require('todo-comments').jump_next()", "Next TODO Comment" },
+	["<leader>[t"] = { "<cmd>lua require('todo-comments').jump_prev()", "Previous TODO Comment" },
 })
 
 -- Debugger keymaps
@@ -33,7 +35,7 @@ wk.register({
 	["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", " Debugger: Step Into " },
 	["<F12>"] = { "<cmd>lua require('dap').step_out()<cr>", " Debugger: Step Out " },
 	["b"] = { "<cmd>lua require('dap')toggle_breakpoint()<cr>", " Debugger: Toggle Breakpoint " },
-	["<leader>dt"] = { "<cmd>lua require('dapui).toggle()<cr>", " Debugger: Toggle DapUI Window " },
+	["<leader>dt"] = { "<cmd>lua require('dapui').toggle()<cr>", " Debugger: Toggle DapUI Window " },
 })
 
 -- Telescope keymaps
@@ -46,9 +48,11 @@ wk.register({
 		g = { "<cmd>Telescope git_files<cr>", " Search Git Files" },
 		h = { "<cmd>Telescope help_tags<cr>", " Search 'Help' Tags" },
 		n = { "<cmd>Telescope notify<cr>", " Search Notifications" },
+		o = { "<cmd>Telescope project<cr>", " Open Project Folder" },
 		p = { "<cmd>Telescope packer<cr>", " Search Packer README Files" },
 		r = { "<cmd>Telescope oldfiles<cr>", " Open Recent Files" },
 		s = { "<cmd>Telescope live_grep<cr>", " Live Grep Search" },
+		t = { "<cmd>TodoTelescope<cr>", " View TODO comments" },
 	},
 })
 
@@ -63,10 +67,6 @@ wk.register({
 
 -- Window / Split Management
 wk.register({
-	["<C-h>"] = { "<C-w>h", "Move to split to the left" },
-	["<C-j>"] = { "<C-w>j", "Move to split below" },
-	["<C-k>"] = { "<C-w>k", "Move to split above" },
-	["<C-l>"] = { "<C-w>l", "Move to split o the right" },
 	["<leader>s"] = {
 		name = "Window Splits ",
 		e = { "<C-w>=", "Make Splits Equal" },
@@ -93,6 +93,7 @@ wk.register({
 		q = { "<cmd>TroubleToggle quickfix<cr>", "Trouble: Toggle Quickfix List" },
 		l = { "<cmd>TroubleToggle lsp_references<cr>", "Trouble: Toggle LSP References" },
 		L = { "<cmd>TroubleToggle loclist<cr>", "Trouble: Toggle LocList" },
+		t = { "<cmd>TodoTrouble<cr>", "Trouble: View TODO Comments" },
 	},
 })
 
