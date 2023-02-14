@@ -24,6 +24,7 @@ tokyo.setup({
 		colors.gitSigns.change = colors.yellow
 	end,
 	on_highlights = function(highlights, colors)
+		highlights.NotifyBackground = { bg = "#000000" }
 		-- header and footer of feline
 		highlights.UserTLHead = { bg = colors.blue, fg = colors.black }
 		highlights.UserTlHeadSep = { bg = colors.bg_dark, fg = colors.blue }
