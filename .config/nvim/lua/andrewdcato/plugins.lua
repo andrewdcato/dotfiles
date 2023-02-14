@@ -81,6 +81,7 @@ return packer.startup(function(use)
 			require("barbecue").setup()
 		end,
 	})
+
 	-- Git plugins
 	use("kdheepak/lazygit.nvim")
 	use("lewis6991/gitsigns.nvim")
@@ -151,6 +152,9 @@ return packer.startup(function(use)
 		run = "npm install --legacy-peer-deps && npm run compile",
 		tag = "v1.74.1", -- you *must* specify this tag; newer versions have breaking bugs
 	})
+
+	-- Additional languages
+	use("digitaltoad/vim-pug")
 
 	if packer_bootstrap then
 		require("packer").sync()
