@@ -16,6 +16,7 @@ return treesitter.setup({
 		"markdown",
 		"markdown_inline",
 		"prisma",
+		"pug",
 		"typescript",
 		"vim",
 		"yaml",
