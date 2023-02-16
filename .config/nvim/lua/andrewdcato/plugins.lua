@@ -60,6 +60,7 @@ return packer.startup(function(use)
 	use("EdenEast/nightfox.nvim")
 	use("shaunsingh/nord.nvim")
 	use("folke/tokyonight.nvim")
+	use({ "catppuccin/nvim", as = "catppuccin" })
 	use("mvllow/modes.nvim")
 	use("goolord/alpha-nvim")
 	use("lukas-reineke/indent-blankline.nvim")
@@ -92,7 +93,8 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim")
 	use("folke/which-key.nvim")
 	use("windwp/nvim-autopairs")
-	use("norcalli/nvim-colorizer.lua")
+	use("NvChad/nvim-colorizer.lua")
+	use("roobert/tailwindcss-colorizer-cmp.nvim")
 	use("folke/trouble.nvim")
 	use({
 		"alexghergh/nvim-tmux-navigation",
@@ -110,6 +112,7 @@ return packer.startup(function(use)
 			})
 		end,
 	})
+
 	-- Telescope
 	use("nvim-telescope/telescope-packer.nvim")
 	use("nvim-telescope/telescope-file-browser.nvim")

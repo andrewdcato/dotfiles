@@ -1,4 +1,5 @@
 local lspsaga_ok, lspsaga = pcall(require, "lspsaga")
+
 if not lspsaga_ok then
 	return
 end
@@ -7,6 +8,7 @@ lspsaga.setup({
 	ui = {
 		winblend = 10,
 		border = "rounded",
+		colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
 	},
 	symbol_in_winbar = {
 		enable = false, -- remember the week you spent two days trying to figure out why you coudn't turn navic off?

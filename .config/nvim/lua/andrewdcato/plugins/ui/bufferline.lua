@@ -1,7 +1,10 @@
 local icons = require("andrewdcato.util").icons
 -- local bufferline_ok, bufferline = pcall(require, "bufferline")
 -- if bufferline_ok then
+-- 	local highlights = require("catppuccin.groups.integrations.bufferline").get()
+--
 -- 	bufferline.setup({
+-- 		highlights = highlights,
 -- 		options = {
 -- 			indicator = { style = "underline" },
 -- 			diagnostics = "nvim_lsp",
@@ -97,6 +100,7 @@ end
 local barbecue_ok, barbecue = pcall(require, "barbecue")
 if barbecue_ok then
 	barbecue.setup({
+		theme = "catppuccin",
 		symbols = {
 			modified = icons.git.modified,
 		},
