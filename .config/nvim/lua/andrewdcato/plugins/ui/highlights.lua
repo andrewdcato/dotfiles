@@ -1,7 +1,9 @@
 -- NVIM-COLORIZER: https://github.com/norcalli/nvim-colorizer.lua
 local colorizer_ok, colorizer = pcall(require, "nvim-colorizer")
 if colorizer_ok then
-	colorizer.setup()
+	colorizer.setup({
+		tailwind = true,
+	})
 end
 
 -- TODO-COMMENTS: https://github.com/folke/todo-comments.nvim
@@ -35,17 +37,13 @@ if modes_ok then
 		},
 		-- Set opacity for cursorline and number background
 		line_opacity = 0.60,
-
 		-- Enable cursor highlights
 		set_cursor = true,
-
 		-- Enable cursorline initially, and disable cursorline for inactive windows
 		-- or ignored filetypes
 		set_cursorline = true,
-
 		-- Enable line number highlights to match cursorline
 		set_number = true,
-
 		-- Disable modes highlights in specified filetypes
 		-- Please PR commonly ignored filetypes
 		ignore_filetypes = { "NvimTree", "TelescopePrompt", "lspsagaoutline" },
