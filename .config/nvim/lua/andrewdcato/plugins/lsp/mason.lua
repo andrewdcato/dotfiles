@@ -27,7 +27,7 @@ local servers = {
 	"html",
 	"jsonls",
 	"prismals",
-	"sumneko_lua",
+	"lua_ls",
 	"tailwindcss",
 	"terraformls",
 	"tsserver",
