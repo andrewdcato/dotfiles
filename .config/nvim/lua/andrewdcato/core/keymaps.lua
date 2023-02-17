@@ -99,7 +99,10 @@ wk.register({
 
 wk.setup({
 	window = {
-		winblend = 10,
+		border = "single",
+		winblend = 15,
+		margin = { 0, 5, 3, 5 },
+		padding = { 1, 1, 1, 1 },
 	},
 	layout = {
 		align = "center",

@@ -5,7 +5,7 @@ local options = {
 	number = true,
 	showmatch = true,
 	colorcolumn = "120",
-	termguicolors = true,
+	-- termguicolors = true,
 	background = "dark", -- force dark mode in themes that support it
 	signcolumn = "yes",
 	smartindent = true,
@@ -14,19 +14,16 @@ local options = {
 	pumblend = 20,
 	showmode = false,
 	cursorline = false,
-
 	-- text wrapping
 	textwidth = 0,
 	wrapmargin = 0,
 	wrap = true,
 	linebreak = true,
-
 	-- spacing
 	tabstop = 2,
 	softtabstop = 2,
 	shiftwidth = 2,
 	expandtab = true, -- convert tabs to spaces like a civilized person
-
 	-- search tweaks
 	ignorecase = true, -- make search case-insensitive
 	smartcase = true, -- make search case-sensitive when starting w/capitals
