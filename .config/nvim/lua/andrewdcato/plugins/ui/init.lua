@@ -10,3 +10,6 @@ require("andrewdcato.plugins.ui.nvim-tree")
 
 -- Set up UI decoration plugins
 require("andrewdcato.plugins.ui.highlights")
+
+-- Set up Git UI plugins
+require("andrewdcato.plugins.ui.gitconflict")

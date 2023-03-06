@@ -32,11 +32,11 @@ if modes_ok then
 		colors = {
 			copy = "#B48EAD",
 			delete = "#BF616A",
-			insert = "#A3BE8C",
-			visual = "#B48EAD",
+			insert = "#A6DA95",
+			visual = "#F0C6C6",
 		},
 		-- Set opacity for cursorline and number background
-		line_opacity = 0.60,
+		line_opacity = 0.20,
 		-- Enable cursor highlights
 		set_cursor = true,
 		-- Enable cursorline initially, and disable cursorline for inactive windows

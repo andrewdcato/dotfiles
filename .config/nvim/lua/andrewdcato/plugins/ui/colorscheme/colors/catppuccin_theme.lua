@@ -8,6 +8,9 @@ local custom_higlights = function(colors)
 	return {
 		NotifyBackground = { bg = "#000000" },
 		TabLine = { bg = colors.mantle, fg = colors.text },
+		-- git-conflict
+		DiffText = { bg = colors.rosewater, fg = colors.mantle },
+		DiffAdd = { bg = colors.teal, fg = colors.mantle },
 		-- header and footer of feline
 		UserTLHead = { bg = colors.blue, fg = colors.mantle },
 		UserTlHeadSep = { bg = colors.mantle, fg = colors.blue },

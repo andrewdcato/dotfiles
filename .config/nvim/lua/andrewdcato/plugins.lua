@@ -86,6 +86,7 @@ return packer.startup(function(use)
 	-- Git plugins
 	use("kdheepak/lazygit.nvim")
 	use("lewis6991/gitsigns.nvim")
+	use("akinsho/git-conflict.nvim")
 
 	-- General workflow
 	use("folke/todo-comments.nvim")
