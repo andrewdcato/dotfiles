@@ -34,7 +34,7 @@ wk.register({
 	["<F10>"] = { "<cmd>lua require('dap').step_over()<cr>", " Debugger: Step Over " },
 	["<F11>"] = { "<cmd>lua require('dap').step_into()<cr>", " Debugger: Step Into " },
 	["<F12>"] = { "<cmd>lua require('dap').step_out()<cr>", " Debugger: Step Out " },
-	["b"] = { "<cmd>lua require('dap')toggle_breakpoint()<cr>", " Debugger: Toggle Breakpoint " },
+	["b"] = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", " Debugger: Toggle Breakpoint " },
 	["<leader>dt"] = { "<cmd>lua require('dapui').toggle()<cr>", " Debugger: Toggle DapUI Window " },
 })
 
