@@ -44,7 +44,7 @@ wk.register({
 		name = "Telescope ",
 		b = { "<cmd>Telescope buffers<cr>", "﬘ Search Open Buffers" },
 		c = { "<cmd>Telescope grep_string<cr>", " Search Current Word" },
-		f = { "<cmd>Telescope find_files<cr>", " Search Current Directory" },
+		f = { "<cmd>Telescope find_files hidden=true<cr>", " Search Current Directory" },
 		g = { "<cmd>Telescope git_files<cr>", " Search Git Files" },
 		h = { "<cmd>Telescope help_tags<cr>", " Search 'Help' Tags" },
 		n = { "<cmd>Telescope notify<cr>", " Search Notifications" },
@@ -62,6 +62,26 @@ wk.register({
 		name = "Git Things ",
 		g = { "<cmd>LazyGit<cr>", "Open Window" },
 		c = { "<cmd>LazyGitConfig<cr>", "Edit Config" },
+	},
+})
+
+-- LSP Config
+wk.register({
+	["<leader>l"] = {
+		name = "LSP Actions ",
+		-- Default LSP
+		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>" },
+		d = { "<cmd>lua vim.lsp.buf.definition()<cr>" },
+		D = { "<cmd>lua vim.lsp.buf.declaration()<cr>" },
+		f = { "<cmd> lua vim.lsp.buf.format({async = true })<cr>" },
+		i = { "<cmd>LspInfo<cr>" },
+		I = { "<cmd>lua vim.lsp.buf.implementation()<cr>" },
+		j = { "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>" },
+		k = { "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>" },
+		r = { "<cmd>lua vim.lsp.buf.rename()<cr>" },
+		R = { "<cmd>lua vim.lsp.buf.references()<cr>" },
+		s = { "<cmd>lua vim.lsp.buf.signature_help()<cr>" },
+		q = { "<cmd>lua vim.diagnostic.setloclist()<cr>" },
 	},
 })
 
@@ -100,7 +120,7 @@ wk.register({
 wk.setup({
 	window = {
 		border = "single",
-		winblend = 15,
+		winblend = 0,
 		margin = { 0, 5, 3, 5 },
 		padding = { 1, 1, 1, 1 },
 	},
