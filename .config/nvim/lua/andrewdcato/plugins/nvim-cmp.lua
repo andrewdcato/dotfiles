@@ -14,6 +14,7 @@ if not lspkind_status_ok then
 end
 
 require("luasnip.loaders.from_vscode").lazy_load()
+
 local check_backspace = function()
 	local col = vim.fn.col(".") - 1
 	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -76,30 +77,33 @@ cmp.setup({
 			mode = "symbol_text",
 			maxwidth = 50,
 			ellipsis_char = "...",
-			-- before = function(entry, vim_item)
-			-- 	vim_item.menu = ({
-			-- 		nvim_lsp = "[LSP]",
-			-- 		luasnip = "[Snippet]",
-			-- 		buffer = "[Buffer]",
-			-- 		path = "[Path]",
-			-- 	})[entry.source.name]
-			--
-			-- 	return vim_item
-			-- end,
-			before = require("tailwindcss-colorizer-cmp").formatter,
+			before = function(entry, vim_item)
+				vim_item.menu = ({
+					nvim_lsp = "[LSP]",
+					luasnip = "[Snippet]",
+					buffer = "[Buffer]",
+					path = "[Path]",
+				})[entry.source.name]
+
+				return vim_item
+			end,
 		}),
 	},
 	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
-		{ name = "buffer" },
-		{ name = "path" },
+		{ name = "path" }, -- file paths
+		{ name = "nvim_lsp", keyword_length = 3 }, -- from language server
+		{ name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
+		{ name = "nvim_lua", keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
+		{ name = "buffer", keyword_length = 2 }, -- source current buffer
+		{ name = "vsnip", keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+		{ name = "calc" }, -- source for math calculation
 	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
 	},
 	window = {
+		completion = cmp.config.window.bordered(),
 		documentation = {
 			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 		},

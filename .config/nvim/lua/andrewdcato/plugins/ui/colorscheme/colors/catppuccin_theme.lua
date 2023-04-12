@@ -35,13 +35,14 @@ end
 
 catppuccin.setup({
 	flavour = "macchiato", -- latte, frappe, macchiato, mocha
-	background = { -- :h background
+	background = {
+		-- :h background
 		light = "latte",
 		dark = "macchiato",
 	},
 	transparent_background = true,
 	show_end_of_buffer = false, -- show the '~' characters after the end of buffers
-	term_colors = false,
+	term_colors = true,
 	dim_inactive = {
 		enabled = false,
 		shade = "dark",
@@ -71,7 +72,6 @@ catppuccin.setup({
 		illuminate = true,
 		indent_blankline = { enabled = true, colored_indent_labels = true },
 		mason = true,
-		mini = false,
 		native_lsp = { enabled = true },
 		notify = true,
 		nvimtree = true,

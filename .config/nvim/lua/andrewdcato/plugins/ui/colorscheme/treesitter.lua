@@ -4,19 +4,22 @@ if not treesitter_installed then
 end
 
 return treesitter.setup({
+	auto_install = true,
 	ensure_installed = { -- list of parsers to install
 		"bash",
 		"css",
 		"dockerfile",
 		"html",
 		"javascript",
-		"json",
 		"jsdoc",
+		"json",
 		"lua",
 		"markdown",
 		"markdown_inline",
 		"prisma",
 		"pug",
+		"rust",
+		"toml",
 		"typescript",
 		"vim",
 		"yaml",
@@ -24,4 +27,9 @@ return treesitter.setup({
 	sync_install = false, -- force async install
 	highlight = { enabled = true }, -- enable extension
 	indentation = { enabled = true },
+	rainbow = {
+		enable = true,
+		extended_mode = true,
+		max_file_lines = nil,
+	},
 })

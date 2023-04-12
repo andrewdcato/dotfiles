@@ -5,7 +5,7 @@ local options = {
 	number = true,
 	showmatch = true,
 	colorcolumn = "120",
-	-- termguicolors = true,
+	termguicolors = true,
 	background = "dark", -- force dark mode in themes that support it
 	signcolumn = "yes",
 	smartindent = true,
@@ -27,6 +27,9 @@ local options = {
 	-- search tweaks
 	ignorecase = true, -- make search case-insensitive
 	smartcase = true, -- make search case-sensitive when starting w/capitals
+	-- completeopt settings
+	completeopt = { "menuone", "noselect", "noinsert" },
+	shortmess = vim.opt.shortmess + { c = true },
 }
 
 for key, value in pairs(options) do
@@ -40,6 +43,8 @@ vim.opt.clipboard:append("unnamedplus") -- use the system clipboard when yanking
 vim.opt.guicursor = "a:block-Cursor" -- block cursor in all modes
 vim.opt.guicursor = "i-v:blinkon10" -- blink the cursor in insert or visual mode
 vim.opt.iskeyword:append("-") -- changes the "-" character to be considered part of the word
+
+vim.api.nvim_set_option("updatetime", 300)
 
 -- Use nvim-notify as default for notifications
 local notify_ok, notify = pcall(require, "notify")

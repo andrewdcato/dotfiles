@@ -6,7 +6,7 @@ end
 
 lspsaga.setup({
 	ui = {
-		winblend = 10,
+		winblend = 0,
 		border = "rounded",
 		colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
 	},

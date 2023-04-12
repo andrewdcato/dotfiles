@@ -89,14 +89,6 @@ return packer.startup(function(use)
 	use("akinsho/git-conflict.nvim")
 
 	-- General workflow
-	use("folke/todo-comments.nvim")
-	use("nvim-tree/nvim-tree.lua")
-	use("numToStr/Comment.nvim")
-	use("folke/which-key.nvim")
-	use("windwp/nvim-autopairs")
-	use("NvChad/nvim-colorizer.lua")
-	use("roobert/tailwindcss-colorizer-cmp.nvim")
-	use("folke/trouble.nvim")
 	use({
 		"alexghergh/nvim-tmux-navigation",
 		config = function()
@@ -113,32 +105,44 @@ return packer.startup(function(use)
 			})
 		end,
 	})
+	use("NvChad/nvim-colorizer.lua")
+	use("folke/todo-comments.nvim")
+	use("folke/trouble.nvim")
+	use("folke/which-key.nvim")
+	use("numToStr/Comment.nvim")
+	use("nvim-tree/nvim-tree.lua")
+	use("roobert/tailwindcss-colorizer-cmp.nvim")
+	use("windwp/nvim-autopairs")
 
 	-- Telescope
-	use("nvim-telescope/telescope-packer.nvim")
 	use("nvim-telescope/telescope-file-browser.nvim")
+	use("nvim-telescope/telescope-packer.nvim")
 	use("nvim-telescope/telescope-project.nvim")
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- improves sorting perf
 	use({ "nvim-telescope/telescope.nvim", tag = "0.1.0" })
 
 	-- LSP and Formatting
-	use("neovim/nvim-lspconfig")
-	use("williamboman/mason-lspconfig.nvim")
-	use("williamboman/mason.nvim")
-	use("RubixDev/mason-update-all")
-	use("jose-elias-alvarez/null-ls.nvim")
 	use("RRethy/vim-illuminate")
+	use("RubixDev/mason-update-all")
 	use("glepnir/lspsaga.nvim")
+	use("jose-elias-alvarez/null-ls.nvim")
+	use("neovim/nvim-lspconfig")
 	use("nvim-lua/lsp-status.nvim")
 	use("onsails/lspkind.nvim")
+	use("simrat39/rust-tools.nvim")
+	use("williamboman/mason-lspconfig.nvim")
+	use("williamboman/mason.nvim")
 
 	-- Autocompletion
-	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("saadparwaiz1/cmp_luasnip")
 	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("hrsh7th/cmp-nvim-lua")
+	use("hrsh7th/cmp-path")
+	use("hrsh7th/cmp-vsnip")
+	use("hrsh7th/nvim-cmp")
+	use("hrsh7th/vim-vsnip")
+	use("saadparwaiz1/cmp_luasnip")
 
 	-- Snippets
 	use("L3MON4D3/LuaSnip")

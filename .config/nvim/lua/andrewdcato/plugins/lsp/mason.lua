@@ -20,14 +20,16 @@ end
 
 local servers = {
 	"ansiblels",
+	"codelldb",
 	"cssls",
 	"cssmodules_ls",
 	"dockerls",
 	"eslint",
 	"html",
 	"jsonls",
-	"prismals",
 	"lua_ls",
+	"prismals",
+	"rust_analyzer",
 	"tailwindcss",
 	"terraformls",
 	"tsserver",
