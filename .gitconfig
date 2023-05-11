@@ -1,0 +1,29 @@
+# This is Git's per-user configuration file.
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
+[user]
+  name = Andrew Cato
+  email = andrewdcato@gmail.com
+[push]
+  default = matching
+  followTags = true
+[core]
+  editor = 'vim'
+[diff]
+  submodule = log
+[submodule]
+  recurse = true
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+[pull]
+  rebase = false
+[init]
+  defaultBranch = main
