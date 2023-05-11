@@ -1,0 +1,11 @@
+# hot-reload alacritty when config is updated 
+live_config_reload: true
+
+key_bindings:
+  - { key: J, mods: Command, chars: "\x02\x54\x0a" }
+
+import:
+  - ~/.config/alacritty/ui/colors.yml
+  - ~/.config/alacritty/ui/window.yml
+  - ~/.config/alacritty/ui/font.yml
+
