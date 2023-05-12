@@ -12,6 +12,11 @@ source $HOMEBREW_PREFIX/opt/spaceship/spaceship.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# Use PyEnv instead of system python
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 # Hack for running mongodb@3.4 as 'mongo'
 export PATH="/usr/local/opt/mongodb@4.0/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
@@ -75,7 +80,6 @@ alias gfpub="git flow feature publish \$(git branch | sed -n '/\* feature\//s///
 alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.zshrc"
 alias gitClean="git branch --merged | egrep -v \"(^\*|master|main|develop|production)\" | xargs git branch -d"
-alias python="python3"
 alias preRelease="gcm; ggpull; gcd; ggpull"
 
 # Handles bare .cfg repo git actions
