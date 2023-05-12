@@ -27,7 +27,6 @@ return nvimtree.setup({
 	view = {
 		adaptive_size = true,
 		side = "left",
-		hide_root_folder = true,
 		mappings = {
 			list = {
 				{ key = "v", cb = tree_cb("vsplit") },
@@ -49,6 +48,7 @@ return nvimtree.setup({
 		},
 	},
 	renderer = {
+		root_folder_label = false,
 		highlight_git = true,
 		highlight_opened_files = "none",
 		indent_markers = {

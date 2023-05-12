@@ -41,7 +41,7 @@ catppuccin.setup({
 		dark = "macchiato",
 	},
 	transparent_background = true,
-	show_end_of_buffer = false, -- show the '~' characters after the end of buffers
+	show_end_of_buffer = true, -- show the '~' characters after the end of buffers
 	term_colors = true,
 	dim_inactive = {
 		enabled = false,
@@ -67,7 +67,8 @@ catppuccin.setup({
 	color_overrides = {},
 	custom_highlights = custom_higlights,
 	integrations = {
-		cmp = true,
+		aerial = true,
+		-- cmp = true,
 		gitsigns = true,
 		illuminate = true,
 		indent_blankline = { enabled = true, colored_indent_labels = true },

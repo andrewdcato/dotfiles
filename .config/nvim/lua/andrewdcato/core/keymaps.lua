@@ -24,6 +24,7 @@ wk.register({
 	["<leader>nh"] = { "<cmd>nohl<cr>", "Hide search highlights", noremap = false },
 	["<leader>t"] = { "<cmd>NvimTreeToggle<cr>", "Open File Tree", noremap = false },
 	["<leader>j"] = { "<cmd>NvimTreeFindFile<cr>", "Search File Tree", noremap = false },
+	["<leader>o"] = { "<cmd>SymbolsOutline<cr>", "Open Outline", noremap = false },
 	["<leader>]t"] = { "<cmd>lua require('todo-comments').jump_next()", "Next TODO Comment" },
 	["<leader>[t"] = { "<cmd>lua require('todo-comments').jump_prev()", "Previous TODO Comment" },
 })

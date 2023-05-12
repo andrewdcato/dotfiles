@@ -1,6 +1,6 @@
 local options = {
 	-- base ui config
-	guifont = { "JetBrainsMono Nerd Font", "h14" },
+	guifont = { "JetBrainsMono Nerd Font", "h15" },
 	relativenumber = true,
 	number = true,
 	showmatch = true,
@@ -11,7 +11,8 @@ local options = {
 	smartindent = true,
 	backspace = "indent,eol,start",
 	scrolloff = 8, -- keep X lines around the cursor at all times
-	pumblend = 20,
+	pumblend = 0,
+	winblend = 0,
 	showmode = false,
 	cursorline = false,
 	-- text wrapping

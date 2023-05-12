@@ -56,10 +56,6 @@ return packer.startup(function(use)
 
 	use({ "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" })
 	use("nvim-tree/nvim-web-devicons")
-	use("ellisonleao/gruvbox.nvim")
-	use("EdenEast/nightfox.nvim")
-	use("shaunsingh/nord.nvim")
-	use("folke/tokyonight.nvim")
 	use({ "catppuccin/nvim", as = "catppuccin" })
 	use("mvllow/modes.nvim")
 	use("goolord/alpha-nvim")
@@ -113,6 +109,14 @@ return packer.startup(function(use)
 	use("nvim-tree/nvim-tree.lua")
 	use("roobert/tailwindcss-colorizer-cmp.nvim")
 	use("windwp/nvim-autopairs")
+	use("simrat39/symbols-outline.nvim")
+	use("nvim-treesitter/nvim-tree-docs")
+	use({
+		"danymat/neogen",
+		config = function()
+			require("neogen").setup({})
+		end,
+	})
 
 	-- Telescope
 	use("nvim-telescope/telescope-file-browser.nvim")

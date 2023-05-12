@@ -3,28 +3,29 @@ if not treesitter_installed then
 	return
 end
 
+local parsers = {
+	"bash",
+	"css",
+	"dockerfile",
+	"html",
+	"javascript",
+	"jsdoc",
+	"json",
+	"lua",
+	"markdown",
+	"markdown_inline",
+	"prisma",
+	"pug",
+	"rust",
+	"toml",
+	"typescript",
+	"vim",
+	"yaml",
+}
+
 return treesitter.setup({
 	auto_install = true,
-	ensure_installed = { -- list of parsers to install
-		"bash",
-		"css",
-		"dockerfile",
-		"html",
-		"javascript",
-		"jsdoc",
-		"json",
-		"lua",
-		"markdown",
-		"markdown_inline",
-		"prisma",
-		"pug",
-		"rust",
-		"toml",
-		"typescript",
-		"vim",
-		"yaml",
-	},
-	sync_install = false, -- force async install
+	ensure_installed = parsers,
 	highlight = { enabled = true }, -- enable extension
 	indentation = { enabled = true },
 	rainbow = {
@@ -32,4 +33,6 @@ return treesitter.setup({
 		extended_mode = true,
 		max_file_lines = nil,
 	},
+	sync_install = false, -- force async install
+	tree_docs = { enable = true },
 })

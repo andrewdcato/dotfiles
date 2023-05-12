@@ -20,7 +20,6 @@ end
 
 local servers = {
 	"ansiblels",
-	"codelldb",
 	"cssls",
 	"cssmodules_ls",
 	"dockerls",
