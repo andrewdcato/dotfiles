@@ -324,7 +324,7 @@ bind C-a send-prefix
 # bind v new-window -c #{pane_current_path} #!important
 
 # move status line to top
-# set -g status-position top
+set -g status-position top
 
 # center the window list
 set -g status-justify centre
