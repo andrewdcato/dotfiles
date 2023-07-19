@@ -61,6 +61,10 @@ M.on_attach = function(client, bufnr)
 		client.server_capabilities.documentFormattingProvider = false
 	end
 
+	if client.name == "yamlls" then
+		client.server_capabilities.documentFormattingProvider = true
+	end
+
 	-- Attach nvim-navic to buffer's LSP instance
 	if client.server_capabilities.documentSymbolProvider then
 		require("nvim-navic").attach(client, bufnr)

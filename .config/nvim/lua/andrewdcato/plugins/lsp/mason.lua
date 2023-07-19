@@ -38,7 +38,7 @@ local servers = {
 
 local settings = {
 	ui = {
-		border = "none",
+		border = "double",
 		icons = {
 			package_installed = "◍",
 			package_pending = "◍",
