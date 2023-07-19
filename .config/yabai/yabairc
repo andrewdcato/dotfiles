@@ -48,4 +48,14 @@ yabai -m config                                 \
     mouse_action2                resize         \
     mouse_drop_action            swap
 
+# rules
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Messages$" manage=off
+yabai -m rule --add app="^Postbox$" manage=off
+yabai -m rule --add app="^Spotify$" manage=off
+yabai -m rule --add app="^MongoDB Compass$" manage=off
+yabai -m rule --add app="^App Store$" manage=off
+yabai -m rule --add app="^RingCentral Meetings$" manage=off
+yabai -m rule --add app="^Plexamp$" manage=off
+
 echo "yabai configuration loaded.."
