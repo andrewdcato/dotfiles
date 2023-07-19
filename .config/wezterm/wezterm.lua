@@ -1,4 +1,6 @@
 local wezterm = require("wezterm")
+local tab = require("tab")
+
 local config = {}
 
 config.color_scheme = "Catppuccin Macchiato"
@@ -19,5 +21,7 @@ config.keys = {
 		action = wezterm.action.SendString("\x02\x54 \n"),
 	},
 }
+
+tab.setup(config)
 
 return config
