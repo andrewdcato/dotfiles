@@ -45,6 +45,7 @@ return packer.startup(function(use)
 	-- Funcs needed by many plugins
 	use("nvim-lua/plenary.nvim")
 	use("nvim-lua/popup.nvim")
+	use("MunifTanjim/nui.nvim")
 
 	-- Theming
 	use({
@@ -65,7 +66,7 @@ return packer.startup(function(use)
 	-- Statusline
 	use("akinsho/bufferline.nvim")
 	use("nvim-lualine/lualine.nvim")
-	use("nanozuki/tabby.nvim")
+	use("rebelot/heirline.nvim")
 	use({
 		"utilyre/barbecue.nvim",
 		tag = "*",
@@ -105,7 +106,9 @@ return packer.startup(function(use)
 	use("folke/todo-comments.nvim")
 	use("folke/trouble.nvim")
 	use("folke/which-key.nvim")
+	use("folke/noice.nvim")
 	use("numToStr/Comment.nvim")
+	use("nvim-neo-tree/neo-tree.nvim")
 	use("nvim-tree/nvim-tree.lua")
 	use("roobert/tailwindcss-colorizer-cmp.nvim")
 	use("windwp/nvim-autopairs")
@@ -169,6 +172,7 @@ return packer.startup(function(use)
 	use("digitaltoad/vim-pug")
 	use("pearofducks/ansible-vim")
 	use("hashivim/vim-terraform")
+	use("evanleck/vim-svelte")
 
 	if packer_bootstrap then
 		require("packer").sync()

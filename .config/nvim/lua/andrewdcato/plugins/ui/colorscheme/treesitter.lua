@@ -18,6 +18,7 @@ local parsers = {
 	"prisma",
 	"pug",
 	"rust",
+	"svelte",
 	"toml",
 	"terraform",
 	"typescript",

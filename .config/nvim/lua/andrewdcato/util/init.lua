@@ -16,6 +16,13 @@ M.icons = {
 		modified = "",
 		removed = "",
 		branch = "",
+		deleted = "",
+		renamed = "",
+		untracked = "",
+		ignored = "",
+		unstaged = "",
+		staged = "",
+		conflict = "",
 	},
 	kinds = {
 		Array = "",

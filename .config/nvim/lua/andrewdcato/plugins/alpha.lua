@@ -54,7 +54,7 @@ dashboard.config.layout = {
 }
 
 vim.cmd(
-	[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 showtabline=2 ]]
+	[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 ]]
 )
 
 vim.api.nvim_create_autocmd("BufUnload", {

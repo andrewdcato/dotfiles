@@ -1,6 +1,6 @@
 local options = {
 	-- base ui config
-	guifont = { "JetBrainsMono Nerd Font", "h15" },
+	guifont = { "Operator Mono Lig Book", "h15" },
 	relativenumber = true,
 	number = true,
 	showmatch = true,
@@ -34,6 +34,7 @@ local options = {
 	-- modeline
 	modeline = true,
 	modelines = 5,
+	showtabline = 0,
 }
 
 for key, value in pairs(options) do
