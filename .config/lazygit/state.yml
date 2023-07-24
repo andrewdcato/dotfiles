@@ -1,0 +1,14 @@
+lastupdatecheck: 0
+recentrepos:
+    - /Users/andrewcato/surety/monorepo
+    - /Users/andrewcato/surety/lms
+    - /Users/andrewcato/surety/ansible
+    - /Users/andrewcato/surety/infra
+    - /Users/andrewcato/surety/connect
+    - /Users/andrewcato/surety/sb-next
+    - /Users/andrewcato/projects/raspberry-pi-config
+startuppopupversion: 5
+customcommandshistory:
+    - w
+    - q
+hidecommandlog: false
