@@ -23,6 +23,11 @@ return neotree.setup({
 				".gitignore",
 				".env",
 			},
+			never_show = {
+				".git",
+				".DS_store",
+				"thumbs.db",
+			},
 		},
 	},
 	source_selector = {
