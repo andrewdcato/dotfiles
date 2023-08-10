@@ -1,4 +1,5 @@
 .cfg
+.config/lazygit/state.yml
 
 .oh-my-zsh/*
 !.oh-my-zsh/custom/plugins/*
