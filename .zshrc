@@ -20,7 +20,13 @@ export PATH="/opt/homebrew/opt/mongodb-community@4.4/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="${PATH}:${HOME}/.local/bin/"
 
-export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
+export PATH="$XDG_CONFIG_HOME/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
+
+# Set theme for FZF
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
 
 # OMZ customization
 DISABLE_AUTO_TITLE="false"
@@ -148,7 +154,8 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
+
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
