@@ -7,6 +7,9 @@ palette = "catppuccin_macchiato"
 # Inserts a blank line between shell prompts
 add_newline = true
 
+[aws]
+disabled = true
+
 [character]
 success_symbol = "[➜](green)"
 error_symbol = "[➜](red)"
