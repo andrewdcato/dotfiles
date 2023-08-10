@@ -5,6 +5,7 @@ require("andrewdcato.plugins")
 require("andrewdcato.plugins.nvim-dap")
 require("andrewdcato.plugins.nvim-cmp")
 require("andrewdcato.plugins.lsp")
+require("andrewdcato.plugins.spectre")
 require("andrewdcato.plugins.alpha")
 require("andrewdcato.plugins.ui")
 

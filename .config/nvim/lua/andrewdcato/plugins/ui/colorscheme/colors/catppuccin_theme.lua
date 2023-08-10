@@ -30,6 +30,11 @@ local custom_higlights = function(colors)
 		UserTLWin = { bg = colors.surface1, fg = colors.sapphire },
 		UserTLWinL = { bg = colors.surface1, fg = colors.mantle },
 		UserTLWinR = { bg = colors.mantle, fg = colors.surface1 },
+		-- Neotree
+		NeoTreeTabActive = { bg = colors.mantle, fg = colors.sapphire },
+		NeoTreeTabSeparatorActive = { bg = colors.mantle, fg = colors.mantle },
+		NeoTreeTabInactive = { bg = colors.base, fg = colors.lavender },
+		NeoTreeTabSeparatorInactive = { bg = colors.base, fg = colors.base },
 	}
 end
 

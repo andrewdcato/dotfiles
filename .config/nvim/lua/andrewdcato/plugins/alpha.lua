@@ -15,21 +15,21 @@ dashboard.section.header.val = {
 }
 
 dashboard.section.buttons.val = {
-	dashboard.button("f", "  Find file", "<cmd>Telescope find_files<cr>"),
-	dashboard.button("e", "  New file", "<cmd>ene <BAR> startinsert<cr>"),
-	dashboard.button("p", "  Find project", "<cmd>Telescope project<cr>"),
-	dashboard.button("r", "  Recently used files", "<cmd>Telescope oldfiles<cr>"),
-	dashboard.button("t", "  Find text", "<cmd>Telescope live_grep<cr>"),
-	dashboard.button("c", "  Configuration", "<cmd>e $MYVIMRC<cr>"),
-	dashboard.button("q", "  Quit Neovim", "<cmd>qa<cr>"),
+	dashboard.button("f", "󰈞  Find file", "<cmd>Telescope find_files<cr>"),
+	dashboard.button("e", "󱪝  New file", "<cmd>ene <BAR> startinsert<cr>"),
+	dashboard.button("p", "󰉗  Find project", "<cmd>Telescope project<cr>"),
+	dashboard.button("r", "󱦺  Recently used files", "<cmd>Telescope oldfiles<cr>"),
+	dashboard.button("t", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),
+	dashboard.button("c", "  Configuration", "<cmd>e $MYVIMRC<cr>"),
+	dashboard.button("q", "󰩈  Quit Neovim", "<cmd>qa<cr>"),
 }
 
 -- Footer must be a table so that its height is correctly measured
 local num_plugins_loaded = #vim.fn.globpath(vim.fn.stdpath("data") .. "/site/pack/packer/start", "*", 0, 1)
 if num_plugins_loaded <= 1 then
-	dashboard.section.footer.val = { num_plugins_loaded .. " plugin ﮣ loaded" }
+	dashboard.section.footer.val = { num_plugins_loaded .. " plugin 󰚥 loaded" }
 else
-	dashboard.section.footer.val = { num_plugins_loaded .. " plugins ﮣ loaded" }
+	dashboard.section.footer.val = { num_plugins_loaded .. " plugins 󰚥 loaded" }
 end
 dashboard.section.footer.opts.hl = "Comment"
 dashboard.section.header.opts.hl = "Include"
@@ -54,7 +54,7 @@ dashboard.config.layout = {
 }
 
 vim.cmd(
-	[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 ]]
+	[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 showtabline=1 ]]
 )
 
 vim.api.nvim_create_autocmd("BufUnload", {

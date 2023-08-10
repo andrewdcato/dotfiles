@@ -32,10 +32,17 @@ return neotree.setup({
 	},
 	source_selector = {
 		winbar = true,
+		statusline = false,
 		sources = {
 			{ source = "filesystem", display_name = "  Files " },
 			{ source = "buffers", display_name = "  Buffers " },
 			{ source = "git_status", display_name = "  Git " },
+		},
+	},
+	window = {
+		mappings = {
+			["<C-x>"] = "open_split",
+			["<C-v>"] = "open_vsplit",
 		},
 	},
 })

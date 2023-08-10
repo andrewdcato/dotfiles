@@ -34,7 +34,6 @@ local options = {
 	-- modeline
 	modeline = true,
 	modelines = 5,
-	showtabline = 0,
 }
 
 for key, value in pairs(options) do
@@ -50,6 +49,8 @@ vim.opt.guicursor = "i-v:blinkon10" -- blink the cursor in insert or visual mode
 vim.opt.iskeyword:append("-") -- changes the "-" character to be considered part of the word
 
 vim.api.nvim_set_option("updatetime", 300)
+vim.api.nvim_set_option("list", false)
+vim.api.nvim_set_option("splitright", true)
 
 -- Use nvim-notify as default for notifications
 local notify_ok, notify = pcall(require, "notify")

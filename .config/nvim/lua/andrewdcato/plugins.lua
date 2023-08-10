@@ -120,6 +120,7 @@ return packer.startup(function(use)
 			require("neogen").setup({})
 		end,
 	})
+	use("nvim-pack/nvim-spectre")
 
 	-- Telescope
 	use("nvim-telescope/telescope-file-browser.nvim")
