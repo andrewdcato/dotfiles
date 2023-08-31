@@ -1,15 +1,19 @@
 lastupdatecheck: 0
 recentrepos:
-    - /Users/andrewcato/surety/monorepo
-    - /Users/andrewcato/surety/lms
-    - /Users/andrewcato/surety/infra
-    - /Users/andrewcato/surety/ansible
-    - /Users/andrewcato/surety/sb-next
-    - /Users/andrewcato/projects/tmux-theme
-    - /Users/andrewcato/surety/connect
-    - /Users/andrewcato/projects/raspberry-pi-config
+- /Users/andrewcato/surety/surety-labs/360-turbo
+- /Users/andrewcato/surety/infra
+- /Users/andrewcato/surety/monorepo
+- /Users/andrewcato/surety/lms
+- /Users/andrewcato/surety/reports
+- /Users/andrewcato/surety/surety-labs/tao-of-node
+- /Users/andrewcato/surety/ansible
+- /Users/andrewcato/surety/sb-next
+- /Users/andrewcato/projects/tmux-theme
+- /Users/andrewcato/surety/connect
+- /Users/andrewcato/projects/raspberry-pi-config
 startuppopupversion: 5
 customcommandshistory:
-    - w
-    - q
+- w
+- q
 hidecommandlog: false
+ignorewhitespaceindiffview: false
