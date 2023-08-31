@@ -37,13 +37,14 @@ local custom_higlights = function(colors)
 		NeoTreeTabSeparatorActive = { bg = colors.mantle, fg = colors.mantle },
 		NeoTreeTabInactive = { bg = colors.base, fg = colors.lavender },
 		NeoTreeTabSeparatorInactive = { bg = colors.base, fg = colors.base },
+		-- Debugger
+		DapBreakpoint = { bg = colors.mantle, fg = colors.sapphire },
 	}
 end
 
 catppuccin.setup({
 	flavour = "macchiato", -- latte, frappe, macchiato, mocha
 	background = {
-		-- :h background
 		light = "latte",
 		dark = "macchiato",
 	},
@@ -75,7 +76,11 @@ catppuccin.setup({
 	custom_highlights = custom_higlights,
 	integrations = {
 		aerial = true,
-		-- cmp = true,
+		cmp = true,
+		dap = {
+			enabled = true,
+			enable_ui = true, -- enable nvim-dap-ui
+		},
 		gitsigns = true,
 		illuminate = true,
 		indent_blankline = { enabled = true, colored_indent_labels = true },

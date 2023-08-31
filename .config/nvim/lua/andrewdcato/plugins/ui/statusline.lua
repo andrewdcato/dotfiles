@@ -65,7 +65,7 @@ local ViMode = {
 			["v"] = "VISUAL",
 			["vs"] = "VISUAL",
 		},
-		mode_colors = { -- TODO: change background *and* foreground colors
+		mode_colors = {
 			[""] = colors.yellow,
 			[""] = colors.yellow,
 			["s"] = colors.yellow,
@@ -104,20 +104,15 @@ local ViMode = {
 	},
 	provider = function(self)
 		local mode = self.mode:sub(1, 1)
-		return string.format("▌ %s ", self.mode_names[mode])
+		return string.format(" %s ", self.mode_names[mode])
 	end,
 	hl = function(self)
 		local mode = self.mode:sub(1, 1)
-		return { fg = self.mode_colors[mode], bg = colors.crust, bold = true }
+		return { bg = self.mode_colors[mode], fg = colors.base, bold = true }
 	end,
 	update = {
 		"ModeChanged",
 	},
-}
-
-local ViModePowerline = {
-	provider = "",
-	hl = { bg = colors.mantle, fg = colors.crust },
 }
 
 local FileNameBlock = {
@@ -125,7 +120,7 @@ local FileNameBlock = {
 		self.filename = vim.api.nvim_buf_get_name(0)
 	end,
 	condition = conditions.buffer_not_empty,
-	hl = { bg = colors.mantle, fg = colors.subtext1 },
+	hl = { bg = colors.base, fg = colors.subtext1 },
 }
 
 local FileIcon = {
@@ -190,73 +185,12 @@ FileNameBlock = utils.insert(
 	FileIcon,
 	utils.insert(FileNameModifer, FileName),
 	unpack(FileFlags),
-	{ provider = "%< " }
+	{ provider = "%< " },
+	{
+		provider = "",
+		hl = { bg = colors.surface0, fg = colors.base },
+	}
 )
-
-local FileType = {
-	provider = function()
-		return (" %s "):format(vim.bo.filetype:upper())
-	end,
-	hl = { bg = colors.mantle, fg = colors.surface2 },
-	condition = function()
-		return conditions.buffer_not_empty() and conditions.hide_in_width()
-	end,
-}
-
-local FileSize = {
-	provider = function()
-		local suffix = { "b", "k", "M", "G", "T", "P", "E" }
-		local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
-		fsize = (fsize < 0 and 0) or fsize
-		if fsize < 1024 then
-			return " " .. fsize .. suffix[1] .. " "
-		end
-		local i = math.floor((math.log(fsize) / math.log(1024)))
-		return (" %.2g%s "):format(fsize / math.pow(1024, i), suffix[i + 1])
-	end,
-	condition = function()
-		return conditions.buffer_not_empty() and conditions.hide_in_width()
-	end,
-	hl = { bg = colors.mantle, fg = colors.surface2 },
-}
-
-local Ruler = {
-	provider = " %7(%l/%3L%):%2c %P ",
-	condition = function()
-		return conditions.buffer_not_empty() and conditions.hide_in_width()
-	end,
-	hl = { bg = colors.mantle, fg = colors.surface2 },
-}
-
-local LSPActive = {
-	condition = function()
-		return conditions.hide_in_width(120) and conditions.lsp_attached()
-	end,
-	update = { "LspAttach", "LspDetach" },
-	on_click = {
-		callback = function()
-			vim.defer_fn(function()
-				vim.cmd("LspInfo")
-			end, 100)
-		end,
-		name = "heirline_LSP",
-	},
-	provider = function()
-		local names = {}
-		for _, server in pairs(vim.lsp.get_active_clients()) do
-			if server.name ~= "null-ls" then
-				table.insert(names, server.name)
-			end
-		end
-
-		if #names == 0 then
-			return ""
-		end
-
-		return (vim.g.emoji and " 🪐 LSP [%s] " or "  LSP [%s] "):format((table.concat(names, " ")))
-	end,
-	hl = { bg = colors.mantle, fg = colors.subtext1, bold = true, italic = false },
-}
 
 local Diagnostics = {
 	condition = function()
@@ -275,7 +209,7 @@ local Diagnostics = {
 		self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 	end,
 	update = { "DiagnosticChanged", "BufEnter" },
-	hl = { bg = colors.mantle },
+	hl = { bg = colors.surface0 },
 	Space,
 	{
 		provider = function(self)
@@ -302,6 +236,83 @@ local Diagnostics = {
 		hl = { fg = colors.sky },
 	},
 	Space,
+	{
+		provider = "",
+		hl = { bg = colors.surface1, fg = colors.surface0 },
+	},
+}
+
+local FileDetails = {
+	hl = { bg = colors.surface1, fg = colors.subtext0 },
+	condition = function()
+		return conditions.buffer_not_empty() and conditions.hide_in_width()
+	end,
+	{
+		provider = function()
+			return (" %s "):format(vim.bo.filetype:upper())
+		end,
+	},
+	{
+		provider = function()
+			local suffix = { "b", "k", "M", "G", "T", "P", "E" }
+			local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
+			fsize = (fsize < 0 and 0) or fsize
+			if fsize < 1024 then
+				return " " .. fsize .. suffix[1] .. " "
+			end
+			local i = math.floor((math.log(fsize) / math.log(1024)))
+			return (" %.2g%s "):format(fsize / math.pow(1024, i), suffix[i + 1])
+		end,
+	},
+	{
+		provider = "",
+		hl = { bg = colors.mantle, fg = colors.surface1 },
+	},
+}
+
+local Ruler = {
+	provider = " %7(%l/%3L%):%2c %P ",
+	condition = function()
+		return conditions.buffer_not_empty() and conditions.hide_in_width()
+	end,
+	hl = { bg = colors.mantle, fg = colors.surface2 },
+}
+
+local LSPActive = {
+	condition = function()
+		return conditions.hide_in_width(120) and conditions.lsp_attached()
+	end,
+	update = { "LspAttach", "LspDetach" },
+	on_click = {
+		callback = function()
+			vim.defer_fn(function()
+				vim.cmd("LspInfo")
+			end, 100)
+		end,
+		name = "heirline_LSP",
+	},
+	{ provider = "", hl = { bg = colors.base, fg = colors.pink } },
+	{
+		provider = vim.g.emoji and "🪐 LSP " or " LSP ",
+		hl = { bg = colors.pink, fg = colors.base },
+	},
+	{
+		provider = function()
+			local names = {}
+			for _, server in pairs(vim.lsp.get_active_clients()) do
+				if server.name ~= "null-ls" then
+					table.insert(names, server.name)
+				end
+			end
+
+			if #names == 0 then
+				return ""
+			end
+
+			return (" [%s] "):format((table.concat(names, " ")))
+		end,
+		hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false },
+	},
 }
 
 local Git = {
@@ -387,11 +398,9 @@ local IndentSizes = {
 heirline.setup({
 	statusline = {
 		ViMode,
-		ViModePowerline,
 		FileNameBlock,
 		Diagnostics,
-		FileType,
-		FileSize,
+		FileDetails,
 		Align,
 		LSPActive,
 		FileFormat,
