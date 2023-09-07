@@ -174,6 +174,7 @@ return packer.startup(function(use)
 	use("pearofducks/ansible-vim")
 	use("hashivim/vim-terraform")
 	use("evanleck/vim-svelte")
+	use("prisma/vim-prisma")
 
 	if packer_bootstrap then
 		require("packer").sync()
