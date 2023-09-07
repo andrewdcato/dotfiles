@@ -9,13 +9,16 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export ANS_DIR="$HOME/surety/ansible"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+# Load custom aliases
+source "$HOME/.zsh_aliases"
+
+# Setup Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Use PyEnv instead of system python
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Hack for running mongodb@3.4 as 'mongo'
 export PATH="/opt/homebrew/opt/mongodb-community@4.4/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="${PATH}:${HOME}/.local/bin/"
@@ -34,6 +37,11 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
+export CORRECT_IGNORE_FILE='.zsh_correctignore'
+setopt correct
+setopt histignorealldups
+setopt histreduceblanks
+
 # OMZ TMUX CONFIG
 # TODO: get .config dir working for TMUX w/ZSH_TMUX_CONFIG
 
@@ -51,87 +59,6 @@ plugins=(
 
 # You have to load this *after* declaring plugins or it won't work...odd
 source $ZSH/oh-my-zsh.sh
-
-# Custom Aliases
-alias bump="./bump.sh"
-alias vim="nvim"
-alias gpt="git push && git push --tags"
-alias gfpub="git flow feature publish \$(git branch | sed -n '/\* feature\//s///p')"
-alias szshrc="source ~/.zshrc"
-alias zshrc="vim ~/.zshrc"
-alias gitClean="git branch --merged | egrep -v \"(^\*|master|main|develop|production)\" | xargs git branch -d"
-alias preRelease="gcm; ggpull; gcd; ggpull"
-
-# Handles bare .cfg repo git actions
-alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-
-# Adds & commits
-function ac(){
-  git add .
-  git commit -m "$1"
-}
-
-# Add, commit, & push
-function acp(){
-  git add .
-  git commit -m "$1"
-  git push
-}
-
-function nvims() {
-  items=("default" "LazyVim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
-
-bindkey -s ^a "nvims\n"
-
-# Kill all docker containers with "none" tags
-alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
-
-# Link Ngrok executable
-alias ngrok="~/.dotfiles/ngrok/ngrok"
-
-# Ngrok shortcuts
-alias nlms='ngrok http -subdomain=sb1-lms 3000'
-alias nconnect='ngrok http -hostname=cato-con.ngrok.io 5000'
-alias nem='ngrok http -subdomain=sb1-ews 5500'
-alias nams='ngrok http -subdomain=sb1-ams 5001'
-
-# Ansible Aliases
-alias pingAll="ansible-playbook $ANS_DIR/playbooks/ping.yml"
-
-# Tells you what's listening on a given port
-# credit: https://stackoverflow.com/a/30029855/3264790
-function listening() {
-    if [ $# -eq 0 ]; then
-        sudo lsof -iTCP -sTCP:LISTEN -n -P
-    elif [ $# -eq 1 ]; then
-        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
-    else
-        echo "Usage: listening [pattern]"
-    fi
-}
-
-# kill process on given port
-function killport() {
-  if [ $# -eq 0 ]; then
-    echo "Usage: killport PORT_TO_KILL"
-    return
-  fi
-  
-  lsof -t -i tcp:$1 | xargs kill
-}
-
-# Mongo Aliases
-alias mongoProd="mongosh 'mongodb+srv://lms-prod.h69c1.mongodb.net/lms-prod' --username acato"
-alias mongoDev="mongosh 'mongodb+srv://lms-dev.msr1d.mongodb.net/lms-dev' --username acato"
 
 # Force NVM to load the specified version of Node
 autoload -U add-zsh-hook
@@ -166,5 +93,6 @@ source $ZSH/custom/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Configure tfenv
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/Cellar/tfenv/3.0.0/versions/1.4.6/terraform terraform

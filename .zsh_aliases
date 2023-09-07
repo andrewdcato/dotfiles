@@ -1,0 +1,83 @@
+export ANS_DIR="$HOME/surety/ansible"
+
+# Custom Aliases
+alias bump="./bump.sh"
+alias vim="nvim"
+alias gpt="git push && git push --tags"
+alias gfpub="git flow feature publish \$(git branch | sed -n '/\* feature\//s///p')"
+alias szshrc="source ~/.zshrc"
+alias zshrc="vim ~/.zshrc"
+alias gitClean="git branch --merged | egrep -v \"(^\*|master|main|develop|production)\" | xargs git branch -d"
+alias preRelease="gcm; ggpull; gcd; ggpull"
+
+# Handles bare .cfg repo git actions
+alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+
+# Adds & commits
+function ac(){
+  git add .
+  git commit -m "$1"
+}
+
+# Add, commit, & push
+function acp(){
+  git add .
+  git commit -m "$1"
+  git push
+}
+
+function nvims() {
+  items=("default" "LazyVim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
+
+# Kill all docker containers with "none" tags
+alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
+
+# Link Ngrok executable
+alias ngrok="~/.dotfiles/ngrok/ngrok"
+
+# Ngrok shortcuts
+alias nlms='ngrok http -subdomain=sb1-lms 3000'
+alias nconnect='ngrok http -hostname=cato-con.ngrok.io 5000'
+alias nem='ngrok http -subdomain=sb1-ews 5500'
+alias nams='ngrok http -subdomain=sb1-ams 5001'
+
+# Ansible Aliases
+alias pingAll="ansible-playbook $ANS_DIR/playbooks/ping.yml"
+
+# Tells you what's listening on a given port
+# credit: https://stackoverflow.com/a/30029855/3264790
+function listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+
+# kill process on given port
+function killport() {
+  if [ $# -eq 0 ]; then
+    echo "Usage: killport PORT_TO_KILL"
+    return
+  fi
+  
+  lsof -t -i tcp:$1 | xargs kill
+}
+
+# Mongo Aliases
+alias mongoProd="mongosh 'mongodb+srv://lms-prod.h69c1.mongodb.net/lms-prod' --username acato"
+alias mongoDev="mongosh 'mongodb+srv://lms-dev.msr1d.mongodb.net/lms-dev' --username acato"
+
