@@ -1,17 +1,11 @@
--- Packer config
-require("andrewdcato.plugins")
-
--- Plugins
-require("andrewdcato.plugins.nvim-dap")
-require("andrewdcato.plugins.nvim-cmp")
-require("andrewdcato.plugins.lsp")
-require("andrewdcato.plugins.spectre")
-require("andrewdcato.plugins.alpha")
-require("andrewdcato.plugins.ui")
+-- Map leader to a space
+vim.g.mapleader = " "
 
 -- Core options
 require("andrewdcato.core.options")
-require("andrewdcato.core.keymaps")
 
 -- Autocommands
 require("andrewdcato.core.autocommands")
+
+-- Lazy.nvim config
+require("andrewdcato.lazy")

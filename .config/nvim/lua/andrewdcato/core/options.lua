@@ -52,14 +52,3 @@ vim.api.nvim_set_option("updatetime", 300)
 vim.api.nvim_set_option("list", false)
 vim.api.nvim_set_option("splitright", true)
 
--- Use nvim-notify as default for notifications
-local notify_ok, notify = pcall(require, "notify")
-if notify_ok then
-	notify.setup({
-		background_color = "#000000",
-		render = "compact",
-		fps = 60,
-	})
-
-	vim.notify = notify
-end
