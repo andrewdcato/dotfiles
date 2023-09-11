@@ -184,18 +184,6 @@ return {
 			end,
 		}
 
-		FileNameBlock = utils.insert(
-			FileNameBlock,
-			FileIcon,
-			utils.insert(FileNameModifer, FileName),
-			unpack(FileFlags),
-			{ provider = "%< " },
-			{
-				provider = "",
-				hl = { bg = colors.surface0, fg = colors.base },
-			}
-		)
-
 		local Diagnostics = {
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width() and conditions.has_diagnostics()
@@ -213,8 +201,6 @@ return {
 				self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 			end,
 			update = { "DiagnosticChanged", "BufEnter" },
-			hl = { bg = colors.surface0 },
-			Space,
 			{
 				provider = function(self)
 					return self.errors > 0 and ("%s%s "):format(self.error_icon, self.errors)
@@ -239,39 +225,61 @@ return {
 				end,
 				hl = { fg = colors.sky },
 			},
-			Space,
-			{
-				provider = "",
-				hl = { bg = colors.surface1, fg = colors.surface0 },
-			},
 		}
 
-		local FileDetails = {
-			hl = { bg = colors.surface1, fg = colors.subtext0 },
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.hide_in_width()
-			end,
-			{
-				provider = function()
-					return (" %s "):format(vim.bo.filetype:upper())
-				end,
-			},
-			{
-				provider = function()
-					local suffix = { "b", "k", "M", "G", "T", "P", "E" }
-					local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
-					fsize = (fsize < 0 and 0) or fsize
-					if fsize < 1024 then
-						return " " .. fsize .. suffix[1] .. " "
-					end
-					local i = math.floor((math.log(fsize) / math.log(1024)))
-					return (" %.2g%s "):format(fsize / math.pow(1024, i), suffix[i + 1])
-				end,
-			},
+		FileNameBlock = utils.insert(
+			FileNameBlock,
+			FileIcon,
+			utils.insert(FileNameModifer, FileName),
+			unpack(FileFlags),
+			{ provider = "%< " },
+			utils.insert(Space, Diagnostics),
 			{
 				provider = "",
-				hl = { bg = colors.mantle, fg = colors.surface1 },
+				hl = { bg = colors.mantle, fg = colors.base },
+			}
+		)
+
+		local Git = {
+			condition = function()
+				return conditions.buffer_not_empty() and conditions.is_git_repo()
+			end,
+			init = function(self)
+				self.status_dict = vim.b.gitsigns_status_dict
+				self.has_changes = self.status_dict.added ~= 0
+					or self.status_dict.removed ~= 0
+					or self.status_dict.changed ~= 0
+			end,
+			hl = { bg = colors.mantle, fg = colors.mauve },
+			Space,
+			{
+				provider = function(self)
+					return (" %s"):format(self.status_dict.head)
+				end,
+				hl = { bold = true },
 			},
+			{
+				provider = function(self)
+					local count = self.status_dict.added or 0
+					return count > 0 and ("  %s"):format(count)
+				end,
+				hl = { fg = colors.green },
+			},
+			{
+				provider = function(self)
+					local count = self.status_dict.removed or 0
+					return count > 0 and ("  %s"):format(count)
+				end,
+				hl = { fg = colors.red },
+			},
+			{
+				provider = function(self)
+					local count = self.status_dict.changed or 0
+					return count > 0 and ("  %s"):format(count)
+				end,
+				hl = { fg = colors.peach },
+			},
+			Space,
 		}
 
 		local Ruler = {
@@ -319,48 +327,6 @@ return {
 			},
 		}
 
-		local Git = {
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.is_git_repo()
-			end,
-			init = function(self)
-				self.status_dict = vim.b.gitsigns_status_dict
-				self.has_changes = self.status_dict.added ~= 0
-					or self.status_dict.removed ~= 0
-					or self.status_dict.changed ~= 0
-			end,
-			hl = { bg = colors.mantle, fg = colors.mauve },
-			Space,
-			{
-				provider = function(self)
-					return (" %s"):format(self.status_dict.head)
-				end,
-				hl = { bold = true },
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.added or 0
-					return count > 0 and ("  %s"):format(count)
-				end,
-				hl = { fg = colors.green },
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.removed or 0
-					return count > 0 and ("  %s"):format(count)
-				end,
-				hl = { fg = colors.red },
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.changed or 0
-					return count > 0 and ("  %s"):format(count)
-				end,
-				hl = { fg = colors.peach },
-			},
-			Space,
-		}
-
 		local FileFormat = {
 			provider = function()
 				local fmt = vim.bo.fileformat
@@ -405,14 +371,12 @@ return {
 			statusline = {
 				ViMode,
 				FileNameBlock,
-				Diagnostics,
-				FileDetails,
+				Git,
 				Align,
 				LSPActive,
 				FileFormat,
 				FileEncoding,
 				IndentSizes,
-				Git,
 				Ruler,
 			},
 		})
