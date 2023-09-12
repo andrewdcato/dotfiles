@@ -16,12 +16,16 @@ return {
 			{ "<F6>", "<cmd>lua require('dap').step_over()<cr>", desc = " Debugger: Step Over " },
 			{ "<F7>", "<cmd>lua require('dap').step_into()<cr>", desc = " Debugger: Step Into " },
 			{ "<F8>", "<cmd>lua require('dap').step_out()<cr>", desc = " Debugger: Step Out " },
-			{ "b", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = " Debugger: Toggle Breakpoint " },
-			{ "<leader>dt", "<cmd>lua require('dapui').toggle()<cr>", " Debugger: Toggle DapUI Window " },
+			{
+				"<leader>db",
+				"<cmd>lua require('dap').toggle_breakpoint()<cr>",
+				desc = " Debugger: Toggle Breakpoint ",
+			},
+			{ "<leader>dt", "<cmd>lua require('dapui').toggle()<cr>", desc = " Debugger: Toggle DapUI Window " },
 		},
 		config = function()
 			require("dap-vscode-js").setup({
-				debugger_path = "/Users/andrewcato/.local/share/nvim/lazy/nvim-dap-vscode-js",
+				debugger_path = "/Users/andrewcato/.local/share/nvim/lazy/vscode-js-debug",
 				adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
 			})
 

@@ -2,7 +2,7 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
-		"L3MON4D3/LuaSnip", -- snippet engine
+		{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-path", -- source for file system paths
@@ -31,22 +31,15 @@ return {
 			winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
 		}
 
-		local function has_words_before()
-			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-		end
-
 		local keymaps = {
 			["<C-k>"] = cmp.mapping.select_prev_item(),
 			["<C-j>"] = cmp.mapping.select_next_item(),
 			["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
 			["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 			["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-			["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-			["<C-e>"] = cmp.mapping({
-				i = cmp.mapping.abort(),
-				c = cmp.mapping.close(),
-			}),
+			-- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+			["<C-y>"] = cmp.config.disable,
+			["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
 			-- Accept currently selected item. If none selected, `select` first item.
 			-- Set `select` to `false` to only confirm explicitly selected items.
 			["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -62,10 +55,7 @@ return {
 				else
 					fallback()
 				end
-			end, {
-				"i",
-				"s",
-			}),
+			end, { "i", "s" }),
 			["<S-Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then
 					cmp.select_prev_item()
@@ -74,10 +64,7 @@ return {
 				else
 					fallback()
 				end
-			end, {
-				"i",
-				"s",
-			}),
+			end, { "i", "s" }),
 		}
 
 		vim.opt.completeopt = { "menu", "menuone", "noselect" }

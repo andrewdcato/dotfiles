@@ -7,6 +7,7 @@ return {
 		local conditions = require("heirline.conditions")
 		local utils = require("heirline.utils")
 		local colors = require("catppuccin.palettes").get_palette()
+		local icons = require("andrewdcato.util").icons
 
 		conditions.buffer_not_empty = function()
 			return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -107,16 +108,18 @@ return {
 				},
 			},
 			provider = function(self)
-				local mode = self.mode:sub(1, 1)
-				return string.format(" %s ", self.mode_names[mode])
+				return string.format(
+					"%s%s %s",
+					icons.vim,
+					self.mode_names[self.mode:sub(1, 1)],
+					icons.separators.slant_left
+				)
 			end,
 			hl = function(self)
 				local mode = self.mode:sub(1, 1)
 				return { bg = self.mode_colors[mode], fg = colors.base, bold = true }
 			end,
-			update = {
-				"ModeChanged",
-			},
+			update = { "ModeChanged" },
 		}
 
 		local FileNameBlock = {
@@ -235,7 +238,7 @@ return {
 			{ provider = "%< " },
 			utils.insert(Space, Diagnostics),
 			{
-				provider = "",
+				provider = icons.separators.inverted_slant_right,
 				hl = { bg = colors.mantle, fg = colors.base },
 			}
 		)
@@ -250,51 +253,49 @@ return {
 					or self.status_dict.removed ~= 0
 					or self.status_dict.changed ~= 0
 			end,
+			static = {
+				added_icon = icons.git.added,
+				branch_icon = icons.git.branch,
+				modified_icon = icons.git.modified,
+				removed_icon = icons.git.removed,
+			},
 			hl = { bg = colors.mantle, fg = colors.mauve },
 			Space,
 			{
 				provider = function(self)
-					return (" %s"):format(self.status_dict.head)
+					return ("%s %s"):format(self.branch_icon, self.status_dict.head)
 				end,
 				hl = { bold = true },
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.added or 0
-					return count > 0 and ("  %s"):format(count)
+					return count > 0 and (" %s %s"):format(self.added_icon, count)
 				end,
 				hl = { fg = colors.green },
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.removed or 0
-					return count > 0 and ("  %s"):format(count)
+					return count > 0 and (" %s %s"):format(self.removed_icon, count)
 				end,
 				hl = { fg = colors.red },
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.changed or 0
-					return count > 0 and ("  %s"):format(count)
+					return count > 0 and (" %s %s"):format(self.modified_icon, count)
 				end,
 				hl = { fg = colors.peach },
 			},
 			Space,
 		}
 
-		local Ruler = {
-			provider = " %7(%l/%3L%):%2c %P ",
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.hide_in_width()
-			end,
-			hl = { bg = colors.mantle, fg = colors.surface2 },
-		}
-
 		local LSPActive = {
 			condition = function()
-				return conditions.hide_in_width(120) and conditions.lsp_attached()
+				return conditions.hide_in_width() and conditions.lsp_attached()
 			end,
-			update = { "LspAttach", "LspDetach" },
+			update = { "LspAttach", "LspDetach", "WinEnter" },
 			on_click = {
 				callback = function()
 					vim.defer_fn(function()
@@ -303,11 +304,8 @@ return {
 				end,
 				name = "heirline_LSP",
 			},
-			{ provider = "", hl = { bg = colors.base, fg = colors.pink } },
-			{
-				provider = vim.g.emoji and "🪐 LSP " or " LSP ",
-				hl = { bg = colors.pink, fg = colors.base },
-			},
+			{ provider = icons.separators.rounded_left, hl = { bg = colors.base, fg = colors.sapphire } },
+			{ provider = icons.lsp, hl = { bg = colors.sapphire, fg = colors.base } },
 			{
 				provider = function()
 					local names = {}
@@ -321,7 +319,7 @@ return {
 						return ""
 					end
 
-					return (" [%s] "):format((table.concat(names, " ")))
+					return (" [%s] "):format((table.concat(names, " / ")))
 				end,
 				hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false },
 			},
@@ -338,7 +336,6 @@ return {
 					return " CRLF "
 				end
 			end,
-			hl = { bg = colors.mantle, fg = colors.surface2 },
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
@@ -352,20 +349,31 @@ return {
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
-			hl = { bg = colors.mantle, fg = colors.surface2 },
 		}
 
-		local IndentSizes = {
-			provider = function()
-				local indent_type = vim.api.nvim_buf_get_option(0, "expandtab") and "Spaces" or "Tab Size"
-				local indent_size = vim.api.nvim_buf_get_option(0, "tabstop")
-				return (" %s: %s "):format(indent_type, indent_size)
-			end,
-			hl = { bg = colors.mantle, fg = colors.surface2 },
+		local FileDetails = utils.insert(
+			{ provider = icons.separators.rounded_left, hl = { bg = colors.surface0, fg = colors.mauve } },
+			{ provider = icons.files.details, hl = { bg = colors.mauve, fg = colors.base } },
+			utils.insert(
+				{ hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false } },
+				FileFormat,
+				{ provider = icons.separators.dotted_vert },
+				FileEncoding
+			)
+		)
+
+		local Ruler = {
+			provider = " %7(%l/%3L%):%2c %P ",
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
 		}
+
+		local FilePosition = utils.insert(
+			{ provider = icons.separators.rounded_left, hl = { bg = colors.surface0, fg = colors.blue } },
+			{ provider = icons.files.ruler, hl = { bg = colors.blue, fg = colors.base } },
+			utils.insert({ hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false } }, Ruler)
+		)
 
 		heirline.setup({
 			statusline = {
@@ -374,10 +382,8 @@ return {
 				Git,
 				Align,
 				LSPActive,
-				FileFormat,
-				FileEncoding,
-				IndentSizes,
-				Ruler,
+				FileDetails,
+				FilePosition,
 			},
 		})
 	end,

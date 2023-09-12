@@ -12,41 +12,17 @@ return {
 			["<leader>+"] = { "<C-a>", "Increment Number Under Cursor" },
 			["<leader>-"] = { "<C-x>", "Decrement Number Under Cursor" },
 			["<leader>nh"] = { "<cmd>nohl<cr>", "Hide search highlights", noremap = false },
-			["<leader>t"] = { "<cmd>Neotree toggle<cr>", "Open File Tree", noremap = false },
-			["<leader>o"] = { "<cmd>SymbolsOutline<cr>", "Open Outline", noremap = false },
 			["<leader>]t"] = { "<cmd>lua require('todo-comments').jump_next()", "Next TODO Comment" },
 			["<leader>[t"] = { "<cmd>lua require('todo-comments').jump_prev()", "Previous TODO Comment" },
 		})
 
 		-- Debugger keymaps
 		wk.register({
-			["<F5>"] = { "<cmd>lua require('dap').continue()<cr>", " Debugger: Continue " },
-			["<F6>"] = { "<cmd>lua require('dap').step_over()<cr>", " Debugger: Step Over " },
-			["<F7>"] = { "<cmd>lua require('dap').step_into()<cr>", " Debugger: Step Into " },
-			["<F8>"] = { "<cmd>lua require('dap').step_out()<cr>", " Debugger: Step Out " },
-			["b"] = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", " Debugger: Toggle Breakpoint " },
-			["<leader>dt"] = { "<cmd>lua require('dapui').toggle()<cr>", " Debugger: Toggle DapUI Window " },
-		})
-
-		-- Telescope keymaps
-		wk.register({
-			["<leader>f"] = {
-				name = "Telescope ",
-			},
-		})
-
-		-- Git keymaps
-		wk.register({
-			["<leader>g"] = {
-				name = "Git Things ",
-			},
-		})
-
-		-- LSP Config
-		wk.register({
-			["<leader>l"] = {
-				name = "LSP Actions ",
-			},
+			["<leader>d"] = "Debugger ",
+			["<leader>f"] = "Telescope ",
+			["<leader>g"] = "Git Things ",
+			["<leader>l"] = "LSP Actions ",
+			["<leader>x"] = "Trouble 󰔫",
 		})
 
 		-- Window / Split Management
