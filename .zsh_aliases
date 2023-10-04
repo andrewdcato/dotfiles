@@ -2,29 +2,41 @@ export ANS_DIR="$HOME/surety/ansible"
 
 # Custom Aliases
 alias bump="./bump.sh"
+alias vi="nvim"
 alias vim="nvim"
-alias gpt="git push && git push --tags"
-alias gfpub="git flow feature publish \$(git branch | sed -n '/\* feature\//s///p')"
 alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.zshrc"
-alias gitClean="git branch --merged | egrep -v \"(^\*|master|main|develop|production)\" | xargs git branch -d"
-alias preRelease="gcm; ggpull; gcd; ggpull"
 
 # Handles bare .cfg repo git actions
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
-# Adds & commits
+# Git aliases
+alias gitClean="git branch --merged | egrep -v \"(^\*|master|main|develop|production)\" | xargs git branch -d"
+alias preRelease="gcm; ggpull; gcd; ggpull"
+alias gpt="git push && git push --tags"
+alias gfpub="git flow feature publish \$(git branch | sed -n '/\* feature\//s///p')"
+alias gbpub="git flow bugfix publish \$(git branch | sed -n '/\* bugfix\//s///p')"
+alias gflbs="git flow bugfix start"
+
 function ac(){
   git add .
   git commit -m "$1"
 }
 
-# Add, commit, & push
 function acp(){
   git add .
   git commit -m "$1"
   git push
 }
+
+# Dotfile repo aliases
+alias ca="config add"
+alias cs="config status"
+function ccmsg() {
+  config commit -am "$1"
+}
+alias cpush="config push"
+
 
 function nvims() {
   items=("default" "LazyVim")
