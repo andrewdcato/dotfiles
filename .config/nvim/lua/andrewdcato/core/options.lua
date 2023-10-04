@@ -34,6 +34,9 @@ local options = {
 	-- modeline
 	modeline = true,
 	modelines = 5,
+	-- folding
+	-- foldmethod = "expr",
+	-- foldexpr = "nvim_treesitter#foldexpr()",
 }
 
 for key, value in pairs(options) do
@@ -51,4 +54,3 @@ vim.opt.iskeyword:append("-") -- changes the "-" character to be considered part
 vim.api.nvim_set_option("updatetime", 300)
 vim.api.nvim_set_option("list", false)
 vim.api.nvim_set_option("splitright", true)
-

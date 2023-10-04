@@ -16,13 +16,19 @@ return {
 			["<leader>[t"] = { "<cmd>lua require('todo-comments').jump_prev()", "Previous TODO Comment" },
 		})
 
-		-- Debugger keymaps
 		wk.register({
 			["<leader>d"] = "Debugger ",
 			["<leader>f"] = "Telescope ",
-			["<leader>g"] = "Git Things ",
 			["<leader>l"] = "LSP Actions ",
 			["<leader>x"] = "Trouble 󰔫",
+		})
+
+		wk.register({
+			["<leader>g"] = "Git Things ",
+		})
+
+		wk.register({
+			["<D-l>"] = { "<cmd>Lazy<cr>", "Lazy 󰒲 " },
 		})
 
 		-- Window / Split Management
