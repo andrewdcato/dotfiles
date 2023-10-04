@@ -84,7 +84,11 @@ return {
 					},
 					gitsigns = true,
 					illuminate = true,
-					indent_blankline = { enabled = true, colored_indent_labels = true },
+					indent_blankline = {
+						enabled = true,
+						scope_color = "sky", -- catppuccin color (eg. `lavender`) Default: text
+						colored_indent_levels = false,
+					},
 					mason = true,
 					native_lsp = { enabled = true },
 					notify = true,
@@ -116,13 +120,15 @@ return {
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		version = "v2.*",
 		config = function()
-			local indent_blankline = require("indent_blankline")
 			vim.opt.list = true
+			vim.opt.listchars:append("space:⋅")
 			vim.opt.listchars:append("eol:↴")
 
 			require("indent_blankline").setup({
-				show_end_of_line = true,
+				space_char_blankline = " ",
 				show_current_context = true,
 				show_current_context_start = true,
 			})

@@ -18,7 +18,7 @@ return {
 		require("trouble").setup({
 			use_diagnostic_signs = true,
 			auto_close = true,
-			auto_open = true,
+			auto_open = false,
 		})
 	end,
 }
