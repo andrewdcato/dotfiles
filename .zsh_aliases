@@ -29,6 +29,15 @@ function acp(){
   git push
 }
 
+function develop-merge-conflict() {
+  git checkout develop
+  git pull
+  git checkout -
+  rm -r node_modules package-lock.json
+  npm install
+  git commit -m "fix: resolve merge conflict" && git push
+}
+
 # Dotfile repo aliases
 alias ca="config add"
 alias cs="config status"

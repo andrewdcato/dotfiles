@@ -7,7 +7,6 @@ export EDITOR="vim"
 export PYENV_ROOT="$HOME/.pyenv"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export ANS_DIR="$HOME/surety/ansible"
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # Load custom aliases
 source "$HOME/.zsh_aliases"
