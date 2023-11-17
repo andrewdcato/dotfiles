@@ -1,7 +1,16 @@
 return {
-  settings = {
-    completions = {
-      completeFunctionCalls = true
-    }
-  }
+	filetypes = {
+		"javascript",
+		"javascript.jsx",
+		"javascriptreact",
+		"typescript",
+		"typescript.tsx",
+		"typescriptreact",
+		-- "svelte",
+	},
+	settings = {
+		completions = {
+			completeFunctionCalls = true,
+		},
+	},
 }

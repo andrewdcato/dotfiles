@@ -4,5 +4,6 @@ return {
 		"javascript.jsx",
 		"typescriptreact",
 		"typescript.tsx",
+		"css",
 	},
 }

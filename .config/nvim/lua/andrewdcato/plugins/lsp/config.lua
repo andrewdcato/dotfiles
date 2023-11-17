@@ -8,6 +8,7 @@ local servers = {
 	"lua_ls",
 	"prismals",
 	"rust_analyzer",
+	"svelte",
 	"tailwindcss",
 	"terraformls",
 	"tflint",

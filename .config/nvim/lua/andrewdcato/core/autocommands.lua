@@ -43,3 +43,13 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 	pattern = "*/{*.tfstate,*.tfstate.backup}",
 	command = "set filetype=json",
 })
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+	pattern = "**/*.server.svelte",
+	command = "set filetype=typescript",
+})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+	pattern = "**/*.postcss",
+	command = "set filetype=css",
+})

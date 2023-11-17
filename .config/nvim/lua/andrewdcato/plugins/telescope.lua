@@ -1,16 +1,7 @@
 local extensions = {
 	"fzf",
 	"file_browser",
-	"packer",
 	"notify",
-	project = {
-		base_dirs = {
-			"~/.dotfiles",
-			"~/surety",
-			"~/projects",
-		},
-		sync_with_nvim_tree = true,
-	},
 }
 
 local pickers = {
@@ -34,6 +25,7 @@ return {
 			"nvim-telescope/telescope-dap.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+			"LinArcX/telescope-env.nvim",
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -79,12 +71,15 @@ return {
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
+			telescope.load_extension("notify")
 			-- telescope.load_extension("dap")
+			telescope.load_extension("env")
 
 			local km = vim.keymap
 
 			km.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "﬘ Search Open Buffers" })
 			km.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = " Search Current Word" })
+			km.set("n", "<leader>fe", "<cmd>Telescope env<cr>", { desc = "󱃻 View Current Environment Variables" })
 			km.set(
 				"n",
 				"<leader>ff",
