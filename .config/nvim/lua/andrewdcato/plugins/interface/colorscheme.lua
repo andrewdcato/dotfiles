@@ -1,48 +1,48 @@
--- Define custom higlight groups for tabby
-local custom_higlights = function(colors)
-	return {
-		NotifyBackground = { bg = "#000000" },
-		TabLine = { bg = colors.mantle, fg = colors.text },
-		-- git-conflict
-		DiffText = { bg = colors.rosewater, fg = colors.mantle },
-		DiffAdd = { bg = colors.teal, fg = colors.mantle },
-		-- header and footer of feline
-		UserTLHead = { bg = colors.blue, fg = colors.mantle },
-		UserTlHeadSep = { bg = colors.mantle, fg = colors.blue },
-		-- active tab
-		UserTLActive = { bg = colors.sky, fg = colors.mantle },
-		UserTlActiveSepL = { bg = colors.sky, fg = colors.mantle },
-		UserTlActiveSepR = { bg = colors.mantle, fg = colors.sky },
-		-- inactive tab
-		UserTLInactive = { bg = colors.surface1, fg = colors.crust },
-		UserTLInactiveSepL = { bg = colors.surface1, fg = colors.mantle },
-		UserTLInactiveSepR = { bg = colors.mantle, fg = colors.surface1 },
-		-- active window
-		UserTLTopWin = { bg = colors.sapphire, fg = colors.mantle },
-		UserTLTopWinL = { bg = colors.sapphire, fg = colors.mantle },
-		UserTLTopWinR = { bg = colors.mantle, fg = colors.sapphire },
-		-- inactive window(s)
-		UserTLWin = { bg = colors.surface1, fg = colors.sapphire },
-		UserTLWinL = { bg = colors.surface1, fg = colors.mantle },
-		UserTLWinR = { bg = colors.mantle, fg = colors.surface1 },
-		-- Neotree
-		NeoTreeNormal = { bg = colors.mantle },
-		NeoTreeNormalNc = { bg = colors.mantle },
-		NeoTreeTabActive = { bg = colors.mantle, fg = colors.sapphire },
-		NeoTreeTabSeparatorActive = { bg = colors.mantle, fg = colors.mantle },
-		NeoTreeTabInactive = { bg = colors.base, fg = colors.lavender },
-		NeoTreeTabSeparatorInactive = { bg = colors.base, fg = colors.base },
-		-- Debugger
-		DapBreakpoint = { bg = colors.mantle, fg = colors.sapphire },
-	}
-end
-
 return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
 		config = function()
+			-- Define custom higlight groups for tabby
+			local custom_higlights = function(colors)
+				return {
+					NotifyBackground = { bg = "#000000" },
+					TabLine = { bg = colors.mantle, fg = colors.text },
+					-- git-conflict
+					DiffText = { bg = colors.rosewater, fg = colors.mantle },
+					DiffAdd = { bg = colors.teal, fg = colors.mantle },
+					-- header and footer of feline
+					UserTLHead = { bg = colors.blue, fg = colors.mantle },
+					UserTlHeadSep = { bg = colors.mantle, fg = colors.blue },
+					-- active tab
+					UserTLActive = { bg = colors.sky, fg = colors.mantle },
+					UserTlActiveSepL = { bg = colors.sky, fg = colors.mantle },
+					UserTlActiveSepR = { bg = colors.mantle, fg = colors.sky },
+					-- inactive tab
+					UserTLInactive = { bg = colors.surface1, fg = colors.crust },
+					UserTLInactiveSepL = { bg = colors.surface1, fg = colors.mantle },
+					UserTLInactiveSepR = { bg = colors.mantle, fg = colors.surface1 },
+					-- active window
+					UserTLTopWin = { bg = colors.sapphire, fg = colors.mantle },
+					UserTLTopWinL = { bg = colors.sapphire, fg = colors.mantle },
+					UserTLTopWinR = { bg = colors.mantle, fg = colors.sapphire },
+					-- inactive window(s)
+					UserTLWin = { bg = colors.surface1, fg = colors.sapphire },
+					UserTLWinL = { bg = colors.surface1, fg = colors.mantle },
+					UserTLWinR = { bg = colors.mantle, fg = colors.surface1 },
+					-- Neotree
+					NeoTreeNormal = { bg = colors.mantle },
+					NeoTreeNormalNc = { bg = colors.mantle },
+					NeoTreeTabActive = { bg = colors.mantle, fg = colors.sapphire },
+					NeoTreeTabSeparatorActive = { bg = colors.mantle, fg = colors.mantle },
+					NeoTreeTabInactive = { bg = colors.base, fg = colors.lavender },
+					NeoTreeTabSeparatorInactive = { bg = colors.base, fg = colors.base },
+					-- Debugger
+					DapBreakpoint = { bg = colors.mantle, fg = colors.sapphire },
+				}
+			end
+
 			require("catppuccin").setup({
 				flavour = "macchiato", -- latte, frappe, macchiato, mocha
 				background = {
@@ -98,7 +98,7 @@ return {
 				},
 			})
 
-			vim.cmd.colorscheme("catppuccin")
+			vim.cmd([[colorscheme catppuccin]])
 		end,
 	},
 	{
