@@ -5,6 +5,7 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
+		local lazy = require("lazy")
 
 		dashboard.section.header.val = {
 			[[                               __                ]],
@@ -25,11 +26,15 @@ return {
 		}
 
 		-- Footer must be a table so that its height is correctly measured
-		local num_plugins_loaded = #vim.fn.globpath(vim.fn.stdpath("data") .. "/site/pack/packer/start", "*", 0, 1)
-		if num_plugins_loaded <= 1 then
-			dashboard.section.footer.val = { num_plugins_loaded .. " plugin 󰚥 loaded" }
+		local nvim_stats = lazy.stats()
+		if nvim_stats.count <= 1 then
+			dashboard.section.footer.val = {
+				"Neovim loaded " .. nvim_stats.count .. " plugin 󰚥 in " .. nvim_stats.startuptime .. "ms",
+			}
 		else
-			dashboard.section.footer.val = { num_plugins_loaded .. " plugins 󰚥 loaded" }
+			dashboard.section.footer.val = {
+				"Neovim loaded " .. nvim_stats.count .. " plugins 󰚥 in " .. nvim_stats.startuptime .. "ms",
+			}
 		end
 		dashboard.section.footer.opts.hl = "Comment"
 		dashboard.section.header.opts.hl = "Include"
