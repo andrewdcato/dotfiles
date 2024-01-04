@@ -12,6 +12,7 @@ return {
 			"TelescopePrompt",
 			"lazy",
 			"spectre_panel",
+			"lspsaga.window",
 		},
 	},
 }
