@@ -7,9 +7,6 @@ alias vim="nvim"
 alias szshrc="source ~/.zshrc"
 alias zshrc="vim ~/.zshrc"
 
-# Handles bare .cfg repo git actions
-alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-
 # Git aliases
 alias gitClean="git branch --merged | egrep -v \"(^\*|master|main|develop|production)\" | xargs git branch -d"
 alias preRelease="gcm; ggpull; gcd; ggpull"
@@ -37,15 +34,6 @@ function develop-merge-conflict() {
   npm install
   git commit -m "fix: resolve merge conflict" && git push
 }
-
-# Dotfile repo aliases
-alias ca="config add"
-alias cs="config status"
-function ccmsg() {
-  config commit -am "$1"
-}
-alias cpush="config push"
-
 
 # Nvim config switcher
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
