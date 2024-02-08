@@ -30,18 +30,13 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 
 -- Terraform filetypes
 vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-	pattern = "*/{*.tf,*.tfvars}",
+	pattern = "*/{*.tf,*.tfvars, terragrunt.hcl}",
 	command = "set filetype=terraform",
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 	pattern = "*/{*.hcl,.terraformrc,terraform.rc}",
 	command = "set filetype=hcl",
-})
-
-vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-	pattern = "*/{*.tfstate,*.tfstate.backup}",
-	command = "set filetype=json",
 })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
@@ -52,4 +47,10 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 	pattern = "**/*.postcss",
 	command = "set filetype=css",
+})
+
+-- Autoopen Neotest sidebar when opening a test file
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+	pattern = "**/*.test.ts",
+	command = "lua require('neotest').summary.open()",
 })

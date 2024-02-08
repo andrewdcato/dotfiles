@@ -8,6 +8,10 @@ export PYENV_ROOT="$HOME/.pyenv"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export ANS_DIR="$HOME/surety/ansible"
 
+# Config flags for tmux session manager
+export T_SESSION_USE_GIT_ROOT="true"
+export T_SESSION_NAME_INCLUDE_PARENT="true"
+
 # Load custom aliases
 source "$HOME/.zsh_aliases"
 
@@ -53,6 +57,7 @@ plugins=(
   git
   git-flow
   nvm
+  terraform
   tmux
 )
 
@@ -103,3 +108,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Configure terragrunt
+complete -o nospace -C /opt/homebrew/bin/terragrunt terragrunt

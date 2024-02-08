@@ -47,8 +47,14 @@ function ccmsg() {
 alias cpush="config push"
 
 
+# Nvim config switcher
+alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nvim-kick="NVIM_APPNAME=kickstart nvim"
+alias nvim-chad="NVIM_APPNAME=NvChad nvim"
+alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
+
 function nvims() {
-  items=("default" "LazyVim")
+  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -58,8 +64,6 @@ function nvims() {
   fi
   NVIM_APPNAME=$config nvim $@
 }
-
-bindkey -s ^a "nvims\n"
 
 # Kill all docker containers with "none" tags
 alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"

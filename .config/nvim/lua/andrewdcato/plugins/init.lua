@@ -28,4 +28,5 @@ return {
 	"hashivim/vim-terraform",
 	"evanleck/vim-svelte",
 	"prisma/vim-prisma",
+	"rhysd/vim-syntax-codeowners",
 }

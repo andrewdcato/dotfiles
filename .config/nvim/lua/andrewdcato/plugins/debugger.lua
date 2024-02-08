@@ -1,4 +1,9 @@
 return {
+	{ -- NOTE: needed to support loading debug configs from ./.vscode/launch.json files, as those contain comments and
+		--        aren't valid JSON
+		"Joakker/lua-json5",
+		build = "./install.sh",
+	},
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
@@ -8,7 +13,7 @@ return {
 			{
 				"microsoft/vscode-js-debug",
 				run = "npm install --legacy-peer-deps && npm run compile",
-				tag = "v1.74.1", -- you *must* specify this tag; newer versions have breaking bugs
+				tag = "v1.74.0", -- you *must* specify this tag; newer versions have breaking bugs
 			},
 		},
 		keys = {
@@ -24,6 +29,10 @@ return {
 			{ "<leader>dt", "<cmd>lua require('dapui').toggle()<cr>", desc = " Debugger: Toggle DapUI Window " },
 		},
 		config = function()
+			-- NOTE: FIXES LOADING JSON5
+			-- https://github.com/neovim/neovim/issues/21749#issuecomment-1378720864
+			table.insert(vim._so_trails, "/?.dylib")
+
 			require("dap-vscode-js").setup({
 				debugger_path = "/Users/andrewcato/.local/share/nvim/lazy/vscode-js-debug",
 				adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
@@ -107,53 +116,25 @@ return {
 				{ text = "", texthl = "DapLogPoint", linehl = "", numhl = "DapLogPoint" }
 			)
 
-			-- TODO: get this properly set up w/latest version of vscode-js-debug
-			-- require("dap.ext.vscode").load_launchjs(nil, { ["pwa-node"] = { "javascript", "typescript" } })
-
-			for _, language in ipairs({ "typescript", "javascript" }) do
-				-- ignore external modules and node.js guts when stepping through code
-				local skipFiles = {
-					"${workspaceFolder}/<node_internals>/**",
-					"${workspaceFolder}/node_modules/**",
-				}
-
-				require("dap").configurations[language] = {
-					{
-						type = "pwa-node",
-						request = "launch",
-						name = "Monorepo: Debug AMS",
-						cwd = "${workspaceFolder}",
-						skipFiles = skipFiles,
-						runtimeExecutable = "pnpm",
-						restart = true,
-						runtimeArgs = {
-							"run-script",
-							"start:ams-dev",
-						},
-					},
-					{
-						type = "pwa-node",
-						request = "launch",
-						name = "Monorepo: Debug LMS",
-						cwd = "${workspaceFolder}",
-						skipFiles = skipFiles,
-						runtimeExecutable = "pnpm",
-						restart = true,
-						runtimeArgs = {
-							"run-script",
-							"start:lms-dev",
-						},
-					},
-					{
-						type = "pwa-node",
-						request = "attach",
-						name = "Attach to Process",
-						processId = require("dap.utils").pick_process,
-						cwd = "${workspaceFolder}",
-						skipFiles = skipFiles,
-					},
-				}
+			-- Auto open / close dapui when debugger sessions start / end
+			local dap, dapui = require("dap"), require("dapui")
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open({})
 			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close({})
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close({})
+			end
+
+			local js_based_languages = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
+			require("dap.ext.vscode").load_launchjs(nil, {
+				["pwa-node"] = js_based_languages,
+				["node"] = js_based_languages,
+				["chrome"] = js_based_languages,
+				["pwa-chrome"] = js_based_languages,
+			})
 		end,
 	},
 }

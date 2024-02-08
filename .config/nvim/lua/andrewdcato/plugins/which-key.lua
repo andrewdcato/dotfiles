@@ -14,6 +14,7 @@ return {
 			["<leader>nh"] = { "<cmd>nohl<cr>", "Hide search highlights", noremap = false },
 			["<leader>]t"] = { "<cmd>lua require('todo-comments').jump_next()", "Next TODO Comment" },
 			["<leader>[t"] = { "<cmd>lua require('todo-comments').jump_prev()", "Previous TODO Comment" },
+			["<leader>wq"] = { '<cmd>s/%V(.*)%V/"\1",/<cr>', "Wrap selection in quotes", mode = "v" },
 		})
 
 		wk.register({
@@ -33,19 +34,19 @@ return {
 
 		-- Window / Split Management
 		wk.register({
-			["<leader>s"] = {
-				name = "Window Splits ",
-				e = { "<C-w>=", "Make Splits Equal" },
-				h = { "<C-w>s", "Split Window Horizontally" },
-				v = { "<C-w>v", "Split Window Vertically" },
-				x = { "<cmd>close<cr>", "Close Current Split" },
-			},
 			["<leader>t"] = {
 				name = "Tab Management 裡",
 				n = { "<cmd>tabn<cr>", "Move to Next Tab" },
 				o = { "<cmd>tabnew<cr>", "Open New Tab" },
 				p = { "<cmd>tabp<cr>", "Move to Previous Tab" },
 				x = { "<cmd>tabclose<cr>", "Close Current Tab" },
+			},
+			["<leader>w"] = {
+				name = "Window Management ",
+				e = { "<C-w>=", "Make Splits Equal" },
+				h = { "<C-w>s", "Split Window Horizontally" },
+				v = { "<C-w>v", "Split Window Vertically" },
+				x = { "<cmd>close<cr>", "Close Current Split" },
 			},
 		})
 

@@ -1,7 +1,7 @@
 return {
 	"nvim-pack/nvim-spectre",
 	keys = {
-		{ "<C-S>", '<cmd>lua require("spectre").toggle()<CR>', desc = "Toggle Spectre" },
+		{ "<leader>s", '<cmd>lua require("spectre").toggle()<CR>', desc = "Toggle Spectre" },
 	},
 	config = function()
 		vim.keymap.set("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {

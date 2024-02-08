@@ -1,7 +1,14 @@
-.cfg
+# State of LazyGit/LazyDocker
 .config/lazygit/state.yml
+.config/lazydocker/state.yml
 
+# Ignore all of OMZ except custom things
 .oh-my-zsh/*
 !.oh-my-zsh/custom/plugins/*
 !.oh-my-zsh/custom/themes/*
+
+# Ignore all in .ssh dir except for config files
+.ssh
+!.ssh/config
+!.ssh/config_personal
 
