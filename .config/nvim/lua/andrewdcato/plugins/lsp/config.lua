@@ -1,3 +1,5 @@
+local icons = require("andrewdcato.util").icons
+
 local servers = {
 	"ansiblels",
 	"cssls",
@@ -16,12 +18,6 @@ local servers = {
 	"yamlls",
 }
 
-local linters = {
-	"eslint_d",
-	"prettier",
-	"stylua",
-}
-
 return {
 	{
 		"williamboman/mason.nvim",
@@ -37,7 +33,7 @@ return {
 
 			mason.setup({
 				ui = {
-					border = "double",
+					border = "rounded",
 					icons = {
 						package_installed = "✓",
 						package_pending = "➜",
@@ -54,7 +50,7 @@ return {
 			})
 
 			mason_null_ls.setup({
-				ensure_installed = linters,
+				ensure_installed = { "eslint_d", "prettier", "stylua" },
 				automatic_installation = true,
 			})
 		end,
@@ -70,6 +66,12 @@ return {
 				scroll_preview = {
 					scroll_down = "<C-j>",
 					scroll_up = "<C-k>",
+				},
+				lightbulb = {
+					virtual_text = false,
+				},
+				ui = {
+					code_action = icons.diagnostics.code_action,
 				},
 			})
 		end,
@@ -93,7 +95,6 @@ return {
 			local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			-- Configure diagnostic symbols
-			local icons = require("andrewdcato.util").icons
 			local signs = {
 				{ name = "DiagnosticSignError", text = icons.diagnostics.error },
 				{ name = "DiagnosticSignWarn", text = icons.diagnostics.warn },
@@ -177,6 +178,9 @@ return {
 
 				opts.desc = "Show LSP Info"
 				km.set("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+
+				opts.desc = "Show hover docs"
+				km.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
 
 				if client.name == "tsserver" then
 					client.server_capabilities.documentFormattingProvider = false

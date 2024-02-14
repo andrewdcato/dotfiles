@@ -28,13 +28,13 @@ return {
 						"svelte",
 						"typescript.tsx",
 						"typescriptreact",
+						"typescript",
 						"yaml",
 					},
 				}),
 				formatting.eslint_d.with({
 					filetypes = {
 						"javascript",
-						"typescript",
 					},
 				}),
 				formatting.stylua,

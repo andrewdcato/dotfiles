@@ -7,6 +7,7 @@ return {
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-path", -- source for file system paths
 		"hrsh7th/cmp-vsnip",
+		"hrsh7th/cmp-cmdline",
 		"hrsh7th/nvim-cmp",
 		"hrsh7th/vim-vsnip",
 		"onsails/lspkind.nvim", -- vs-code like pictograms
@@ -118,6 +119,33 @@ return {
 				completion = cmp.config.window.bordered(border_opts),
 				documentation = cmp.config.window.bordered(border_opts),
 			},
+			experimental = {
+				native_menu = false,
+				ghost_text = true,
+			},
+		})
+
+		-- Autocomplete from current buffer when searching
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		-- Autocomplete in command line
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{
+					name = "cmdline",
+					option = {
+						ignore_cmds = { "Man", "!" },
+					},
+				},
+			}),
 		})
 
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
