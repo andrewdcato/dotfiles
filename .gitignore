@@ -1,6 +1,7 @@
-# State of LazyGit/LazyDocker
+# State files
 .config/lazygit/state.yml
 .config/lazydocker/state.yml
+.config/configstore
 
 # Ignore all of OMZ except custom things
 .oh-my-zsh/*
