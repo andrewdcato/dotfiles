@@ -1,2 +1,0 @@
-key_bindings:
-  - { key: J, mods: Command, chars: "\x02\x54" }
