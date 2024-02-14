@@ -30,6 +30,7 @@ M.icons = {
 		hint = "",
 		info = "",
 		warn = "",
+		code_action = " ",
 	},
 	git = {
 		added = "",
