@@ -12,9 +12,6 @@ export ANS_DIR="$HOME/surety/ansible"
 export T_SESSION_USE_GIT_ROOT="true"
 export T_SESSION_NAME_INCLUDE_PARENT="true"
 
-# Load custom aliases
-source "$HOME/.zsh_aliases"
-
 # Setup Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -108,6 +105,9 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# Load custom aliases
+source "$HOME/.zsh_aliases"
 
 # Configure terragrunt
 complete -o nospace -C /opt/homebrew/bin/terragrunt terragrunt
