@@ -136,16 +136,19 @@ return {
 	},
 	{
 		"mvllow/modes.nvim",
+		dependencies = { "catppuccin/nvim" },
 		config = function()
+			local colors = require("catppuccin.palettes").get_palette()
+
 			require("modes").setup({
 				colors = {
-					copy = "#B48EAD",
-					delete = "#BF616A",
-					insert = "#A6DA95",
-					visual = "#F0C6C6",
+					copy = colors.peach,
+					delete = colors.red,
+					insert = colors.green,
+					visual = colors.lavender,
 				},
 				-- Set opacity for cursorline and number background
-				line_opacity = 0.20,
+				line_opacity = 0.35,
 				-- Enable cursor highlights
 				set_cursor = true,
 				-- Enable cursorline initially, and disable cursorline for inactive windows
