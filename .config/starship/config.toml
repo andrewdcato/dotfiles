@@ -8,6 +8,8 @@ palette = "catppuccin_macchiato"
 add_newline = true
 
 format = """
+$os\
+$sudo\
 $username\
 $hostname\
 $localip\
@@ -28,19 +30,14 @@ $python\
 $rust\
 $terraform\
 $nix_shell\
-$memory_usage\
 $aws\
 $direnv\
-$env_var\
-$custom\
-$sudo\
 $cmd_duration\
 $line_break\
 $jobs\
 $battery\
 $time\
 $status\
-$os\
 $container\
 $shell\
 $character"""
@@ -58,7 +55,7 @@ truncation_length = 4
 style = "bold teal"
 
 [terraform]
-format = 'via [$symbol$version]($style)'
+format = 'via [$symbol$version]($style) '
 symbol = '󱁢 ' 
 detect_files = ['.tflint.hcl','.terraform-version'] 
 
