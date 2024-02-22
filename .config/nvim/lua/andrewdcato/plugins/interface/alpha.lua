@@ -5,16 +5,9 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
-		local lazy = require("lazy")
-
-		dashboard.section.header.val = {
-			[[                               __                ]],
-			[[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-			[[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-			[[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-			[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-			[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-		}
+		local plugins = require("lazy")
+		local headers = require("andrewdcato.util").ascii_headers
+		dashboard.section.header.val = headers[math.random(#headers)]
 
 		dashboard.section.buttons.val = {
 			dashboard.button("f", "󰈞  Find file", "<cmd>Telescope find_files hidden=true<cr>"),
@@ -26,7 +19,7 @@ return {
 		}
 
 		-- Footer must be a table so that its height is correctly measured
-		local nvim_stats = lazy.stats()
+		local nvim_stats = plugins.stats()
 		if nvim_stats.count <= 1 then
 			dashboard.section.footer.val = {
 				"Neovim loaded " .. nvim_stats.count .. " plugin 󰚥 in " .. nvim_stats.startuptime .. "ms",
@@ -59,7 +52,7 @@ return {
 		}
 
 		vim.cmd(
-			[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 showtabline=1 ]]
+			[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 showtabline=2 ]]
 		)
 
 		vim.api.nvim_create_autocmd("BufUnload", {

@@ -1,14 +1,10 @@
-local icons = require("andrewdcato.util").icons
-
 return {
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = { "catppuccin/nvim" },
 		config = function()
-			local highlights = require("catppuccin.groups.integrations.bufferline").get()
-
 			require("bufferline").setup({
-				highlights = highlights,
+				highlights = require("catppuccin.groups.integrations.bufferline").get(),
 				options = {
 					indicator = { style = "underline" },
 					diagnostics = "nvim_lsp",
@@ -47,8 +43,14 @@ return {
 		"utilyre/barbecue.nvim",
 		dependencies = { "catppuccin/nvim" },
 		config = function()
+			local icons = require("andrewdcato.util").icons
+
 			require("barbecue").setup({
 				theme = "catppuccin",
+				modified = function(bufnr)
+					return vim.bo[bufnr].modified
+				end,
+				show_modified = true,
 				symbols = {
 					modified = icons.git.modified,
 				},

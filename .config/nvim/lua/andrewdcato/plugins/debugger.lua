@@ -12,7 +12,7 @@ return {
 			"theHamsta/nvim-dap-virtual-text",
 			{
 				"microsoft/vscode-js-debug",
-				run = "npm install --legacy-peer-deps && npm run compile",
+				build = "npm install --legacy-peer-deps && npm run compile",
 				tag = "v1.74.0", -- you *must* specify this tag; newer versions have breaking bugs
 			},
 		},
