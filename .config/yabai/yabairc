@@ -28,7 +28,7 @@ yabai -m config                                 \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 on             \
-    top_padding                  10             \
+    top_padding                  40             \
     bottom_padding               10             \
     left_padding                 10             \
     right_padding                10             \
@@ -42,7 +42,6 @@ yabai -m config                                 \
 # rules
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
-yabai -m rule --add app="^Postbox$" manage=off
 yabai -m rule --add app="^Tidal$" manage=off
 yabai -m rule --add app="^MongoDB Compass$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
