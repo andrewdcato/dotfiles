@@ -1,0 +1,48 @@
+# vi: ft=config
+# Create and focus on new space
+cmd + ctrl - c : yabai -m space --create
+
+# Destroy last space
+cmd + ctrl - w : yabai -m space --focus prev && yabai -m space recent --destroy
+
+# Window focus
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# Move windows
+shift + cmd - h : yabai -m window --warp west
+shift + cmd - j : yabai -m window --warp south
+shift + cmd - k : yabai -m window --warp north
+shift + cmd - l : yabai -m window --warp east
+
+# fast focus desktop
+cmd + ctrl - x : yabai -m space --focus recent
+cmd + ctrl - h : yabai -m space --focus prev || skhd -k "ctrl + alt + cmd - z"
+cmd + ctrl - l : yabai -m space --focus next || skhd -k "ctrl + alt + cmd - c"
+cmd + ctrl - 1 : yabai -m space --focus  1 || skhd -k "ctrl + alt + cmd - 1"
+cmd + ctrl - 2 : yabai -m space --focus  2 || skhd -k "ctrl + alt + cmd - 2"
+cmd + ctrl - 3 : yabai -m space --focus  3 || skhd -k "ctrl + alt + cmd - 3"
+cmd + ctrl - 4 : yabai -m space --focus  4 || skhd -k "ctrl + alt + cmd - 4"
+cmd + ctrl - 5 : yabai -m space --focus  5 || skhd -k "ctrl + alt + cmd - 5"
+cmd + ctrl - 6 : yabai -m space --focus  6 || skhd -k "ctrl + alt + cmd - 6"
+cmd + ctrl - 7 : yabai -m space --focus  7 || skhd -k "ctrl + alt + cmd - 7"
+cmd + ctrl - 8 : yabai -m space --focus  8 || skhd -k "ctrl + alt + cmd - 8"
+cmd + ctrl - 9 : yabai -m space --focus  9 || skhd -k "ctrl + alt + cmd - 9"
+cmd + ctrl - 0 : yabai -m space --focus 10 || skhd -k "ctrl + alt + cmd - 0"
+
+# send window to desktop and follow focus
+shift + cmd - x : yabai -m window --space recent && yabai -m space --focus recent
+shift + cmd - z : yabai -m window --space prev && yabai -m space --focus prev
+shift + cmd - c : yabai -m window --space next && yabai -m space --focus next
+shift + cmd - 1 : yabai -m window --space  1 && yabai -m space --focus 1
+shift + cmd - 2 : yabai -m window --space  2 && yabai -m space --focus 2
+shift + cmd - 3 : yabai -m window --space  3 && yabai -m space --focus 3
+shift + cmd - 4 : yabai -m window --space  4 && yabai -m space --focus 4
+shift + cmd - 5 : yabai -m window --space  5 && yabai -m space --focus 5
+shift + cmd - 6 : yabai -m window --space  6 && yabai -m space --focus 6
+shift + cmd - 7 : yabai -m window --space  7 && yabai -m space --focus 7
+shift + cmd - 8 : yabai -m window --space  8 && yabai -m space --focus 8
+shift + cmd - 9 : yabai -m window --space  9 && yabai -m space --focus 9
+shift + cmd - 0 : yabai -m window --space 10 && yabai -m space --focus 10
