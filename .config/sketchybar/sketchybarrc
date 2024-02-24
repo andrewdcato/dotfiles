@@ -3,11 +3,14 @@ ITEM_DIR="$HOME/.config/sketchybar/items"
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins" 
 UTILS_DIR="$HOME/.config/sketchybar/utils"
 
+# Load in color scheme
+source "$UTILS_DIR/colors.sh"
+
 bar=(
   position=top
   height=30
   blur_radius=30
-  color=0x40000000
+  color=$BAR_BG
 )
 
 sketchybar --bar "${bar[@]}"
@@ -17,8 +20,8 @@ default=(
   padding_right=5
   icon.font="Hack Nerd Font:Bold:17.0"
   label.font="Hack Nerd Font:Bold:14.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
+  icon.color=$BLUE
+  label.color=$TEXT
   icon.padding_left=4
   icon.padding_right=4
   label.padding_left=4
