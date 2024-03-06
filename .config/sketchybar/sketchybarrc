@@ -1,40 +1,57 @@
 #!/bin/bash
+FONT="Hack Nerd Font"
+ICON_PADDING=4
+LABEL_PADDING=2
+
 ITEM_DIR="$HOME/.config/sketchybar/items" 
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins" 
 UTILS_DIR="$HOME/.config/sketchybar/utils"
 
-# Load in color scheme
 source "$UTILS_DIR/colors.sh"
+source "$UTILS_DIR/icons.sh"
 
 bar=(
-  position=top
-  height=30
   blur_radius=30
   color=$BAR_BG
+  height=33
+  padding_left=5
+  padding_right=5
+  position=top
+  topmost=window
 )
 
 sketchybar --bar "${bar[@]}"
 
 default=(
+  icon.color=$BLUE
+  icon.font="$FONT:Bold:17.0"
+  icon.padding_left=$ICON_PADDING
+  icon.padding_right=$ICON_PADDING
+ 
+  label.color=$TEXT
+  label.font="$FONT:Bold:14.0"
+  label.padding_left=$LABEL_PADDING
+  label.padding_right=$LABEL_PADDING
+ 
   padding_left=5
   padding_right=5
-  icon.font="Hack Nerd Font:Bold:17.0"
-  label.font="Hack Nerd Font:Bold:14.0"
-  icon.color=$BLUE
-  label.color=$TEXT
-  icon.padding_left=4
-  icon.padding_right=4
-  label.padding_left=4
-  label.padding_right=4
+
+  popup.background.border_color=$TEXT
+  popup.background.border_width=2
+  popup.background.color=$BAR_BG
+  popup.background.corner_radius=9
+  popup.background.shadow.drawing=on
+  popup.blur_radius=20
 )
 sketchybar --default "${default[@]}"
 
 # Left Side
+source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
 sketchybar --add item chevron left \
            --set chevron icon= label.drawing=off \
            --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           --set front_app icon.drawing=on script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
 # Right Side
