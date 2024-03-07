@@ -13,11 +13,28 @@ return {
 	},
 	{
 		"kdheepak/lazygit.nvim",
+		lazy = true,
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
 		keys = {
 			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "Open LazyGit" },
 			{ "<leader>gc", "<cmd>LazyGitConfig<cr>", desc = "Edit LazyGit Config" },
 		},
-		config = true,
+		config = function()
+			vim.g.lazygit_floating_window_winblend = 0 -- transparency of floating window
+			vim.g.lazygit_floating_window_scaling_factor = 0.9 -- scaling factor for floating window
+
+			vim.g.lazygit_use_custom_config_file_path = 1 -- config file path is evaluated if this value is 1
+			vim.g.lazygit_config_file_path = os.getenv("HOME") .. "/.config/lazygit/config.yml" -- custom config file path
+		end,
 	},
 	{
 		"akinsho/git-conflict.nvim",
