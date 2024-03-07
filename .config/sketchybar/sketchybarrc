@@ -1,70 +1,88 @@
 #!/bin/bash
-FONT="Hack Nerd Font"
-ICON_PADDING=4
-LABEL_PADDING=2
 
-ITEM_DIR="$HOME/.config/sketchybar/items" 
-PLUGIN_DIR="$HOME/.config/sketchybar/plugins" 
-UTILS_DIR="$HOME/.config/sketchybar/utils"
+source "$CONFIG_DIR/colors.sh" # Loads all defined colors
+source "$CONFIG_DIR/icons.sh" # Loads all defined icons
 
-source "$UTILS_DIR/colors.sh"
-source "$UTILS_DIR/icons.sh"
+ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
+PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are stored
 
+FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
+PADDINGS=3 # All paddings use this value (icon, label, background)
+
+# Setting up and starting the helper process
+HELPER=git.felix.helper
+killall helper
+(cd $CONFIG_DIR/helper && make)
+$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+
+# Setting up the general bar appearance of the bar
 bar=(
-  blur_radius=30
-  color=$BAR_BG
-  height=33
-  padding_left=5
-  padding_right=5
+  background.blur_radius=20
+  background.corner_radius=9
+  border_color=$BAR_BORDER_COLOR
+  border_width=2
+  color=$BAR_COLOR
+  height=45
+  margin=-2
+  padding_left=10
+  padding_right=10
   position=top
+  shadow=off
+  sticky=on
   topmost=window
+  y_offset=-5
 )
 
 sketchybar --bar "${bar[@]}"
 
-default=(
-  icon.color=$BLUE
-  icon.font="$FONT:Bold:17.0"
-  icon.padding_left=$ICON_PADDING
-  icon.padding_right=$ICON_PADDING
- 
-  label.color=$TEXT
-  label.font="$FONT:Bold:14.0"
-  label.padding_left=$LABEL_PADDING
-  label.padding_right=$LABEL_PADDING
- 
-  padding_left=5
-  padding_right=5
-
-  popup.background.border_color=$TEXT
+# Setting up default values
+defaults=(
+  background.border_width=2
+  background.corner_radius=9
+  background.height=26
+  icon.color=$ICON_COLOR
+  icon.font="$FONT:Bold:14.0"
+  icon.padding_left=$PADDINGS
+  icon.padding_right=$PADDINGS
+  label.color=$LABEL_COLOR
+  label.font="$FONT:Semibold:13.0"
+  label.padding_left=$PADDINGS
+  label.padding_right=$PADDINGS
+  padding_left=$PADDINGS
+  padding_right=$PADDINGS
+  popup.background.border_color=$POPUP_BORDER_COLOR
   popup.background.border_width=2
-  popup.background.color=$BAR_BG
+  popup.background.color=$POPUP_BACKGROUND_COLOR
   popup.background.corner_radius=9
   popup.background.shadow.drawing=on
   popup.blur_radius=20
+  scroll_texts=on
+  updates=when_shown
 )
-sketchybar --default "${default[@]}"
 
-# Left Side
+sketchybar --default "${defaults[@]}"
+
+# Left
 source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/spaces.sh"
-sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
-           --add item front_app left \
-           --set front_app icon.drawing=on script="$PLUGIN_DIR/front_app.sh" \
-           --subscribe front_app front_app_switched
+source "$ITEM_DIR/yabai.sh"
+source "$ITEM_DIR/front_app.sh"
 
-# Right Side
-sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
-           --add item volume right \
-           --set volume script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change \
-           --add item battery right \
-           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+# Center
+source "$ITEM_DIR/media.sh"
 
-##### Force all scripts to run the first time (never do this in a script) #####
+# Right
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/brew.sh"
+source "$ITEM_DIR/github.sh"
+source "$ITEM_DIR/wifi.sh"
+source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/volume.sh"
+source "$ITEM_DIR/cpu.sh"
+
+sketchybar --hotload on
+
+# Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
 
-echo "sketchybar config loaded..."
+echo "sketchybar configuation loaded.."
