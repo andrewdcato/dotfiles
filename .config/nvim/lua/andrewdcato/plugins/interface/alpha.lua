@@ -7,15 +7,28 @@ return {
 		local dashboard = require("alpha.themes.dashboard")
 		local plugins = require("lazy")
 		local headers = require("andrewdcato.util").ascii_headers
+		local icons = require("andrewdcato.util").icons
 		dashboard.section.header.val = headers[math.random(#headers)]
 
 		dashboard.section.buttons.val = {
-			dashboard.button("f", "󰈞  Find file", "<cmd>Telescope find_files hidden=true<cr>"),
-			dashboard.button("e", "󱪝  New file", "<cmd>ene <BAR> startinsert<cr>"),
-			dashboard.button("r", "󱦺  Recently used files", "<cmd>Telescope oldfiles<cr>"),
-			dashboard.button("t", "󰺮  Find text", "<cmd>Telescope live_grep<cr>"),
-			dashboard.button("c", "  Configuration", "<cmd>e $MYVIMRC<cr>"),
-			dashboard.button("q", "󰩈  Quit Neovim", "<cmd>qa<cr>"),
+			dashboard.button("e", icons.dashboard.new_file .. "Create new file", "<cmd>ene <BAR> startinsert<cr>"),
+			dashboard.button("g", icons.dashboard.lazygit .. "Open LazyGit", "<cmd>LazyGit<cr>"),
+			dashboard.button(
+				"f",
+				icons.dashboard.file_name .. "Search by file name",
+				"<cmd>Telescope find_files hidden=true<cr>"
+			),
+			dashboard.button(
+				"r",
+				icons.dashboard.file_recent .. "Search recently used files",
+				"<cmd>Telescope oldfiles<cr>"
+			),
+			dashboard.button(
+				"t",
+				icons.dashboard.file_grep .. "Search by text in file",
+				"<cmd>Telescope live_grep<cr>"
+			),
+			dashboard.button("q", icons.dashboard.exit .. "Quit Neovim", "<cmd>qa<cr>"),
 		}
 
 		-- Footer must be a table so that its height is correctly measured
