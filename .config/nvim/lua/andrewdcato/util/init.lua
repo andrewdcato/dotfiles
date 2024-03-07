@@ -10,6 +10,14 @@ M.icons = {
 		details = "󱁻 ",
 		ruler = "󰱼 ",
 	},
+	dashboard = {
+		new_file = "󱪝  ",
+		lazygit = "  ",
+		file_name = "󰈞  ",
+		file_recent = "󱦺  ",
+		file_grep = "󰺮  ",
+		exit = "󰩈  ",
+	},
 	separators = {
 		block = "█",
 		dotted_vert = "┊",
