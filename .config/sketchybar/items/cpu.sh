@@ -40,6 +40,8 @@ cpu_user=(
   background.color=$TRANSPARENT
 )
 
+cpu_bracket=()
+
 sketchybar --add item cpu.top right              \
            --set cpu.top "${cpu_top[@]}"         \
                                                  \
@@ -51,3 +53,6 @@ sketchybar --add item cpu.top right              \
                                                  \
            --add graph cpu.user right 75         \
            --set cpu.user "${cpu_user[@]}"
+
+sketchybar --add bracket cpu cpu.top cpu.percent cpu.sys cpu.user \
+  --set cpu "${cpu_bracket[@]}"

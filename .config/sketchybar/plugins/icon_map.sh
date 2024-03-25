@@ -83,17 +83,8 @@ function icon_map() {
     "Notes")
       icon_result=":notes:"
       ;;
-    "Sequel Ace")
-      icon_result=":sequel_ace:"
-      ;;
-    "Folx")
-      icon_result=":folx:"
-      ;;
-    "Sequel Pro")
+    "Sequel Pro"| "pgAdmin 4")
       icon_result=":sequel_pro:"
-      ;;
-    "Skype")
-      icon_result=":skype:"
       ;;
     "PyCharm")
       icon_result=":pycharm:"
@@ -107,9 +98,6 @@ function icon_map() {
     "App Store")
       icon_result=":app_store:"
       ;;
-    "Calibre")
-      icon_result=":book:"
-      ;;
     "Todoist")
       icon_result=":todoist:"
       ;;
@@ -118,9 +106,6 @@ function icon_map() {
       ;;
     "Tower")
       icon_result=":tower:"
-      ;;
-    "Drafts")
-      icon_result=":drafts:"
       ;;
     "Cypress")
       icon_result=":cypress:"
@@ -209,7 +194,7 @@ function icon_map() {
     "VMware Fusion")
       icon_result=":vmware_fusion:"
       ;;
-    "Microsoft Teams" | "Microsoft Teams classic")
+    "Microsoft Teams" | "Microsoft Teams classic" | "Microsoft Teams (work or school)")
       icon_result=":microsoft_teams:"
       ;;
     "Slack")
