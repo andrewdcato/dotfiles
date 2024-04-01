@@ -1,0 +1,16 @@
+{
+  "connections": [
+    {
+      "name": "surety360",
+      "adapter": "postgres",
+      "host": "localhost",
+      "port": 5678,
+      "user": "dbadmin",
+      "password": "password",
+      "database": "surety360",
+      "projectPaths": [
+        "/Users/andrewcato/surety/surety360"
+      ]
+    }
+  ]
+}
