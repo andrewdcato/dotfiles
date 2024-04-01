@@ -1,5 +1,6 @@
 tap "cloudflare/cloudflare"
 tap "esolitos/ipa"
+tap "felixkratz/formulae"
 tap "hashicorp/tap"
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
@@ -84,10 +85,12 @@ brew "ripgrep"
 brew "rust"
 brew "rustup-init"
 brew "sdl2"
+brew "sql-language-server"
 brew "starship"
 brew "stow"
 brew "stylua"
 brew "subversion"
+brew "switchaudio-osx"
 brew "telnet"
 brew "terragrunt"
 brew "tfenv"
@@ -105,7 +108,9 @@ brew "zsh-autosuggestions"
 brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "esolitos/ipa/sshpass"
+brew "felixkratz/formulae/sketchybar"
 brew "hashicorp/tap/terraform-ls"
+brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 brew "mongodb/brew/mongodb-community@4.4"
 brew "teamookla/speedtest/speedtest"
@@ -152,6 +157,7 @@ cask "postbox"
 cask "postman"
 cask "raspberry-pi-imager"
 cask "ringcentral"
+cask "sf-symbols"
 cask "slack"
 cask "steam"
 cask "synology-drive"
@@ -160,6 +166,7 @@ cask "utm"
 cask "wezterm"
 cask "zoom"
 mas "1Password for Safari", id: 1569813296
+mas "Amphetamine", id: 937984704
 mas "Fantastical", id: 975937182
 mas "GarageBand", id: 682658836
 mas "Home Assistant", id: 1099568401
@@ -171,4 +178,4 @@ mas "Okta Verify", id: 490179405
 mas "Pages", id: 409201541
 mas "Parcel", id: 639968404
 mas "Reeder", id: 1529448980
-mas "Civilization VI", id: 1123795278
+mas "WireGuard", id: 1451685025
