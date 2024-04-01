@@ -46,3 +46,8 @@ shift + cmd + ctrl - 7 : yabai -m window --space  7 && yabai -m space --focus 7
 shift + cmd + ctrl - 8 : yabai -m window --space  8 && yabai -m space --focus 8
 shift + cmd + ctrl - 9 : yabai -m window --space  9 && yabai -m space --focus 9
 shift + cmd + ctrl - 0 : yabai -m window --space 10 && yabai -m space --focus 10
+
+# Yabai management
+shift + cmd + ctrl - u : echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+
+shift + cmd + ctrl -r : sudo yabai --load-sa

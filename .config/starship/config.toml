@@ -59,6 +59,9 @@ format = 'via [$symbol$version]($style) '
 symbol = '󱁢 ' 
 detect_files = ['.tflint.hcl','.terraform-version'] 
 
+[package]
+format = 'via [🎁 $version](208 bold) '
+
 [custom.giturl]
 # disabled = true
 description = "Display symbol for remote Git server"
