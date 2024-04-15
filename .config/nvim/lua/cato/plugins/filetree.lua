@@ -7,7 +7,7 @@ return {
   },
   config = function()
     local neotree = require("neo-tree")
-    local icons = require("andrewdcato.util").icons
+    local icons = require("cato.util").icons
 
     vim.fn.sign_define("DiagnosticSignError", { text = icons.diagnostics.error, texthl = "DiagnosticSignError" })
     vim.fn.sign_define("DiagnosticSignWarn", { text = icons.diagnostics.warn, texthl = "DiagnosticSignWarn" })

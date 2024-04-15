@@ -4,7 +4,7 @@ return {
 		{ "<leader>o", "<cmd>SymbolsOutline<cr>", desc = "Open Symbols Outline" },
 	},
 	config = function()
-		local icons = require("andrewdcato.util").icons
+		local icons = require("cato.util").icons
 
 		local icon_table = {}
 		for symbol, icon in pairs(icons.kinds) do

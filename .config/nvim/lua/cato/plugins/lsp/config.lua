@@ -1,4 +1,4 @@
-local icons = require("andrewdcato.util").icons
+local icons = require("cato.util").icons
 
 local servers = {
 	"ansiblels",
@@ -57,35 +57,9 @@ return {
 		end,
 	},
 	{
-		"nvimdev/lspsaga.nvim",
-		config = function()
-			require("lspsaga").setup({
-				border = "rounded",
-				symbol_in_winbar = {
-					enable = false,
-				},
-				scroll_preview = {
-					scroll_down = "<C-j>",
-					scroll_up = "<C-k>",
-				},
-				lightbulb = {
-					virtual_text = false,
-				},
-				ui = {
-					code_action = icons.diagnostics.code_action,
-				},
-			})
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
-	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"nvimdev/lspsaga.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
 			"SmiteshP/nvim-navic",
@@ -142,46 +116,37 @@ return {
 				opts.buffer = bufnr
 
 				opts.desc = "Show LSP code actions"
-				-- km.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-				km.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", opts)
+				km.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 
 				opts.desc = "Go to definition"
-				-- km.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
-				km.set("n", "<leader>ld", "<cmd>Lspsaga goto_definition<cr>", opts)
+				km.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 
-				-- opts.desc = "Go to declaration"
-				-- km.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+				opts.desc = "Go to declaration"
+				km.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
 
-				-- opts.desc = "Go to implementation"
-				-- km.set("n", "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
-				opts.desc = "Show implementation"
-				km.set("n", "<leader>li", "<cmd>Lspsaga finder imp<cr>", opts)
+				opts.desc = "Go to implementation"
+				km.set("n", "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
 
 				opts.desc = "Show references"
-				-- km.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
-				km.set("n", "<leader>lr", "<cmd>Lspsaga finder ref<cr>", opts)
+				km.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
 
 				opts.desc = "Rename"
-				-- km.set("n", "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-				km.set("n", "<leader>lR", "<cmd>Lspsaga rename<cr>", opts)
+				km.set("n", "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 
 				opts.desc = "Show signature help"
-				-- km.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
-				km.set("n", "<leader>ls", "<cmd>Lspsaga hover_doc<cr>", opts)
+				km.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
 				opts.desc = "Go to next diagnostic"
-				-- km.set("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
-				km.set("n", "<leader>lj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+				km.set("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
 
 				opts.desc = "Go to previousdiagnostic"
-				-- km.set("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_previous({buffer=0})<cr>", opts)
-				km.set("n", "<leader>lk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+				km.set("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_previous({buffer=0})<cr>", opts)
 
 				opts.desc = "Show LSP Info"
 				km.set("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
 
 				opts.desc = "Show hover docs"
-				km.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
+				km.set("n", "K", "<cmd>vim.lsp.buf.hover<cr>", opts)
 
 				if client.name == "tsserver" then
 					client.server_capabilities.documentFormattingProvider = false
@@ -216,7 +181,7 @@ return {
 
 				server = vim.split(server, "@")[1]
 
-				local require_ok, conf_opts = pcall(require, "andrewdcato.plugins.lsp.settings." .. server)
+				local require_ok, conf_opts = pcall(require, "cato.plugins.lsp.settings." .. server)
 				if require_ok then
 					serverOpts = vim.tbl_deep_extend("force", conf_opts, serverOpts)
 				end

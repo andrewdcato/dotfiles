@@ -6,8 +6,8 @@ return {
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
 		local plugins = require("lazy")
-		local headers = require("andrewdcato.util").ascii_headers
-		local icons = require("andrewdcato.util").icons
+		local headers = require("cato.util").ascii_headers
+		local icons = require("cato.util").icons
 		dashboard.section.header.val = headers[math.random(#headers)]
 
 		dashboard.section.buttons.val = {

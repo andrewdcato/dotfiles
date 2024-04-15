@@ -14,9 +14,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	{ import = "andrewdcato.plugins" },
-	{ import = "andrewdcato.plugins.lsp" },
-	{ import = "andrewdcato.plugins.interface" },
+	{ import = "cato.plugins" },
+	{ import = "cato.plugins.lsp" },
 }, {
 	install = {
 		missing = true,

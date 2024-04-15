@@ -43,7 +43,7 @@ return {
 		"utilyre/barbecue.nvim",
 		dependencies = { "catppuccin/nvim" },
 		config = function()
-			local icons = require("andrewdcato.util").icons
+			local icons = require("cato.util").icons
 
 			require("barbecue").setup({
 				theme = "catppuccin",

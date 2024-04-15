@@ -7,7 +7,7 @@ return {
 		local conditions = require("heirline.conditions")
 		local utils = require("heirline.utils")
 		local colors = require("catppuccin.palettes").get_palette()
-		local icons = require("andrewdcato.util").icons
+		local icons = require("cato.util").icons
 
 		conditions.buffer_not_empty = function()
 			return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
