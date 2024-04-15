@@ -2,10 +2,10 @@
 vim.g.mapleader = " "
 
 -- Core options
-require("andrewdcato.core.options")
+require("cato.core.options")
 
 -- Autocommands
-require("andrewdcato.core.autocommands")
+require("cato.core.autocommands")
 
 -- Lazy.nvim config
-require("andrewdcato.lazy")
+require("cato.lazy")
