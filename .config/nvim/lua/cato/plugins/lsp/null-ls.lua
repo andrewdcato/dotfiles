@@ -32,15 +32,25 @@ return {
 						"yaml",
 					},
 				}),
-				formatting.eslint_d.with({
+				formatting.eslint.with({
 					filetypes = {
 						"javascript",
 					},
 				}),
+				-- formatting.eslint_d.with({
+				-- 	filetypes = {
+				-- 		"javascript",
+				-- 	},
+				-- }),
 				formatting.stylua,
 				formatting.prismaFmt,
 				formatting.terraform_fmt,
-				diagnostics.eslint_d.with({
+				-- diagnostics.eslint_d.with({
+				-- 	condition = function(utils)
+				-- 		return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs" })
+				-- 	end,
+				-- }),
+				diagnostics.eslint.with({
 					condition = function(utils)
 						return utils.root_has_file({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs" })
 					end,

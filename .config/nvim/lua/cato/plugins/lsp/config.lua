@@ -51,7 +51,7 @@ return {
 			})
 
 			mason_null_ls.setup({
-				ensure_installed = { "eslint_d", "prettier", "stylua" },
+				ensure_installed = { "eslint", "eslint_d", "prettier", "stylua" },
 				automatic_installation = true,
 			})
 		end,
