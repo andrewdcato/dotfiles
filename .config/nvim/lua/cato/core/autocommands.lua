@@ -48,9 +48,3 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 	pattern = "**/*.postcss",
 	command = "set filetype=css",
 })
-
--- Autoopen Neotest sidebar when opening a test file
-vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
-	pattern = "**/*.test.ts",
-	command = "lua require('neotest').summary.open()",
-})
