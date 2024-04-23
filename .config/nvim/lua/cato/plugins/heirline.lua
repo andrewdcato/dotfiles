@@ -14,7 +14,7 @@ return {
 		end
 
 		conditions.hide_in_width = function(size)
-			return vim.api.nvim_get_option("columns") > (size or 140)
+			return vim.api.nvim_get_option("columns") > (size or 120)
 		end
 
 		local Align = { provider = "%=", hl = { bg = colors.mantle } }
@@ -304,8 +304,8 @@ return {
 				end,
 				name = "heirline_LSP",
 			},
-			{ provider = icons.separators.rounded_left, hl = { bg = colors.base, fg = colors.sapphire } },
-			{ provider = icons.lsp, hl = { bg = colors.sapphire, fg = colors.base } },
+			{ provider = icons.separators.rounded_left, hl = { bg = colors.base, fg = colors.mauve } },
+			{ provider = icons.lsp, hl = { bg = colors.mauve, fg = colors.base } },
 			{
 				provider = function()
 					local names = {}
@@ -325,45 +325,25 @@ return {
 			},
 		}
 
-		local FileFormat = {
-			provider = function()
-				local fmt = vim.bo.fileformat
-				if fmt == "unix" then
-					return " LF "
-				elseif fmt == "mac" then
-					return " CR "
-				else
-					return " CRLF "
-				end
-			end,
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.hide_in_width()
-			end,
-		}
-
-		local FileEncoding = {
-			provider = function()
-				local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc
-				return (" %s "):format(enc:upper())
-			end,
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.hide_in_width()
-			end,
-		}
-
-		local FileDetails = utils.insert(
-			{ provider = icons.separators.rounded_left, hl = { bg = colors.surface0, fg = colors.mauve } },
-			{ provider = icons.files.details, hl = { bg = colors.mauve, fg = colors.base } },
-			utils.insert(
-				{ hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false } },
-				FileFormat,
-				{ provider = icons.separators.dotted_vert },
-				FileEncoding
-			)
-		)
-
 		local Ruler = {
 			provider = " %7(%l/%3L%):%2c %P ",
+			condition = function()
+				return conditions.buffer_not_empty() and conditions.hide_in_width()
+			end,
+		} -- I take no credits for this! :lion:
+
+		local ScrollBar = {
+			static = {
+				sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" },
+				-- Another variant, because the more choice the better.
+				-- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+			},
+			provider = function(self)
+				local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+				local lines = vim.api.nvim_buf_line_count(0)
+				local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
+				return string.rep(self.sbar[i], 2)
+			end,
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
@@ -372,7 +352,8 @@ return {
 		local FilePosition = utils.insert(
 			{ provider = icons.separators.rounded_left, hl = { bg = colors.surface0, fg = colors.blue } },
 			{ provider = icons.files.ruler, hl = { bg = colors.blue, fg = colors.base } },
-			utils.insert({ hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false } }, Ruler)
+			utils.insert({ hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false } }, Ruler),
+			utils.insert({ hl = { bg = colors.surface0, fg = colors.blue, bold = true, italic = false } }, ScrollBar)
 		)
 
 		heirline.setup({
@@ -382,7 +363,6 @@ return {
 				Git,
 				Align,
 				LSPActive,
-				FileDetails,
 				FilePosition,
 			},
 		})
