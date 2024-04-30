@@ -12,7 +12,8 @@ return {
 			"theHamsta/nvim-dap-virtual-text",
 			{
 				"microsoft/vscode-js-debug",
-				build = "npm install --legacy-peer-deps && npm run compile",
+				-- HACK: checking out the package lock was added to get around errors when checking for updates
+				build = "npm install --legacy-peer-deps && npm run compile && git checkout package-lock.json",
 				tag = "v1.74.0", -- you *must* specify this tag; newer versions have breaking bugs
 			},
 		},
