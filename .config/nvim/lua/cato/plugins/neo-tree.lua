@@ -23,9 +23,6 @@ return {
 			enable_modified_markers = true,
 			enable_diagnostics = true,
 			default_component_configs = {
-				indent = {
-					-- with_markers = true,
-				},
 				modified = {
 					symbol = " ",
 					highlight = "NeoTreeModified",
@@ -54,9 +51,9 @@ return {
 			},
 			sort_case_insensitive = true,
 			filtered_items = {
-				visible = false,
+				visible = true,
 				hide_dotfiles = false,
-				hide_gitignored = false,
+				hide_gitignored = true,
 				always_show = {
 					".gitignore",
 					".env",
@@ -73,6 +70,22 @@ return {
 				mappings = {
 					["<C-x>"] = "open_split",
 					["<C-v>"] = "open_vsplit",
+				},
+			},
+			filesystem = {
+				filtered_items = {
+					visible = true,
+					hide_dotfiles = false,
+					hide_gitignored = true,
+					always_show = {
+						".gitignore",
+						".env",
+					},
+					never_show = {
+						".git",
+						".DS_store",
+						"thumbs.db",
+					},
 				},
 			},
 			event_handlers = {
