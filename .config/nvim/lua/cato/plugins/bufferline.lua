@@ -2,6 +2,7 @@ return {
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = { "catppuccin/nvim" },
+		enabled = false,
 		config = function()
 			require("bufferline").setup({
 				highlights = require("catppuccin.groups.integrations.bufferline").get(),
