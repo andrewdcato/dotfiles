@@ -1,13 +1,13 @@
 -- Blatantly borrowed from github.com/thanhvule0310 - mostly like the aesthetic / info shown in his dots but need to tweak further...
 return {
 	"rebelot/heirline.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", "neovim/nvim-lspconfig" },
-	config = function()
-		local heirline = require("heirline")
-		local conditions = require("heirline.conditions")
-		local utils = require("heirline.utils")
+	dependencies = { "nvim-tree/nvim-web-devicons", "neovim/nvim-lspconfig", "Zeioth/heirline-components.nvim" },
+	opts = function()
 		local colors = require("catppuccin.palettes").get_palette()
+		local conditions = require("heirline.conditions")
 		local icons = require("cato.util").icons
+		local lib = require("heirline-components.all")
+		local utils = require("heirline.utils")
 
 		conditions.buffer_not_empty = function()
 			return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -174,7 +174,7 @@ return {
 				condition = function()
 					return not vim.bo.modifiable or vim.bo.readonly
 				end,
-				provider = "",
+				provider = "  ",
 				hl = { fg = colors.red },
 			},
 		}
@@ -304,8 +304,13 @@ return {
 				end,
 				name = "heirline_LSP",
 			},
-			{ provider = icons.separators.rounded_left, hl = { bg = colors.base, fg = colors.mauve } },
-			{ provider = icons.lsp, hl = { bg = colors.mauve, fg = colors.base } },
+			{
+				condition = function()
+					return conditions.hide_in_width() and conditions.lsp_attached()
+				end,
+				provider = icons.separators.vert_thick,
+				hl = { fg = colors.mauve, bg = colors.surface0 },
+			},
 			{
 				provider = function()
 					local names = {}
@@ -319,18 +324,18 @@ return {
 						return ""
 					end
 
-					return (" [%s] "):format((table.concat(names, " / ")))
+					return (" " .. icons.lsp .. " [%s] "):format((table.concat(names, " / ")))
 				end,
-				hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false },
+				hl = { bg = colors.base, fg = colors.mauve, bold = true, italic = false },
 			},
 		}
 
 		local Ruler = {
-			provider = " %7(%l/%3L%):%2c %P ",
+			provider = " %7(%l/%3L%):%2c ",
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
-		} -- I take no credits for this! :lion:
+		}
 
 		local ScrollBar = {
 			static = {
@@ -350,13 +355,35 @@ return {
 		}
 
 		local FilePosition = utils.insert(
-			{ provider = icons.separators.rounded_left, hl = { bg = colors.surface0, fg = colors.blue } },
-			{ provider = icons.files.ruler, hl = { bg = colors.blue, fg = colors.base } },
-			utils.insert({ hl = { bg = colors.surface0, fg = colors.subtext1, bold = true, italic = false } }, Ruler),
-			utils.insert({ hl = { bg = colors.surface0, fg = colors.blue, bold = true, italic = false } }, ScrollBar)
+			{
+				condition = function()
+					return conditions.hide_in_width() and conditions.lsp_attached()
+				end,
+				provider = icons.separators.vert_thick,
+				hl = { bg = colors.base, fg = colors.blue },
+			},
+			{
+				condition = function()
+					return conditions.hide_in_width() and conditions.lsp_attached()
+				end,
+				provider = " " .. icons.files.ruler,
+				hl = { bg = colors.base, fg = colors.blue },
+			},
+			utils.insert({ hl = { bg = colors.base, fg = colors.blue, bold = true, italic = false } }, Ruler),
+			utils.insert({ hl = { bg = colors.base, fg = colors.blue, bold = true, italic = false } }, ScrollBar)
 		)
 
-		heirline.setup({
+		return {
+			opts = {
+				disable_winbar_cb = function(args) -- We do this to avoid showing it on the greeter.
+					local is_disabled = not require("heirline-components.buffer").is_valid(args.buf)
+						or lib.condition.buffer_matches({
+							buftype = { "terminal", "prompt", "nofile", "help", "quickfix" },
+							filetype = { "NvimTree", "neo%-tree", "alpha", "Outline", "aerial" },
+						}, args.buf)
+					return is_disabled
+				end,
+			},
 			statusline = {
 				ViMode,
 				FileNameBlock,
@@ -365,6 +392,51 @@ return {
 				LSPActive,
 				FilePosition,
 			},
-		})
+			tabline = { -- UI upper bar
+				lib.component.tabline_conditional_padding(),
+				lib.component.tabline_buffers(),
+				lib.component.fill({ hl = { bg = colors.mantle } }),
+				lib.component.tabline_tabpages(),
+			},
+			winbar = { -- UI breadcrumbs bar
+				init = function(self)
+					self.bufnr = vim.api.nvim_get_current_buf()
+				end,
+				fallthrough = false,
+				-- Winbar for terminal, neotree, and aerial.
+				{
+					condition = function()
+						return not lib.condition.is_active()
+					end,
+					{
+						lib.component.neotree(),
+						lib.component.compiler_play(),
+						lib.component.fill(),
+						lib.component.compiler_build_type(),
+						lib.component.compiler_redo(),
+						lib.component.aerial(),
+					},
+				},
+				-- Regular winbar
+				{
+					lib.component.neotree(),
+					lib.component.compiler_play(),
+					lib.component.fill(),
+					lib.component.breadcrumbs(),
+					lib.component.fill(),
+					lib.component.compiler_redo(),
+					lib.component.aerial(),
+				},
+			},
+		}
+	end,
+	config = function(_, opts)
+		local heirline = require("heirline")
+		local heirline_components = require("heirline-components.all")
+
+		-- Setup
+		heirline_components.init.subscribe_to_events()
+		heirline.load_colors(heirline_components.hl.get_colors())
+		heirline.setup(opts)
 	end,
 }
