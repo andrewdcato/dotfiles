@@ -1,22 +1,35 @@
 local icons = require("cato.util").icons
 
 local servers = {
-	"ansiblels",
-	"cssls",
-	"cssmodules_ls",
-	"dockerls",
-	"html",
-	"jsonls",
-	"lua_ls",
-	"prismals",
-	"rust_analyzer",
-	"svelte",
-	"tailwindcss",
-	"terraformls",
-	"tflint",
-	"tsserver",
-	"yamlls",
-	"sqlls",
+	mason = {
+		"ansiblels",
+		"cssls",
+		"cssmodules_ls",
+		"dockerls",
+		"eslint",
+		"html",
+		"jsonls",
+		"lua_ls",
+		"prismals",
+		"rust_analyzer",
+		"svelte",
+		"tailwindcss",
+		"terraformls",
+		"tflint",
+		"tsserver",
+		"yamlls",
+		"sqlls",
+	},
+	tools = {
+		"eslint",
+		"eslint_d",
+		"prettier",
+		"prettierd",
+		"stylua",
+		"ansible-lint",
+		"tflint",
+		"yamllint",
+	},
 }
 
 return {
@@ -24,13 +37,13 @@ return {
 		"williamboman/mason.nvim",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
-			"jayp0521/mason-null-ls.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "RubixDev/mason-update-all", config = true },
 		},
 		config = function()
 			local mason = require("mason")
 			local mason_lspconfig = require("mason-lspconfig")
-			local mason_null_ls = require("mason-null-ls")
+			local mason_tool_installer = require("mason-tool-installer")
 
 			mason.setup({
 				ui = {
@@ -46,13 +59,12 @@ return {
 			})
 
 			mason_lspconfig.setup({
-				ensure_installed = servers,
+				ensure_installed = servers.mason,
 				automatic_installation = true,
 			})
 
-			mason_null_ls.setup({
-				ensure_installed = { "eslint", "eslint_d", "prettier", "stylua" },
-				automatic_installation = true,
+			mason_tool_installer.setup({
+				ensure_installed = servers.tools,
 			})
 		end,
 	},
@@ -171,9 +183,10 @@ return {
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
 			capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
-			-- Loop through configuration files for LSP servers and configure them
+			-- Loop through configuration files for servers and configure them
+			-- NOTE: file names need to mirror mason-lspconfigs names
 			local serverOpts = {}
-			for _, server in pairs(servers) do
+			for _, server in pairs(servers.mason) do
 				serverOpts = {
 					on_attach = on_attach,
 					capabilities = capabilities,
