@@ -17,7 +17,7 @@ $CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
 
 # Setting up the general bar appearance of the bar
 bar=(
-  background.blur_radius=20
+  background.blur_radius=90
   background.corner_radius=9
   border_color=$BAR_BORDER_COLOR
   border_width=2
