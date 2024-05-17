@@ -28,10 +28,11 @@ export SEL0=0xff3e4a5b #Popupbg,visualselectionbg
 export SEL1=0xff4f6074 #Popupselbg,searchbg
 
 # General bar colors
-export BAR_COLOR=0xE62e3440 # BASE w/50% opacity
+# export BAR_COLOR=0xE6232831 # BG0 w/90% opacity
+export BAR_COLOR=0xE63904f # BG2 w/90% opacity
 export BAR_BORDER_COLOR=$BG2
-export BACKGROUND_1=0x66232821 # CRUST w/40% opacity
-export BACKGROUND_2=0x80181926
+export BACKGROUND_1=0xE6444c5e # BG3 w/90% opacity
+export BACKGROUND_2=0xE65a657d # BG3 w/90% opacity
 export ICON_COLOR=$FG2 # Color of all icons
 export LABEL_COLOR=$FG2 # Color of all labels
 export POPUP_BACKGROUND_COLOR=0xE63e4a5b
