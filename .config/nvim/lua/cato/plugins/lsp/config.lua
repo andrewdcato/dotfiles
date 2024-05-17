@@ -10,7 +10,6 @@ local servers = {
 		"html",
 		"jsonls",
 		"lua_ls",
-		"prismals",
 		"rust_analyzer",
 		"svelte",
 		"tailwindcss",
@@ -113,9 +112,17 @@ return {
 
 			vim.diagnostic.config(diagnostic_config)
 
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-				border = "rounded",
-			})
+			local handlers = {
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+					border = "rounded",
+				}),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+					border = "rounded",
+				}),
+			}
+			-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			-- 	border = "rounded",
+			-- })
 
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 				border = "rounded",
@@ -151,14 +158,17 @@ return {
 				opts.desc = "Go to next diagnostic"
 				km.set("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
 
-				opts.desc = "Go to previousdiagnostic"
+				opts.desc = "Go to previous diagnostic"
 				km.set("n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_previous({buffer=0})<cr>", opts)
 
 				opts.desc = "Show LSP Info"
-				km.set("n", "<leader>li", "<cmd>LspInfo<cr>", opts)
+				km.set("n", "<leader>lI", "<cmd>LspInfo<cr>", opts)
 
 				opts.desc = "Show hover docs"
 				km.set("n", "K", "<cmd>vim.lsp.buf.hover<cr>", opts)
+
+				opts.desc = "Restart LSP"
+				km.set("n", "<leader>rs", "<cmd>LspRestart<cr>", opts) -- mapping to restart lsp if necessary
 
 				if client.name == "tsserver" then
 					client.server_capabilities.documentFormattingProvider = false
@@ -190,6 +200,7 @@ return {
 				serverOpts = {
 					on_attach = on_attach,
 					capabilities = capabilities,
+					handlers = handlers,
 				}
 
 				server = vim.split(server, "@")[1]
