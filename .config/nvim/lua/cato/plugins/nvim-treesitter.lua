@@ -6,17 +6,18 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-tree-docs",
 			"nvim-treesitter/nvim-treesitter-textobjects",
+			"JoosepAlviste/nvim-ts-context-commentstring",
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
 			local treesitter = require("nvim-treesitter.configs")
 
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
+			})
+
 			treesitter.setup({
 				auto_install = true,
-				context_commentstring = {
-					enable = true,
-					enable_autocmd = false,
-				},
 				ensure_installed = {
 					"bash",
 					"css",

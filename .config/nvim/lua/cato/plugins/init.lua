@@ -20,7 +20,11 @@ return {
 	},
 
 	-- Quickly comment things out
-	{ "numToStr/Comment.nvim", config = true },
+	{
+		"numToStr/Comment.nvim",
+		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+		config = true,
+	},
 
 	-- Additional language modes
 	"digitaltoad/vim-pug",
