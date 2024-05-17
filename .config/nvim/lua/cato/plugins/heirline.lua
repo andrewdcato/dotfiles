@@ -3,7 +3,7 @@ return {
 	"rebelot/heirline.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons", "neovim/nvim-lspconfig", "Zeioth/heirline-components.nvim" },
 	opts = function()
-		local colors = require("catppuccin.palettes").get_palette()
+		local palette = require("nightfox.palette").load("nordfox")
 		local conditions = require("heirline.conditions")
 		local icons = require("cato.util").icons
 		local lib = require("heirline-components.all")
@@ -17,7 +17,7 @@ return {
 			return vim.api.nvim_get_option("columns") > (size or 120)
 		end
 
-		local Align = { provider = "%=", hl = { bg = colors.mantle } }
+		local Align = { provider = "%=", hl = { bg = palette.bg0 } }
 		local Space = { provider = " " }
 
 		local ViMode = {
@@ -71,40 +71,40 @@ return {
 					["vs"] = "VISUAL",
 				},
 				mode_colors = {
-					[""] = colors.yellow,
-					[""] = colors.yellow,
-					["s"] = colors.yellow,
-					["!"] = colors.maroon,
-					["R"] = colors.flamingo,
-					["Rc"] = colors.flamingo,
-					["Rv"] = colors.rosewater,
-					["Rx"] = colors.flamingo,
-					["S"] = colors.teal,
-					["V"] = colors.lavender,
-					["Vs"] = colors.lavender,
-					["c"] = colors.peach,
-					["ce"] = colors.peach,
-					["cv"] = colors.peach,
-					["i"] = colors.green,
-					["ic"] = colors.green,
-					["ix"] = colors.green,
-					["n"] = colors.blue,
-					["niI"] = colors.blue,
-					["niR"] = colors.blue,
-					["niV"] = colors.blue,
-					["no"] = colors.pink,
-					["no"] = colors.pink,
-					["noV"] = colors.pink,
-					["nov"] = colors.pink,
-					["nt"] = colors.red,
-					["null"] = colors.pink,
-					["r"] = colors.teal,
-					["r?"] = colors.maroon,
-					["rm"] = colors.sky,
-					["s"] = colors.teal,
-					["t"] = colors.red,
-					["v"] = colors.mauve,
-					["vs"] = colors.mauve,
+					[""] = palette.yellow.base,
+					[""] = palette.yellow.base,
+					["s"] = palette.yellow.base,
+					["!"] = palette.red.dim,
+					["R"] = palette.pink.base,
+					["Rc"] = palette.pink.base,
+					["Rv"] = palette.pink.bright,
+					["Rx"] = palette.pink.base,
+					["S"] = palette.cyan.dim,
+					["V"] = palette.magenta.base,
+					["Vs"] = palette.magenta.base,
+					["c"] = palette.orange.base,
+					["ce"] = palette.orange.base,
+					["cv"] = palette.orange.base,
+					["i"] = palette.green.base,
+					["ic"] = palette.green.base,
+					["ix"] = palette.green.base,
+					["n"] = palette.blue.base,
+					["niI"] = palette.blue.base,
+					["niR"] = palette.blue.base,
+					["niV"] = palette.blue.base,
+					["no"] = palette.magenta.bright,
+					["no"] = palette.magenta.bright,
+					["noV"] = palette.magenta.bright,
+					["nov"] = palette.magenta.bright,
+					["nt"] = palette.red.base,
+					["null"] = palette.magenta.bright,
+					["r"] = palette.cyan.dim,
+					["r?"] = palette.red.dim,
+					["rm"] = palette.cyan.base,
+					["s"] = palette.cyan.dim,
+					["t"] = palette.red.base,
+					["v"] = palette.magenta.dim,
+					["vs"] = palette.magenta.dim,
 				},
 			},
 			provider = function(self)
@@ -117,7 +117,7 @@ return {
 			end,
 			hl = function(self)
 				local mode = self.mode:sub(1, 1)
-				return { bg = self.mode_colors[mode], fg = colors.base, bold = true }
+				return { bg = self.mode_colors[mode], fg = palette.bg1, bold = true }
 			end,
 			update = { "ModeChanged" },
 		}
@@ -127,7 +127,7 @@ return {
 				self.filename = vim.api.nvim_buf_get_name(0)
 			end,
 			condition = conditions.buffer_not_empty,
-			hl = { bg = colors.base, fg = colors.subtext1 },
+			hl = { bg = palette.bg1, fg = palette.fg2 },
 		}
 
 		local FileIcon = {
@@ -159,7 +159,7 @@ return {
 				end
 				return filename
 			end,
-			hl = { fg = colors.subtext1, bold = true },
+			hl = { fg = palette.fg2, bold = true },
 		}
 
 		local FileFlags = {
@@ -168,21 +168,21 @@ return {
 					return vim.bo.modified
 				end,
 				provider = " ● ",
-				hl = { fg = colors.lavender },
+				hl = { fg = palette.magenta.base },
 			},
 			{
 				condition = function()
 					return not vim.bo.modifiable or vim.bo.readonly
 				end,
 				provider = "  ",
-				hl = { fg = colors.red },
+				hl = { fg = palette.red.base },
 			},
 		}
 
 		local FileNameModifer = {
 			hl = function()
 				if vim.bo.modified then
-					return { fg = colors.text, bold = true, force = true }
+					return { fg = palette.fg1, bold = true, force = true }
 				end
 			end,
 		}
@@ -208,25 +208,25 @@ return {
 				provider = function(self)
 					return self.errors > 0 and ("%s%s "):format(self.error_icon, self.errors)
 				end,
-				hl = { fg = colors.red },
+				hl = { fg = palette.red.base },
 			},
 			{
 				provider = function(self)
 					return self.warnings > 0 and ("%s%s "):format(self.warn_icon, self.warnings)
 				end,
-				hl = { fg = colors.yellow },
+				hl = { fg = palette.yellow.base },
 			},
 			{
 				provider = function(self)
 					return self.info > 0 and ("%s%s "):format(self.info_icon, self.info)
 				end,
-				hl = { fg = colors.sapphire },
+				hl = { fg = palette.blue.bright },
 			},
 			{
 				provider = function(self)
 					return self.hints > 0 and ("%s%s "):format(self.hint_icon, self.hints)
 				end,
-				hl = { fg = colors.sky },
+				hl = { fg = palette.cyan.base },
 			},
 		}
 
@@ -239,7 +239,7 @@ return {
 			utils.insert(Space, Diagnostics),
 			{
 				provider = icons.separators.inverted_slant_right,
-				hl = { bg = colors.mantle, fg = colors.base },
+				hl = { bg = palette.bg0, fg = palette.bg1 },
 			}
 		)
 
@@ -259,7 +259,7 @@ return {
 				modified_icon = icons.git.modified,
 				removed_icon = icons.git.removed,
 			},
-			hl = { bg = colors.mantle, fg = colors.mauve },
+			hl = { bg = palette.bg0, fg = palette.magenta.base },
 			Space,
 			{
 				provider = function(self)
@@ -272,21 +272,21 @@ return {
 					local count = self.status_dict.added or 0
 					return count > 0 and (" %s %s"):format(self.added_icon, count)
 				end,
-				hl = { fg = colors.green },
+				hl = { fg = palette.green.base },
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.removed or 0
 					return count > 0 and (" %s %s"):format(self.removed_icon, count)
 				end,
-				hl = { fg = colors.red },
+				hl = { fg = palette.red.base },
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.changed or 0
 					return count > 0 and (" %s %s"):format(self.modified_icon, count)
 				end,
-				hl = { fg = colors.peach },
+				hl = { fg = palette.orange.base },
 			},
 			Space,
 		}
@@ -309,7 +309,7 @@ return {
 					return conditions.hide_in_width() and conditions.lsp_attached()
 				end,
 				provider = icons.separators.vert_thick,
-				hl = { fg = colors.mauve, bg = colors.surface0 },
+				hl = { fg = palette.magenta.base, bg = palette.bg1 },
 			},
 			{
 				provider = function()
@@ -326,7 +326,7 @@ return {
 
 					return (" " .. icons.lsp .. " [%s] "):format((table.concat(names, " / ")))
 				end,
-				hl = { bg = colors.base, fg = colors.mauve, bold = true, italic = false },
+				hl = { bg = palette.bg1, fg = palette.magenta.base, bold = true, italic = false },
 			},
 		}
 
@@ -360,17 +360,17 @@ return {
 					return conditions.hide_in_width() and conditions.lsp_attached()
 				end,
 				provider = icons.separators.vert_thick,
-				hl = { bg = colors.base, fg = colors.blue },
+				hl = { bg = palette.bg1, fg = palette.blue.base },
 			},
 			{
 				condition = function()
 					return conditions.hide_in_width() and conditions.lsp_attached()
 				end,
 				provider = " " .. icons.files.ruler,
-				hl = { bg = colors.base, fg = colors.blue },
+				hl = { bg = palette.bg1, fg = palette.blue.base },
 			},
-			utils.insert({ hl = { bg = colors.base, fg = colors.blue, bold = true, italic = false } }, Ruler),
-			utils.insert({ hl = { bg = colors.base, fg = colors.blue, bold = true, italic = false } }, ScrollBar)
+			utils.insert({ hl = { bg = palette.bg1, fg = palette.blue.base, bold = true, italic = false } }, Ruler),
+			utils.insert({ hl = { bg = palette.bg1, fg = palette.blue.base, bold = true, italic = false } }, ScrollBar)
 		)
 
 		return {
@@ -395,7 +395,7 @@ return {
 			tabline = { -- UI upper bar
 				lib.component.tabline_conditional_padding(),
 				lib.component.tabline_buffers(),
-				lib.component.fill({ hl = { bg = colors.mantle } }),
+				lib.component.fill({ hl = { bg = palette.bg0 } }),
 				lib.component.tabline_tabpages(),
 			},
 			winbar = { -- UI breadcrumbs bar
