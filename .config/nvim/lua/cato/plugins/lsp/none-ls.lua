@@ -29,7 +29,7 @@ local ft = {
 
 return {
 	"nvimtools/none-ls.nvim",
-	dependencies = { "nvim-lua/plenary.nvim", "nvimtools/none-ls-extras.nvim" },
+	dependencies = { "nvim-lua/plenary.nvim", "j-hui/fidget.nvim", "nvimtools/none-ls-extras.nvim" },
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		local null_ls = require("null-ls")
@@ -56,7 +56,6 @@ return {
 				-- formatting.prettier.with({ filetypes = ft.prettier }),
 				formatting.prettierd.with({ filetypes = ft.prettier }),
 				formatting.stylua,
-				formatting.prismaFmt,
 				formatting.terraform_fmt,
 			},
 			on_attach = function(client, bufnr)
