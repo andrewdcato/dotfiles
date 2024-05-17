@@ -1,113 +1,75 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Set colorscheme
-palette = "catppuccin_macchiato"
+# Don't print a new line at the start of the prompt
+add_newline = true 
 
-# Inserts a blank line between shell prompts
-add_newline = true
-
+# Define order to make prompt on one line
+# https://starship.rs/config/#default-prompt-order
 format = """
-$os\
 $sudo\
 $username\
 $hostname\
-$localip\
 $directory\
-$vcsh\
-${custom.giturl}\
+$package\
+$nodejs\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
 $docker_context\
-$package\
-$golang\
-$lua\
-$nodejs\
-$python\
-$rust\
-$terraform\
-$nix_shell\
-$aws\
-$direnv\
 $cmd_duration\
 $line_break\
 $jobs\
-$battery\
-$time\
 $status\
-$container\
-$shell\
-$character"""
+$character\
+"""
 
-[aws]
-disabled = true
+# Change timeout of scanning files to 10 mili secs
+scan_timeout = 10
 
 [character]
-success_symbol = "[➜](green)"
-error_symbol = "[➜](red)"
-vicmd_symbol = "[](green)"
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+vicmd_symbol = "[V](bold blue)"
 
 [directory]
-truncation_length = 4
-style = "bold teal"
+truncation_length = 3
+truncate_to_repo = true
+style = "bold italic cyan"
+
+[package]
+format = 'at [$symbol$version](208 bold) '
+symbol = '󰏗 '
+display_private = true
+
+[nodejs]
+format = 'via [$symbol$version]($style) '
+symbol = "󰎙 "
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_state]
+format = "[\\($state($progress_current of $progress_total)\\)]($style)"
+cherry_pick = "[ PICKING](bold red)"
+
+[git_status]
+format = '([\[$ahead_behind\]]($style) )'
+style = "bold blue"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+
+[docker_context]
+format = "in [$symbol$context]($style) "
+symbol = " "
 
 [terraform]
 format = 'via [$symbol$version]($style) '
 symbol = '󱁢 ' 
 detect_files = ['.tflint.hcl','.terraform-version'] 
 
-[package]
-format = 'via [🎁 $version](208 bold) '
-
-[custom.giturl]
-# disabled = true
-description = "Display symbol for remote Git server"
-command = """
-GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
-if [[ "$GIT_REMOTE" =~ "github" ]]; then
-    GIT_REMOTE_SYMBOL=" "
-elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
-    GIT_REMOTE_SYMBOL=" "
-elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
-    GIT_REMOTE_SYMBOL=" "
-elif [[ "$GIT_REMOTE" =~ "git" ]]; then
-    GIT_REMOTE_SYMBOL=" "
-else
-    GIT_REMOTE_SYMBOL=" "
-fi
-echo "$GIT_REMOTE_SYMBOL "
-"""
-when = 'git rev-parse --is-inside-work-tree 2> /dev/null'
-format = "at $output  "
-
-# palette tables should be last in the config ⚓️
-[palettes.catppuccin_macchiato]
-rosewater = "#f4dbd6"
-flamingo = "#f0c6c6"
-pink = "#f5bde6"
-mauve = "#c6a0f6"
-red = "#ed8796"
-maroon = "#ee99a0"
-peach = "#f5a97f"
-yellow = "#eed49f"
-green = "#a6da95"
-teal = "#8bd5ca"
-sky = "#91d7e3"
-sapphire = "#7dc4e4"
-blue = "#8aadf4"
-lavender = "#b7bdf8"
-text = "#cad3f5"
-subtext1 = "#b8c0e0"
-subtext0 = "#a5adcb"
-overlay2 = "#939ab7"
-overlay1 = "#8087a2"
-overlay0 = "#6e738d"
-surface2 = "#5b6078"
-surface1 = "#494d64"
-surface0 = "#363a4f"
-base = "#24273a"
-mantle = "#1e2030"
-crust = "#181926"
+[cmd_duration]
+style = 'bold italic yellow'
