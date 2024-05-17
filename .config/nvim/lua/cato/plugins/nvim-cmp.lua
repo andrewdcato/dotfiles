@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
+	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" }, -- snippet engine
 		"hrsh7th/cmp-buffer", -- source for text in buffer
@@ -125,29 +125,22 @@ return {
 			},
 		})
 
-		-- Autocomplete from current buffer when searching
-		cmp.setup.cmdline({ "/", "?" }, {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = "buffer" },
-			},
-		})
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-		-- Autocomplete in command line
-		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
+		-- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline({ "/", "?" }, {
 			sources = cmp.config.sources({
-				{ name = "path" },
-			}, {
-				{
-					name = "cmdline",
-					option = {
-						ignore_cmds = { "Man", "!" },
-					},
-				},
+				{ name = "buffer" },
 			}),
 		})
 
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline(":", {
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{ name = "cmdline" },
+			}),
+		})
 	end,
 }
