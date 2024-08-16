@@ -357,14 +357,14 @@ return {
 		local FilePosition = utils.insert(
 			{
 				condition = function()
-					return conditions.hide_in_width() and conditions.lsp_attached()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
 				end,
 				provider = icons.separators.vert_thick,
 				hl = { bg = palette.bg1, fg = palette.blue.base },
 			},
 			{
 				condition = function()
-					return conditions.hide_in_width() and conditions.lsp_attached()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
 				end,
 				provider = " " .. icons.files.ruler,
 				hl = { bg = palette.bg1, fg = palette.blue.base },

@@ -11,18 +11,20 @@ return {
 				})
 			end,
 		},
-		"nvim-treesitter/nvim-treesitter/",
 	},
 	config = function()
 		require("noice").setup({
 			views = {
+				cmdline = {
+					view = "cmdline",
+				},
 				cmdline_popup = {
 					position = {
 						row = "40%",
 						col = "50%",
 					},
 					size = {
-						width = "55%",
+						width = "50%",
 						col = "auto",
 					},
 					border = {
@@ -31,6 +33,9 @@ return {
 				},
 			},
 			lsp = {
+				progress = {
+					enabled = false,
+				},
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,

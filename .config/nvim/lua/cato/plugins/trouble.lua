@@ -8,7 +8,11 @@ return {
 			"<cmd>TroubleToggle workspace_diagnostics<cr>",
 			desc = "Trouble: Toggle Workspace Diagnostics",
 		},
-		{ "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Trouble: Toggle Document Diagnostics" },
+		{
+			"<leader>xd",
+			"<cmd>Trouble diagnostics toggle focus=false filter.buf=0<cr>",
+			desc = "Trouble: Toggle Document Diagnostics",
+		},
 		{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Trouble: Toggle Quickfix List" },
 		{ "<leader>xl", "<cmd>TroubleToggle lsp_references<cr>", desc = "Trouble: Toggle LSP References" },
 		{ "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Trouble: Toggle LocList" },

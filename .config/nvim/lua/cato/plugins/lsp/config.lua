@@ -34,6 +34,7 @@ local servers = {
 return {
 	{
 		"williamboman/mason.nvim",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -120,9 +121,6 @@ return {
 					border = "rounded",
 				}),
 			}
-			-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			-- 	border = "rounded",
-			-- })
 
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 				border = "rounded",
@@ -135,25 +133,25 @@ return {
 				opts.buffer = bufnr
 
 				opts.desc = "Show LSP code actions"
-				km.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
+				km.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
 
 				opts.desc = "Go to definition"
-				km.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
+				km.set("n", "<leader>ld", vim.lsp.buf.definition, opts)
 
 				opts.desc = "Go to declaration"
-				km.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
+				km.set("n", "<leader>lD", vim.lsp.buf.declaration, opts)
 
 				opts.desc = "Go to implementation"
-				km.set("n", "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
+				km.set("n", "<leader>li", vim.lsp.buf.implementation, opts)
 
 				opts.desc = "Show references"
-				km.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+				km.set("n", "<leader>lr", vim.lsp.buf.references, opts)
 
 				opts.desc = "Rename"
-				km.set("n", "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
+				km.set("n", "<leader>lR", vim.lsp.buf.rename, opts)
 
 				opts.desc = "Show signature help"
-				km.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
+				km.set("n", "<leader>ls", vim.lsp.buf.signature_help, opts)
 
 				opts.desc = "Go to next diagnostic"
 				km.set("n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
@@ -165,7 +163,7 @@ return {
 				km.set("n", "<leader>lI", "<cmd>LspInfo<cr>", opts)
 
 				opts.desc = "Show hover docs"
-				km.set("n", "K", "<cmd>vim.lsp.buf.hover<cr>", opts)
+				km.set("n", "K", vim.lsp.buf.hover, opts)
 
 				opts.desc = "Restart LSP"
 				km.set("n", "<leader>rs", "<cmd>LspRestart<cr>", opts) -- mapping to restart lsp if necessary
@@ -180,6 +178,13 @@ return {
 
 				if client.name == "yamlls" then
 					client.server_capabilities.documentFormattingProvider = true
+				end
+
+				if client.name == "eslint" then
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = "EslintFixAll",
+					})
 				end
 
 				-- Attach nvim-navic to buffer's LSP instance

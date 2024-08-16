@@ -70,6 +70,24 @@ return {
 
 		vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
+		-- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline({ "/", "?" }, {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "buffer" },
+			}),
+		})
+
+		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+		cmp.setup.cmdline(":", {
+			mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{ name = "cmdline" },
+			}),
+		})
+
 		cmp.setup({
 			snippet = {
 				expand = function(args)
@@ -126,21 +144,5 @@ return {
 		})
 
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-
-		-- -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-		cmp.setup.cmdline({ "/", "?" }, {
-			sources = cmp.config.sources({
-				{ name = "buffer" },
-			}),
-		})
-
-		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-		cmp.setup.cmdline(":", {
-			sources = cmp.config.sources({
-				{ name = "path" },
-			}, {
-				{ name = "cmdline" },
-			}),
-		})
 	end,
 }

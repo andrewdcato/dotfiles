@@ -45,16 +45,12 @@ return {
 			root_dir = null_ls_utils.root_pattern(".git", "package.json"),
 			sources = {
 				diagnostics.ansiblelint,
-
-				-- require("none-ls.diagnostics.eslint").with({
-				-- 	filetypes = ft.eslint,
-				-- 	condition = function(utils)
-				-- 		return utils.root_has_file({ ".eslintrc", "eslint.config.js" })
-				-- 	end,
-				-- }),
-
-				-- formatting.prettier.with({ filetypes = ft.prettier }),
-				formatting.prettierd.with({ filetypes = ft.prettier }),
+				formatting.prettierd.with({
+					filetypes = ft.prettier,
+					condition = function(utils)
+						return utils.root_has_file({ ".prettierrc", "prettier.config.js", ".prettierignore" })
+					end,
+				}),
 				formatting.stylua,
 				formatting.terraform_fmt,
 			},

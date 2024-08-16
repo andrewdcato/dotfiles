@@ -6,7 +6,6 @@ return {
 		"typescript",
 		"typescript.tsx",
 		"typescriptreact",
-		-- "svelte",
 	},
 	settings = {
 		completions = {
