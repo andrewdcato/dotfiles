@@ -26,16 +26,11 @@ export PATH="${PATH}:${HOME}/.local/bin/"
 export PATH="$XDG_CONFIG_HOME/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 
 # Set theme for FZF
-# export FZF_DEFAULT_OPTS=" \
-# --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-# --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-# --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
-
 export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS" \
---color=fg:#e5e9f0,bg:#3b4252,hl:#81a1c1 \
---color=fg+:#e5e9f0,bg+:#3b4252,hl+:#81a1c1 \
+--color=fg:#cdcecf,bg:#3e4a5b,hl:#81a1c1 \
+--color=fg+:#c7cdd9,bg+:#4f6074,hl+:#81a1c1 \
 --color=info:#eacb8a,prompt:#bf6069,pointer:#b48dac \
---color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b" \
+--color=marker:#a3be8b,spinner:#b48dac,header:#a3be8b" 
 
 # OMZ customization
 DISABLE_AUTO_TITLE="false"

@@ -20,12 +20,12 @@ do
     padding_right=2
     label.padding_right=20
     icon.highlight_color=$RED
-    label.color=$COMMENT
-    label.highlight_color=$BLUE
+    label.color=$FG2
+    label.highlight_color=$CYAN
     label.font="sketchybar-app-font:Regular:16.0"
     label.y_offset=-1
     background.color=$BACKGROUND_1
-    background.border_color=$COMMENT
+    background.border_color=$FG2
     script="$PLUGIN_DIR/space.sh"
   )
 

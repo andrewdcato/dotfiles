@@ -4,7 +4,7 @@ update() {
   source "$CONFIG_DIR/colors.sh"
   COLOR=$BACKGROUND_2
   if [ "$SELECTED" = "true" ]; then
-    COLOR=$OVERLAY2
+    COLOR=$CYAN
   fi
   sketchybar --set $NAME icon.highlight=$SELECTED \
                          label.highlight=$SELECTED \
