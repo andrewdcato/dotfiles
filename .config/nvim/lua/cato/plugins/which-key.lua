@@ -51,10 +51,10 @@ return {
 		})
 
 		wk.setup({
-			window = {
-				border = "single",
-				winblend = 0,
-				margin = { 0, 5, 3, 5 },
+			win = {
+				border = "double",
+				-- winblend = 50,
+				-- margin = { 0, 5, 3, 5 },
 				padding = { 1, 1, 1, 1 },
 			},
 			layout = {
