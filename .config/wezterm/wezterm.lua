@@ -1,13 +1,14 @@
 local wezterm = require("wezterm")
-local tab = require("tab")
 
 local config = {}
 
 config.term = "xterm-256color"
 config.color_scheme = "nordfox"
 config.enable_scroll_bar = false
+config.enable_tab_bar = false
 config.window_background_opacity = 0.85
 config.macos_window_background_blur = 25
+config.window_decorations = "RESIZE"
 config.window_padding = {
 	left = 5,
 	right = 0,
@@ -30,7 +31,5 @@ config.keys = {
 		action = wezterm.action.SendString("\x02\x54 \n"),
 	},
 }
-
-tab.setup(config)
 
 return config
