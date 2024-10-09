@@ -57,14 +57,11 @@ function nvims() {
 # Kill all docker containers with "none" tags
 alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
 
-# Link Ngrok executable
-alias ngrok="~/.dotfiles/ngrok/ngrok"
-
 # Ngrok shortcuts
-alias nlms='ngrok http -subdomain=sb1-lms 3000'
-alias nconnect='ngrok http -hostname=cato-con.ngrok.io 5000'
-alias nem='ngrok http -subdomain=sb1-ews 5500'
-alias nams='ngrok http -subdomain=sb1-ams 5001'
+alias nlms='ngrok http --url cato-lms.ngrok.io 3000'
+alias nconnect='ngrok http --url cato-con.ngrok.io 5000'
+alias nem='ngrok http --url cato-ews.ngrok.io 5500'
+alias nds='ngrok http --url cato-ds.ngrok.io 8000'
 
 # Ansible Aliases
 alias pingAll="ansible-playbook $ANS_DIR/playbooks/ping.yml"
