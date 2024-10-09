@@ -19,7 +19,7 @@ require("lazy").setup({
 }, {
 	install = {
 		missing = true,
-		colorscheme = { "nordfox" },
+		colorscheme = { "tokyonight" },
 	},
 	ui = {
 		border = "rounded",

@@ -7,7 +7,7 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			"rcarriga/nvim-dap-ui",
+			{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
 			"mxsdev/nvim-dap-vscode-js",
 			"theHamsta/nvim-dap-virtual-text",
 			{

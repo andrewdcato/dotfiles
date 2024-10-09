@@ -1,5 +1,6 @@
 return {
 	"folke/which-key.nvim",
+	dependencies = { "echasnovski/mini.icons", "nvim-tree/nvim-web-devicons" },
 	event = "VeryLazy",
 	config = function()
 		local wk = require("which-key")
@@ -8,46 +9,39 @@ return {
 		vim.o.timeoutlen = 500
 
 		-- General maps
-		wk.register({
-			["<leader>+"] = { "<C-a>", "Increment Number Under Cursor" },
-			["<leader>-"] = { "<C-x>", "Decrement Number Under Cursor" },
-			["<leader>nh"] = { "<cmd>nohl<cr>", "Hide search highlights", noremap = false },
-			["<leader>]t"] = { "<cmd>lua require('todo-comments').jump_next()", "Next TODO Comment" },
-			["<leader>[t"] = { "<cmd>lua require('todo-comments').jump_prev()", "Previous TODO Comment" },
-			["<leader>wq"] = { '<cmd>s/%V(.*)%V/"\1",/<cr>', "Wrap selection in quotes", mode = "v" },
+		wk.add({
+			{ "<leader>+", "<C-a>", desc = "Increment Number Under Cursor" },
+			{ "<leader>-", "<C-x>", desc = "Decrement Number Under Cursor" },
+			{ "<leader>nh", "<cmd>nohl<cr>", desc = "Hide search highlights", noremap = false },
+			{ "<leader>]t", "<cmd>lua require('todo-comments').jump_next()", desc = "Next TODO Comment" },
+			{ "<leader>[t", "<cmd>lua require('todo-comments').jump_prev()", desc = "Previous TODO Comment" },
+			{ "<leader>wq", '<cmd>s/%V(.*)%V/"\1",/<cr>', desc = "Wrap selection in quotes", mode = "v" },
+			{ "<D-l>", "<cmd>Lazy<cr>", desc = "Lazy 󰒲 " },
 		})
 
-		wk.register({
-			["<leader>d"] = "Debugger ",
-			["<leader>f"] = "Telescope ",
-			["<leader>l"] = "LSP Actions ",
-			["<leader>x"] = "Trouble 󰔫",
+		wk.add({
+			{ "<leader>d", group = "Debugger " },
+			{ "<leader>f", group = "Telescope " },
+			{ "<leader>g", group = "Git Things " },
+			{ "<leader>l", group = "LSP Actions " },
+			{ "<leader>x", group = "Trouble 󰔫" },
 		})
 
-		wk.register({
-			["<leader>g"] = "Git Things ",
+		wk.add({
+			{ "<leader>t", group = "Tab Management 裡" },
+			{ "<leader>tn", "<cmd>tabn<cr>", desc = "Move to Next Tab" },
+			{ "<leader>tn", "<cmd>tabn<cr>", desc = "Move to Next Tab" },
+			{ "<leader>to", "<cmd>tabnew<cr>", desc = "Open New Tab" },
+			{ "<leader>tp", "<cmd>tabp<cr>", desc = "Move to Previous Tab" },
+			{ "<leader>tx", "<cmd>tabclose<cr>", desc = "Close Current Tab" },
 		})
 
-		wk.register({
-			["<D-l>"] = { "<cmd>Lazy<cr>", "Lazy 󰒲 " },
-		})
-
-		-- Window / Split Management
-		wk.register({
-			["<leader>t"] = {
-				name = "Tab Management 裡",
-				n = { "<cmd>tabn<cr>", "Move to Next Tab" },
-				o = { "<cmd>tabnew<cr>", "Open New Tab" },
-				p = { "<cmd>tabp<cr>", "Move to Previous Tab" },
-				x = { "<cmd>tabclose<cr>", "Close Current Tab" },
-			},
-			["<leader>w"] = {
-				name = "Window Management ",
-				e = { "<C-w>=", "Make Splits Equal" },
-				h = { "<C-w>s", "Split Window Horizontally" },
-				v = { "<C-w>v", "Split Window Vertically" },
-				x = { "<cmd>close<cr>", "Close Current Split" },
-			},
+		wk.add({
+			{ "<leader>w", group = "Split Management " },
+			{ "<leader>wn", "<C-w>=", desc = "Make Splits Equal" },
+			{ "<leader>wn", "<C-w>s", desc = "Split Window Horizontally" },
+			{ "<leader>wo", "<C-w>v", desc = "Split Window Vertically" },
+			{ "<leader>wx", "<cmd>close<cr>", desc = "Close Current Split" },
 		})
 
 		wk.setup({

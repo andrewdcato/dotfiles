@@ -15,7 +15,7 @@ local servers = {
 		"tailwindcss",
 		"terraformls",
 		"tflint",
-		"tsserver",
+		"ts_ls",
 		"yamlls",
 		"sqlls",
 	},
@@ -168,7 +168,7 @@ return {
 				opts.desc = "Restart LSP"
 				km.set("n", "<leader>rs", "<cmd>LspRestart<cr>", opts) -- mapping to restart lsp if necessary
 
-				if client.name == "tsserver" then
+				if client.name == "ts_ls" then
 					client.server_capabilities.documentFormattingProvider = false
 				end
 

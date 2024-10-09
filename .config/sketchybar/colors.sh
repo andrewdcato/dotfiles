@@ -1,40 +1,37 @@
 #!/bin/bash
 
-export BLACK=0xff3b4252
-export RED=0xffbf616a
-export GREEN=0xffa3be8c
-export YELLOW=0xffebcb8b
-export BLUE=0xff81a1c1
-export MAGENTA=0xffb48ead
-export CYAN=0xff88c0d0
-export WHITE=0xffe5e9f0
-export ORANGE=0xffc9826b
-export PINK=0xffbf88bc
+export BLACK=0xff414868
+export RED=0xfff7768e
+export GREEN=0xff9ece6a
+export YELLOW=0xffe0af68
+export BLUE=0xff7aa2f7
+export MAGENTA=0xffbb9af7
+export CYAN=0xff7dcfff
+export WHITE=0xffa9b1d6
+export ORANGE=0xffff9e64
+export PINK=0xff9d7cd8
 
-export COMMENT=0xff60728a
+export COMMENT=0xff565f89
 
-export BG0=0xff232831 #Darkbg(statuslineandfloat)
-export BG1=0xff2e3440 #Defaultbg
+export BG0=0xff1f2335 #Darkbg(statuslineandfloat)
+export BG1=0xff24283b #Defaultbg
 export BG2=0xff39404f #Lighterbg(colorcolmfolds)
-export BG3=0xff444c5e #Lighterbg(cursorline)
-export BG4=0xff5a657d #Conceal,borderfg
 
 export FG0=0xffc7cdd9 #Lighterfg
-export FG1=0xffcdcecf #Defaultfg
-export FG2=0xffabb1bb #Darkerfg(statusline)
-export FG3=0xff7e8188 #Darkerfg(linenumbers,foldcolums)
+export FG1=0xffc0caf5 #Defaultfg
+export FG2=0xffa9b1d6 #Darkerfg(statusline)
+export FG3=0xff3b4261 #Darkerfg(linenumbers,foldcolums)
 
 export SEL0=0xff3e4a5b #Popupbg,visualselectionbg
 export SEL1=0xff4f6074 #Popupselbg,searchbg
 
 # General bar colors
-# export BAR_COLOR=0xB3232831 # BG0 w/90% opacity
 export BAR_COLOR=0xCC39404f # BG2 w/80% opacity
 export BAR_BORDER_COLOR=$BAR_COLOR
-export BACKGROUND_1=0xB3444c5e # BG3 w/90% opacity
-export BACKGROUND_2=0xB35a657d # BG3 w/90% opacity
+export BACKGROUND_1=0xB31f2335 # BG3 w/90% opacity
+export BACKGROUND_2=0xB31f2335 # BG3 w/90% opacity
 export ICON_COLOR=$FG2 # Color of all icons
 export LABEL_COLOR=$FG2 # Color of all labels
-export POPUP_BACKGROUND_COLOR=0xB33e4a5b
+export POPUP_BACKGROUND_COLOR=$BAR_COLOR
 export POPUP_BORDER_COLOR=$FG1
 export SHADOW_COLOR=$BLACK

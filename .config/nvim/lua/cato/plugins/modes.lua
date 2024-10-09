@@ -2,14 +2,14 @@ return {
 	"mvllow/modes.nvim",
 	dependencies = { "catppuccin/nvim" },
 	config = function()
-		local palette = require("nightfox.palette").load("nordfox")
+		local colors = require("tokyonight.colors").setup()
 
 		require("modes").setup({
 			colors = {
-				copy = palette.orange.base,
-				delete = palette.red.base,
-				insert = palette.green.base,
-				visual = palette.magenta.dim,
+				copy = colors.orange,
+				delete = colors.red,
+				insert = colors.green,
+				visual = colors.magenta,
 			},
 			-- Set opacity for cursorline and number background
 			line_opacity = 0.35,

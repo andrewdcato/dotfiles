@@ -3,7 +3,8 @@ local wezterm = require("wezterm")
 local config = {}
 
 config.term = "xterm-256color"
-config.color_scheme = "nordfox"
+-- config.color_scheme = "nordfox"
+config.color_scheme = "Tokyo Night Storm"
 config.enable_scroll_bar = false
 config.enable_tab_bar = false
 config.window_background_opacity = 0.85
