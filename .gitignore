@@ -13,5 +13,3 @@
 !.ssh/config
 !.ssh/config_personal
 
-.config/tmux_backup
-.config/sketchybar_backup
