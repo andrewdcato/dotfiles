@@ -23,12 +23,12 @@ yabai -m config                                 \
     window_opacity_duration      0.0            \
     active_window_opacity        1.0            \
     normal_window_opacity        0.90           \
-    window_opacity               off            \
+    window_opacity               on             \
     insert_feedback_color        0xffd75f5f     \
     split_ratio                  0.50           \
     split_type                   auto           \
     auto_balance                 on             \
-    top_padding                  15             \
+    top_padding                  10             \
     bottom_padding               10             \
     left_padding                 10             \
     right_padding                10             \
@@ -46,10 +46,9 @@ yabai -m rule --add app="^Tidal$" manage=off
 yabai -m rule --add app="^MongoDB Compass$" manage=off
 yabai -m rule --add app="^App Store$" manage=off
 yabai -m rule --add app="^RingCentral Meetings$" manage=off
-yabai -m rule --add app="^Plexamp$" manage=off
 
 NOTCH_UUID="1FFD8930-F1C9-5FB9-A0B6-45F2F0499C0B"
-NORMAL_BAR=32
+NORMAL_BAR=40
 NOTCH_BAR=0
 
 yabai -m signal --add event=display_added action="if [[ \"\$(yabai -m query --displays | jq \".[\$YABAI_DISPLAY_ID].uuid\")\" =~ \"$NOTCH_UUID\" ]]; then yabai -m config external_bar main:$NORMAL_BAR:0; elif [[ \"\$(yabai -m query --displays | jq '.[].uuid')\" =~ \"$NOTCH_UUID\" ]]; then yabai -m config external_bar main:$NORMAL_BAR:0; else yabai -m config external_bar all:$NORMAL_BAR:0; fi"
