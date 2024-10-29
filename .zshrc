@@ -27,27 +27,15 @@ export PATH="$XDG_CONFIG_HOME/tmux/plugins/t-smart-tmux-session-manager/bin:$PAT
 
 # Set theme for FZF
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 
+  --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 
+  --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 
+  --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4
   --highlight-line \
   --info=inline-right \
   --ansi \
   --layout=reverse \
   --border=rounded \
-  --color=bg+:#2e3c64 \
-  --color=bg:#1f2335 \
-  --color=border:#29a4bd \
-  --color=fg:#c0caf5 \
-  --color=gutter:#1f2335 \
-  --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#29a4bd \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c \
 "
 
 # OMZ customization
@@ -74,7 +62,6 @@ plugins=(
   git-flow
   nvm
   terraform
-  tmux
 )
 
 # You have to load this *after* declaring plugins or it won't work...odd
