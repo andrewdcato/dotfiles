@@ -2,14 +2,14 @@ return {
 	"mvllow/modes.nvim",
 	dependencies = { "catppuccin/nvim" },
 	config = function()
-		local colors = require("tokyonight.colors").setup()
+		local colors = require("catppuccin.palettes").get_palette("macchiato")
 
 		require("modes").setup({
 			colors = {
 				copy = colors.orange,
 				delete = colors.red,
 				insert = colors.green,
-				visual = colors.magenta,
+				visual = colors.maroon,
 			},
 			-- Set opacity for cursorline and number background
 			line_opacity = 0.35,

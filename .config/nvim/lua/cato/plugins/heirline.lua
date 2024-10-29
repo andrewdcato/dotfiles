@@ -3,7 +3,7 @@ return {
 	"rebelot/heirline.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons", "neovim/nvim-lspconfig", "Zeioth/heirline-components.nvim" },
 	opts = function()
-		local colors = require("tokyonight.colors").setup()
+		local colors = require("catppuccin.palettes").get_palette("macchiato")
 		local conditions = require("heirline.conditions")
 		local icons = require("cato.util").icons
 		local lib = require("heirline-components.all")
@@ -17,7 +17,7 @@ return {
 			return vim.api.nvim_get_option("columns") > (size or 120)
 		end
 
-		local Align = { provider = "%=", hl = { bg = colors.bg_statusline } }
+		local Align = { provider = "%=", hl = { bg = colors.crust } }
 		local Space = { provider = " " }
 
 		local ViMode = {
@@ -75,36 +75,36 @@ return {
 					[""] = colors.yellow,
 					["s"] = colors.yellow,
 					["!"] = colors.red,
-					["R"] = colors.red1,
-					["Rc"] = colors.red1,
-					["Rv"] = colors.red1,
-					["Rx"] = colors.red1,
-					["S"] = colors.cyan,
-					["V"] = colors.magenta,
-					["Vs"] = colors.magenta,
-					["c"] = colors.orange,
-					["ce"] = colors.orange,
-					["cv"] = colors.orange,
+					["R"] = colors.pink,
+					["Rc"] = colors.pink,
+					["Rv"] = colors.pink,
+					["Rx"] = colors.pink,
+					["S"] = colors.sky,
+					["V"] = colors.mauve,
+					["Vs"] = colors.mauve,
+					["c"] = colors.peach,
+					["ce"] = colors.peach,
+					["cv"] = colors.peach,
 					["i"] = colors.green,
 					["ic"] = colors.green,
 					["ix"] = colors.green,
 					["n"] = colors.blue,
-					["niI"] = colors.blue,
-					["niR"] = colors.blue,
-					["niV"] = colors.blue,
-					["no"] = colors.magenta,
-					["no"] = colors.magenta,
-					["noV"] = colors.magenta,
-					["nov"] = colors.magenta,
+					["niI"] = colors.sapphire,
+					["niR"] = colors.sapphire,
+					["niV"] = colors.sapphire,
+					["no"] = colors.mauve,
+					["no"] = colors.mauve,
+					["noV"] = colors.mauve,
+					["nov"] = colors.mauve,
 					["nt"] = colors.red,
-					["null"] = colors.magenta,
-					["r"] = colors.cyan,
+					["null"] = colors.mauve,
+					["r"] = colors.sky,
 					["r?"] = colors.red,
-					["rm"] = colors.cyan,
-					["s"] = colors.cyan,
+					["rm"] = colors.sky,
+					["s"] = colors.sky,
 					["t"] = colors.red,
-					["v"] = colors.magenta,
-					["vs"] = colors.magenta,
+					["v"] = colors.mauve,
+					["vs"] = colors.mauve,
 				},
 			},
 			provider = function(self)
@@ -117,7 +117,7 @@ return {
 			end,
 			hl = function(self)
 				local mode = self.mode:sub(1, 1)
-				return { bg = self.mode_colors[mode], fg = colors.bg_dark, bold = true }
+				return { bg = self.mode_colors[mode], fg = colors.mantle, bold = true }
 			end,
 			update = { "ModeChanged" },
 		}
@@ -127,7 +127,7 @@ return {
 				self.filename = vim.api.nvim_buf_get_name(0)
 			end,
 			condition = conditions.buffer_not_empty,
-			hl = { bg = colors.bg_statusline, fg = colors.fg_dark },
+			hl = { bg = colors.mantle, fg = colors.text },
 		}
 
 		local FileIcon = {
@@ -159,7 +159,7 @@ return {
 				end
 				return filename
 			end,
-			hl = { fg = colors.fg_dark, bold = true },
+			hl = { fg = colors.text, bold = true },
 		}
 
 		local FileFlags = {
@@ -168,7 +168,7 @@ return {
 					return vim.bo.modified
 				end,
 				provider = " ● ",
-				hl = { fg = colors.magenta },
+				hl = { fg = colors.mauve },
 			},
 			{
 				condition = function()
@@ -182,7 +182,7 @@ return {
 		local FileNameModifer = {
 			hl = function()
 				if vim.bo.modified then
-					return { fg = colors.fg_dark, bold = true, force = true }
+					return { fg = colors.text, bold = true, force = true }
 				end
 			end,
 		}
@@ -220,13 +220,13 @@ return {
 				provider = function(self)
 					return self.info > 0 and ("%s%s "):format(self.info_icon, self.info)
 				end,
-				hl = { fg = colors.blue },
+				hl = { fg = colors.sapphire },
 			},
 			{
 				provider = function(self)
 					return self.hints > 0 and ("%s%s "):format(self.hint_icon, self.hints)
 				end,
-				hl = { fg = colors.cyan },
+				hl = { fg = colors.sky },
 			},
 		}
 
@@ -239,7 +239,7 @@ return {
 			utils.insert(Space, Diagnostics),
 			{
 				provider = icons.separators.inverted_slant_right,
-				hl = { bg = colors.bg_statusline, fg = colors.bg_dark },
+				hl = { bg = colors.base, fg = colors.mantle },
 			}
 		)
 
@@ -259,7 +259,7 @@ return {
 				modified_icon = icons.git.modified,
 				removed_icon = icons.git.removed,
 			},
-			hl = { bg = colors.bg_dark, fg = colors.magenta },
+			hl = { bg = colors.base, fg = colors.mauve },
 			Space,
 			{
 				provider = function(self)
@@ -286,9 +286,13 @@ return {
 					local count = self.status_dict.changed or 0
 					return count > 0 and (" %s %s"):format(self.modified_icon, count)
 				end,
-				hl = { fg = colors.orange },
+				hl = { fg = colors.peach },
 			},
 			Space,
+			{
+				provider = icons.separators.inverted_slant_right,
+				hl = { bg = colors.crust, fg = colors.base },
+			},
 		}
 
 		local LSPActive = {
@@ -309,7 +313,7 @@ return {
 					return conditions.hide_in_width() and conditions.lsp_attached()
 				end,
 				provider = icons.separators.vert_thick,
-				hl = { fg = colors.magenta, bg = colors.bg_dark },
+				hl = { fg = colors.mauve, bg = colors.base },
 			},
 			{
 				provider = function()
@@ -326,7 +330,7 @@ return {
 
 					return (" " .. icons.lsp .. " [%s] "):format((table.concat(names, " / ")))
 				end,
-				hl = { bg = colors.bg_dark, fg = colors.magenta, bold = true, italic = false },
+				hl = { bg = colors.base, fg = colors.mauve, bold = true, italic = false },
 			},
 		}
 
@@ -360,17 +364,17 @@ return {
 					return conditions.buffer_not_empty() and conditions.hide_in_width()
 				end,
 				provider = icons.separators.vert_thick,
-				hl = { bg = colors.bg_dark, fg = colors.blue },
+				hl = { bg = colors.base, fg = colors.sapphire },
 			},
 			{
 				condition = function()
 					return conditions.buffer_not_empty() and conditions.hide_in_width()
 				end,
 				provider = " " .. icons.files.ruler,
-				hl = { bg = colors.bg_dark, fg = colors.blue },
+				hl = { bg = colors.base, fg = colors.sapphire },
 			},
-			utils.insert({ hl = { bg = colors.bg_dark, fg = colors.blue, bold = true, italic = false } }, Ruler),
-			utils.insert({ hl = { bg = colors.bg_dark, fg = colors.blue, bold = true, italic = false } }, ScrollBar)
+			utils.insert({ hl = { bg = colors.base, fg = colors.sapphire, bold = true, italic = false } }, Ruler),
+			utils.insert({ hl = { bg = colors.base, fg = colors.sapphire, bold = true, italic = false } }, ScrollBar)
 		)
 
 		return {
@@ -395,7 +399,7 @@ return {
 			tabline = { -- UI upper bar
 				lib.component.tabline_conditional_padding(),
 				lib.component.tabline_buffers(),
-				lib.component.fill({ hl = { bg = colors.bg_dark } }),
+				lib.component.fill({ hl = { bg = colors.crust } }),
 				lib.component.tabline_tabpages(),
 			},
 			winbar = { -- UI breadcrumbs bar

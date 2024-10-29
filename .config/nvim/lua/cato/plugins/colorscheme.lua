@@ -1,8 +1,23 @@
 return {
 	{
+		"Mofiqul/dracula.nvim",
+		enabled = false,
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("dracula").setup({
+				show_end_of_buffer = true,
+				transparent_bg = true,
+			})
+
+			vim.cmd([[colorscheme dracula]])
+		end,
+	},
+	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
+		enabled = false,
 		config = function()
 			require("tokyonight").setup({
 				style = "storm",
@@ -25,8 +40,9 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		priority = 1000,
 		enabled = false,
+		priority = 1000,
+		lazy = false,
 		config = function()
 			local palette = require("nightfox.palette").load("nordfox")
 
@@ -66,7 +82,6 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
-		enabled = false,
 		config = function()
 			-- Define custom higlight groups for tabby
 			local custom_higlights = function(colors)
