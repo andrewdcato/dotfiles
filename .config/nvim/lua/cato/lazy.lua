@@ -19,7 +19,7 @@ require("lazy").setup({
 }, {
 	install = {
 		missing = true,
-		colorscheme = { "tokyonight" },
+		colorscheme = { "catppuccin" },
 	},
 	ui = {
 		border = "rounded",
