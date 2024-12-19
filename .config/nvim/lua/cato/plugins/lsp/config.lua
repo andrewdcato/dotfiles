@@ -72,14 +72,14 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
+			-- "hrsh7th/cmp-nvim-lsp",
+			-- "hrsh7th/cmp-nvim-lsp-signature-help",
 			"SmiteshP/nvim-navic",
 			{ "antosha417/nvim-lsp-file-operations", config = true },
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
-			local cmp_nvim_lsp = require("cmp_nvim_lsp")
+			-- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			-- Configure diagnostic symbols
 			local signs = {
@@ -196,7 +196,7 @@ return {
 			-- Configure capabilities
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+			-- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 			-- Loop through configuration files for servers and configure them
 			-- NOTE: file names need to mirror mason-lspconfigs names
