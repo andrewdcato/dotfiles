@@ -4,7 +4,6 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim" },
 	event = "VeryLazy",
 	keys = {
-		{ "<leader>t", "<cmd>Neotree toggle left<cr>", desc = "Open File Tree" },
 		{ "<leader>e", "<cmd>Neotree toggle float<cr>", silent = true, desc = "Float File Explorer" },
 	},
 	config = function()
