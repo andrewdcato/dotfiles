@@ -5,9 +5,10 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
-		local plugins = require("lazy")
 		local headers = require("cato.util").ascii_headers
 		local icons = require("cato.util").icons
+
+		math.randomseed(os.time())
 		dashboard.section.header.val = headers[math.random(#headers)]
 
 		dashboard.section.buttons.val = {
@@ -31,17 +32,12 @@ return {
 			dashboard.button("q", icons.dashboard.exit .. "Quit Neovim", "<cmd>qa<cr>"),
 		}
 
-		-- Footer must be a table so that its height is correctly measured
-		local nvim_stats = plugins.stats()
-		if nvim_stats.count <= 1 then
-			dashboard.section.footer.val = {
-				"Neovim loaded " .. nvim_stats.count .. " plugin 󰚥 in " .. nvim_stats.startuptime .. "ms",
-			}
-		else
-			dashboard.section.footer.val = {
-				"Neovim loaded " .. nvim_stats.count .. " plugins 󰚥 in " .. nvim_stats.startuptime .. "ms",
-			}
-		end
+		local stats = require("lazy").stats()
+		local ms = stats.startuptime .. " ms"
+		dashboard.section.footer.val = {
+			"  Loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms, -- Footer must be a table so that its height is correctly measured
+		}
+
 		dashboard.section.footer.opts.hl = "Comment"
 		dashboard.section.header.opts.hl = "Include"
 		dashboard.section.buttons.opts.hl = "Keyword"
@@ -65,7 +61,7 @@ return {
 		}
 
 		vim.cmd(
-			[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 showtabline=2 ]]
+			[[ au User AlphaReady if winnr('$') == 1 | set laststatus=0 showtabline=0 | endif | au BufUnload <buffer> set laststatus=3 showtabline=1 ]]
 		)
 
 		vim.api.nvim_create_autocmd("BufUnload", {

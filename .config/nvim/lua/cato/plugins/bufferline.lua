@@ -42,7 +42,7 @@ return {
 	},
 	{
 		"utilyre/barbecue.nvim",
-		dependencies = { "catppuccin/nvim" },
+		after = "nvim-web-devicons",
 		config = function()
 			local icons = require("cato.util").icons
 
