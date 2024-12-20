@@ -13,3 +13,8 @@
 !.ssh/config
 !.ssh/config_personal
 
+# Ignore all log files
+**/*.log
+
+# Ignore yazi flavors
+.config/yazi/flavors/cattpuccin-mocha.yazi/*
