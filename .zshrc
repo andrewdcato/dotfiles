@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export XDG_CONFIG_HOME="$HOME/.config"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/config.toml"
 export DEFAULT_USER="andrewcato"
-export EDITOR="vim"
+export EDITOR="nvim"
 export PYENV_ROOT="$HOME/.pyenv"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export ANS_DIR="$HOME/surety/ansible"
@@ -14,6 +14,11 @@ export T_SESSION_NAME_INCLUDE_PARENT="true"
 
 # Setup Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Load Ghostty integration
+# if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
+#   "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
+# fi
 
 # Use PyEnv instead of system python
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
