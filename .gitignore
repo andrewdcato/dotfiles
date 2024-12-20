@@ -17,4 +17,4 @@
 **/*.log
 
 # Ignore yazi flavors
-.config/yazi/flavors/cattpuccin-mocha.yazi/*
+.config/yazi/flavors/catppuccin-mocha.yazi/*
