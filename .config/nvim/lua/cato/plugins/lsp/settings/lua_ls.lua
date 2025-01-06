@@ -2,7 +2,7 @@ return {
 	settings = {
 		Lua = {
 			diagnostics = {
-				globals = { "vim", "bufnr" },
+				globals = { "vim", "bufnr", "Snacks" },
 			},
 		},
 		workspace = {
