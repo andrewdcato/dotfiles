@@ -8,17 +8,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 export ANS_DIR="$HOME/surety/ansible"
 
-# Config flags for tmux session manager
-export T_SESSION_USE_GIT_ROOT="true"
-export T_SESSION_NAME_INCLUDE_PARENT="true"
-
 # Setup Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Load Ghostty integration
-# if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
-#   "$GHOSTTY_RESOURCES_DIR"/shell-integration/zsh/ghostty-integration
-# fi
 
 # Use PyEnv instead of system python
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -27,8 +18,7 @@ eval "$(pyenv init -)"
 export PATH="/opt/homebrew/opt/mongodb-community@4.4/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="${PATH}:${HOME}/.local/bin/"
-
-export PATH="$XDG_CONFIG_HOME/tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
+export PATH="$HOME/.config/sesh/scripts:$PATH"
 
 # Set theme for FZF
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
@@ -53,9 +43,6 @@ export CORRECT_IGNORE_FILE='.zsh_correctignore'
 setopt correct
 setopt histignorealldups
 setopt histreduceblanks
-
-# OMZ TMUX CONFIG
-# TODO: get .config dir working for TMUX w/ZSH_TMUX_CONFIG
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -92,6 +79,33 @@ load-nvmrc() {
 }
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
+
+# Auto-add keys to ssh-agent
+if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
+    eval $(ssh-agent -s) > /dev/null
+    if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
+        ssh-add --apple-use-keychain ~/.ssh/id_ed25519 > /dev/null 2>&1
+        ssh-add --apple-use-keychain ~/.ssh/servers_rsa > /dev/null 2>&1
+        ssh-add --apple-use-keychain ~/.ssh/personal > /dev/null 2>&1
+    fi
+fi
+
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+zle     -N             sesh-sessions
+bindkey -M emacs '\es' sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
 
