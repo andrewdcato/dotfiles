@@ -1,0 +1,9 @@
+# #!/usr/bin/env bash
+
+tmux send-keys 'nvim' Enter
+tmux new-window -c "#{session_path}"
+tmux split-window -h -l 50% 
+tmux send-keys 'docker compose up db' Enter
+tmux select-pane -L
+tmux send-keys 'pnpm dev' Enter
+tmux select-window -p

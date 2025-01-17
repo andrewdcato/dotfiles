@@ -1,0 +1,19 @@
+[[session]]
+name = "tmux config"
+path = "~/.dotfiles/.config/tmux"
+startup_command = "nvim tmux.conf"
+
+[[session]]
+name = "surety360"
+path = "~/surety360/surety360"
+startup_command = "surety360"
+
+[[session]]
+name = "suretybonds.com"
+path = "~/surety/sb-next"
+startup_command = "sb-next"
+
+[[session]]
+name = "contractorbonds.com"
+path = "~/surety/contractorbonds.com"
+startup_command = "cb-next"
