@@ -14,12 +14,13 @@ M.icons.files = {
 }
 
 M.icons.dashboard = {
-	new_file = "󱪝  ",
-	lazygit = "  ",
+	exit = "󰩈  ",
+	file_grep = "󰺮  ",
 	file_name = "󰈞  ",
 	file_recent = "󱦺  ",
-	file_grep = "󰺮  ",
-	exit = "󰩈  ",
+	lazy = "󰒲  ",
+	lazygit = "  ",
+	new_file = "󱪝  ",
 }
 
 M.icons.separators = {
