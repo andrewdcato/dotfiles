@@ -1,7 +1,6 @@
 local extensions = {
 	"fzf",
 	"file_browser",
-	"notify",
 }
 
 local pickers = {
@@ -71,8 +70,6 @@ return {
 
 			telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
-			telescope.load_extension("notify")
-			-- telescope.load_extension("dap")
 			telescope.load_extension("env")
 
 			local km = vim.keymap
