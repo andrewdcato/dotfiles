@@ -1,5 +1,6 @@
 require("lazy").setup({
 	{ import = "cato.plugins" },
+	{ import = "cato.plugins.colorscheme" },
 	{ import = "cato.plugins.lsp" },
 }, {
 	install = {
