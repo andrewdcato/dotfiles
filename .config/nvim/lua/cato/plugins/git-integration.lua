@@ -1,6 +1,8 @@
 return {
 	{
 		"lewis6991/gitsigns.nvim",
+		lazy = true,
+		event = "BufEnter",
 		config = function()
 			require("gitsigns").setup({
 				numhl = true,
@@ -38,6 +40,8 @@ return {
 	},
 	{
 		"akinsho/git-conflict.nvim",
+		lazy = true,
+		event = "BufEnter",
 		config = function()
 			require("git-conflict").setup({
 				default_commands = true,
@@ -45,9 +49,5 @@ return {
 				highlights = { incoming = "DiffText", current = "DiffAdd" },
 			})
 		end,
-	},
-	{
-		"tpope/vim-fugitive",
-		-- config = function() end,
 	},
 }
