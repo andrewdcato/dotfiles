@@ -24,9 +24,9 @@ return {
 			},
 			{
 				icon = icons.dashboard.file_grep,
-				key = "g",
+				key = "t",
 				desc = "Find Text",
-				action = "<leader>ft",
+				action = "<leader>fs",
 			},
 			{
 				icon = icons.dashboard.file_recent,
@@ -34,6 +34,7 @@ return {
 				desc = "Recent Files",
 				action = "<leader>fr",
 			},
+			{ icon = icons.dashboard.lazygit, key = "g", desc = "LazyGit", action = "<leader>gg" },
 			{
 				icon = icons.dashboard.lazy,
 				key = "L",

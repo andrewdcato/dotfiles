@@ -52,7 +52,6 @@ brew "gcc"
 brew "gh"
 brew "git"
 brew "git-filter-repo"
-brew "git-flow", link: false
 brew "git-flow-avh"
 brew "git-recent"
 brew "glab"
