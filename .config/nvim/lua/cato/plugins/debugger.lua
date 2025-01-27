@@ -1,3 +1,13 @@
+local function get_pkg_path(pkg, path)
+	pcall(require, "mason") -- make sure Mason is loaded. Will fail when generating docs
+
+	local root = vim.env.MASON or (vim.fn.stdpath("data") .. "/mason")
+
+	path = path or ""
+
+	return root .. "/packages/" .. pkg .. "/" .. path
+end
+
 return {
 	{ -- NOTE: needed to support loading debug configs from ./.vscode/launch.json files, as those contain comments and
 		--        aren't valid JSON
@@ -7,14 +17,10 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
-			{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
-			"mxsdev/nvim-dap-vscode-js",
 			"theHamsta/nvim-dap-virtual-text",
 			{
 				"microsoft/vscode-js-debug",
-				-- HACK: checking out the package lock was added to get around errors when checking for updates
-				build = "npm install --legacy-peer-deps && npm run compile && git checkout package-lock.json",
-				tag = "v1.74.0", -- you *must* specify this tag; newer versions have breaking bugs
+				build = "npm i --no-package-lock && npm run compile vsDebugServerBundle && rm -rf out && mv -f dist out",
 			},
 		},
 		keys = {
@@ -27,17 +33,102 @@ return {
 				"<cmd>lua require('dap').toggle_breakpoint()<cr>",
 				desc = " Debugger: Toggle Breakpoint ",
 			},
+		},
+		config = function()
+			-- Set highlights and icons for breakpoints
+			vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+			vim.fn.sign_define(
+				"DapBreakpoint",
+				{ text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+			)
+			vim.fn.sign_define(
+				"DapBreakpointCondition",
+				{ text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "DapBreakpointCondition" }
+			)
+			vim.fn.sign_define(
+				"DapLogPoint",
+				{ text = "", texthl = "DapLogPoint", linehl = "", numhl = "DapLogPoint" }
+			)
+
+			-- Auto open / close dapui when debugger sessions start / end
+			local dap = require("dap")
+			local dapui = require("dapui")
+
+			dap.listeners.after.event_initialized["dapui_config"] = function()
+				dapui.open({})
+			end
+			dap.listeners.before.event_terminated["dapui_config"] = function()
+				dapui.close({})
+			end
+			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close({})
+			end
+
+			if not dap.adapters["pwa-node"] then
+				dap.adapters["pwa-node"] = {
+					type = "server",
+					host = "localhost",
+					port = "${port}",
+					executable = {
+						command = "node",
+						args = {
+							get_pkg_path("js-debug-adapter", "/js-debug/src/dapDebugServer.js"),
+							"${port}",
+						},
+					},
+				}
+			end
+
+			if not dap.adapters["node"] then
+				dap.adapters["node"] = function(cb, config)
+					if config.type == "node" then
+						config.type = "pwa-node"
+					end
+					local nativeAdapter = dap.adapters["pwa-node"]
+					if type(nativeAdapter) == "function" then
+						nativeAdapter(cb, config)
+					else
+						cb(nativeAdapter)
+					end
+				end
+			end
+
+			-- setup dap config by VsCode launch.json file
+			local vscode = require("dap.ext.vscode")
+			local json = require("plenary.json")
+			vscode.json_decode = function(str)
+				return vim.json.decode(json.json_strip_comments(str))
+			end
+
+			-- dap.adapters["pwa-node"] = {
+			-- 	type = "server",
+			-- 	host = "localhost",
+			-- 	port = "${port}",
+			-- 	executable = {
+			-- 		command = "node",
+			-- 		args = { vim.fn.stdpath("data") .. "/lazy/vscode-js-debug/dist/src/extension.js", "${port}" },
+			-- 	},
+			-- }
+		end,
+	},
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		keys = {
 			{ "<leader>dt", "<cmd>lua require('dapui').toggle()<cr>", desc = " Debugger: Toggle DapUI Window " },
+			{
+				"<leader>de",
+				function()
+					require("dapui").eval()
+				end,
+				desc = " Debugger: Eval",
+				mode = { "n", "v" },
+			},
 		},
 		config = function()
 			-- NOTE: FIXES LOADING JSON5
 			-- https://github.com/neovim/neovim/issues/21749#issuecomment-1378720864
 			table.insert(vim._so_trails, "/?.dylib")
-
-			require("dap-vscode-js").setup({
-				debugger_path = "/Users/andrewcato/.local/share/nvim/lazy/vscode-js-debug",
-				adapters = { "pwa-node", "pwa-chrome" }, -- which adapters to register in nvim-dap
-			})
 
 			require("dapui").setup({
 				controls = {
@@ -78,7 +169,7 @@ return {
 							{ id = "watches", size = 0.25 },
 						},
 						position = "left",
-						size = (vim.api.nvim_win_get_width(0) * 0.35),
+						size = 40,
 					},
 					{
 						elements = {
@@ -100,40 +191,6 @@ return {
 					indent = 1,
 					max_value_lines = 100,
 				},
-			})
-
-			-- Set highlights and icons for breakpoints
-			vim.fn.sign_define(
-				"DapBreakpoint",
-				{ text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
-			)
-			vim.fn.sign_define(
-				"DapBreakpointCondition",
-				{ text = "", texthl = "DapBreakpointCondition", linehl = "", numhl = "DapBreakpointCondition" }
-			)
-			vim.fn.sign_define(
-				"DapLogPoint",
-				{ text = "", texthl = "DapLogPoint", linehl = "", numhl = "DapLogPoint" }
-			)
-
-			-- Auto open / close dapui when debugger sessions start / end
-			local dap, dapui = require("dap"), require("dapui")
-			dap.listeners.after.event_initialized["dapui_config"] = function()
-				dapui.open({})
-			end
-			dap.listeners.before.event_terminated["dapui_config"] = function()
-				dapui.close({})
-			end
-			dap.listeners.before.event_exited["dapui_config"] = function()
-				dapui.close({})
-			end
-
-			local js_based_languages = { "typescript", "javascript", "typescriptreact", "javascriptreact" }
-			require("dap.ext.vscode").load_launchjs(nil, {
-				["pwa-node"] = js_based_languages,
-				["node"] = js_based_languages,
-				["chrome"] = js_based_languages,
-				["pwa-chrome"] = js_based_languages,
 			})
 		end,
 	},

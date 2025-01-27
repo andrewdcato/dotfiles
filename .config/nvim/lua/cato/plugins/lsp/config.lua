@@ -37,12 +37,14 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "RubixDev/mason-update-all", config = true },
 		},
 		config = function()
 			local mason = require("mason")
 			local mason_lspconfig = require("mason-lspconfig")
+			local mason_dap = require("mason-nvim-dap")
 			local mason_tool_installer = require("mason-tool-installer")
 
 			mason.setup({
@@ -65,6 +67,10 @@ return {
 
 			mason_tool_installer.setup({
 				ensure_installed = servers.tools,
+			})
+
+			mason_dap.setup({
+				ensure_installed = { "chrome", "js" },
 			})
 		end,
 	},

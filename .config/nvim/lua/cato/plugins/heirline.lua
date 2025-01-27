@@ -1,7 +1,12 @@
 -- Blatantly borrowed from github.com/thanhvule0310 - mostly like the aesthetic / info shown in his dots but need to tweak further...
 return {
 	"rebelot/heirline.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", "neovim/nvim-lspconfig", "Zeioth/heirline-components.nvim" },
+	dependencies = {
+		"lewis6991/gitsigns.nvim",
+		"nvim-tree/nvim-web-devicons",
+		"neovim/nvim-lspconfig",
+		"Zeioth/heirline-components.nvim",
+	},
 	opts = function()
 		local colors = require("catppuccin.palettes").get_palette("macchiato")
 		local conditions = require("heirline.conditions")
