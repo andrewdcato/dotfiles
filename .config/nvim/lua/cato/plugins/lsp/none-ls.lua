@@ -29,6 +29,7 @@ local ft = {
 
 return {
 	"nvimtools/none-ls.nvim",
+	enabled = false,
 	dependencies = { "nvim-lua/plenary.nvim", "j-hui/fidget.nvim", "nvimtools/none-ls-extras.nvim" },
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
@@ -45,10 +46,22 @@ return {
 			root_dir = null_ls_utils.root_pattern(".git", "package.json"),
 			sources = {
 				diagnostics.ansiblelint,
+				require("none-ls.diagnostics.eslint_d").with({
+					filetypes = ft.eslint,
+					condition = function(utils)
+						return utils.root_has_file({ ".eslintrc", "eslint.config.js" })
+					end,
+				}),
+				require("none-ls.formatting.eslint_d").with({
+					filetypes = ft.eslint,
+					condition = function(utils)
+						return utils.root_has_file({ ".eslintrc", "eslint.config.js" })
+					end,
+				}),
 				formatting.prettierd.with({
 					filetypes = ft.prettier,
 					condition = function(utils)
-						return utils.root_has_file({ ".prettierrc", "prettier.config.js", ".prettierignore" })
+						return utils.root_has_file({ ".prettierrc", ".prettierignore" })
 					end,
 				}),
 				formatting.stylua,

@@ -20,9 +20,7 @@ local servers = {
 		"sqlls",
 	},
 	tools = {
-		"eslint",
 		"eslint_d",
-		"prettier",
 		"prettierd",
 		"stylua",
 		"ansible-lint",
@@ -78,14 +76,12 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			-- "hrsh7th/cmp-nvim-lsp",
-			-- "hrsh7th/cmp-nvim-lsp-signature-help",
 			"SmiteshP/nvim-navic",
+			"saghen/blink.cmp",
 			{ "antosha417/nvim-lsp-file-operations", config = true },
 		},
 		config = function()
 			local lspconfig = require("lspconfig")
-			-- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 			-- Configure diagnostic symbols
 			local signs = {
@@ -100,7 +96,7 @@ return {
 			end
 
 			local diagnostic_config = {
-				virtual_text = true, -- disable virtual text
+				virtual_text = false, -- disable virtual text
 				signs = {
 					active = signs, -- show signs
 				},
@@ -186,13 +182,6 @@ return {
 					client.server_capabilities.documentFormattingProvider = true
 				end
 
-				if client.name == "eslint" then
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end
-
 				-- Attach nvim-navic to buffer's LSP instance
 				if client.server_capabilities.documentSymbolProvider then
 					require("nvim-navic").attach(client, bufnr)
@@ -202,7 +191,13 @@ return {
 			-- Configure capabilities
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			-- capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
+			capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lifeFoldingOnly = true,
+			}
+
+			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			-- Loop through configuration files for servers and configure them
 			-- NOTE: file names need to mirror mason-lspconfigs names
@@ -224,5 +219,25 @@ return {
 				lspconfig[server].setup(serverOpts)
 			end
 		end,
+	},
+	{
+		"stevearc/conform.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				rust = { "rustfmt", lsp_format = "fallback" },
+				-- TODO: figure out why prettierd is fucked?
+				javascript = { "eslint_d", "prettier", stop_after_first = true },
+				typescript = { "prettier", stop_after_first = true },
+				svelte = { "prettier", stop_after_first = true },
+				terraform = { "terraform_fmt" },
+				["_"] = { "prettier" },
+			},
+			format_on_save = {
+				lsp_format = "fallback",
+				timeout_ms = 1000,
+			},
+		},
 	},
 }
