@@ -3,9 +3,9 @@ return {
 	name = "catppuccin",
 	priority = 1000,
 	config = function()
-		-- Define custom higlight groups for tabby
 		local custom_higlights = function(colors)
 			return {
+				-- General overrides
 				NotifyBackground = { bg = "#000000" },
 				TabLine = { bg = colors.mantle, fg = colors.text },
 				-- git-conflict
@@ -43,10 +43,10 @@ return {
 		end
 
 		require("catppuccin").setup({
-			flavour = "macchiato", -- latte, frappe, macchiato, mocha
+			flavour = "mocha", -- latte, frappe, mocha, mocha
 			background = {
 				light = "latte",
-				dark = "macchiato",
+				dark = "mocha",
 			},
 			transparent_background = true,
 			show_end_of_buffer = true, -- show the '~' characters after the end of buffers
@@ -67,7 +67,7 @@ return {
 				strings = {},
 				variables = {},
 				numbers = {},
-				booleans = {},
+				booleans = { "italic" },
 				properties = {},
 				types = {},
 				operators = {},
@@ -77,22 +77,49 @@ return {
 			integrations = {
 				aerial = true,
 				cmp = true,
+				dadbod_ui = true,
 				dap = {
 					enabled = true,
-					enable_ui = true, -- enable nvim-dap-ui
+					enable_ui = true,
 				},
 				gitsigns = true,
 				illuminate = true,
 				indent_blankline = {
 					enabled = true,
-					scope_color = "sky", -- catppuccin color (eg. `lavender`) Default: text
+					scope_color = "sky",
 					colored_indent_levels = false,
 				},
+				lsp_trouble = true,
 				mason = true,
-				native_lsp = { enabled = true },
+				native_lsp = {
+					enabled = true,
+					virtual_text = {
+						errors = { "italic" },
+						hints = { "italic" },
+						warnings = { "italic" },
+						information = { "italic" },
+						ok = { "italic" },
+					},
+					underlines = {
+						errors = { "underline" },
+						hints = { "underline" },
+						warnings = { "underline" },
+						information = { "underline" },
+						ok = { "underline" },
+					},
+					inlay_hints = {
+						background = true,
+					},
+				},
 				notify = true,
+				noice = true,
 				telescope = true,
 				treesitter = true,
+				ufo = true,
+				snacks = {
+					enabled = true,
+					indent_scope_color = "sky",
+				},
 				which_key = true,
 			},
 		})
