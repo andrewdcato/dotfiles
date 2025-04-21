@@ -19,6 +19,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.2",
+		enabled = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-dap.nvim",
@@ -85,7 +86,7 @@ return {
 			)
 			km.set("n", "<leader>fg", "<cmd>Telescope git_files<cr>", { desc = " Search Git Files" })
 			km.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = " Search 'Help' Tags" })
-			km.set("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = " Search Notifications" })
+			-- km.set("n", "<leader>fn", "<cmd>Telescope notify<cr>", { desc = " Search Notifications" })
 			km.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = " Open Recent Files" })
 			km.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = " Live Grep Search" })
 			km.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = " View TODO comments" })
