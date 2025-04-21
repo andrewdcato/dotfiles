@@ -1,3 +1,6 @@
+# OS garbage
+.DS_Store
+
 # State files
 .config/lazygit/state.yml
 .config/lazydocker/state.yml
