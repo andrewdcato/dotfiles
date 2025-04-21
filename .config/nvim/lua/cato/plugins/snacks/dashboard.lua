@@ -13,7 +13,7 @@ return {
 	col = nil, -- dashboard position. nil for center
 	pane_gap = 4,
 	preset = {
-		pick = "telescope.nvim",
+		pick = nil,
 		keys = {
 			{ icon = icons.dashboard.new_file, key = "n", desc = "New File", action = ":ene | startinsert" },
 			{
