@@ -22,6 +22,17 @@ return {
 			open_cmd = "vnew",
 			is_open_target_win = true,
 			is_insert_mode = true,
+			-- HACK: explanation here - https://github.com/nvim-pack/nvim-spectre/issues/118
+			replace_engine = {
+				["sed"] = {
+					cmd = "sed",
+					args = {
+						"-i",
+						"",
+						"-E",
+					},
+				},
+			},
 		})
 	end,
 }
