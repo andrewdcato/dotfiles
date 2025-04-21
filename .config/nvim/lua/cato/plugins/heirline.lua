@@ -1,130 +1,133 @@
--- Blatantly borrowed from github.com/thanhvule0310 - mostly like the aesthetic / info shown in his dots but need to tweak further...
 return {
 	"rebelot/heirline.nvim",
+	lazy = false,
 	dependencies = {
-		"lewis6991/gitsigns.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"neovim/nvim-lspconfig",
 		"Zeioth/heirline-components.nvim",
 	},
 	opts = function()
-		local colors = require("catppuccin.palettes").get_palette("macchiato")
+		local heirline = require("heirline")
 		local conditions = require("heirline.conditions")
-		local icons = require("cato.util").icons
-		local lib = require("heirline-components.all")
 		local utils = require("heirline.utils")
+		local colors = require("catppuccin.palettes").get_palette("mocha")
+		local lib = require("heirline-components.all")
 
 		conditions.buffer_not_empty = function()
 			return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 		end
 
 		conditions.hide_in_width = function(size)
-			return vim.api.nvim_get_option("columns") > (size or 120)
+			return vim.api.nvim_get_option_value("columns", { scope = "local" }) > (size or 140)
 		end
 
-		local Align = { provider = "%=", hl = { bg = colors.crust } }
+		local Align = { provider = "%=", hl = { bg = colors.base } }
 		local Space = { provider = " " }
 
 		local ViMode = {
-			init = function(self)
-				self.mode = vim.api.nvim_get_mode().mode
-				if not self.once then
-					vim.api.nvim_create_autocmd("ModeChanged", {
-						pattern = "*:*o",
-						command = "redrawstatus",
-					})
-					self.once = true
-				end
-			end,
-			static = {
-				mode_names = {
-					["!"] = "SHELL",
-					["R"] = "REPLACE",
-					["Rc"] = "REPLACE",
-					["Rv"] = "V-REPLACE",
-					["Rvc"] = "V-REPLACE",
-					["Rvx"] = "V-REPLACE",
-					["Rx"] = "REPLACE",
-					["S"] = "S-LINE",
-					["V"] = "V-LINE",
-					["Vs"] = "V-LINE",
-					["\19"] = "S-BLOCK",
-					["\22"] = "V-BLOCK",
-					["\22s"] = "V-BLOCK",
-					["c"] = "COMMAND",
-					["ce"] = "EX",
-					["cv"] = "EX",
-					["i"] = "INSERT",
-					["ic"] = "INSERT",
-					["ix"] = "INSERT",
-					["n"] = "NORMAL",
-					["niI"] = "NORMAL",
-					["niR"] = "NORMAL",
-					["niV"] = "NORMAL",
-					["no"] = "O-PENDING",
-					["noV"] = "O-PENDING",
-					["no\22"] = "O-PENDING",
-					["nov"] = "O-PENDING",
-					["nt"] = "NORMAL",
-					["ntT"] = "NORMAL",
-					["r"] = "REPLACE",
-					["r?"] = "CONFIRM",
-					["rm"] = "MORE",
-					["s"] = "SELECT",
-					["t"] = "TERMINAL",
-					["v"] = "VISUAL",
-					["vs"] = "VISUAL",
+			{
+				init = function(self)
+					self.mode = vim.api.nvim_get_mode().mode
+					if not self.once then
+						vim.api.nvim_create_autocmd("ModeChanged", {
+							pattern = "*:*o",
+							command = "redrawstatus",
+						})
+						self.once = true
+					end
+				end,
+				static = {
+					MODE_NAMES = {
+						["!"] = "SHELL",
+						["R"] = "REPLACE",
+						["Rc"] = "REPLACE",
+						["Rv"] = "V-REPLACE",
+						["Rvc"] = "V-REPLACE",
+						["Rvx"] = "V-REPLACE",
+						["Rx"] = "REPLACE",
+						["S"] = "S-LINE",
+						["V"] = "V-LINE",
+						["Vs"] = "V-LINE",
+						["\19"] = "S-BLOCK",
+						["\22"] = "V-BLOCK",
+						["\22s"] = "V-BLOCK",
+						["c"] = "COMMAND",
+						["ce"] = "EX",
+						["cv"] = "EX",
+						["i"] = "INSERT",
+						["ic"] = "INSERT",
+						["ix"] = "INSERT",
+						["n"] = "NORMAL",
+						["niI"] = "NORMAL",
+						["niR"] = "NORMAL",
+						["niV"] = "NORMAL",
+						["no"] = "O-PENDING",
+						["noV"] = "O-PENDING",
+						["no\22"] = "O-PENDING",
+						["nov"] = "O-PENDING",
+						["nt"] = "NORMAL",
+						["ntT"] = "NORMAL",
+						["r"] = "REPLACE",
+						["r?"] = "CONFIRM",
+						["rm"] = "MORE",
+						["s"] = "SELECT",
+						["t"] = "TERMINAL",
+						["v"] = "VISUAL",
+						["vs"] = "VISUAL",
+					},
+					MODE_COLORS = {
+						[""] = colors.yellow,
+						[""] = colors.yellow,
+						["s"] = colors.yellow,
+						["!"] = colors.maroon,
+						["R"] = colors.flamingo,
+						["Rc"] = colors.flamingo,
+						["Rv"] = colors.rosewater,
+						["Rx"] = colors.flamingo,
+						["S"] = colors.teal,
+						["V"] = colors.lavender,
+						["Vs"] = colors.lavender,
+						["c"] = colors.peach,
+						["ce"] = colors.peach,
+						["cv"] = colors.peach,
+						["i"] = colors.green,
+						["ic"] = colors.green,
+						["ix"] = colors.green,
+						["n"] = colors.blue,
+						["niI"] = colors.blue,
+						["niR"] = colors.blue,
+						["niV"] = colors.blue,
+						["no"] = colors.pink,
+						["no"] = colors.pink,
+						["noV"] = colors.pink,
+						["nov"] = colors.pink,
+						["nt"] = colors.red,
+						["null"] = colors.pink,
+						["r"] = colors.teal,
+						["r?"] = colors.maroon,
+						["rm"] = colors.sky,
+						["s"] = colors.teal,
+						["t"] = colors.red,
+						["v"] = colors.mauve,
+						["vs"] = colors.mauve,
+					},
 				},
-				mode_colors = {
-					[""] = colors.yellow,
-					[""] = colors.yellow,
-					["s"] = colors.yellow,
-					["!"] = colors.red,
-					["R"] = colors.pink,
-					["Rc"] = colors.pink,
-					["Rv"] = colors.pink,
-					["Rx"] = colors.pink,
-					["S"] = colors.sky,
-					["V"] = colors.mauve,
-					["Vs"] = colors.mauve,
-					["c"] = colors.peach,
-					["ce"] = colors.peach,
-					["cv"] = colors.peach,
-					["i"] = colors.green,
-					["ic"] = colors.green,
-					["ix"] = colors.green,
-					["n"] = colors.blue,
-					["niI"] = colors.sapphire,
-					["niR"] = colors.sapphire,
-					["niV"] = colors.sapphire,
-					["no"] = colors.mauve,
-					["no"] = colors.mauve,
-					["noV"] = colors.mauve,
-					["nov"] = colors.mauve,
-					["nt"] = colors.red,
-					["null"] = colors.mauve,
-					["r"] = colors.sky,
-					["r?"] = colors.red,
-					["rm"] = colors.sky,
-					["s"] = colors.sky,
-					["t"] = colors.red,
-					["v"] = colors.mauve,
-					["vs"] = colors.mauve,
+				provider = function(self)
+					local mode = self.mode:sub(1, 1)
+					return string.format(" %s ", self.MODE_NAMES[mode])
+				end,
+				hl = function(self)
+					local mode = self.mode:sub(1, 1)
+					return { bg = self.MODE_COLORS[mode], fg = colors.mantle, bold = true }
+				end,
+				update = {
+					"ModeChanged",
 				},
 			},
-			provider = function(self)
-				return string.format(
-					"%s%s %s",
-					icons.vim,
-					self.mode_names[self.mode:sub(1, 1)],
-					icons.separators.slant_left
-				)
-			end,
-			hl = function(self)
-				local mode = self.mode:sub(1, 1)
-				return { bg = self.mode_colors[mode], fg = colors.mantle, bold = true }
-			end,
-			update = { "ModeChanged" },
+			{
+				provider = "",
+				hl = { bg = colors.base, fg = colors.mantle },
+			},
 		}
 
 		local FileNameBlock = {
@@ -132,7 +135,7 @@ return {
 				self.filename = vim.api.nvim_buf_get_name(0)
 			end,
 			condition = conditions.buffer_not_empty,
-			hl = { bg = colors.mantle, fg = colors.text },
+			hl = { bg = colors.base, fg = colors.subtext1 },
 		}
 
 		local FileIcon = {
@@ -164,7 +167,7 @@ return {
 				end
 				return filename
 			end,
-			hl = { fg = colors.text, bold = true },
+			hl = { fg = colors.subtext1, bold = true },
 		}
 
 		local FileFlags = {
@@ -173,13 +176,13 @@ return {
 					return vim.bo.modified
 				end,
 				provider = " ● ",
-				hl = { fg = colors.mauve },
+				hl = { fg = colors.lavender },
 			},
 			{
 				condition = function()
 					return not vim.bo.modifiable or vim.bo.readonly
 				end,
-				provider = "  ",
+				provider = "",
 				hl = { fg = colors.red },
 			},
 		}
@@ -189,6 +192,101 @@ return {
 				if vim.bo.modified then
 					return { fg = colors.text, bold = true, force = true }
 				end
+			end,
+		}
+
+		FileNameBlock = utils.insert(
+			FileNameBlock,
+			FileIcon,
+			utils.insert(FileNameModifer, FileName),
+			unpack(FileFlags),
+			{ provider = "%< " }
+		)
+
+		local FileType = {
+			provider = function()
+				return (" %s "):format(vim.bo.filetype)
+			end,
+			hl = { bg = colors.base, fg = colors.overlay0 },
+			condition = function()
+				return conditions.buffer_not_empty() and conditions.hide_in_width()
+			end,
+		}
+
+		local FileSize = {
+			provider = function()
+				local suffix = { "b", "k", "M", "G", "T", "P", "E" }
+				local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
+				fsize = (fsize < 0 and 0) or fsize
+				if fsize < 1024 then
+					return string.format(" %s ", fsize .. suffix[1])
+				end
+
+				local i = 0
+				if fsize ~= nil then
+					i = math.floor((math.log(fsize) / math.log(1024)))
+				end
+
+				return string.format(" %.2g%s ", fsize / math.pow(1024, i), suffix[i + 1])
+			end,
+			hl = { bg = colors.base, fg = colors.overlay0 },
+			condition = function()
+				return conditions.buffer_not_empty() and conditions.hide_in_width()
+			end,
+		}
+
+		local LSPActive = {
+			condition = function()
+				return conditions.hide_in_width(120) and conditions.lsp_attached()
+			end,
+			update = { "LspAttach", "LspDetach" },
+			on_click = {
+				callback = function()
+					vim.defer_fn(function()
+						vim.cmd("LspInfo")
+					end, 100)
+				end,
+				name = "heirline_LSP",
+			},
+			provider = function()
+				local names = {}
+				for _, server in pairs(vim.lsp.get_clients()) do
+					table.insert(names, server.name)
+				end
+
+				if #names == 0 then
+					return ""
+				end
+
+				return ("▌  %s "):format(table.concat(names, " "))
+			end,
+			hl = { bg = colors.base, fg = colors.mauve, bold = true, italic = false },
+		}
+
+		local Formatters = {
+			provider = function()
+				local formatters = {}
+				for _, formatter in pairs(require("conform").list_formatters()) do
+					if formatter.available then
+						table.insert(formatters, formatter.name)
+					end
+				end
+
+				if #formatters == 0 then
+					return ""
+				end
+
+				return ("  %s "):format(table.concat(formatters, " "))
+			end,
+			on_click = {
+				callback = function()
+					vim.defer_fn(function() end, 100)
+				end,
+				name = "heirline_Formatters",
+			},
+			hl = { bg = colors.base, fg = colors.overlay0 },
+			condition = function()
+				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
 		}
 
@@ -209,6 +307,8 @@ return {
 				self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
 			end,
 			update = { "DiagnosticChanged", "BufEnter" },
+			hl = { bg = colors.base },
+			Space,
 			{
 				provider = function(self)
 					return self.errors > 0 and ("%s%s "):format(self.error_icon, self.errors)
@@ -233,154 +333,102 @@ return {
 				end,
 				hl = { fg = colors.sky },
 			},
+			Space,
 		}
 
-		FileNameBlock = utils.insert(
-			FileNameBlock,
-			FileIcon,
-			utils.insert(FileNameModifer, FileName),
-			unpack(FileFlags),
-			{ provider = "%< " },
-			utils.insert(Space, Diagnostics),
-			{
-				provider = icons.separators.inverted_slant_right,
-				hl = { bg = colors.base, fg = colors.mantle },
-			}
-		)
-
 		local Git = {
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.is_git_repo()
-			end,
+			condition = conditions.is_git_repo,
 			init = function(self)
 				self.status_dict = vim.b.gitsigns_status_dict
 				self.has_changes = self.status_dict.added ~= 0
 					or self.status_dict.removed ~= 0
 					or self.status_dict.changed ~= 0
 			end,
-			static = {
-				added_icon = icons.git.added,
-				branch_icon = icons.git.branch,
-				modified_icon = icons.git.modified,
-				removed_icon = icons.git.removed,
+			hl = { bg = colors.base },
+			{
+				provider = "",
+				hl = { bg = colors.base, fg = colors.mantle },
 			},
-			hl = { bg = colors.base, fg = colors.mauve },
-			Space,
 			{
 				provider = function(self)
-					return ("%s %s"):format(self.branch_icon, self.status_dict.head)
+					return ("  %s"):format(self.status_dict.head == "" and "~" or self.status_dict.head)
 				end,
-				hl = { bold = true },
+				hl = { fg = colors.mauve },
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.added or 0
-					return count > 0 and (" %s %s"):format(self.added_icon, count)
+					return count > 0 and ("  %s"):format(count)
 				end,
 				hl = { fg = colors.green },
+				condition = function()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
+				end,
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.removed or 0
-					return count > 0 and (" %s %s"):format(self.removed_icon, count)
+					return count > 0 and ("  %s"):format(count)
 				end,
 				hl = { fg = colors.red },
+				condition = function()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
+				end,
 			},
 			{
 				provider = function(self)
 					local count = self.status_dict.changed or 0
-					return count > 0 and (" %s %s"):format(self.modified_icon, count)
+					return count > 0 and ("  %s"):format(count)
 				end,
 				hl = { fg = colors.peach },
+				condition = function()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
+				end,
 			},
 			Space,
-			{
-				provider = icons.separators.inverted_slant_right,
-				hl = { bg = colors.crust, fg = colors.base },
-			},
 		}
 
-		local LSPActive = {
-			condition = function()
-				return conditions.hide_in_width() and conditions.lsp_attached()
+		local FileFormat = {
+			provider = function()
+				local fmt = vim.bo.fileformat
+				if fmt == "unix" then
+					return " LF "
+				elseif fmt == "mac" then
+					return " CR "
+				else
+					return " CRLF "
+				end
 			end,
-			update = { "LspAttach", "LspDetach", "WinEnter" },
-			on_click = {
-				callback = function()
-					vim.defer_fn(function()
-						vim.cmd("LspInfo")
-					end, 100)
-				end,
-				name = "heirline_LSP",
-			},
-			{
-				condition = function()
-					return conditions.hide_in_width() and conditions.lsp_attached()
-				end,
-				provider = icons.separators.vert_thick,
-				hl = { fg = colors.mauve, bg = colors.base },
-			},
-			{
-				provider = function()
-					local names = {}
-					for _, server in pairs(vim.lsp.get_active_clients()) do
-						if server.name ~= "null-ls" then
-							table.insert(names, server.name)
-						end
-					end
-
-					if #names == 0 then
-						return ""
-					end
-
-					return (" " .. icons.lsp .. " [%s] "):format((table.concat(names, " / ")))
-				end,
-				hl = { bg = colors.base, fg = colors.mauve, bold = true, italic = false },
-			},
-		}
-
-		local Ruler = {
-			provider = " %7(%l/%3L%):%2c ",
+			hl = { bg = colors.base, fg = colors.overlay0 },
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
 		}
 
-		local ScrollBar = {
-			static = {
-				sbar = { "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" },
-				-- Another variant, because the more choice the better.
-				-- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
-			},
-			provider = function(self)
-				local curr_line = vim.api.nvim_win_get_cursor(0)[1]
-				local lines = vim.api.nvim_buf_line_count(0)
-				local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
-				return string.rep(self.sbar[i], 2)
+		local FileEncoding = {
+			provider = function()
+				local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc
+				return (" %s "):format(enc:upper())
 			end,
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
+			hl = { bg = colors.base, fg = colors.overlay0 },
 		}
 
-		local FilePosition = utils.insert(
-			{
-				condition = function()
-					return conditions.buffer_not_empty() and conditions.hide_in_width()
-				end,
-				provider = icons.separators.vert_thick,
-				hl = { bg = colors.base, fg = colors.sapphire },
-			},
-			{
-				condition = function()
-					return conditions.buffer_not_empty() and conditions.hide_in_width()
-				end,
-				provider = " " .. icons.files.ruler,
-				hl = { bg = colors.base, fg = colors.sapphire },
-			},
-			utils.insert({ hl = { bg = colors.base, fg = colors.sapphire, bold = true, italic = false } }, Ruler),
-			utils.insert({ hl = { bg = colors.base, fg = colors.sapphire, bold = true, italic = false } }, ScrollBar)
-		)
+		local IndentSizes = {
+			provider = function()
+				local indent_type = vim.api.nvim_get_option_value("expandtab", { scope = "local" }) and "Spaces"
+					or "Tab Size"
+				local indent_size = vim.api.nvim_get_option_value("tabstop", { scope = "local" })
+
+				return (" %s: %s "):format(indent_type, indent_size)
+			end,
+			hl = { bg = colors.surface1, fg = colors.overlay0 },
+			condition = function()
+				return conditions.buffer_not_empty() and conditions.hide_in_width()
+			end,
+		}
 
 		return {
 			opts = {
@@ -396,10 +444,15 @@ return {
 			statusline = {
 				ViMode,
 				FileNameBlock,
-				Git,
+				FileType,
+				FileSize,
+				Diagnostics,
 				Align,
 				LSPActive,
-				FilePosition,
+				Formatters,
+				FileFormat,
+				FileEncoding,
+				IndentSizes,
 			},
 			tabline = { -- UI upper bar
 				lib.component.tabline_conditional_padding(),
