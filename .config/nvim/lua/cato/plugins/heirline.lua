@@ -114,7 +114,7 @@ return {
 				},
 				provider = function(self)
 					local mode = self.mode:sub(1, 1)
-					return string.format(" %s ", self.MODE_NAMES[mode])
+					return string.format("  %s ", self.MODE_NAMES[mode])
 				end,
 				hl = function(self)
 					local mode = self.mode:sub(1, 1)
@@ -124,10 +124,6 @@ return {
 					"ModeChanged",
 				},
 			},
-			{
-				provider = "",
-				hl = { bg = colors.base, fg = colors.mantle },
-			},
 		}
 
 		local FileNameBlock = {
@@ -135,7 +131,7 @@ return {
 				self.filename = vim.api.nvim_buf_get_name(0)
 			end,
 			condition = conditions.buffer_not_empty,
-			hl = { bg = colors.base, fg = colors.subtext1 },
+			hl = { bg = colors.surface1, fg = colors.text, bold = true },
 		}
 
 		local FileIcon = {
@@ -167,7 +163,6 @@ return {
 				end
 				return filename
 			end,
-			hl = { fg = colors.subtext1, bold = true },
 		}
 
 		local FileFlags = {
@@ -182,7 +177,7 @@ return {
 				condition = function()
 					return not vim.bo.modifiable or vim.bo.readonly
 				end,
-				provider = "",
+				provider = "  ",
 				hl = { fg = colors.red },
 			},
 		}
@@ -190,7 +185,7 @@ return {
 		local FileNameModifer = {
 			hl = function()
 				if vim.bo.modified then
-					return { fg = colors.text, bold = true, force = true }
+					return { italic = true, force = true }
 				end
 			end,
 		}
@@ -207,7 +202,7 @@ return {
 			provider = function()
 				return (" %s "):format(vim.bo.filetype)
 			end,
-			hl = { bg = colors.base, fg = colors.overlay0 },
+			hl = { bg = colors.base, fg = colors.subtext0, italic = true },
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
@@ -229,7 +224,7 @@ return {
 
 				return string.format(" %.2g%s ", fsize / math.pow(1024, i), suffix[i + 1])
 			end,
-			hl = { bg = colors.base, fg = colors.overlay0 },
+			hl = { bg = colors.base, fg = colors.subtext0, italic = true },
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
@@ -250,7 +245,7 @@ return {
 			},
 			provider = function()
 				local names = {}
-				for _, server in pairs(vim.lsp.get_clients()) do
+				for _, server in pairs(vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })) do
 					table.insert(names, server.name)
 				end
 
@@ -284,7 +279,7 @@ return {
 				end,
 				name = "heirline_Formatters",
 			},
-			hl = { bg = colors.base, fg = colors.overlay0 },
+			hl = { bg = colors.base, fg = colors.blue, bold = true },
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
@@ -399,7 +394,7 @@ return {
 					return " CRLF "
 				end
 			end,
-			hl = { bg = colors.base, fg = colors.overlay0 },
+			hl = { bg = colors.base, fg = colors.subtext0 },
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
@@ -413,7 +408,7 @@ return {
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
-			hl = { bg = colors.base, fg = colors.overlay0 },
+			hl = { bg = colors.base, fg = colors.subtext0 },
 		}
 
 		local IndentSizes = {
@@ -424,7 +419,7 @@ return {
 
 				return (" %s: %s "):format(indent_type, indent_size)
 			end,
-			hl = { bg = colors.surface1, fg = colors.overlay0 },
+			hl = { bg = colors.base, fg = colors.subtext0 },
 			condition = function()
 				return conditions.buffer_not_empty() and conditions.hide_in_width()
 			end,
