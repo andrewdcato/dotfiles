@@ -39,6 +39,14 @@ return {
 	},
 
 	{
+		"<leader>fn",
+		function()
+			Snacks.picker.notifications()
+		end,
+		desc = " Notification History",
+	},
+
+	{
 		"<leader>fs",
 		function()
 			Snacks.picker.grep()
