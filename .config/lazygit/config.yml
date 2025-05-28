@@ -66,9 +66,10 @@ gui:
     "main": "magenta"
     "master": "magenta"
 git:
-    paging:
-        colorArg: always
-        useConfig: false
+  paging:
+    colorArg: always
+    # useConfig: true
+    pager: delta --paging=never
   commit:
     signOff: false
   merging:
