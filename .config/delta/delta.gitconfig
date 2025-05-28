@@ -1,0 +1,8 @@
+# vi: ft=gitconfig
+
+# Delta Config: https://dandavison.github.io/delta/configuration.html
+[delta]
+  line-numbers = true
+  navigate = true
+  side-by-side = true
+
