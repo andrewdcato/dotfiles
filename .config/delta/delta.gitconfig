@@ -1,8 +1,10 @@
 # vi: ft=gitconfig
-
 # Delta Config: https://dandavison.github.io/delta/configuration.html
+[include]
+  path = ~/.config/delta/themes/catppuccin.gitconfig
+
 [delta]
   line-numbers = true
   navigate = true
   side-by-side = true
-
+  features = catppuccin-mocha
