@@ -227,6 +227,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				rust = { "rustfmt", lsp_format = "fallback" },
+				go = { "gofmt" },
 				-- TODO: figure out why prettierd is fucked?
 				javascript = { "eslint_d", "prettier", stop_after_first = true },
 				typescript = { "prettier", stop_after_first = true },
