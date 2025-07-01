@@ -1,0 +1,6 @@
+# #!/usr/bin/env bash
+
+tmux rename-window 'editor'
+tmux send-keys 'nvim' Enter
+tmux new-window -n 'terragrunt' -c "#{session_path}"
+tmux select-window -p

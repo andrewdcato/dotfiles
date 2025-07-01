@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+tmux rename-window 'infra'
+tmux send-keys 'nvim -c "lua Snacks.picker.files()"' Enter
+tmux new-window -n 'infra-catalog' -c "#{session_path}/../infra-catalog"
+tmux send-keys 'nvim -c "lua Snacks.picker.files()"' Enter
+tmux new-window -n 'surety360' -c "#{session_path}/../../surety360/surety360/terraform"
+tmux send-keys 'nvim -c "lua Snacks.picker.files()"' Enter
+tmux new-window -n 'sb-next' -c "#{session_path}/../sb-next/terraform"
+tmux send-keys 'nvim -c "lua Snacks.picker.files()"' Enter
+tmux new-window -n 'monorepo' -c "#{session_path}/../monorepo/terraform"
+tmux send-keys 'nvim -c "lua Snacks.picker.files()"' Enter
+tmux select-window -p
