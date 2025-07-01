@@ -1,6 +1,12 @@
 local dashboard = require("cato.plugins.snacks.dashboard")
 local pickers = require("cato.plugins.snacks.pickers")
 
+local exclude = {
+	".git",
+	".DS_Store",
+	".terraform.lock.hcl",
+}
+
 return {
 	"folke/snacks.nvim",
 	priority = 1000,
@@ -20,7 +26,11 @@ return {
 				explorer = {
 					hidden = true,
 					ignored = true,
-					exclude = { ".git" },
+					exclude = vim.tbl_extend("force", exclude, {}),
+				},
+				files = {
+					hidden = true,
+					exclude = vim.tbl_extend("force", exclude, {}),
 				},
 			},
 		},
