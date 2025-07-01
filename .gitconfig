@@ -1,22 +1,77 @@
+[include]
+  path = ~/.config/delta/delta.gitconfig
+
 # This is Git's per-user configuration file.
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   required = true
   process = git-lfs filter-process
+
 [user]
   name = Andrew Cato
   email = andrewdcato@gmail.com
-	signingkey = /Users/andrewcato/.ssh/id_ed25519.pub
+  signingkey = /Users/andrewcato/.ssh/id_ed25519.pub
+
+[core]
+  compression = 9
+  editor = nvim
+  preloadindex = true
+  whitespace = error
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[pager]
+  branch = false
+
+# Command Config
 [push]
+  autoSetupRemote = true
   default = matching
   followTags = true
-[core]
-  editor = 'vim'
+
+[pull]
+  rebase = true
+
+[rebase]
+  autoStash = true
+  missingCommitsCheck = warn
+
+[init]
+  defaultBranch = main
+
 [diff]
+  context = 5
+  renames = copies
   submodule = log
+  interHunkContext = 10
+
+[status]
+  branch = true
+  showStash = true
+  showUntrackedFiles = all
+
+[log]
+  abbrevCommit = true
+
+[branch]
+  sort = -committerdate
+
+[tag]
+  sort = -taggerdate
+
 [submodule]
   recurse = true
+
+[gpg]
+	format = ssh
+
+[commit]
+  gpgsign = true
+
+# Color Config
 [color]
   diff = auto
   status = auto
@@ -24,11 +79,17 @@
   interactive = auto
   ui = true
   pager = true
-[pull]
-  rebase = false
-[init]
-  defaultBranch = main
-[gpg]
-	format = ssh
-[commit]
-	gpgsign = true
+
+# URL Shortcuts
+[url "git@github.com:"]
+  insteadOf = "gh:"
+
+[url "git@github.com:andrewdcato/"]
+  insteadOf = "ac:"
+
+[url "git@github.com:surety-bonds/"]
+  insteadOf = "sb:"
+
+[url "git@github.com:surety360/"]
+  insteadOf = "s360:"
+
