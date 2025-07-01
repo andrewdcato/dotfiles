@@ -1,5 +1,9 @@
 export ANS_DIR="$HOME/surety/ansible"
 
+# Global overrides
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+
 # Custom Aliases
 alias vi="nvim"
 alias vim="nvim"
