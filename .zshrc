@@ -134,5 +134,8 @@ esac
 # Load custom aliases
 source "$HOME/.zsh_aliases"
 
+# Configure Bat as manpager
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
 # Configure terragrunt
 complete -o nospace -C /opt/homebrew/bin/terragrunt terragrunt
