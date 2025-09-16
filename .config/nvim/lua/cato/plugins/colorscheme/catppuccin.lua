@@ -49,6 +49,10 @@ return {
 				dark = "mocha",
 			},
 			transparent_background = true,
+			float = {
+				transparent = false, -- enable transparent floating windows
+				solid = false, -- use solid styling for floating windows, see |winborder|
+			},
 			show_end_of_buffer = true, -- show the '~' characters after the end of buffers
 			term_colors = true,
 			dim_inactive = {
@@ -74,23 +78,25 @@ return {
 			},
 			color_overrides = {},
 			custom_highlights = custom_higlights,
+			default_integrations = false,
+			auto_integrations = true,
+
 			integrations = {
-				aerial = true,
-				cmp = true,
-				dadbod_ui = true,
+				barbecue = {
+					dim_dirname = true, -- directory name is dimmed by default
+					bold_basename = true,
+					dim_context = false,
+					alt_background = false,
+				},
 				dap = {
 					enabled = true,
 					enable_ui = true,
 				},
-				gitsigns = true,
-				illuminate = true,
 				indent_blankline = {
 					enabled = true,
 					scope_color = "sky",
 					colored_indent_levels = false,
 				},
-				lsp_trouble = true,
-				mason = true,
 				native_lsp = {
 					enabled = true,
 					virtual_text = {
@@ -111,16 +117,10 @@ return {
 						background = true,
 					},
 				},
-				notify = true,
-				noice = true,
-				telescope = true,
-				treesitter = true,
-				ufo = true,
 				snacks = {
 					enabled = true,
 					indent_scope_color = "sky",
 				},
-				which_key = true,
 			},
 		})
 
