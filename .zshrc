@@ -1,21 +1,22 @@
 # Set a few defaults to our shell.
-export ZSH="$HOME/.oh-my-zsh"
-export XDG_CONFIG_HOME="$HOME/.config"
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/config.toml"
 export DEFAULT_USER="andrewcato"
 export EDITOR="nvim"
+export XDG_CONFIG_HOME="$HOME/.config"
+export ZSH="$HOME/.oh-my-zsh"
+
+export ANS_DIR="$HOME/surety/ansible"
 export PYENV_ROOT="$HOME/.pyenv"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-export ANS_DIR="$HOME/surety/ansible"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/config.toml"
 
 # Setup Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
 # Use PyEnv instead of system python
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-export PATH="/opt/homebrew/opt/mongodb-community@4.4/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/mongodb-community@4.4/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="${PATH}:${HOME}/.local/bin/"
 export PATH="$HOME/.config/sesh/scripts:$PATH"
@@ -113,7 +114,7 @@ eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
 # Apply the proper rice
-source $ZSH/custom/themes/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+source $ZSH/custom/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # Load homebrew-managed extensions
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -121,10 +122,10 @@ source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 # Configure tfenv
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /opt/homebrew/Cellar/tfenv/3.0.0/versions/1.4.6/terraform terraform
+complete -o nospace -C $HOMEBREW_PREFIX/Cellar/tfenv/3.0.0/versions/1.4.6/terraform terraform
 
 # pnpm
-export PNPM_HOME="/Users/andrewcato/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -138,4 +139,4 @@ source "$HOME/.zsh_aliases"
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
 # Configure terragrunt
-complete -o nospace -C /opt/homebrew/bin/terragrunt terragrunt
+complete -o nospace -C $HOMEBREW_PREFIX/bin/terragrunt terragrunt
