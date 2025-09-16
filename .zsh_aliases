@@ -1,5 +1,3 @@
-export ANS_DIR="$HOME/surety/ansible"
-
 # Global overrides
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
@@ -31,44 +29,8 @@ function acp(){
   git push
 }
 
-function develop-merge-conflict() {
-  git checkout develop
-  git pull
-  git checkout -
-  rm -r node_modules package-lock.json
-  npm install
-  git commit -m "fix: resolve merge conflict" && git push
-}
-
-# Nvim config switcher
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-kick="NVIM_APPNAME=kickstart nvim"
-alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
-
-function nvims() {
-  items=("default" "kickstart" "LazyVim" "NvChad" "AstroNvim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
-
 # Kill all docker containers with "none" tags
 alias dkill="docker rmi $(docker images | grep '^<none>' | awk '{print $3}')"
-
-# Ngrok shortcuts
-alias nlms='ngrok http --url cato-lms.ngrok.io 3000'
-alias nconnect='ngrok http --url cato-con.ngrok.io 5000'
-alias nem='ngrok http --url cato-ews.ngrok.io 5500'
-alias nds='ngrok http --url cato-ds.ngrok.io 8000'
-
-# Ansible Aliases
-alias pingAll="ansible-playbook $ANS_DIR/playbooks/ping.yml"
 
 # Tells you what's listening on a given port
 # credit: https://stackoverflow.com/a/30029855/3264790
@@ -91,8 +53,4 @@ function killport() {
   
   lsof -t -i tcp:$1 | xargs kill
 }
-
-# Mongo Aliases
-alias mongoProd="mongosh 'mongodb+srv://lms-prod.h69c1.mongodb.net/lms-prod' --username acato"
-alias mongoDev="mongosh 'mongodb+srv://lms-dev.msr1d.mongodb.net/lms-dev' --username acato"
 

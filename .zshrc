@@ -1,27 +1,51 @@
-# Set a few defaults to our shell.
 export DEFAULT_USER="andrewcato"
 export EDITOR="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
-export ZSH="$HOME/.oh-my-zsh"
 
-export ANS_DIR="$HOME/surety/ansible"
 export PYENV_ROOT="$HOME/.pyenv"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship/config.toml"
 
 # Setup Homebrew
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
-# Use PyEnv instead of system python
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Enable oh-my-posh
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/config.toml)"
+fi
 
-export PATH="$HOMEBREW_PREFIX/opt/mongodb-community@4.4/bin:$PATH"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export PATH="${PATH}:${HOME}/.local/bin/"
-export PATH="$HOME/.config/sesh/scripts:$PATH"
+# Enable Zinit and install plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Set theme for FZF
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+zinit snippet OMZP::ansible
+zinit snippet OMZP::aws
+zinit snippet OMZP::brew
+zinit snippet OMZP::git
+zinit snippet OMZP::git-flow
+zinit snippet OMZP::nvm
+zinit snippet OMZP::terraform
+
+# Load completions
+autoload -Uz compinit && compinit
+
+zinit cdreplay -q
+
+# Configure FZF, Zoxide, and Sesh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
   --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
@@ -34,33 +58,36 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --border=rounded \
 "
 
-# OMZ customization
-DISABLE_AUTO_TITLE="false"
-ENABLE_CORRECTION="true"
-COMPLETION_WAITING_DOTS="true"
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+eval "$(zoxide init zsh)"
+export PATH="$HOME/.config/sesh/scripts:$PATH"
 
-export CORRECT_IGNORE_FILE='.zsh_correctignore'
-setopt correct
-setopt histignorealldups
-setopt histreduceblanks
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  ansible
-  brew
-  git
-  git-flow
-  nvm
-  terraform
-)
+zle     -N             sesh-sessions
+bindkey -M emacs '\es' sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
 
-# You have to load this *after* declaring plugins or it won't work...odd
-source $ZSH/oh-my-zsh.sh
+##### LANGUAGE AND FRAMEWORK MANAGEMENT
+# TODO: figure out how to lazy load this, prompt is slow as hell even after ditching
+#   oh-my-zsh...
 
-# Force NVM to load the specified version of Node
+# Enable Node Version Manager (NVM)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+
+# Force NVM to load the specified version of Node if an .nvmrc exists
 autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
@@ -81,6 +108,27 @@ load-nvmrc() {
 add-zsh-hook chpwd load-nvmrc
 load-nvmrc
 
+# Enable PNPM
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# Enable PyEnv 
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Enable TFEnv
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C "$HOMEBREW_PREFIX/Cellar/tfenv/3.0.0/versions/1.4.6/terraform terraform"
+
+# Enable Terragrunt
+complete -o nospace -C "$HOMEBREW_PREFIX/bin/terragrunt terragrunt"
+
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="${PATH}:${HOME}/.local/bin/"
+
 # Auto-add keys to ssh-agent
 if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     eval $(ssh-agent -s) > /dev/null
@@ -91,45 +139,10 @@ if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     fi
 fi
 
-function sesh-sessions() {
-  {
-    exec </dev/tty
-    exec <&1
-    local session
-    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
-    zle reset-prompt > /dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    sesh connect $session
-  }
-}
-
-zle     -N             sesh-sessions
-bindkey -M emacs '\es' sesh-sessions
-bindkey -M vicmd '\es' sesh-sessions
-bindkey -M viins '\es' sesh-sessions
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
-
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
 
 # Apply the proper rice
-source $ZSH/custom/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
-
-# Load homebrew-managed extensions
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Configure tfenv
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $HOMEBREW_PREFIX/Cellar/tfenv/3.0.0/versions/1.4.6/terraform terraform
-
+# source $ZSH/custom/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
 # pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
 # pnpm end
 
 # Load custom aliases
@@ -138,5 +151,3 @@ source "$HOME/.zsh_aliases"
 # Configure Bat as manpager
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 
-# Configure terragrunt
-complete -o nospace -C $HOMEBREW_PREFIX/bin/terragrunt terragrunt
