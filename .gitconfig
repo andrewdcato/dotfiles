@@ -86,10 +86,3 @@
 
 [url "git@github.com:andrewdcato/"]
   insteadOf = "ac:"
-
-[url "git@github.com:surety-bonds/"]
-  insteadOf = "sb:"
-
-[url "git@github.com:surety360/"]
-  insteadOf = "s360:"
-
