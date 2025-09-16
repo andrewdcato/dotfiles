@@ -22,11 +22,6 @@ mouse-hide-while-typing = true
 quit-after-last-window-closed = true
 shell-integration = zsh
 macos-titlebar-style = hidden
-# TODO: make this work?
-# macos-icon = custom-style
-# macos-icon-frame = chrome
-# macos-icon-ghost-color = cba6f7
-# macos-icon-screen-color = 585b70,45475a,313244,1e1e2e
 
 ###############
 ## clipboard ##
@@ -39,7 +34,7 @@ clipboard-write = allow
 ## visual ##
 ############
 background-blur-radius = 20
-background-opacity = 0.8
+background-opacity = 0.85
 cursor-color = f5e0dc
 cursor-invert-fg-bg = true
 cursor-opacity = 0.75
@@ -47,7 +42,7 @@ cursor-style-blink = true
 foreground = cdd6f4
 selection-background = 585b70
 selection-foreground = cdd6f4
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 window-colorspace = display-p3
 window-padding-balance = false
 window-padding-color = extend
