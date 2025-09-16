@@ -24,7 +24,7 @@ return {
 			},
 			fuzzy = {
 				implementation = "rust",
-				use_frecency = true,
+				frecency = { enabled = true },
 				prebuilt_binaries = {
 					download = true,
 					ignore_version_mismatch = false,
