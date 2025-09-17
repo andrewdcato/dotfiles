@@ -56,8 +56,8 @@ newline = true
 type = 'text'
 style = 'plain'
 foreground_templates = [
-"{{if gt .Code 0}}red{{end}}",
-"{{if eq .Code 0}}green{{end}}",
+  "{{if gt .Code 0}}red{{end}}",
+  "{{if eq .Code 0}}green{{end}}",
 ]
 background = 'transparent'
 template = '➜'
@@ -65,14 +65,14 @@ template = '➜'
 # NOTE: only show full prompt on current line - otherwise just show command/output and status
 [transient_prompt]
 foreground_templates = [
-"{{if gt .Code 0}}red{{end}}",
-"{{if eq .Code 0}}green{{end}}",
+  "{{if gt .Code 0}}red{{end}}",
+  "{{if eq .Code 0}}green{{end}}",
 ]
 background = 'transparent'
-template = '➜'
+template = '➜ '
 
 # NOTE: only active for multiline commands
 [secondary_prompt]
 foreground = 'blue'
 background = 'transparent'
-template = '➜'
+template = '➜ '
