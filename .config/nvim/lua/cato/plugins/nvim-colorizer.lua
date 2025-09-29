@@ -7,6 +7,8 @@ return {
 			"lua",
 			"javascript",
 			"typescript",
+			"javascriptreact",
+			"typescriptreact",
 			"tailwind",
 		})
 	end,
