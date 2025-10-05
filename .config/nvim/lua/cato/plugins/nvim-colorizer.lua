@@ -1,5 +1,6 @@
 return {
 	"norcalli/nvim-colorizer.lua",
+	event = "LspAttach",
 	dependencies = { "roobert/tailwindcss-colorizer-cmp.nvim" },
 	config = function()
 		require("colorizer").setup({

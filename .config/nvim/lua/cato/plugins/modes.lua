@@ -1,6 +1,7 @@
 return {
 	"mvllow/modes.nvim",
 	dependencies = { "catppuccin/nvim" },
+	event = "VeryLazy",
 	config = function()
 		local colors = require("catppuccin.palettes").get_palette("mocha")
 
@@ -15,6 +16,7 @@ return {
 			set_cursor = true,
 			set_cursorline = true,
 			set_number = true,
+			-- TODO: ignore in snacks pickers
 			ignore = { "neo-tree", "TelescopePrompt" },
 		})
 	end,

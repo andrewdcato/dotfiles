@@ -1,7 +1,7 @@
 return {
 	"kevinhwang91/nvim-ufo",
 	dependencies = "kevinhwang91/promise-async",
-	event = "VeryLazy",
+	event = "LspAttach",
 	opts = {
 		open_fold_hl_timeout = 400,
 		close_fold_kinds = { "imports", "comment" },

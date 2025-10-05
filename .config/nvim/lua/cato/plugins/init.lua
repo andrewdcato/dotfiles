@@ -2,6 +2,7 @@ return {
 	-- Allows quick switch from nvim to tmux splits
 	{
 		"alexghergh/nvim-tmux-navigation",
+    event = "VeryLazy",
 		config = function()
 			require("nvim-tmux-navigation").setup({
 				disable_when_zoomed = true, -- defaults to false
@@ -21,6 +22,7 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
+    event = "VeryLazy",
 		config = true,
 	},
 }

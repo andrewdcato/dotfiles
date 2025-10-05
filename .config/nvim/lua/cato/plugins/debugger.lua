@@ -9,11 +9,6 @@ local function get_pkg_path(pkg, path)
 end
 
 return {
-	{ -- NOTE: needed to support loading debug configs from ./.vscode/launch.json files, as those contain comments and
-		--        aren't valid JSON
-		"Joakker/lua-json5",
-		build = "./install.sh",
-	},
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
@@ -21,6 +16,12 @@ return {
 			{
 				"microsoft/vscode-js-debug",
 				build = "npm i --no-package-lock && npm run compile vsDebugServerBundle && rm -rf out && mv -f dist out",
+			},
+			{
+				-- NOTE: needed to support loading debug configs from ./.vscode/launch.json files, as those contain comments and
+				--        aren't valid JSON
+				"Joakker/lua-json5",
+				build = "./install.sh",
 			},
 		},
 		keys = {

@@ -1,5 +1,6 @@
 return {
 	"lukas-reineke/indent-blankline.nvim",
+	event = { "InsertEnter" },
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	version = "v2.*",
 	config = function()

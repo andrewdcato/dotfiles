@@ -7,6 +7,7 @@ return {
 	},
 	{
 		"saghen/blink.cmp",
+		event = "LspAttach",
 		version = "*",
 		dependencies = {
 			"saghen/blink.compat",

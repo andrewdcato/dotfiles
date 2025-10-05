@@ -6,7 +6,6 @@ local servers = {
 		"cssls",
 		"cssmodules_ls",
 		"dockerls",
-		"eslint",
 		"html",
 		"jsonls",
 		"lua_ls",
@@ -33,7 +32,7 @@ local servers = {
 return {
 	{
 		"williamboman/mason.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
 		dependencies = {
 			"williamboman/mason-lspconfig.nvim",
 			"jay-babu/mason-nvim-dap.nvim",
@@ -69,22 +68,18 @@ return {
 			})
 
 			mason_dap.setup({
-				ensure_installed = { "chrome", "js" },
+				ensure_installed = { "js" },
 			})
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
+		priority = 50,
 		dependencies = {
 			"SmiteshP/nvim-navic",
-			"saghen/blink.cmp",
 			{ "antosha417/nvim-lsp-file-operations", config = true },
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
-
-			-- Configure diagnostic symbols
 			local signs = {
 				{ name = "DiagnosticSignError", text = icons.diagnostics.error },
 				{ name = "DiagnosticSignWarn", text = icons.diagnostics.warn },
@@ -93,14 +88,13 @@ return {
 			}
 
 			for _, sign in ipairs(signs) do
+				-- TODO: address deprecation warning
 				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 			end
 
 			local diagnostic_config = {
-				virtual_text = false, -- disable virtual text
-				signs = {
-					active = signs, -- show signs
-				},
+				virtual_text = false,
+				signs = { active = signs },
 				update_in_insert = true,
 				underline = true,
 				severity_sort = true,
@@ -116,18 +110,13 @@ return {
 
 			vim.diagnostic.config(diagnostic_config)
 
+			local border = { border = "rounded" }
 			local handlers = {
-				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-					border = "rounded",
-				}),
-				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-					border = "rounded",
-				}),
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, border),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, border),
 			}
 
-			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-				border = "rounded",
-			})
+			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, border)
 
 			-- Configure on_attach function
 			local km = vim.keymap
@@ -190,56 +179,35 @@ return {
 			end
 
 			-- Configure capabilities
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
+			local default_capabilities = vim.lsp.protocol.make_client_capabilities()
+			local capabilities = vim.tbl_deep_extend("force", default_capabilities, {
+				textDocument = {
+					completion = {
+						completionItem = { snippetSupport = true },
+						semanticTokens = { multilineTokenSupport = true },
+					},
+					foldingRange = {
+						dynamicRegistration = false,
+						lifeFoldingOnly = true,
+					},
+				},
+			})
 
-			capabilities.textDocument.foldingRange = {
-				dynamicRegistration = false,
-				lifeFoldingOnly = true,
-			}
-
-			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
+			vim.lsp.config("*", {
+				capabilities = capabilities,
+				on_attach = on_attach,
+				handlers = handlers,
+				root_markers = { ".git" },
+			})
 
 			-- Loop through configuration files for servers and configure them
 			-- NOTE: file names need to mirror mason-lspconfigs names
-			local serverOpts = {}
 			for _, server in pairs(servers.mason) do
-				serverOpts = {
-					on_attach = on_attach,
-					capabilities = capabilities,
-					handlers = handlers,
-				}
-
 				server = vim.split(server, "@")[1]
 
-				local require_ok, conf_opts = pcall(require, "cato.plugins.lsp.settings." .. server)
-				if require_ok then
-					serverOpts = vim.tbl_deep_extend("force", conf_opts, serverOpts)
-				end
-
-				lspconfig[server].setup(serverOpts)
+				vim.lsp.config(server, {})
+				vim.lsp.enable(server)
 			end
 		end,
-	},
-	{
-		"stevearc/conform.nvim",
-		dependencies = { "neovim/nvim-lspconfig" },
-		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				rust = { "rustfmt", lsp_format = "fallback" },
-				go = { "gofmt" },
-				-- TODO: figure out why prettierd is fucked?
-				javascript = { "eslint_d", "prettier", stop_after_first = true },
-				typescript = { "prettier", stop_after_first = true },
-				svelte = { "prettier", stop_after_first = true },
-				terraform = { "terraform_fmt" },
-				["_"] = { "prettier" },
-			},
-			format_on_save = {
-				lsp_format = "fallback",
-				timeout_ms = 1000,
-			},
-		},
 	},
 }

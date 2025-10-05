@@ -2,10 +2,10 @@
 vim.g.mapleader = " "
 
 -- Core options
-require("cato.core.options")
+require("cato.config.options")
 
 -- Autocommands
-require("cato.core.autocommands")
+require("cato.config.autocommands")
 
 -- Bootstrap lazy.nvim if it is missing
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -23,4 +23,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Lazy.nvim config
-require("cato.lazy")
+require("cato.core.lazy")

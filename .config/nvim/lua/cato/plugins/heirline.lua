@@ -1,3 +1,5 @@
+local icons = require("cato.util").icons
+
 return {
 	"rebelot/heirline.nvim",
 	lazy = false,
@@ -131,7 +133,7 @@ return {
 				self.filename = vim.api.nvim_buf_get_name(0)
 			end,
 			condition = conditions.buffer_not_empty,
-			hl = { bg = colors.surface1, fg = colors.text, bold = true },
+			hl = { bg = colors.surface0, fg = colors.text, bold = true },
 		}
 
 		local FileIcon = {
@@ -190,11 +192,100 @@ return {
 			end,
 		}
 
+		local Diagnostics = {
+			condition = function()
+				return conditions.buffer_not_empty() and conditions.hide_in_width() and conditions.has_diagnostics()
+			end,
+			static = {
+				error_icon = icons.diagnostics.error,
+				warn_icon = icons.diagnostics.warn,
+				info_icon = icons.diagnostics.info,
+				hint_icon = icons.diagnostics.hint,
+			},
+			init = function(self)
+				self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+				self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+				self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+				self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+			end,
+			update = { "DiagnosticChanged", "BufEnter" },
+			hl = { bg = colors.base },
+			Space,
+			{
+				provider = function(self)
+					return self.errors > 0 and ("%s%s"):format(self.error_icon, self.errors)
+				end,
+				hl = { fg = colors.red },
+			},
+			{
+				provider = function(self)
+					return self.warnings > 0 and ("%s%s"):format(self.warn_icon, self.warnings)
+				end,
+				hl = { fg = colors.yellow },
+			},
+			{
+				provider = function(self)
+					return self.info > 0 and ("%s%s"):format(self.info_icon, self.info)
+				end,
+				hl = { fg = colors.sapphire },
+			},
+			{
+				provider = function(self)
+					return self.hints > 0 and ("%s%s"):format(self.hint_icon, self.hints)
+				end,
+				hl = { fg = colors.sky },
+			},
+			Space,
+		}
+
+		local Git = {
+			condition = conditions.is_git_repo,
+			init = function(self)
+				self.status_dict = vim.b.gitsigns_status_dict
+				self.has_changes = self.status_dict.added ~= 0
+					or self.status_dict.removed ~= 0
+					or self.status_dict.changed ~= 0
+			end,
+			{
+				provider = function(self)
+					local count = self.status_dict.added or 0
+					return count > 0 and ("  %s"):format(count)
+				end,
+				hl = { fg = colors.green },
+				condition = function()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
+				end,
+			},
+			{
+				provider = function(self)
+					local count = self.status_dict.removed or 0
+					return count > 0 and ("  %s"):format(count)
+				end,
+				hl = { fg = colors.red },
+				condition = function()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
+				end,
+			},
+			{
+				provider = function(self)
+					local count = self.status_dict.changed or 0
+					return count > 0 and ("  %s"):format(count)
+				end,
+				hl = { fg = colors.peach },
+				condition = function()
+					return conditions.buffer_not_empty() and conditions.hide_in_width()
+				end,
+			},
+			Space,
+		}
+
 		FileNameBlock = utils.insert(
 			FileNameBlock,
 			FileIcon,
 			utils.insert(FileNameModifer, FileName),
+			-- TODO: address deprecation warning
 			unpack(FileFlags),
+			Git,
 			{ provider = "%< " }
 		)
 
@@ -253,7 +344,7 @@ return {
 					return ""
 				end
 
-				return ("▌  %s "):format(table.concat(names, " "))
+				return ("▌ %s "):format(table.concat(names, " "))
 			end,
 			hl = { bg = colors.base, fg = colors.mauve, bold = true, italic = false },
 		}
@@ -285,104 +376,6 @@ return {
 			end,
 		}
 
-		local Diagnostics = {
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.hide_in_width() and conditions.has_diagnostics()
-			end,
-			static = {
-				error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
-				warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
-				info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
-				hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
-			},
-			init = function(self)
-				self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-				self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-				self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
-				self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-			end,
-			update = { "DiagnosticChanged", "BufEnter" },
-			hl = { bg = colors.base },
-			Space,
-			{
-				provider = function(self)
-					return self.errors > 0 and ("%s%s "):format(self.error_icon, self.errors)
-				end,
-				hl = { fg = colors.red },
-			},
-			{
-				provider = function(self)
-					return self.warnings > 0 and ("%s%s "):format(self.warn_icon, self.warnings)
-				end,
-				hl = { fg = colors.yellow },
-			},
-			{
-				provider = function(self)
-					return self.info > 0 and ("%s%s "):format(self.info_icon, self.info)
-				end,
-				hl = { fg = colors.sapphire },
-			},
-			{
-				provider = function(self)
-					return self.hints > 0 and ("%s%s "):format(self.hint_icon, self.hints)
-				end,
-				hl = { fg = colors.sky },
-			},
-			Space,
-		}
-
-		local Git = {
-			condition = conditions.is_git_repo,
-			init = function(self)
-				self.status_dict = vim.b.gitsigns_status_dict
-				self.has_changes = self.status_dict.added ~= 0
-					or self.status_dict.removed ~= 0
-					or self.status_dict.changed ~= 0
-			end,
-			hl = { bg = colors.base },
-			{
-				provider = "",
-				hl = { bg = colors.base, fg = colors.mantle },
-			},
-			{
-				provider = function(self)
-					return ("  %s"):format(self.status_dict.head == "" and "~" or self.status_dict.head)
-				end,
-				hl = { fg = colors.mauve },
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.added or 0
-					return count > 0 and ("  %s"):format(count)
-				end,
-				hl = { fg = colors.green },
-				condition = function()
-					return conditions.buffer_not_empty() and conditions.hide_in_width()
-				end,
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.removed or 0
-					return count > 0 and ("  %s"):format(count)
-				end,
-				hl = { fg = colors.red },
-				condition = function()
-					return conditions.buffer_not_empty() and conditions.hide_in_width()
-				end,
-			},
-			{
-				provider = function(self)
-					local count = self.status_dict.changed or 0
-					return count > 0 and ("  %s"):format(count)
-				end,
-				hl = { fg = colors.peach },
-				condition = function()
-					return conditions.buffer_not_empty() and conditions.hide_in_width()
-				end,
-			},
-			Space,
-		}
-
 		local FileFormat = {
 			provider = function()
 				local fmt = vim.bo.fileformat
@@ -411,20 +404,6 @@ return {
 			hl = { bg = colors.base, fg = colors.subtext0 },
 		}
 
-		local IndentSizes = {
-			provider = function()
-				local indent_type = vim.api.nvim_get_option_value("expandtab", { scope = "local" }) and "Spaces"
-					or "Tab Size"
-				local indent_size = vim.api.nvim_get_option_value("tabstop", { scope = "local" })
-
-				return (" %s: %s "):format(indent_type, indent_size)
-			end,
-			hl = { bg = colors.base, fg = colors.subtext0 },
-			condition = function()
-				return conditions.buffer_not_empty() and conditions.hide_in_width()
-			end,
-		}
-
 		return {
 			opts = {
 				disable_winbar_cb = function(args) -- We do this to avoid showing it on the greeter.
@@ -442,12 +421,16 @@ return {
 				FileType,
 				FileSize,
 				Diagnostics,
+				lib.component.cmd_info(),
 				Align,
 				LSPActive,
 				Formatters,
 				FileFormat,
 				FileEncoding,
-				IndentSizes,
+				lib.component.nav({
+					hl = { bg = colors.surface0, fg = colors.subtext0 },
+					scrollbar = { hl = { fg = colors.blue } },
+				}),
 			},
 			tabline = { -- UI upper bar
 				lib.component.tabline_conditional_padding(),
@@ -466,23 +449,14 @@ return {
 						return not lib.condition.is_active()
 					end,
 					{
-						lib.component.neotree(),
-						lib.component.compiler_play(),
 						lib.component.fill(),
-						lib.component.compiler_build_type(),
-						lib.component.compiler_redo(),
-						lib.component.aerial(),
 					},
 				},
 				-- Regular winbar
 				{
-					lib.component.neotree(),
-					lib.component.compiler_play(),
 					lib.component.fill(),
 					lib.component.breadcrumbs(),
 					lib.component.fill(),
-					lib.component.compiler_redo(),
-					lib.component.aerial(),
 				},
 			},
 		}

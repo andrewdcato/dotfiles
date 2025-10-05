@@ -40,25 +40,25 @@ M.icons.separators = {
 }
 
 M.icons.diagnostics = {
-	error = "",
-	hint = "",
-	info = "",
-	warn = "",
-	code_action = " ",
+	error = " ",
+	hint = " ",
+	info = " ",
+	warn = " ",
+	code_action = "  ",
 }
 
 M.icons.git = {
-	added = "",
-	branch = "",
-	conflict = "",
-	deleted = "",
-	ignored = "",
-	modified = "",
-	removed = "",
-	renamed = "",
-	staged = "",
-	unstaged = "",
-	untracked = "",
+	added = " ",
+	branch = " ",
+	conflict = " ",
+	deleted = " ",
+	ignored = " ",
+	modified = " ",
+	removed = " ",
+	renamed = " ",
+	staged = " ",
+	unstaged = " ",
+	untracked = " ",
 }
 
 M.icons.kinds = {

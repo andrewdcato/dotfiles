@@ -116,7 +116,7 @@ case ":$PATH:" in
 esac
 
 # Enable PyEnv 
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # Enable TFEnv
