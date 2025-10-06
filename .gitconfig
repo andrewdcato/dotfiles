@@ -11,7 +11,7 @@
 [user]
   name = Andrew Cato
   email = andrewdcato@gmail.com
-  signingkey = /Users/andrewcato/.ssh/id_ed25519.pub
+	signingkey = /Users/andrewcato/.ssh/github.pub
 
 [core]
   compression = 9
