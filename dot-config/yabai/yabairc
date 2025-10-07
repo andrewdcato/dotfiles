@@ -43,7 +43,7 @@ yabai -m rule --add label="About This Mac" app="System Information" title="About
 
 # NOTE: get around spacing differences based on sketchybar / the notch...
 NOTCH_UUID="1FFD8930-F1C9-5FB9-A0B6-45F2F0499C0B"
-NORMAL_BAR=15
+NORMAL_BAR=40
 NOTCH_BAR=0
 
 yabai -m signal --add event=display_added action="if [[ \"\$(yabai -m query --displays | jq \".[\$YABAI_DISPLAY_ID].uuid\")\" =~ \"$NOTCH_UUID\" ]]; then yabai -m config external_bar main:$NORMAL_BAR:0; elif [[ \"\$(yabai -m query --displays | jq '.[].uuid')\" =~ \"$NOTCH_UUID\" ]]; then yabai -m config external_bar main:$NORMAL_BAR:0; else yabai -m config external_bar all:$NORMAL_BAR:0; fi"

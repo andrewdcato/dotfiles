@@ -7,6 +7,7 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # Setup Homebrew
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+echo 'export PATH="/usr/local/sbin:$PATH"'
 
 # Enable oh-my-posh
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then

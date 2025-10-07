@@ -2,22 +2,18 @@
 .DS_Store
 
 # State files
-.config/lazygit/state.yml
-.config/lazydocker/state.yml
-.config/configstore
-
-# Ignore all of OMZ except custom things
-.oh-my-zsh/*
-!.oh-my-zsh/custom/plugins/*
-!.oh-my-zsh/custom/themes/*
+dot-config/lazygit/state.yml
+dot-config/lazydocker/state.yml
+dot-config/configstore
 
 # Ignore all in .ssh dir except for config files
-.ssh
-!.ssh/config
-!.ssh/config_personal
+dot-ssh/*
+!dot-ssh/config
+!dot-ssh/config_personal
 
 # Ignore all log files
 **/*.log
 
 # Ignore yazi flavors
-.config/yazi/flavors/catppuccin-mocha.yazi/*
+dot-config/yazi/flavors/catppuccin-mocha.yazi/*
+
