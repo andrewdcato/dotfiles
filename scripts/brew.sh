@@ -12,21 +12,28 @@ else
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-brew doctor;
+brew doctor
 
 # NOTE: install homebrew dependencies
 cd ~/code/dotfiles && brew bundle install --force;
 
+# NOTE: agree to xcode license
+sudo xcodebuild -license accept
+
 # NOTE: symlink dependencies to home directory...
 stow --target=$HOME --dotfiles .
+
+# NOTE: build bat cache...
+bat cache --build
+
 
 #####################################################################
 #      NOTE: Set up Sketchybar, Yabai, and SKHD
 #####################################################################
 setup_font () {
-  local dir="~/code/sb-app-font"
+  local dir="$HOME/code/sb-app-font"
 
-  if [-d "$dir/.git"]; then
+  if [ -d "$dir/.git" ]; then
     echo "Font installed; updating..."
     cd "$dir" && git pull;
   else
@@ -34,7 +41,7 @@ setup_font () {
   fi
 
   # NOTE: build and install font to proper directory...
-  cd "$dir" && pnpm install && pnpm run build:install -- "${XDG_CONFIG_HOME}/sketchybar/plugins/icon_map.sh"
+  cd "$dir" && pnpm install && pnpm run build:install "$XDG_CONFIG_HOME/sketchybar/plugins/icon_map.sh"
 }
 
 setup_font
@@ -57,7 +64,7 @@ sudo yabai --load-sa
 #       pull down preferences...
 #####################################################################
 for app in "1Password" \
-  "Synology Drive Client" do
+  "Synology Drive Client"; do
   osascript -e "tell application \"$app\" to launch"
 done
 
