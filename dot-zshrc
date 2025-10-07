@@ -1,3 +1,4 @@
+# vi: ft=zsh
 export DEFAULT_USER="andrewcato"
 export EDITOR="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -36,7 +37,7 @@ zinit snippet OMZP::ansible
 zinit snippet OMZP::aws
 zinit snippet OMZP::brew
 zinit snippet OMZP::git
-zinit snippet OMZP::git-flow
+zinit snippet OMZP::git-flow-avh
 zinit snippet OMZP::nvm
 zinit snippet OMZP::terraform
 
