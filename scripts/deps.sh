@@ -4,7 +4,7 @@
 #      install needed packages...
 #####################################################################
 # Ensure that any relevant apps are closed
-if which brew &> /dev/null; then
+if command -v brew  &> /dev/null; then
   echo "Homebrew is already installed; updating now..."
   brew update;
 else
@@ -14,18 +14,34 @@ fi
 
 brew doctor
 
-# NOTE: install homebrew dependencies
-cd ~/code/dotfiles && brew bundle install --force;
+# install homebrew dependencies
+cd "$HOME/code/dotfiles" && brew bundle install --force;
 
-# NOTE: agree to xcode license
+#####################################################################
+#      NOTE: Set up Tmux, NVM, etc.
+#####################################################################
+# agree to xcode license
 sudo xcodebuild -license accept
 
-# NOTE: symlink dependencies to home directory...
-stow --target=$HOME --dotfiles .
+# Install NVM - script is smart enough to check for updates if already installed...
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/HEAD/install.sh)"
 
-# NOTE: build bat cache...
+setup_tmux () {
+  local dir="$HOME/.tmux/plugins/tpm"
+
+  if [ -d "$dir/.git" ]; then
+    echo "TPM installed; updating..."
+    cd "$dir" && git pull;
+  else
+    mkdir -p "$dir" && git clone gh:tmux-plugins/tpm "$dir"
+  fi
+
+  cd "$HOME/code/dotfiles"
+}
+
+setup_tmux;
+stow --target=$HOME --dotfiles "$HOME/code/dotfiles/."
 bat cache --build
-
 
 #####################################################################
 #      NOTE: Set up Sketchybar, Yabai, and SKHD
