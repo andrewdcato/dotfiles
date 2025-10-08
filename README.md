@@ -1,18 +1,21 @@
 ## Dotfiles
 
-General config for nvim, tmux, ranger, etc.
+General config for macOS and the core tools I use:
 
-### What do I need to install?
+* [neovim](https://github.com/neovim/neovim)
+* [tmux](https://github.com/tmux/tmux)
+* [Ghostty](https://github.com/ghostty-org/ghostty)
+* [Yabai](https://github.com/koekeishiya/yabai)
+* [SKHD](https://github.com/koekeishiya/skhd)
 
-I primarily work on macOS but dabble in Debian; as such, all instructions (for now) are centered around [Homebrew](https://brew.sh).
-
-All files are managed with [GNU Stow](https://www.gnu.org/software/stow/manual/stow.html).
+All files in this repo are managed with [GNU Stow](https://www.gnu.org/software/stow/manual/stow.html).
 
 ### How do I use this?
-I've bundled *most* configuration steps under a single shell script. Simply launch `Terminal.app` and:
+First, you'll need to ensure that System Integrity Protection is at least partially disabled so that `yabai` will work properly - [instructions can be found here](https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection).
+
+Once that's done, fire up `Terminal.app` for (hopefully) the last time and follow the steps below.
 
 ###### 1. Install Homebrew
-
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
@@ -27,12 +30,15 @@ mkdir -p ~/code
 git clone https://github.com/andrewdcato/dotfiles ~/code/dotfiles && cd ~/code/dotfiles
 ```
 
-###### 3. Run the setup script
-You may be prompted for your admin password, as some commands require `sudo` to successfully run. This script will ensure Homebrew is installed and working properly, set up some sensible macOS defaults, and then install all Homebrew-managed dependencies (which, at this point, should be everything you need to work).
+###### 3. Run the macOS script
+You may be prompted for your admin password, as some commands require `sudo` to successfully run. This script will set macOS preferences, hide the Dock and Menubar,  and then trigger a reboot.
 ```bash
-./setup.sh
+./scripts/macos.sh
 ```
 
-###### 4. Reboot your system, and partially disable System Integrity Protection (SIP)
-You will need to reboot your system once the setup script completes, as some macOS settings will not take until after a system restart. Further, `yabai` requires a partial disabling of SIP in order to work properly - [instructions can be found here](https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection).
+###### 4. Run the deps script
+This script will ensure that Homebrew is installed and working, configure core dependencies, invoke `stow` to symlink dotfiles, and then fire up `yabai`, `skhd`, and `sketchybar`.
+```bash
+./scripts/deps.sh
+```
 
