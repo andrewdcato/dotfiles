@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 function bump {
 	output=$(npm version ${release} --no-git-tag-version)
 	version=${output:1}
