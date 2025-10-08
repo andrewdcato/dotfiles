@@ -1,19 +1,38 @@
 # vi: ft=zsh
 export DEFAULT_USER="andrewcato"
 export EDITOR="nvim"
+export VISUAL="nvim"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g ..="cd .."
+alias -g home="cd ~"
+
+alias l="tree --dirsfirst --metafirst --si -agpsuACDL 1"
+alias ll="tree --dirsfirst --metafirst --si -gpsuACDL 1"
+alias lg="lazygit"
+alias vi="nvim"
+alias vim="nvim"
+
+# Custom keybinds
+bindkey '^f' autosuggest-accept
+bindkey '^l' undefined-key # unbind this so our tmux conf will work properly
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
 # Setup Homebrew
-eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
-echo 'export PATH="/usr/local/sbin:$PATH"'
-
-# Enable oh-my-posh
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/config.toml)"
+if [ "$(uname -p)" = "arm64" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(/usr/local/bin/brew shellenv)"
 fi
+
+eval "$(oh-my-posh init zsh --config $XDG_CONFIG_HOME/oh-my-posh/config.toml)"
 
 # Enable Zinit and install plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -23,28 +42,42 @@ if [ ! -d "$ZINIT_HOME" ]; then
    mkdir -p "$(dirname $ZINIT_HOME)"
    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
-
-# Source/Load zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-
 zinit snippet OMZP::ansible
 zinit snippet OMZP::aws
 zinit snippet OMZP::brew
 zinit snippet OMZP::git
 zinit snippet OMZP::git-flow-avh
-zinit snippet OMZP::nvm
 zinit snippet OMZP::terraform
 
 # Load completions
 autoload -Uz compinit && compinit
-
 zinit cdreplay -q
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Configure FZF, Zoxide, and Sesh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh 
@@ -87,7 +120,7 @@ bindkey -M viins '\es' sesh-sessions
 # Enable Node Version Manager (NVM)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
-[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Force NVM to load the specified version of Node if an .nvmrc exists
 autoload -U add-zsh-hook
@@ -131,30 +164,3 @@ complete -o nospace -C "$HOMEBREW_PREFIX/bin/terragrunt terragrunt"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="${PATH}:${HOME}/.local/bin/"
 
-# Auto-add keys to ssh-agent
-if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
-    eval $(ssh-agent -s) > /dev/null
-    if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
-        ssh-add --apple-use-keychain ~/.ssh/id_ed25519 > /dev/null 2>&1
-        ssh-add --apple-use-keychain ~/.ssh/servers_rsa > /dev/null 2>&1
-        ssh-add --apple-use-keychain ~/.ssh/personal > /dev/null 2>&1
-    fi
-fi
-
-
-# Apply the proper rice
-# source $ZSH/custom/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh
-# pnpm
-# pnpm end
-
-# Load custom aliases
-source "$HOME/.zsh_aliases"
-
-# Configure Bat as manpager
-export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
-
-# Custom keybinds
-bindkey '^f' autosuggest-accept
-bindkey '^l' undefined-key # unbind this so our tmux conf will work properly
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
