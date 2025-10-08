@@ -6,6 +6,9 @@ dot-config/lazygit/state.yml
 dot-config/lazydocker/state.yml
 dot-config/configstore
 
+# Tmux Plugins
+dot-config/tmux/plugins/*
+
 # Ignore all in .ssh dir except for config files
 dot-ssh/*
 !dot-ssh/config
