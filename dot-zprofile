@@ -1,0 +1,19 @@
+# vi: ft=zsh
+export DEFAULT_USER="andrewcato"
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export PYENV_ROOT="$HOME/.pyenv"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+export PATH="${PATH}:${HOME}/.local/bin/"
+
+# Setup Homebrew
+if [ "$(uname -p)" = "arm64" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
