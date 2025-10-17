@@ -2,6 +2,8 @@
 .DS_Store
 
 # State files
+dot-config/aws
+dot-config/gcloud
 dot-config/lazygit/state.yml
 dot-config/lazydocker/state.yml
 dot-config/configstore
