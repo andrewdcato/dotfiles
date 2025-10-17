@@ -1,39 +1,14 @@
 [[session]]
 name = "tmux config"
-path = "~/.dotfiles/.config/tmux"
+path = "~/code/dotfiles/dot-config/tmux"
 startup_command = "nvim tmux.conf"
 
 [[session]]
 name = "vim config"
-path = "~/.dotfiles/.config/nvim"
+path = "~/code/dotfiles/dot-config/nvim"
 startup_command = "nvim"
 
 [[session]]
-name = "surety360"
-path = "~/surety360/surety360"
-startup_command = "surety360"
-
-[[session]]
-name = "surety360-infra"
-path = "~/surety360/surety360/terraform"
-startup_command = "surety360-infra"
-
-[[session]]
-name = "suretybonds.com"
-path = "~/surety/sb-next"
-startup_command = "sb-next"
-
-[[session]]
-name = "contractorbonds.com"
-path = "~/surety/contractorbonds.com"
-startup_command = "cb-next"
-
-[[session]]
-name = "legacy monorepo"
-path = "~/surety/monorepo"
-startup_command = "legacy-monorepo"
-
-[[session]]
-name = "infra"
-path = "~/surety/infra"
-startup_command = "infra"
+name = "balancehq"
+path = "~/code/balancehq/balance"
+startup_command = "balancehq"
