@@ -25,7 +25,7 @@ type = 'git'
 style = 'plain'
 foreground = 'magenta'
 background = 'transparent'
-template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }} {{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}   {{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }} {{ if gt .Ahead 0 }}⇡{{ end }}</>'
 
 [blocks.segments.properties]
 branch_icon = ' '
