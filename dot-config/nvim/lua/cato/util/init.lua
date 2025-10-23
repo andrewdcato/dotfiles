@@ -41,7 +41,7 @@ M.icons.separators = {
 
 M.icons.diagnostics = {
 	error = " ",
-	hint = " ",
+	hint = "󰌵",
 	info = " ",
 	warn = " ",
 	code_action = "  ",
