@@ -18,11 +18,9 @@ return {
 		{ "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Trouble: Toggle LocList" },
 		{ "<leader>xt", "<cmd>TodoTrouble<cr>", desc = "Trouble: View TODO Comments" },
 	},
-	config = function()
-		require("trouble").setup({
-			use_diagnostic_signs = true,
-			auto_close = true,
-			auto_open = false,
-		})
-	end,
+	opts = {
+		use_diagnostic_signs = true,
+		auto_close = true,
+		auto_open = false,
+	},
 }

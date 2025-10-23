@@ -42,12 +42,9 @@ return {
 		"akinsho/git-conflict.nvim",
 		lazy = true,
 		event = "BufEnter",
-		config = function()
-			require("git-conflict").setup({
-				default_commands = true,
-				default_mappings = true,
-				highlights = { incoming = "DiffText", current = "DiffAdd" },
-			})
-		end,
+		opts = {
+			default_commands = true,
+			default_mappings = true,
+		},
 	},
 }

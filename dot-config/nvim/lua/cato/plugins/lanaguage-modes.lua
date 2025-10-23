@@ -2,11 +2,12 @@
 
 return {
 	{ "digitaltoad/vim-pug", lazy = true, event = "BufEnter *.pug" },
-	{ "pearofducks/ansible-vim", lazy = true, event = "VeryLazy" },
-	{ "hashivim/vim-terraform", lazy = true, event = "BufEnter *tf" },
 	{ "evanleck/vim-svelte", lazy = true, event = "BufEnter *.svelte" },
+	{ "hashivim/vim-terraform", lazy = true, event = "BufEnter *tf" },
+	{ "pearofducks/ansible-vim", lazy = true, event = "VeryLazy" },
 	{ "prisma/vim-prisma", lazy = true, event = "BufEnter *.prisma" },
 	{ "rhysd/vim-syntax-codeowners", lazy = true, event = "BufEnter CODEOWNERS, BufEnter codeowners" },
+
 	{
 		"rhadley-recurly/vim-terragrunt",
 		lazy = true,
