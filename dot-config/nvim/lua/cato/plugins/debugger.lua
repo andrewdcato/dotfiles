@@ -54,6 +54,7 @@ return {
 			-- Auto open / close dapui when debugger sessions start / end
 			local dap = require("dap")
 			local dapui = require("dapui")
+			require("nvim-dap-virtual-text").setup()
 
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open({})
