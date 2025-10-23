@@ -3,12 +3,15 @@ local icons = require("cato.util").icons
 local servers = {
 	mason = {
 		"ansiblels",
+		"biome",
 		"cssls",
 		"cssmodules_ls",
 		"dockerls",
+		"gopls",
 		"html",
 		"jsonls",
 		"lua_ls",
+		"postgres_lsp",
 		"rust_analyzer",
 		"sqlls",
 		"svelte",
@@ -17,7 +20,6 @@ local servers = {
 		"tflint",
 		"ts_ls",
 		"yamlls",
-		"gopls",
 	},
 	tools = {
 		"ansible-lint",
