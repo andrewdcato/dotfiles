@@ -219,19 +219,19 @@ return {
 			},
 			{
 				provider = function(self)
-					return self.warnings > 0 and ("%s%s"):format(self.warn_icon, self.warnings)
+					return self.warnings > 0 and (" %s%s"):format(self.warn_icon, self.warnings)
 				end,
 				hl = { fg = colors.yellow },
 			},
 			{
 				provider = function(self)
-					return self.info > 0 and ("%s%s"):format(self.info_icon, self.info)
+					return self.info > 0 and (" %s%s"):format(self.info_icon, self.info)
 				end,
 				hl = { fg = colors.sapphire },
 			},
 			{
 				provider = function(self)
-					return self.hints > 0 and ("%s%s"):format(self.hint_icon, self.hints)
+					return self.hints > 0 and (" %s %s"):format(self.hint_icon, self.hints)
 				end,
 				hl = { fg = colors.sky },
 			},
@@ -421,7 +421,6 @@ return {
 				FileType,
 				FileSize,
 				Diagnostics,
-				lib.component.cmd_info(),
 				Align,
 				LSPActive,
 				Formatters,
