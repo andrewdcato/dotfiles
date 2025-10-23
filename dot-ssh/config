@@ -1,4 +1,6 @@
 # vi: ft=sshconfig
+Include ./config.home
+
 Host github.com
   AddKeysToAgent yes
   UseKeychain yes
