@@ -49,15 +49,13 @@ gui:
   border: "rounded" # one of 'single' | 'double' | 'rounded' | 'hidden'
   authorColors:
     "Andrew Cato": "cyan"
-    "George DuMontier": "red"
-    "Josh Cole": "yellow"
-    "Joshua Cole": "yellow"
-    "Tyson Suttle": "magenta"
-    "Tyson": "magenta"
-    "Greg Bryant": "green"
-    "Gregory Bryant": "green"
-    "ian": "blue"
-    "Ian Sobule": "blue"
+    "Andrew Loutfi": "green"
+    "Aloutfi": "green"
+    "GregGlickert": "magenta"
+    "Gregory Glickert": "magenta"
+    "latimerb": "blue"
+    "Ben Latimer": "blue"
+    "dependabot[bot]": "red"
     "*": "white"
   branchColors:
     "feature/**": "green"
