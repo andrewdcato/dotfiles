@@ -1,7 +1,9 @@
 #include "cpu.h"
+#include "memory.h"
 #include "sketchybar.h"
 
 struct cpu g_cpu;
+struct memory g_memory;
 
 void handler(env env) {
   // Environment variables passed from sketchybar can be accessed as seen below
@@ -16,10 +18,17 @@ void handler(env env) {
 
     if (strlen(g_cpu.command) > 0) sketchybar(g_cpu.command);
   }
+  else if ((strcmp(name, "memory.percent") == 0)) {
+    // Memory graph updates
+    memory_update(&g_memory);
+
+    if (strlen(g_memory.command) > 0) sketchybar(g_memory.command);
+  }
 }
 
 int main (int argc, char** argv) {
   cpu_init(&g_cpu);
+  memory_init(&g_memory);
 
   if (argc < 2) {
     printf("Usage: helper \"<bootstrap name>\"\n");

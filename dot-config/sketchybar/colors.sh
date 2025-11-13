@@ -21,6 +21,7 @@ export BG2=0xff313244 #Lighterbg(colorcolmfolds)
 export FG0=0xffcdd6f4 #Lighterfg
 export FG1=0xffa6adc8 #Defaultfg
 export FG2=0xff7f849c #Darkerfg(statusline)
+export GREY=0xff9399b2 #Grey(same as COMMENT)
 
 export SEL0=0xff3e4a5b #Popupbg,visualselectionbg
 export SEL1=0xff4f6074 #Popupselbg,searchbg
@@ -35,3 +36,4 @@ export LABEL_COLOR=$FG1 # Color of all labels
 export POPUP_BACKGROUND_COLOR=$BAR_COLOR
 export POPUP_BORDER_COLOR=$BACKGROUND_1
 export SHADOW_COLOR=$BLACK
+export TRANSPARENT=0x00000000
