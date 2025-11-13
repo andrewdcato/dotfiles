@@ -62,18 +62,8 @@ setup_font () {
 
 setup_font
 
-# NOTE: allow yabai to run sudo commands without auth...
-#   docs here: https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
-echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
-
 # NOTE: enables services to start on boot and configures yabai...
 brew services start sketchybar
-
-skhd --start-service
-yabai --start-service
-
-sudo yabai --load-sa
-
 
 #####################################################################
 #      NOTE: Launch synology drive client so we can

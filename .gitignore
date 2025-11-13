@@ -14,7 +14,7 @@ dot-config/tmux/plugins/*
 # Ignore all in .ssh dir except for config files
 dot-ssh/*
 !dot-ssh/config
-!dot-ssh/config_personal
+!dot-ssh/config.home
 
 # Ignore all log files
 **/*.log

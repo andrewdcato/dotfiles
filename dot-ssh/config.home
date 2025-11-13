@@ -1,0 +1,32 @@
+# vi: ft=sshconfig
+Host synology
+  HostName synology.lan
+  Port 75
+  User andrew_admin
+  IdentityAgent ~/.1password/agent.sock
+
+Host udmpro
+  HostName udmpro.lan
+  User root
+  IdentityAgent ~/.1password/agent.sock
+
+Host balthasar 
+  HostName 192.168.20.4
+  User pi
+  IdentityAgent ~/.1password/agent.sock
+
+Host caspar 
+  HostName 192.168.1.86
+  User pi
+  IdentityAgent ~/.1password/agent.sock
+
+Host melchior 
+  HostName 192.168.1.85
+  User pi
+  IdentityAgent ~/.1password/agent.sock
+
+Host steve
+  HostName 192.168.1.90
+  User pi
+  IdentityAgent ~/.1password/agent.sock
+
