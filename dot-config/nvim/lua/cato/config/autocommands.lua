@@ -43,3 +43,30 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 	pattern = "**/*.postcss",
 	command = "set filetype=css",
 })
+
+-- Reload Aerospace config on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = vim.fn.expand("$XDG_CONFIG_HOME") .. "/aerospace/*",
+	callback = function()
+		vim.fn.system("aerospace reload-config")
+		vim.notify("Aerospace config reloaded", "info", { title = "Aerospace" })
+	end,
+})
+
+-- Reload tmux config on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = vim.fn.expand("$XDG_CONFIG_HOME") .. "/tmux/*",
+	callback = function()
+		vim.fn.system("tmux source-file ~/.config/tmux/tmux.conf")
+		vim.notify("Tmux config reloaded", "info", { title = "Tmux" })
+	end,
+})
+
+-- Reload sketchybar config on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = vim.fn.expand("$XDG_CONFIG_HOME") .. "/sketchybar/*",
+	callback = function()
+		vim.fn.system("sketchybar --reload")
+		vim.notify("Sketchybar config reloaded", "info", { title = "Sketchybar" })
+	end,
+})
