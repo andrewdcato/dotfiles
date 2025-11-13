@@ -23,9 +23,9 @@ local servers = {
 	},
 	tools = {
 		"ansible-lint",
-		"eslint_d",
 		"prettierd",
 		"stylua",
+		"taplo",
 		"tflint",
 		"yamllint",
 	},

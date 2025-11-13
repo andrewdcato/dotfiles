@@ -8,10 +8,11 @@ return {
 			rust = { "rustfmt", lsp_format = "fallback" },
 			go = { "gofmt" },
 			-- TODO: figure out why prettierd is fucked?
-			javascript = { "eslint_d", "prettier", stop_after_first = true },
-			typescript = { "prettier", stop_after_first = true },
-			svelte = { "prettier", stop_after_first = true },
+			javascript = { "prettierd", "prettier", stop_after_first = true },
+			typescript = { "prettierd", "prettier", stop_after_first = true },
+			svelte = { "prettierd", "prettier", stop_after_first = true },
 			terraform = { "terraform_fmt" },
+			toml = { "taplo" },
 			["_"] = { "prettier" },
 		},
 		format_on_save = {
