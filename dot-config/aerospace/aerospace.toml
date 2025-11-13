@@ -1,0 +1,193 @@
+# Startup command
+start-at-login = true
+
+after-startup-command = ['exec-and-forget sketchybar']
+after-login-command = []
+
+exec-on-workspace-change = [
+  '/Users/andrewcato/.config/sketchybar/plugins/aerospace_event.sh',
+]
+
+# Mouse behavior on focus change
+on-focus-changed = ['move-mouse window-lazy-center']
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Possible values: (qwerty|dvorak|colemak)
+# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
+[key-mapping]
+preset = 'qwerty'
+
+[gaps]
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 50
+outer.right = 10
+
+[mode.service.binding]
+esc = "mode main"
+r = "reload-config"
+
+[mode.main.binding]
+cmd-ctrl-space = "mode service"
+# Create and focus on new workspace
+# cmd-ctrl-c = "workspace-create-new"
+
+# Window focus (alt - hjkl)
+alt-h = "focus --boundaries workspace left"
+alt-j = "focus --boundaries workspace down"
+alt-k = "focus --boundaries workspace up"
+alt-l = "focus --boundaries workspace right"
+
+# Move windows (shift - cmd - hjkl)
+shift-cmd-h = "move left"
+shift-cmd-j = "move down"
+shift-cmd-k = "move up"
+shift-cmd-l = "move right"
+
+# Fast focus workspace
+cmd-ctrl-x = "workspace-back-and-forth"
+cmd-ctrl-h = "workspace --wrap-around prev"
+cmd-ctrl-l = "workspace --wrap-around next"
+
+# Focus specific workspace (1-9)
+cmd-ctrl-1 = "summon-workspace 1"
+cmd-ctrl-2 = "summon-workspace 2"
+cmd-ctrl-3 = "summon-workspace 3"
+cmd-ctrl-4 = "summon-workspace 4"
+cmd-ctrl-5 = "summon-workspace 5"
+cmd-ctrl-6 = "summon-workspace 6"
+cmd-ctrl-7 = "summon-workspace 7"
+cmd-ctrl-8 = "summon-workspace 8"
+cmd-ctrl-9 = "summon-workspace 9"
+cmd-ctrl-0 = "summon-workspace 10"
+
+# Move window to specific workspace
+shift-cmd-ctrl-1 = "move-node-to-workspace 1"
+shift-cmd-ctrl-2 = "move-node-to-workspace 2"
+shift-cmd-ctrl-3 = "move-node-to-workspace 3"
+shift-cmd-ctrl-4 = "move-node-to-workspace 4"
+shift-cmd-ctrl-5 = "move-node-to-workspace 5"
+shift-cmd-ctrl-6 = "move-node-to-workspace 6"
+shift-cmd-ctrl-7 = "move-node-to-workspace 7"
+shift-cmd-ctrl-8 = "move-node-to-workspace 8"
+shift-cmd-ctrl-9 = "move-node-to-workspace 9"
+shift-cmd-ctrl-0 = "move-node-to-workspace 10"
+
+#####################################################################
+#
+# NOTE: Application Rules - list of common app IDs can be found here:
+#  https://nikitabobko.github.io/AeroSpace/goodies#popular-apps-ids
+#
+#####################################################################
+
+# Apps we don't want Aerospace to manage - most of these are things that I typically pop open
+#   for a quick interaction and then immediately close.
+[[on-window-detected]]
+if.app-id = "tv.plex.plexamp"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.calculator"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.MobileSMS"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.systempreferences"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.systemsettings"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "us.zoom.xos"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.DiskUtility"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.ActivityMonitor"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.AppStore"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.valvesoftware.Steam"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.alfredapp.Alfred"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.mongodb.Compass"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.flexibits.fantastical2.mac"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.finder"
+if.window-title-regex-substring = "Co(py|nnect)|Move|Info|Pref"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Safari"
+if.window-title-regex-substring = "General|Tabs?|Passwords?|Website|Extensions?|AutoFill|Search|Security|Privacy|Advanced"
+run = "layout floating"
+
+# NOTE: Lock apps to workspaces. General philosophy is:
+#    - Terminal on workspace 1
+#    - Browser on workspace 2
+#    - Comms on workspace 3
+#    - Notes on workspace 4
+#    - Email client on workspace 5
+[[on-window-detected]]
+if.app-id = "com.mitchellh.ghostty"
+run = "move-node-to-workspace 1"
+
+[[on-window-detected]]
+if.app-id = "com.google.Chrome"
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = "org.mozilla.firefox"
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = "org.mozilla.firefoxdeveloperedition"
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = "com.apple.Safari"
+run = "move-node-to-workspace 2"
+
+[[on-window-detected]]
+if.app-id = "com.tinyspeck.slackmacgap"
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = "com.hnc.Discord"
+run = "move-node-to-workspace 3"
+
+[[on-window-detected]]
+if.app-id = "md.obsidian"
+run = "move-node-to-workspace 4"
+
+[[on-window-detected]]
+if.app-id = "org.mozilla.thunderbird"
+run = "move-node-to-workspace 5"
