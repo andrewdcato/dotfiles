@@ -12,7 +12,7 @@ export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p
 export PATH="${PATH}:${HOME}/.local/bin/:${HOME}/.cargo/bin"
 
 # Setup Homebrew
-if [ "$(uname -p)" = "arm64" ]; then
+if [ "$(uname -p)" = "arm" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 else
   eval "$(/usr/local/bin/brew shellenv)"
