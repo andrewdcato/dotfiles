@@ -6,6 +6,7 @@
 
 
 
+
 ### START-OF-ICON-MAP
 function __icon_map() {
     case "$1" in
@@ -120,6 +121,9 @@ function __icon_map() {
    "Bear")
         icon_result=":bear:"
         ;;
+   "Beeper" | "Beeper Desktop")
+        icon_result=":beeper:"
+        ;;
    "BetterTouchTool")
         icon_result=":bettertouchtool:"
         ;;
@@ -144,8 +148,14 @@ function __icon_map() {
    "Books" | "Calibre" | "Bücher")
         icon_result=":book:"
         ;;
+   "Brain.fm")
+        icon_result=":brainfm:"
+        ;;
    "Brave Browser")
         icon_result=":brave_browser:"
+        ;;
+   "Broadcasts")
+        icon_result=":broadcasts:"
         ;;
    "Bruno")
         icon_result=":bruno:"
@@ -182,6 +192,9 @@ function __icon_map() {
         ;;
    "Citrix Workspace" | "Citrix Viewer")
         icon_result=":citrix:"
+        ;;
+   "ClassIn")
+        icon_result=":classin:"
         ;;
    "Claude")
         icon_result=":claude:"
@@ -489,6 +502,12 @@ function __icon_map() {
    "Kakoune")
         icon_result=":kakoune:"
         ;;
+   "Karabiner-Elements Settings")
+        icon_result=":karabiner_elements:"
+        ;;
+   "Karabiner-EventViewer")
+        icon_result=":karabiner_elements_event_viewer:"
+        ;;
    "KeePassXC")
         icon_result=":kee_pass_x_c:"
         ;;
@@ -552,7 +571,7 @@ function __icon_map() {
    "MacPass")
         icon_result=":macpass:"
         ;;
-   "Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "Superhuman" | "Spark" | "邮件" | "メール")
+   "Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "Superhuman" | "Spark" | "Spark Mail" | "邮件" | "メール")
         icon_result=":mail:"
         ;;
    "MAMP" | "MAMP PRO")
