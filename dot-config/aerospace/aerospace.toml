@@ -5,7 +5,9 @@ after-startup-command = ['exec-and-forget sketchybar']
 after-login-command = []
 
 exec-on-workspace-change = [
-  '/Users/andrewcato/.config/sketchybar/plugins/aerospace_event.sh',
+  '/bin/bash',
+  '-c',
+  '${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace-workspace-change.sh',
 ]
 
 # Mouse behavior on focus change
