@@ -3,7 +3,7 @@
 source "$CONFIG_DIR/colors.sh"
 
 AEROSPACE_FOCUSED_MONITOR=$(aerospace list-monitors --focused | awk '{print $1}')
-AEROSAPCE_WORKSPACE_FOCUSED_MONITOR=$(aerospace list-workspaces --monitor focused --empty no)
+AEROSPACE_WORKSPACE_FOCUSED_MONITOR=$(aerospace list-workspaces --monitor focused --empty no)
 AEROSPACE_EMPTY_WORKESPACE=$(aerospace list-workspaces --monitor focused --empty)
 
 reload_workspace_icon() {
@@ -36,7 +36,7 @@ if [ "$SENDER" = "aerospace_workspace_change" ]; then
                          label.highlight=false \
                          background.border_color=$BACKGROUND_2
 
-  for i in $AEROSAPCE_WORKSPACE_FOCUSED_MONITOR; do
+  for i in $AEROSPACE_WORKSPACE_FOCUSED_MONITOR; do
     sketchybar --set space.$i display=$AEROSPACE_FOCUSED_MONITOR
   done
 
