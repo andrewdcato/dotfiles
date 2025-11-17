@@ -1,10 +1,7 @@
 # Startup command
 start-at-login = true
 
-after-startup-command = [
-  'exec-and-forget sketchybar',
-  'exec-and-forget ${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/detect_notch.sh'
-]
+after-startup-command = ['exec-and-forget sketchybar']
 after-login-command = []
 
 exec-on-workspace-change = [
@@ -31,7 +28,10 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-outer.top = 15
+outer.top = [
+  { monitor.'LG HDR 4K' = 50 },
+  10,
+] # TODO: make this dynamically work for LG vs builtin vs builtin w/notch
 outer.right = 10
 
 [mode.service.binding]
