@@ -10,6 +10,10 @@
 ---@class obsidian.Note
 ---@field bufnr number
 
+frontmatter_func = function(note)
+	return note.frontmatter
+end
+
 return {
 	"obsidian-nvim/obsidian.nvim",
 	version = "*", -- recommended, use latest release instead of latest commit
@@ -36,9 +40,9 @@ return {
 			nvim_cmp = false,
 			blink = true,
 		},
-		note_frontmatter_func = function(note)
-			return note.frontmatter
-		end,
+		-- FIXME: remove this when v4.0 releases
+		note_frontmatter_func = frontmatter_func,
+		frontmatter = { func = frontmatter_func },
 		workspaces = {
 			{
 				name = "Loanspark",
