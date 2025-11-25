@@ -12,3 +12,8 @@ startup_command = "nvim"
 name = "balancehq"
 path = "~/code/balancehq/balance"
 startup_command = "balancehq"
+
+[[session]]
+name = "loanspark vault"
+path = "~/Documents/Loanspark/"
+startup_command = "loanspark-vault"
