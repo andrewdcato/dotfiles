@@ -16,6 +16,10 @@ dot-ssh/*
 !dot-ssh/config
 !dot-ssh/config.home
 
+# Ignore all in .gemini dir except for settings file
+dot-gemini/*
+!dot-gemini/settings.json
+
 # Ignore all log files
 **/*.log
 
