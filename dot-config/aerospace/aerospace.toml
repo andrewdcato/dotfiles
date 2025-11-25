@@ -30,7 +30,7 @@ outer.left = 10
 outer.bottom = 10
 outer.top = [
   { monitor.'LG HDR 4K' = 50 },
-  10,
+  15,
 ] # TODO: make this dynamically work for LG vs builtin vs builtin w/notch
 outer.right = 10
 
