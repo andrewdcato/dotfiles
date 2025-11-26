@@ -26,3 +26,6 @@ dot-gemini/*
 # Ignore yazi flavors
 dot-config/yazi/flavors/catppuccin-mocha.yazi/*
 
+# Ignore BTT logs
+Library/Application Support/BetterTouchTool/Logs/*
+
