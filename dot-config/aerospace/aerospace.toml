@@ -130,6 +130,10 @@ if.app-id = "com.apple.AppStore"
 run = "layout floating"
 
 [[on-window-detected]]
+if.app-id = "io.robbie.HomeAssistant"
+run = "layout floating"
+
+[[on-window-detected]]
 if.app-id = "com.valvesoftware.Steam"
 run = "layout floating"
 
@@ -143,6 +147,10 @@ run = "layout floating"
 
 [[on-window-detected]]
 if.app-id = "com.flexibits.fantastical2.mac"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-name-regex-substring = "YouTube Music"
 run = "layout floating"
 
 [[on-window-detected]]

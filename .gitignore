@@ -20,6 +20,10 @@ dot-ssh/*
 dot-gemini/*
 !dot-gemini/settings.json
 
+# Ignore all in .claude dir except for settings file
+dot-claude/*
+!dot-claude/settings.json
+
 # Ignore all log files
 **/*.log
 
