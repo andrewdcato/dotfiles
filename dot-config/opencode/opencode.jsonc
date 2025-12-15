@@ -7,20 +7,34 @@
     }
   },
   "agent": {
-    "code-reviewer": {
-      "description": "Reviews code for best practices and potential issues",
+    // NOTE: Settings for default agents. Custom agents are stored in agent/*.md files
+    "build": {
+      "mode": "primary",
       "model": "anthropic/claude-sonnet-4-5",
-      "prompt": "You are a code reviewer. Focus on security, performance, and maintainability.",
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      }
+    },
+    "plan": {
+      "mode": "primary",
+      "model": "anthropic/claude-haiku-4-5",
       "tools": {
         "write": false,
-        "edit": false
+        "edit": false,
+        "bash": false
       }
     }
   },
   "mcp": {
+    // FIXME: set this up
+    // "jira": {
+    //
+    // },
     "chrome-devtools": {
       "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest"],
+      "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
     }
   },
   "command": {
@@ -30,5 +44,5 @@
       "agent": "build",
       "model": "anthropic/claude-haiku-4-5"
     }
-  },
+  }
 }
