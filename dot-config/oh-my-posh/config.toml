@@ -1,78 +1,69 @@
 # NOTE: docs here - https://ohmyposh.dev/docs
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
-final_space = true
-version = 3
+
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
+version = 4
+final_space = true
 
-# NOTE: Left prompt holds directory name and git information
-[[blocks]]
-type = 'prompt'
-alignment = 'left'
-newline = true
-
-[[blocks.segments]]
-type = 'path'
-style = 'plain'
-background = 'transparent'
-foreground = 'cyan'
-template = '{{ .Path }}'
-
-[blocks.segments.properties]
-style = 'full'
-
-[[blocks.segments]]
-type = 'git'
-style = 'plain'
-foreground = 'magenta'
-background = 'transparent'
-template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}   {{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }} {{ if gt .Ahead 0 }}⇡{{ end }}</>'
-
-[blocks.segments.properties]
-branch_icon = ' '
-commit_icon = '@'
-fetch_status = true
-
-# NOTE: right prompt shows execution time if a command takes more than five seconds
-[[blocks]]
-type = 'rprompt'
-overflow = 'hidden'
-
-[[blocks.segments]]
-type = 'executiontime'
-style = 'plain'
-foreground = 'yellow'
-background = 'transparent'
-template = 'Took {{ .FormattedMs }}'
-
-[blocks.segments.properties]
-threshold = 5000
-
-[[blocks]]
-type = 'prompt'
-alignment = 'left'
-newline = true
-
-[[blocks.segments]]
-type = 'text'
-style = 'plain'
-foreground_templates = [
-  "{{if gt .Code 0}}red{{end}}",
-  "{{if eq .Code 0}}green{{end}}",
-]
-background = 'transparent'
-template = '➜'
-
-# NOTE: only show full prompt on current line - otherwise just show command/output and status
-[transient_prompt]
-foreground_templates = [
-  "{{if gt .Code 0}}red{{end}}",
-  "{{if eq .Code 0}}green{{end}}",
-]
-background = 'transparent'
-template = '➜ '
-
-# NOTE: only active for multiline commands
 [secondary_prompt]
-foreground = 'blue'
-background = 'transparent'
-template = '➜ '
+  template = '➜ '
+  foreground = 'blue'
+  background = 'transparent'
+
+[transient_prompt]
+  template = '➜ '
+  background = 'transparent'
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}green{{end}}']
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '{{ .Path }}'
+    foreground = 'cyan'
+    background = 'transparent'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.options]
+      style = 'full'
+
+  [[blocks.segments]]
+    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}   {{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }} {{ if gt .Ahead 0 }}⇡{{ end }}</>'
+    foreground = 'magenta'
+    background = 'transparent'
+    type = 'git'
+    style = 'plain'
+
+    [blocks.segments.options]
+      branch_icon = ' '
+      commit_icon = '@'
+      fetch_status = true
+
+[[blocks]]
+  type = 'rprompt'
+  overflow = 'hidden'
+
+  [[blocks.segments]]
+    template = 'Took {{ .FormattedMs }}'
+    foreground = 'yellow'
+    background = 'transparent'
+    type = 'executiontime'
+    style = 'plain'
+
+    [blocks.segments.options]
+      threshold = 5000
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '➜'
+    background = 'transparent'
+    type = 'text'
+    style = 'plain'
+    foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}green{{end}}']
