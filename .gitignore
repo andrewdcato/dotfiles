@@ -26,6 +26,7 @@ dot-claude/*
 
 # Ignore all in opencode dir except for settings and plugins
 dot-config/opencode/*
+!dot-config/opencode/agent/
 !dot-config/opencode/opencode.*
 !dot-config/opencode/plugin/
 
