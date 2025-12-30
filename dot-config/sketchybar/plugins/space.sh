@@ -39,7 +39,7 @@ case "$SENDER" in
   "mouse.clicked") mouse_clicked
   ;;
   "aerospace_workspace_change")
-    if [ "$SID" = "$AEROSPACE_FOCUSED_WORKSPACE" ]; then
+    if [ "$SID" = "$FOCUSED_WORKSPACE" ]; then
       SELECTED=true
     else
       SELECTED=false
