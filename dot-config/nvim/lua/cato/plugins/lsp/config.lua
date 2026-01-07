@@ -9,6 +9,7 @@ local servers = {
 		"dockerls",
 		"gopls",
 		"html",
+		"intelephense",
 		"jsonls",
 		"lua_ls",
 		"postgres_lsp",
