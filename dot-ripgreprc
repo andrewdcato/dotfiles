@@ -10,6 +10,7 @@ web:*.{html,css,js}*
 --glob=!.git/*
 --glob=!**/package-lock.json
 --glob=!.env
+--no-ignore
 
 
 # Set the colors.
