@@ -68,3 +68,4 @@ keybind = super+shift+r=reload_config
 adjust-cell-height = 10%
 font-size = 16
 font-family = OperatorMonoLig Nerd Font
+keybind = shift+enter=text:\x1b\r
