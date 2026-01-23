@@ -41,8 +41,14 @@
     "test": {
       "template": "Run the full test suite with coverage report and show any failures.\nFocus on the failing tests and suggest fixes.",
       "description": "Run tests with coverage",
-      "agent": "build",
+      "agent": "plan",
       "model": "anthropic/claude-haiku-4-5"
+    }
+  },
+  "formatter": {
+    "prettier": {
+      "command": ["npx", "prettier", "--write", "$FILE"],
+      "extensions": [".js", ".jsx", ".ts", ".tsx", ".json", ".md"]
     }
   }
 }
