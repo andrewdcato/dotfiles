@@ -13,4 +13,14 @@ return {
 		"typescript.tsx",
 		"typescriptreact",
 	},
+	settings = {
+		tailwindCSS = {
+			experimental = {
+				classRegex = {
+					{ "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+					{ "cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+				},
+			},
+		},
+	},
 }
