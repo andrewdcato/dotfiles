@@ -1,0 +1,8 @@
+# vi: ft=sh
+#!/usr/bin/env bash
+
+tmux rename-window 'nvim'
+tmux send-keys 'nvim' Enter
+tmux new-window -n 'app' -c "#{session_path}"
+tmux send-keys 'npm run dev' Enter
+tmux select-window -p

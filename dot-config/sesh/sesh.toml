@@ -17,3 +17,8 @@ startup_command = "balancehq"
 name = "loanspark vault"
 path = "~/Documents/Loanspark/"
 startup_command = "loanspark-vault"
+
+[[session]]
+name = "loanspark portal"
+path = "~/Development/portal/"
+startup_command = "loanspark-portal"
