@@ -8,6 +8,9 @@ dot-config/lazygit/state.yml
 dot-config/lazydocker/state.yml
 dot-config/configstore
 
+# Any kind of license file...
+**/*.bttlicense
+
 # Tmux Plugins
 dot-config/tmux/plugins/*
 
