@@ -1,0 +1,6 @@
+# vi: ft=sh
+#!/usr/bin/env bash
+
+tmux rename-window 'notes'
+tmux send-keys 'git fetch; git pull; nvim' Enter
+tmux select-window -p

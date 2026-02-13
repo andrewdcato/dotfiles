@@ -9,6 +9,11 @@ path = "~/code/dotfiles/dot-config/nvim"
 startup_command = "nvim"
 
 [[session]]
+name = "main vault"
+path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes"
+startup_command = "main-vault"
+
+[[session]]
 name = "balancehq"
 path = "~/code/balancehq/balance"
 startup_command = "balancehq"

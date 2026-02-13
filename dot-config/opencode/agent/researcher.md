@@ -2,7 +2,7 @@
 description: Researches solutions, explores approaches, and provides creative guidance
 mode: subagent
 model: anthropic/claude-sonnet-4-5
-temperature: 0.3
+temperature: 0.8
 tools:
   write: false
   edit: false
