@@ -37,6 +37,10 @@ outer.right = 10
 [mode.service.binding]
 esc = "mode main"
 r = "reload-config"
+alt-h = "join-with left"
+alt-j = "join-with down"
+alt-k = "join-with up"
+alt-l = "join-with right"
 
 [mode.main.binding]
 cmd-ctrl-space = "mode service"
