@@ -44,6 +44,11 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
 	command = "set filetype=css",
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufNewFile" }, {
+	pattern = "**/Caddyfile",
+	command = "set filetype=caddyfile",
+})
+
 -- Reload Aerospace config on save
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = vim.fn.expand("$XDG_CONFIG_HOME") .. "/aerospace/*",

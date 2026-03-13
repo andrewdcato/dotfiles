@@ -3,6 +3,13 @@ return {
 	event = "LspAttach",
 	dependencies = { "neovim/nvim-lspconfig" },
 	opts = {
+		formatters = {
+			caddy = {
+				command = "caddy",
+				args = { "fmt", "-" },
+				stdin = true,
+			},
+		},
 		formatters_by_ft = {
 			lua = { "stylua" },
 			rust = { "rustfmt", lsp_format = "fallback" },
@@ -13,6 +20,7 @@ return {
 			svelte = { "prettierd", "prettier", stop_after_first = true },
 			terraform = { "terraform_fmt" },
 			toml = { "taplo" },
+			caddyfile = { "caddy" },
 			["_"] = { "prettier" },
 		},
 		format_on_save = {

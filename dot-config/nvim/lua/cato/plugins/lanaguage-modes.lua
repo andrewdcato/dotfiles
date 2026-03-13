@@ -7,6 +7,7 @@ return {
 	{ "pearofducks/ansible-vim", lazy = true, event = "VeryLazy" },
 	{ "prisma/vim-prisma", lazy = true, event = "BufEnter *.prisma" },
 	{ "rhysd/vim-syntax-codeowners", lazy = true, event = "BufEnter CODEOWNERS, BufEnter codeowners" },
+	{ "isobit/vim-caddyfile", lazy = true, event = "BufEnter Caddyfile" },
 
 	{
 		"rhadley-recurly/vim-terragrunt",
