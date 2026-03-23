@@ -131,6 +131,20 @@ for _, monitor_id in ipairs(monitors) do
   end
 end
 
+-- Apply initial highlight to the currently focused workspace
+local focused_lines = popen_lines("aerospace list-workspaces --focused")
+local focused_ws = focused_lines[1]
+if focused_ws then
+  sbar.set("space." .. focused_ws, {
+    icon  = { highlight = true },
+    label = { highlight = true },
+    background = { border_color = colors.cyan },
+  })
+end
+
+-- Track the focused workspace so front_app_switched knows which strip to refresh
+local current_workspace = focused_ws
+
 -- Space creator button — handles workspace visibility on changes
 local space_creator = sbar.add("item", "space_creator", {
   position      = "left",
@@ -145,7 +159,17 @@ local space_creator = sbar.add("item", "space_creator", {
   label = { drawing = false },
 })
 
+space_creator:subscribe("front_app_switched", function(_)
+  if not current_workspace then return end
+  reload_icon_strip(current_workspace, function(strip)
+    sbar.animate("sin", 10, function()
+      sbar.set("space." .. current_workspace, { label = { string = strip } })
+    end)
+  end)
+end)
+
 space_creator:subscribe("aerospace_workspace_change", function(env)
+  current_workspace = env.FOCUSED_WORKSPACE
   sbar.exec("aerospace list-monitors --focused | awk '{print $1}'", function(result)
     local focused_monitor = tonumber(result:gsub("%s+$", ""))
     if not focused_monitor then return end

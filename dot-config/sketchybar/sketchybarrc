@@ -9,9 +9,17 @@ package.cpath = package.cpath
 
 sbar = require("sketchybar")
 
--- Start the C helper for CPU/memory monitoring
-sbar.exec("killall helper 2>/dev/null; (cd " .. config_dir .. "/helper && make -s 2>/dev/null); "
-  .. config_dir .. "/helper/helper com.cato.helper > /dev/null 2>&1")
+-- Start the C helper for CPU/memory monitoring.
+-- The helper reads these env vars to colour its labels; export them before exec.
+sbar.exec(
+  "killall helper 2>/dev/null;"
+  .. " (cd " .. config_dir .. "/helper && make -s 2>/dev/null);"
+  .. " RED=0xfff38ba8"
+  .. " ORANGE=0xffFFB86C"
+  .. " YELLOW=0xfff9e2af"
+  .. " LABEL_COLOR=0xffa6adc8"
+  .. " " .. config_dir .. "/helper/helper com.cato.helper > /dev/null 2>&1"
+)
 
 sbar.begin_config()
 require("init")

@@ -46,5 +46,5 @@ local cpu_user = sbar.add("graph", "cpu.user", 75, {
 
 sbar.add("bracket", "cpu",
   { cpu_top.name, cpu_percent.name, cpu_sys.name, cpu_user.name },
-  {}
+  { background = { drawing = false } }
 )

@@ -46,5 +46,5 @@ local memory_compressed = sbar.add("graph", "memory.compressed", 75, {
 
 sbar.add("bracket", "memory",
   { memory_top.name, memory_percent.name, memory_used.name, memory_compressed.name },
-  {}
+  { background = { drawing = false } }
 )

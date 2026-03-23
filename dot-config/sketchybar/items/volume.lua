@@ -132,3 +132,14 @@ volume_icon:subscribe("mouse.clicked", function(env)
     toggle_slider()
   end
 end)
+
+-- Group the right-side system items with a shared background
+sbar.add("bracket", "status",
+  { "brew", "github.bell", "wifi", "volume_icon" },
+  {
+    background = {
+      color        = colors.background_1,
+      border_color = colors.background_2,
+    },
+  }
+)
