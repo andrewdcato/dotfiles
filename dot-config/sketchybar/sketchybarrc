@@ -1,90 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env lua
 
-source "$CONFIG_DIR/colors.sh" # Loads all defined colors
-source "$CONFIG_DIR/icons.sh" # Loads all defined icons
+local config_dir = os.getenv("CONFIG_DIR")
+package.path = package.path
+  .. ";" .. config_dir .. "/?.lua"
+  .. ";" .. config_dir .. "/?/init.lua"
+package.cpath = package.cpath
+  .. ";" .. os.getenv("HOME") .. "/.local/share/sketchybar_lua/?.so"
 
-ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
-PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where all the plugin scripts are stored
+sbar = require("sketchybar")
 
-FONT="SF Pro" # Needs to have Regular, Bold, Semibold, Heavy and Black variants
-PADDINGS=3 # All paddings use this value (icon, label, background)
+-- Start the C helper for CPU/memory monitoring
+sbar.exec("killall helper 2>/dev/null; (cd " .. config_dir .. "/helper && make -s 2>/dev/null); "
+  .. config_dir .. "/helper/helper com.cato.helper > /dev/null 2>&1")
 
-# Setting up and starting the helper process
-HELPER=com.cato.helper
-killall helper
-(cd $CONFIG_DIR/helper && make)
-$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+sbar.begin_config()
+require("init")
+sbar.hotload(true)
+sbar.end_config()
 
-# Setting up the general bar appearance of the bar
-bar=(
-  background.blur_radius=90
-  background.corner_radius=9
-  border_color=$BAR_BORDER_COLOR
-  border_width=2
-  color=$BAR_COLOR
-  height=45
-  margin=-2
-  padding_left=10
-  padding_right=10
-  position=top
-  shadow=off
-  sticky=on
-  topmost=window
-  y_offset=-5
-)
-
-sketchybar --bar "${bar[@]}"
-
-# Setting up default values
-defaults=(
-  background.border_width=2
-  background.corner_radius=9
-  background.height=26
-  icon.color=$ICON_COLOR
-  icon.font="$FONT:Bold:14.0"
-  icon.padding_left=$PADDINGS
-  icon.padding_right=$PADDINGS
-  label.color=$LABEL_COLOR
-  label.font="$FONT:Semibold:13.0"
-  label.padding_left=$PADDINGS
-  label.padding_right=$PADDINGS
-  padding_left=$PADDINGS
-  padding_right=$PADDINGS
-  popup.background.border_color=$POPUP_BORDER_COLOR
-  popup.background.border_width=2
-  popup.background.color=$POPUP_BACKGROUND_COLOR
-  popup.background.corner_radius=9
-  popup.background.shadow.drawing=on
-  popup.blur_radius=20
-  scroll_texts=on
-  updates=when_shown
-)
-
-sketchybar --default "${defaults[@]}"
-
-# Left
-source "$ITEM_DIR/apple.sh"
-source "$ITEM_DIR/spaces.sh"
-source "$ITEM_DIR/aerospace.sh"
-source "$ITEM_DIR/front_app.sh"
-
-# Center
-# TODO: make this respect the notch
-
-# Right
-source "$ITEM_DIR/calendar.sh"
-source "$ITEM_DIR/brew.sh"
-source "$ITEM_DIR/github.sh"
-source "$ITEM_DIR/wifi.sh"
-source "$ITEM_DIR/battery.sh"
-source "$ITEM_DIR/volume.sh"
-source "$ITEM_DIR/cpu.sh"
-source "$ITEM_DIR/memory.sh"
-source "$ITEM_DIR/fantastical.sh"
-
-sketchybar --hotload on
-
-# Forcing all item scripts to run (never do this outside of sketchybarrc)
-sketchybar --update
-
-echo "sketchybar configuation loaded.."
+sbar.event_loop()
