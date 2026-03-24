@@ -1,12 +1,12 @@
 # vi: ft=sshconfig
 Host synology
-  HostName synology.lan
+  HostName 192.168.1.99
   Port 75
   User andrew_admin
   IdentityAgent ~/.1password/agent.sock
 
 Host udmpro
-  HostName udmpro.lan
+  HostName 192.168.1.1
   User root
   IdentityAgent ~/.1password/agent.sock
 
@@ -30,3 +30,7 @@ Host steve
   User pi
   IdentityAgent ~/.1password/agent.sock
 
+Host vault
+  HostName 192.168.1.100
+  User acato
+  IdentityAgent ~/.1password/agent.sock
