@@ -2,9 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BTTCurrentAudioInputDevice</key>
-	<string>Yeti Stereo Microphone</string>
-	<key>BTTCurrentAudioOutputDevice</key>
-	<string>Yeti Stereo Microphone</string>
+	<key>2026-3-23</key>
+	<dict/>
 </dict>
 </plist>
