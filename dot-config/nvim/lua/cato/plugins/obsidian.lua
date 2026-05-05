@@ -10,7 +10,7 @@
 ---@class obsidian.Note
 ---@field bufnr number
 
-frontmatter_func = function(note)
+local frontmatter_func = function(note)
 	return note.frontmatter
 end
 
@@ -56,16 +56,13 @@ return {
 			date_format = "%Y-%m-%d-%a",
 			time_format = "%H:%M",
 		},
-		callbacks = {
-			-- Runs anytime you leave the buffer for a note.
-			---@param client obsidian.Client
-			---@param note obsidian.Note
-			---@diagnostic disable-next-line: unused-local
-			leave_note = function(client, note)
-				vim.api.nvim_buf_call(note.bufnr or 0, function()
-					vim.cmd("silent w")
-				end)
-			end,
+		callbacks = {},
+		daily_notes = {
+			enabled = true,
+			date_format = "YYYYMMDD",
+			default_tags = { "daily-note" },
+			folder = "000_Daily Notes",
+			template = "Daily Note Template.md",
 		},
 	},
 }

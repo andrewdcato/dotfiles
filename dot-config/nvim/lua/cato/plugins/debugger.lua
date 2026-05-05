@@ -15,6 +15,7 @@ return {
 			"theHamsta/nvim-dap-virtual-text",
 			{
 				"microsoft/vscode-js-debug",
+				version = "v1.112.0",
 				build = "npm i --no-package-lock && npm run compile vsDebugServerBundle && rm -rf out && mv -f dist out",
 			},
 			{
