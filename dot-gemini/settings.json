@@ -1,28 +1,85 @@
 {
-  "security": {
-    "auth": {
-      "selectedType": "oauth-personal"
-    }
+  "general" : {
+    "vimMode" : true
   },
-  "general": {
-    "vimMode": true
+  "hooks" : {
+    "AfterAgent" : [
+      {
+        "hooks" : [
+          {
+            "command" : "cmux_cli=\"${CMUX_BUNDLED_CLI_PATH:-}\"; if [ -z \"$cmux_cli\" ] || [ ! -x \"$cmux_cli\" ]; then cmux_cli=\"$(command -v cmux 2>\/dev\/null || true)\"; fi; if [ -n \"$CMUX_SURFACE_ID\" ] && [ \"$CMUX_GEMINI_HOOKS_DISABLED\" != \"1\" ] && [ -n \"$cmux_cli\" ]; then { if [ -n \"${CMUX_SOCKET_PATH:-}\" ]; then \"$cmux_cli\" --socket \"$CMUX_SOCKET_PATH\" hooks gemini stop; else \"$cmux_cli\" hooks gemini stop; fi; } || echo '{}'; else echo '{}'; fi",
+            "timeout" : 10000,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "BeforeAgent" : [
+      {
+        "hooks" : [
+          {
+            "command" : "cmux_cli=\"${CMUX_BUNDLED_CLI_PATH:-}\"; if [ -z \"$cmux_cli\" ] || [ ! -x \"$cmux_cli\" ]; then cmux_cli=\"$(command -v cmux 2>\/dev\/null || true)\"; fi; if [ -n \"$CMUX_SURFACE_ID\" ] && [ \"$CMUX_GEMINI_HOOKS_DISABLED\" != \"1\" ] && [ -n \"$cmux_cli\" ]; then { if [ -n \"${CMUX_SOCKET_PATH:-}\" ]; then \"$cmux_cli\" --socket \"$CMUX_SOCKET_PATH\" hooks gemini prompt-submit; else \"$cmux_cli\" hooks gemini prompt-submit; fi; } || echo '{}'; else echo '{}'; fi",
+            "timeout" : 10000,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "PreToolUse" : [
+      {
+        "hooks" : [
+          {
+            "command" : "cmux_cli=\"${CMUX_BUNDLED_CLI_PATH:-}\"; if [ -z \"$cmux_cli\" ] || [ ! -x \"$cmux_cli\" ]; then cmux_cli=\"$(command -v cmux 2>\/dev\/null || true)\"; fi; if [ -n \"$CMUX_SURFACE_ID\" ] && [ \"$CMUX_GEMINI_HOOKS_DISABLED\" != \"1\" ] && [ -n \"$cmux_cli\" ]; then { if [ -n \"${CMUX_SOCKET_PATH:-}\" ]; then \"$cmux_cli\" --socket \"$CMUX_SOCKET_PATH\" hooks feed --source gemini --event PreToolUse; else \"$cmux_cli\" hooks feed --source gemini --event PreToolUse; fi; } || echo '{}'; else echo '{}'; fi",
+            "timeout" : 120000,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SessionEnd" : [
+      {
+        "hooks" : [
+          {
+            "command" : "cmux_cli=\"${CMUX_BUNDLED_CLI_PATH:-}\"; if [ -z \"$cmux_cli\" ] || [ ! -x \"$cmux_cli\" ]; then cmux_cli=\"$(command -v cmux 2>\/dev\/null || true)\"; fi; if [ -n \"$CMUX_SURFACE_ID\" ] && [ \"$CMUX_GEMINI_HOOKS_DISABLED\" != \"1\" ] && [ -n \"$cmux_cli\" ]; then { if [ -n \"${CMUX_SOCKET_PATH:-}\" ]; then \"$cmux_cli\" --socket \"$CMUX_SOCKET_PATH\" hooks gemini session-end; else \"$cmux_cli\" hooks gemini session-end; fi; } || echo '{}'; else echo '{}'; fi",
+            "timeout" : 10000,
+            "type" : "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart" : [
+      {
+        "hooks" : [
+          {
+            "command" : "cmux_cli=\"${CMUX_BUNDLED_CLI_PATH:-}\"; if [ -z \"$cmux_cli\" ] || [ ! -x \"$cmux_cli\" ]; then cmux_cli=\"$(command -v cmux 2>\/dev\/null || true)\"; fi; if [ -n \"$CMUX_SURFACE_ID\" ] && [ \"$CMUX_GEMINI_HOOKS_DISABLED\" != \"1\" ] && [ -n \"$cmux_cli\" ]; then { if [ -n \"${CMUX_SOCKET_PATH:-}\" ]; then \"$cmux_cli\" --socket \"$CMUX_SOCKET_PATH\" hooks gemini session-start; else \"$cmux_cli\" hooks gemini session-start; fi; } || echo '{}'; else echo '{}'; fi",
+            "timeout" : 10000,
+            "type" : "command"
+          }
+        ]
+      }
+    ]
   },
-  "ui": {
-    "footer": {
-      "hideContextPercentage": false
-    }
-  },
-  "tools": {
-    "shell": {
-      "showColor": true
-    }
-  },
-  "mcpServers": {
-    "chrome-devtools": {
-      "command": "npx",
-      "args": [
+  "mcpServers" : {
+    "chrome-devtools" : {
+      "args" : [
         "chrome-devtools-mcp@latest"
-      ]
+      ],
+      "command" : "npx"
+    }
+  },
+  "security" : {
+    "auth" : {
+      "selectedType" : "oauth-personal"
+    }
+  },
+  "tools" : {
+    "shell" : {
+      "showColor" : true
+    }
+  },
+  "ui" : {
+    "footer" : {
+      "hideContextPercentage" : false
     }
   }
 }
