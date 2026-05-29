@@ -21,8 +21,6 @@ gui:
       - cyan
     selectedLineBgColor:
       - black # set to `default` to have no background colour
-    selectedRangeBgColor:
-      - black
     cherryPickedCommitBgColor:
       - default
     cherryPickedCommitFgColor:
@@ -66,14 +64,11 @@ gui:
 git:
   pagers:
     - colorArg: always
-      # useConfig: true
       pager: delta --paging=never
   commit:
     signOff: false
   merging:
-    # only applicable to unix users
     manualCommit: false
-    # extra args passed to `git merge`, e.g. --no-ff
     args: ""
   log:
     # one of date-order, author-date-order, topo-order or default.
@@ -137,7 +132,6 @@ keybinding:
     nextMatch: "n"
     prevMatch: "N"
     optionMenu: <disabled> # show help menu
-    optionMenu-alt1: "?" # show help menu
     select: "<space>"
     goInto: "<enter>"
     openRecentRepos: "<c-r>"
@@ -219,12 +213,10 @@ keybinding:
     pickCommit: "p" # pick commit (when mid-rebase)
     revertCommit: "t"
     cherryPickCopy: "c"
-    cherryPickCopyRange: "C"
     pasteCommits: "v"
     tagCommit: "T"
     checkoutCommit: "<space>"
     resetCherryPick: "<c-R>"
-    copyCommitMessageToClipboard: "<c-y>"
     openLogMenu: "<c-l>"
     viewBisectOptions: "b"
   stash:
@@ -233,11 +225,45 @@ keybinding:
   commitFiles:
     checkoutCommitFile: "c"
   main:
-    toggleDragSelect: "v"
-    toggleDragSelect-alt: "V"
     toggleSelectHunk: "a"
     pickBothHunks: "b"
   submodules:
     init: "i"
     update: "u"
     bulkMenu: "b"
+
+customCommands:
+  # Create worktree from current branch (worktrees view)
+  - key: "N"
+    context: "worktrees"
+    description: "Create new worktree from current branch"
+    prompts:
+      - type: "input"
+        title: "From '{{ .CheckedOutBranch.Name }}' → new branch name?"
+        key: "Name"
+    command: >
+      repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name
+      }} && base={{ .CheckedOutBranch.Name }} &&  if git show-ref --verify
+      --quiet refs/heads/$branch; then
+        git worktree add .claude/worktrees/${repo}-$branch $branch;
+      else
+        git worktree add .claude/worktrees/${repo}-$branch -b $branch $base;
+      fi && echo "✔ ${repo}-$branch (from $base)"
+
+  # Create worktree from selected branch (branches view)
+  - key: "N"
+    context: "localBranches"
+    description: "Create new worktree from selected branch"
+    prompts:
+      - type: "input"
+        title: "From '{{ .SelectedLocalBranch.Name }}' → new branch name?"
+        key: "Name"
+    command: >
+      repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name
+      }} && base={{ .SelectedLocalBranch.Name }} && if git show-ref --verify
+      --quiet refs/heads/$branch; then
+        git worktree add .claude/worktrees/${repo}-$branch $branch;
+      else
+        git worktree add .claude/worktrees/${repo}-$branch -b $branch $base;
+      fi && echo "✔ ${repo}-$branch (from $base)"
+
