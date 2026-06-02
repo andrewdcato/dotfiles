@@ -52,6 +52,9 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]]) -- Undercurl
 vim.opt.guicursor = "a:block-Cursor" -- block cursor in all modes
 vim.opt.guicursor = "i-v:blinkon10" -- blink the cursor in insert or visual mode
 vim.opt.iskeyword:append("-") -- changes the "-" character to be considered part of the word
+vim.opt.list = true
+vim.opt.listchars:append("eol:↴")
+vim.opt.listchars:append("space:⋅")
 
 vim.api.nvim_set_option("updatetime", 300)
 vim.api.nvim_set_option("list", false)
