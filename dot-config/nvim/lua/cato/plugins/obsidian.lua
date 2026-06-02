@@ -29,9 +29,7 @@ return {
 	-- },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-treesitter/nvim-treesitter",
-
-		-- see below for full list of optional dependencies 👇
+		"folke/snacks.nvim",
 	},
 	---@module 'obsidian'
 	---@type obsidian.config
