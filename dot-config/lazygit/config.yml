@@ -110,7 +110,7 @@ promptToReturnFromSubprocess: false # display confirmation when subprocess termi
 keybinding:
   universal:
     quit: "q"
-    quit-alt1: "<c-c>" # alternative/alias of quit
+    quit-alt1: "<ctrl+c>" # alternative/alias of quit
     return: "<esc>" # return to previous menu, will quit if there's nowhere to return
     quitWithoutChangingDirectory: "Q"
     togglePanel: "<tab>" # goto the next panel
@@ -134,7 +134,7 @@ keybinding:
     optionMenu: <disabled> # show help menu
     select: "<space>"
     goInto: "<enter>"
-    openRecentRepos: "<c-r>"
+    openRecentRepos: "<ctrl+r>"
     confirm: "<enter>"
     remove: "d"
     new: "n"
@@ -144,27 +144,27 @@ keybinding:
     scrollDownMain: "<pgdown>" # main panel scroll down
     scrollUpMain-alt1: "K" # main panel scroll up
     scrollDownMain-alt1: "J" # main panel scroll down
-    scrollUpMain-alt2: "<c-u>" # main panel scroll up
-    scrollDownMain-alt2: "<c-d>" # main panel scroll down
+    scrollUpMain-alt2: "<ctrl+u>" # main panel scroll up
+    scrollDownMain-alt2: "<ctrl+d>" # main panel scroll down
     executeShellCommand: ":"
     createRebaseOptionsMenu: "m"
     pushFiles: "P"
     pullFiles: "p"
     refresh: "R"
-    createPatchOptionsMenu: "<c-p>"
+    createPatchOptionsMenu: "<ctrl+p>"
     nextTab: "]"
     prevTab: "["
     nextScreenMode: "+"
     prevScreenMode: "_"
     undo: "z"
-    redo: "<c-z>"
-    filteringMenu: "<c-s>"
+    redo: "<ctrl+z>"
+    filteringMenu: "<ctrl+s>"
     diffingMenu: "W"
-    diffingMenu-alt: "<c-e>" # deprecated
-    copyToClipboard: "<c-o>"
+    diffingMenu-alt: "<ctrl+e>" # deprecated
+    copyToClipboard: "<ctrl+o>"
     submitEditorText: "<enter>"
     extrasMenu: "@"
-    toggleWhitespaceInDiffView: "<c-w>"
+    toggleWhitespaceInDiffView: "<ctrl+w>"
     increaseContextInDiffView: "}"
     decreaseContextInDiffView: "{"
   status:
@@ -184,7 +184,7 @@ keybinding:
     fetch: "f"
     toggleTreeView: "`"
     openMergeOptions: "M"
-    openStatusFilter: "<c-b>"
+    openStatusFilter: "<ctrl+b>"
   branches:
     createPullRequest: "o"
     viewPullRequestOptions: "O"
@@ -207,8 +207,8 @@ keybinding:
     markCommitAsFixup: "f"
     createFixupCommit: "F" # create fixup commit for this commit
     squashAboveCommits: "S"
-    moveDownCommit: "<c-j>" # move commit down one
-    moveUpCommit: "<c-k>" # move commit up one
+    moveDownCommit: "<ctrl+j>" # move commit down one
+    moveUpCommit: "<ctrl+k>" # move commit up one
     amendToCommit: "A"
     pickCommit: "p" # pick commit (when mid-rebase)
     revertCommit: "t"
@@ -216,8 +216,8 @@ keybinding:
     pasteCommits: "v"
     tagCommit: "T"
     checkoutCommit: "<space>"
-    resetCherryPick: "<c-R>"
-    openLogMenu: "<c-l>"
+    resetCherryPick: "<ctrl+shift+r>"
+    openLogMenu: "<ctrl+l>"
     viewBisectOptions: "b"
   stash:
     popStash: "g"
