@@ -1,6 +1,9 @@
 # OS garbage
 .DS_Store
 
+# Auth files
+auth.json
+
 # State files
 dot-config/aws
 dot-config/gcloud
