@@ -30,6 +30,7 @@ outer.left = 10
 outer.bottom = 10
 outer.top = [
   { monitor.'LG HDR 4K' = 50 },
+  { monitor."Built-in Retina Display" = 50 },
   15,
 ] # TODO: make this dynamically work for LG vs builtin vs builtin w/notch
 outer.right = 10
@@ -131,10 +132,6 @@ run = "layout floating"
 
 [[on-window-detected]]
 if.app-id = "com.apple.AppStore"
-run = "layout floating"
-
-[[on-window-detected]]
-if.app-id = "io.robbie.HomeAssistant"
 run = "layout floating"
 
 [[on-window-detected]]

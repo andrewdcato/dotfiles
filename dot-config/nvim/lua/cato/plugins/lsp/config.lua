@@ -13,6 +13,8 @@ local servers = {
 		"jsonls",
 		"lua_ls",
 		"postgres_lsp",
+		"pyright",
+		"ruff",
 		"rust_analyzer",
 		"sqlls",
 		"svelte",
@@ -173,6 +175,10 @@ return {
 
 				if client.name == "yamlls" then
 					client.server_capabilities.documentFormattingProvider = true
+				end
+
+				if client.name == "ruff" then
+					client.server_capabilities.hoverProvider = false
 				end
 
 				-- Attach nvim-navic to buffer's LSP instance

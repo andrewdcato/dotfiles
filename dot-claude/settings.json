@@ -1,10 +1,10 @@
 {
-  "model": "opusplan",
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
     "php-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "frontend-design@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
@@ -18,4 +18,5 @@
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
   "tui": "fullscreen"
+  "model": "opusplan"
 }

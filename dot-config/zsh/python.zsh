@@ -5,5 +5,5 @@ if command -v pyenv &> /dev/null; then
   eval "$(pyenv init -)"
 fi
 
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
