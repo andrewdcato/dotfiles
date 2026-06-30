@@ -1,0 +1,18 @@
+{
+  "trustedtaps": [
+    "cloudflare/cloudflare",
+    "esolitos/ipa",
+    "felixkratz/formulae",
+    "hashicorp/tap",
+    "idoavrah/homebrew",
+    "indirect/tap",
+    "jandedobbeleer/oh-my-posh",
+    "khanhas/tap",
+    "koekeishiya/formulae",
+    "mongodb/brew",
+    "ngrok/ngrok",
+    "nikitabobko/tap",
+    "rigellute/tap",
+    "teamookla/speedtest"
+  ]
+}
