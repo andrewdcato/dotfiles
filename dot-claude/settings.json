@@ -14,9 +14,9 @@
       }
     }
   },
+  "agentPushNotifEnabled": true,
   "alwaysThinkingEnabled": true,
   "inputNeededNotifEnabled": true,
-  "agentPushNotifEnabled": true,
+  "model": "opusplan",
   "tui": "fullscreen"
-  "model": "opusplan"
 }
