@@ -1,0 +1,65 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "1",
+        "type": "session-name",
+        "rawValue": true
+      },
+      {
+        "id": "77b7fbae-cbac-4c30-a791-10099011c166",
+        "type": "model",
+        "rawValue": true
+      },
+      {
+        "id": "f8f963fe-363a-4bc8-9076-3acefa7c582c",
+        "type": "context-percentage-usable",
+        "rawValue": false
+      }
+    ],
+    [
+      {
+        "id": "28842038-ce96-4920-9a8b-322bd1ab6ae7",
+        "type": "session-usage",
+        "rawValue": false,
+        "color": "brightCyan"
+      },
+      {
+        "id": "61027e1c-7569-435d-8da7-65e3cac070b7",
+        "type": "weekly-usage",
+        "rawValue": false,
+        "color": "yellow"
+      }
+    ],
+    []
+  ],
+  "flexMode": "full-until-compact",
+  "compactThreshold": 60,
+  "colorLevel": 3,
+  "defaultPadding": " ",
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "minimalistMode": false,
+  "powerline": {
+    "enabled": false,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [
+      ""
+    ],
+    "theme": "catppuccin",
+    "autoAlign": false,
+    "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "pinned",
+    "installedVersion": "2.2.22"
+  }
+}
