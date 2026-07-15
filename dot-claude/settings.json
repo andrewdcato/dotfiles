@@ -1,5 +1,11 @@
 {
   "model": "opusplan",
+  "statusLine": {
+    "type": "command",
+    "command": "ccstatusline",
+    "padding": 0,
+    "refreshInterval": 10
+  },
   "enabledPlugins": {
     "typescript-lsp@claude-plugins-official": true,
     "php-lsp@claude-plugins-official": true,
@@ -17,6 +23,7 @@
     }
   },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
   "tui": "fullscreen",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true

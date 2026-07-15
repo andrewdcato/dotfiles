@@ -34,10 +34,9 @@ return {
 	---@module 'obsidian'
 	---@type obsidian.config
 	opts = {
-		completion = {
-			nvim_cmp = false,
-			blink = true,
-		},
+		-- TODO: these are all suppressing deprecation warnings, remove them when 4.0 releases
+		legacy_commands = false,
+		completion = {},
 		-- FIXME: remove this when v4.0 releases
 		note_frontmatter_func = frontmatter_func,
 		frontmatter = { func = frontmatter_func },
