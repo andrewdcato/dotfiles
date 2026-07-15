@@ -46,3 +46,6 @@ dot-config/yazi/flavors/catppuccin-mocha.yazi/*
 # Ignore BTT logs
 Library/Application Support/BetterTouchTool/Logs/*
 
+/dot-config/filezilla
+/dot-config/herdr/session.json
+/dot-config/lazyjira/jql_history
