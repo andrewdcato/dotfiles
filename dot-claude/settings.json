@@ -1,5 +1,19 @@
 {
   "model": "opusplan",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/andrew/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "ccstatusline",
@@ -7,12 +21,12 @@
     "refreshInterval": 10
   },
   "enabledPlugins": {
-    "typescript-lsp@claude-plugins-official": true,
-    "php-lsp@claude-plugins-official": true,
-    "lua-lsp@claude-plugins-official": true,
     "codex@openai-codex": true,
     "frontend-design@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true
+    "lua-lsp@claude-plugins-official": true,
+    "php-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
