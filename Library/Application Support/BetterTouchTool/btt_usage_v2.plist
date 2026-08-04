@@ -215,9 +215,50 @@
 	<dict/>
 	<key>2026-7-15</key>
 	<dict/>
+	<key>2026-7-16</key>
+	<dict>
+		<key>v2||1DF64796-A949-4143-AD13-B3DDCC6DB888||1||105||206||0||4 Finger Swipe Left||Execute Shell Script / Task: Move to RIGHT||</key>
+		<integer>1</integer>
+		<key>v2||1DF64796-A949-4143-AD13-B3DDCC6DB888||1||105||366||49||4 Finger Swipe Left||Execute Shell Script / Task: Move to RIGHT||Actions Executed On Quick Flick</key>
+		<integer>2</integer>
+		<key>v2||90DE751C-EAC6-4BDC-93A5-CB673542ACC0||1||106||206||0||4 Finger Swipe Right||Execute Shell Script / Task: Move to LEFT||</key>
+		<integer>1</integer>
+		<key>v2||90DE751C-EAC6-4BDC-93A5-CB673542ACC0||1||106||366||49||4 Finger Swipe Right||Execute Shell Script / Task: Move to LEFT||Actions Executed On Quick Flick</key>
+		<integer>2</integer>
+	</dict>
+	<key>2026-7-17</key>
+	<dict/>
+	<key>2026-7-18</key>
+	<dict/>
+	<key>2026-7-19</key>
+	<dict/>
 	<key>2026-7-2</key>
 	<dict/>
+	<key>2026-7-20</key>
+	<dict/>
+	<key>2026-7-21</key>
+	<dict/>
+	<key>2026-7-22</key>
+	<dict/>
+	<key>2026-7-23</key>
+	<dict/>
+	<key>2026-7-24</key>
+	<dict/>
+	<key>2026-7-25</key>
+	<dict/>
+	<key>2026-7-26</key>
+	<dict/>
+	<key>2026-7-27</key>
+	<dict/>
+	<key>2026-7-28</key>
+	<dict/>
+	<key>2026-7-29</key>
+	<dict/>
 	<key>2026-7-3</key>
+	<dict/>
+	<key>2026-7-30</key>
+	<dict/>
+	<key>2026-7-31</key>
 	<dict/>
 	<key>2026-7-4</key>
 	<dict/>
@@ -230,6 +271,12 @@
 	<key>2026-7-8</key>
 	<dict/>
 	<key>2026-7-9</key>
+	<dict/>
+	<key>2026-8-1</key>
+	<dict/>
+	<key>2026-8-2</key>
+	<dict/>
+	<key>2026-8-3</key>
 	<dict/>
 </dict>
 </plist>
