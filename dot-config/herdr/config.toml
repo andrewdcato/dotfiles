@@ -45,11 +45,6 @@ manifest_check = true
 [keys]
 prefix = "ctrl+a"
 
-focus_pane_left = "ctrl+h"
-focus_pane_down = "ctrl+j"
-focus_pane_up = "ctrl+k"
-focus_pane_right = "ctrl+l"
-
 previous_tab = "prefix+h"
 next_tab = "prefix+l"
 switch_tab = "prefix+1..9"
@@ -59,11 +54,33 @@ next_workspace = "prefix+L"
 previous_agent = ""
 next_agent = ""
 
+#! NOTE: Enable LazyGit overlay
 [[keys.command]]
 key = "prefix+g"
 type = "shell"
 command = "herdr plugin action invoke open --plugin beomjungil.lazygit-overlay"
 description = "open lazygit popup"
+
+# NOTE: Enable navigation between nvim panes and herder splits, just like Tmux
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "herdr-nvim-nav.left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "herdr-nvim-nav.down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "herdr-nvim-nav.up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "herdr-nvim-nav.right"
 # Prefix-mode actions
 # help = "prefix+?"
 # settings = "prefix+s"
