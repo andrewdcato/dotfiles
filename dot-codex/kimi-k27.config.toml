@@ -1,0 +1,5 @@
+model_provider = "loanspark"
+model = "@cf/moonshotai/kimi-k2.7-code"
+
+[tui.model_availability_nux]
+"gpt-5.6-sol" = 2

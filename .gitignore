@@ -26,7 +26,7 @@ dot-ssh/*
 dot-gemini/*
 !dot-gemini/settings.json
 
-# Ignore all in .claude dir except for settings file
+# Ignore all in .claude dir except for settings file and skills
 dot-claude/*
 !dot-claude/settings.json
 !dot-claude/skills
@@ -36,6 +36,11 @@ dot-config/opencode/*
 !dot-config/opencode/agent/
 !dot-config/opencode/opencode.*
 !dot-config/opencode/plugin/
+
+# Ignore all in codex dir except for config files
+dot-codex/*
+!dot-codex/config.toml
+!dot-codex/*.config.toml
 
 # Ignore all log files
 **/*.log

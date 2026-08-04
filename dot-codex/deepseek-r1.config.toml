@@ -1,0 +1,2 @@
+model_provider = "loanspark"
+model = "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b"

@@ -1,0 +1,12 @@
+[model_providers.loanspark]
+name = "LoanSpark AI Gateway"
+base_url = "https://ai-gateway.loanspark.com/v1"
+env_key = "LOANSPARK_AI_KEY"
+wire_api = "chat"
+
+[tui.model_availability_nux]
+"gpt-5.6-sol" = 1
+
+[projects."/Users/andrew/code/dotfiles"]
+trust_level = "trusted"
+
