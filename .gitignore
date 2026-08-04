@@ -54,3 +54,5 @@ Library/Application Support/BetterTouchTool/Logs/*
 /dot-config/filezilla
 /dot-config/herdr/session.json
 /dot-config/lazyjira/jql_history
+/dot-config/cagent
+/dot-config/herdr/release-notes.json
