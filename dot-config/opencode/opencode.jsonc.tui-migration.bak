@@ -1,5 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "theme": "catppuccin",
+  "tui": {
+    "scroll_acceleration": {
+      "enabled": true
+    }
+  },
   "agent": {
     // NOTE: Settings for default agents. Custom agents are stored in agent/*.md files
     "build": {
