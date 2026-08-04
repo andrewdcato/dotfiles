@@ -1,0 +1,53 @@
+[
+  {
+    "plugin_id": "beomjungil.lazygit-overlay",
+    "name": "Lazygit Overlay",
+    "version": "0.2.0",
+    "min_herdr_version": "0.7.4",
+    "description": "Open lazygit as a session-modal Herdr popup over the active pane.",
+    "manifest_path": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1/herdr-plugin.toml",
+    "plugin_root": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1",
+    "enabled": true,
+    "platforms": [
+      "macos",
+      "linux"
+    ],
+    "actions": [
+      {
+        "id": "open",
+        "title": "Open Lazygit Popup",
+        "description": "Open lazygit as a popup window over the active pane.",
+        "contexts": [
+          "workspace",
+          "tab",
+          "pane"
+        ],
+        "command": [
+          "bash",
+          "scripts/open.sh"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "lazygit",
+        "title": "Lazygit",
+        "placement": "popup",
+        "width": "90%",
+        "height": "85%",
+        "command": [
+          "lazygit"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "beomjungil",
+      "repo": "herdr-lazygit-overlay",
+      "requested_ref": "main",
+      "resolved_commit": "14b12382e3b504579f4e0f701c6cf27bec203608",
+      "managed_path": "/Users/andrew/.config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1",
+      "installed_unix_ms": 1785442561224
+    }
+  }
+]

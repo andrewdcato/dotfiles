@@ -43,14 +43,6 @@ version_check = true
 manifest_check = true
 
 [keys]
-# Prefix key to enter prefix mode (default: "ctrl+b")
-# Examples: "ctrl+b", "f12", "esc", "-"
-# Action bindings use explicit syntax: "prefix+n" requires the prefix;
-# "ctrl+alt+n" is a direct terminal-mode shortcut.
-# Accepted key syntax: plain keys, ctrl/shift/alt/cmd/super modifiers, and special keys like enter/tab/esc/left/right/up/down.
-# Named punctuation such as minus, comma, ampersand, plus, and backtick is also accepted.
-# Most reliable direct bindings are ctrl+letter, function keys, and explicit modified chords.
-# alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
 prefix = "ctrl+a"
 
 focus_pane_left = "ctrl+h"
@@ -63,10 +55,15 @@ next_tab = "prefix+l"
 switch_tab = "prefix+1..9"
 
 previous_workspace = "prefix+H"
-next_workspace = "prefix+L"   
-previous_agent = ""  
-next_agent = ""     
+next_workspace = "prefix+L"
+previous_agent = ""
+next_agent = ""
 
+[[keys.command]]
+key = "prefix+g"
+type = "shell"
+command = "herdr plugin action invoke open --plugin beomjungil.lazygit-overlay"
+description = "open lazygit popup"
 # Prefix-mode actions
 # help = "prefix+?"
 # settings = "prefix+s"
@@ -74,9 +71,9 @@ next_agent = ""
 # reload_config = "prefix+shift+r"
 # open_notification_target = "prefix+o"
 # workspace_picker = "prefix+w"
-# goto = "prefix+g"
+# goto = "prefix+shift+g"
 # new_workspace = "prefix+shift+n"
-# new_worktree = "prefix+shift+g"
+# new_worktree = ""
 # open_worktree = ""    # optional, unset by default
 # remove_worktree = ""  # optional, unset by default; opens confirmation
 # rename_workspace = "prefix+shift+w"
@@ -123,17 +120,10 @@ next_agent = ""
 # type = "shell" runs detached in the background.
 # type = "pane" opens a temporary pane and closes it when the command exits.
 # On Windows, command strings run through cmd.exe /d /c.
-# [[keys.command]]
-# key = "prefix+alt+g"
-# type = "pane"
-# command = "lazygit"
-
-# Legacy indexed shortcut config is still parsed for compatibility.
-# Prefer switch_tab, switch_workspace, and focus_agent for new configs.
-# [keys.indexed]
-# tabs = ""       # e.g. "ctrl" makes ctrl+1..9 switch tabs directly
-# workspaces = "" # e.g. "ctrl+shift" makes ctrl+shift+1..9 switch workspaces directly
-# agents = ""     # e.g. "alt" makes alt+1..9 focus agent rows directly
+[[keys.command]]
+key = "prefix+alt+g"
+type = "pane"
+command = "lazygit"
 
 # [worktrees]
 # directory = "~/.herdr/worktrees"
