@@ -129,10 +129,11 @@ in from direct questions (step 6), not left thin by default.
    MCP tools:
    - Get the cloud id via `getAccessibleAtlassianResources` (cache/reuse it
      for the rest of the session).
-   - Query with `searchJiraIssuesUsingJql`, JQL:
-     `assignee = currentUser() AND (resolutiondate >= -6d OR (project = "LS Originator" AND updatedDate >= -6d))  order by created DESC`
-     (this is what filter 10144 resolves to — a ~1-week trailing window of
-     the user's resolved tickets).
+   - Query with `searchJiraIssuesUsingJql`, JQL: `filter = 10144`. Reference
+     the saved filter directly rather than a hardcoded equivalent JQL string
+     — the filter's own definition can change over time, and querying by
+     filter id always picks up the current version instead of a stale copy
+     baked into this skill.
    - Request a narrow field set first (key, summary, status, resolutiondate)
      to gauge issue count before asking for `description` too — with
      `description` included, results routinely exceed the tool output token
