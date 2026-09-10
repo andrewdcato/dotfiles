@@ -69,6 +69,7 @@
   "vim-terraform": { "branch": "master", "commit": "520498fab16a3a11f2ae1b8cb65e0a1684bc317a" },
   "vim-terragrunt": { "branch": "master", "commit": "39b9cd1f87879790b53f2edc728b254c1e17a465" },
   "vim-tmux-navigator": { "branch": "master", "commit": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432" },
+  "vimtex": { "branch": "master", "commit": "154eca8f68a5ad54eb12308bb378e88bdd0dfb3e" },
   "vscode-js-debug": { "branch": "main", "commit": "b53b28c5faeab5dc8f52b3246a3714686e57f9b7" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }

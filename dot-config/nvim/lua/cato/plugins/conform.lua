@@ -19,6 +19,7 @@ return {
 			typescript = { "prettierd", "prettier", stop_after_first = true },
 			svelte = { "prettierd", "prettier", stop_after_first = true },
 			terraform = { "terraform_fmt" },
+			tex = { "tex-fmt" },
 			toml = { "taplo" },
 			caddyfile = { "caddy" },
 			["_"] = { "prettier" },
