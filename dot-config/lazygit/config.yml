@@ -62,9 +62,9 @@ gui:
     "main": "magenta"
     "master": "magenta"
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never
+      command: delta --paging=never
   commit:
     signOff: false
   merging:
@@ -231,7 +231,6 @@ keybinding:
     init: "i"
     update: "u"
     bulkMenu: "b"
-
 customCommands:
   # Create worktree from current branch (worktrees view)
   - key: "N"
@@ -242,11 +241,11 @@ customCommands:
         title: "From '{{ .CheckedOutBranch.Name }}' → new branch name?"
         key: "Name"
     command: >
-      repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name
-      }} && base={{ .CheckedOutBranch.Name }} &&  if git show-ref --verify
-      --quiet refs/heads/$branch; then
+      repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name }} && base={{ .CheckedOutBranch.Name }} &&  if git show-ref --verify --quiet refs/heads/$branch; then
+
         git worktree add .claude/worktrees/${repo}-$branch $branch;
       else
+
         git worktree add .claude/worktrees/${repo}-$branch -b $branch $base;
       fi && echo "✔ ${repo}-$branch (from $base)"
 
@@ -259,11 +258,11 @@ customCommands:
         title: "From '{{ .SelectedLocalBranch.Name }}' → new branch name?"
         key: "Name"
     command: >
-      repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name
-      }} && base={{ .SelectedLocalBranch.Name }} && if git show-ref --verify
-      --quiet refs/heads/$branch; then
+      repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name }} && base={{ .SelectedLocalBranch.Name }} && if git show-ref --verify --quiet refs/heads/$branch; then
+
         git worktree add .claude/worktrees/${repo}-$branch $branch;
       else
+
         git worktree add .claude/worktrees/${repo}-$branch -b $branch $base;
       fi && echo "✔ ${repo}-$branch (from $base)"
 
