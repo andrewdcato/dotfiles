@@ -6,13 +6,14 @@ sbar.add("event", "brew_update")
 local brew = sbar.add("item", "brew", {
   position      = "right",
   padding_right = 10,
+  update_freq   = 3600,
   icon          = { string = "􀐛" },
   label         = { string = "?" },
 })
 
 local function update()
-  sbar.exec("brew outdated | wc -l | tr -d ' '", function(result)
-    local count = tonumber(result:gsub("%s+", "")) or 0
+  sbar.exec("brew outdated --formula | wc -l | tr -d ' '", function(result)
+    local count = tonumber((result:gsub("%s+", ""))) or 0
     local color = colors.red
     local label = tostring(count)
 
@@ -34,4 +35,4 @@ local function update()
   end)
 end
 
-brew:subscribe({"routine", "brew_update"}, update)
+brew:subscribe({"routine", "forced", "brew_update"}, update)
