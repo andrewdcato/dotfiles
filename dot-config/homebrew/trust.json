@@ -1,5 +1,6 @@
 {
   "trustedtaps": [
+    "atlassian/acli",
     "cloudflare/cloudflare",
     "esolitos/ipa",
     "felixkratz/formulae",
