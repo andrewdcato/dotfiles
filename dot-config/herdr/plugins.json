@@ -51,6 +51,47 @@
     }
   },
   {
+    "plugin_id": "dot.terminal-notifier",
+    "name": "terminal-notifier notifications",
+    "version": "0.1.0",
+    "min_herdr_version": "0.7.0",
+    "description": "Customizable macOS notifications for herdr agent state changes via terminal-notifier",
+    "manifest_path": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/dot.terminal-notifier-769075972046/herdr-plugin.toml",
+    "plugin_root": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/dot.terminal-notifier-769075972046",
+    "enabled": true,
+    "platforms": [
+      "macos"
+    ],
+    "build": [
+      {
+        "platforms": [
+          "macos"
+        ],
+        "command": [
+          "bash",
+          "scripts/setup-notifier.sh"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "on": "pane.agent_status_changed",
+        "command": [
+          "bash",
+          "bin/notify.sh"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "dot",
+      "repo": "herdr-terminal-notifier",
+      "resolved_commit": "321cb6e18df7c5e42030c019ed9e7c812f8998f5",
+      "managed_path": "/Users/andrew/.config/herdr/plugins/github/dot.terminal-notifier-769075972046",
+      "installed_unix_ms": 1790173111339
+    }
+  },
+  {
     "plugin_id": "herdr-nvim-nav",
     "name": "Vim Nav",
     "version": "0.1.0",
