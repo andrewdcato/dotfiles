@@ -1,7 +1,6 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		enabled = false,
 		lazy = false,
 		branch = "main",
 		build = ":TSUpdate",
@@ -28,6 +27,7 @@ return {
 				"javascript",
 				"jsdoc",
 				"json",
+				"latex",
 				"lua",
 				"markdown",
 				"markdown_inline",
@@ -48,7 +48,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		lazy = true,
-		enabled = false,
 		config = function()
 			require("nvim-treesitter-textobjects").setup({
 				select = {
