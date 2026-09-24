@@ -3,7 +3,7 @@ name: daily-work-summary-loanspark
 description: Auto-generate a summary of work done at the end of the day and add it to your daily obsidian note
 ---
 
-Check local checkouts of Loanspark repositories (stored at `~/Development/{portal,lendspark,lendspark-portal,calculators}`) for work done today, then update your Loanspark Obsidian vault (stored at `~/Documents/Loanspark/`).
+Check local checkouts of Loanspark repositories (stored at `~/Development/{portal,lendspark,lendspark-portal,calculators}`) for work done today, then update your Loanspark Obsidian vault (stored at `~/obsidian/loanspark/`).
 
 1. For each repository, check all branches modified by you in the last 24 hours. If the checkout doesn't exist at the expected path, or if no branches were modified, skip that repository and do not mention it in the summary.
 2. For each modified branch, summarize the changes in 2–3 sentences: what you worked on, what changed, and current status. Ensure that Jira tickets are properly linked to in the summary.
