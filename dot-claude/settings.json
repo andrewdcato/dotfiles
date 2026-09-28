@@ -26,7 +26,8 @@
     "lua-lsp@claude-plugins-official": true,
     "php-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "vanta-mcp-plugin@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {
