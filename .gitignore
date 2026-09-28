@@ -60,3 +60,4 @@ Library/Application Support/BetterTouchTool/Logs/*
 /dot-config/cagent
 /dot-config/herdr/release-notes.json
 /dot-claude/skills/synced
+/dot-config/acli
