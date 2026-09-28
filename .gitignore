@@ -10,6 +10,7 @@ dot-config/gcloud
 dot-config/lazygit/state.yml
 dot-config/lazydocker/state.yml
 dot-config/configstore
+dot-config/acli
 
 # Any kind of license file...
 **/*.bttlicense
