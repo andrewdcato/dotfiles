@@ -14,7 +14,8 @@ _darcs
 \.git
 \.gitignore
 \.gitmodules
-dot-gitconfig
+\.gitattributes
+README.md
 
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
@@ -24,3 +25,5 @@ dot-gitconfig
 ^/COPYING
 
 scripts/*
+Brewfile
+Brewfile.*
