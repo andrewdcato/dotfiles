@@ -5,13 +5,12 @@ General config for macOS and the core tools I use:
 * [neovim](https://github.com/neovim/neovim)
 * [tmux](https://github.com/tmux/tmux)
 * [Ghostty](https://github.com/ghostty-org/ghostty)
-* [Yabai](https://github.com/koekeishiya/yabai)
-* [SKHD](https://github.com/koekeishiya/skhd)
+* [Aerospace]()
 
 All files in this repo are managed with [GNU Stow](https://www.gnu.org/software/stow/manual/stow.html).
 
 ### How do I use this?
-First, you'll need to ensure that System Integrity Protection is at least partially disabled so that `yabai` will work properly - [instructions can be found here](https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection).
+First, you'll need to ensure that Xcode and command line tools have been installed.
 
 Once that's done, fire up `Terminal.app` for (hopefully) the last time and follow the steps below.
 

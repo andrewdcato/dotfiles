@@ -74,7 +74,6 @@
             "devices": [
                 {
                     "identifiers": { "is_keyboard": true },
-                    "ignore": false,
                     "simple_modifications": [
                         {
                             "from": { "key_code": "caps_lock" },

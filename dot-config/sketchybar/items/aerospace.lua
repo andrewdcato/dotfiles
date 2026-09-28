@@ -3,21 +3,34 @@ local icon_map = require("plugins.icon_map")
 
 sbar.add("event", "aerospace_workspace_change")
 
+-- Helper: read lines from a shell command synchronously.
+-- Wrapped in `timeout`: AeroSpace's own `after-startup-command` launches
+-- sketchybar, so right at startup the `aerospace` CLI's socket may not be
+-- listening yet. Without this, a hung `aerospace` call here blocked
+-- sketchybar's startup indefinitely (only recoverable by killing the
+-- process).
+local function popen_lines(cmd)
+  local pipe = io.popen("timeout 2 " .. cmd)
+  if not pipe then return {} end
+  local lines = {}
+  for line in pipe:lines() do
+    if line ~= "" then table.insert(lines, line) end
+  end
+  pipe:close()
+  return lines
+end
+
 -- Synchronously get initial icon strip for a workspace
 local function initial_icon_strip(ws)
-  local pipe = io.popen(
+  local lines = popen_lines(
     "aerospace list-windows --workspace " .. ws
     .. " | awk -F'|' '{gsub(/^ *| *$/, \"\", $2); print $2}'"
   )
-  if not pipe then return " —" end
 
   local strip = " "
-  for app in pipe:lines() do
-    if app ~= "" then
-      strip = strip .. " " .. icon_map(app)
-    end
+  for _, app in ipairs(lines) do
+    strip = strip .. " " .. icon_map(app)
   end
-  pipe:close()
 
   return strip == " " and " —" or strip
 end
@@ -37,18 +50,6 @@ local function reload_icon_strip(ws, callback)
       callback(strip == " " and " —" or strip)
     end
   )
-end
-
--- Helper: read lines from a shell command synchronously
-local function popen_lines(cmd)
-  local pipe = io.popen(cmd)
-  if not pipe then return {} end
-  local lines = {}
-  for line in pipe:lines() do
-    if line ~= "" then table.insert(lines, line) end
-  end
-  pipe:close()
-  return lines
 end
 
 -- Build space items for each monitor/workspace
