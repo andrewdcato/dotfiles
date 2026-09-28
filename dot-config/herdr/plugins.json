@@ -44,10 +44,9 @@
       "kind": "github",
       "owner": "beomjungil",
       "repo": "herdr-lazygit-overlay",
-      "requested_ref": "main",
       "resolved_commit": "14b12382e3b504579f4e0f701c6cf27bec203608",
       "managed_path": "/Users/andrew/.config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1",
-      "installed_unix_ms": 1785442561224
+      "installed_unix_ms": 1790606328039
     }
   },
   {
@@ -88,7 +87,7 @@
       "repo": "herdr-terminal-notifier",
       "resolved_commit": "321cb6e18df7c5e42030c019ed9e7c812f8998f5",
       "managed_path": "/Users/andrew/.config/herdr/plugins/github/dot.terminal-notifier-769075972046",
-      "installed_unix_ms": 1790173111339
+      "installed_unix_ms": 1790606357876
     }
   },
   {
@@ -171,7 +170,57 @@
       "repo": "herdr-nvim-nav",
       "resolved_commit": "ec047fd6d8d0269d54a34e9405af28d8aad4c8f0",
       "managed_path": "/Users/andrew/.config/herdr/plugins/github/herdr-nvim-nav-37d546a0d32b",
-      "installed_unix_ms": 1785861992067
+      "installed_unix_ms": 1790606389796
+    }
+  },
+  {
+    "plugin_id": "ray.plugin-manager",
+    "name": "Plugin Manager",
+    "version": "0.5.0",
+    "min_herdr_version": "0.7.4",
+    "description": "Manage herdr plugins from a popup: list, install, update, enable/disable, uninstall, browse the marketplace, open repo in browser, edit plugins.json",
+    "manifest_path": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/ray.plugin-manager-75f462e8e1d0/herdr-plugin.toml",
+    "plugin_root": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/ray.plugin-manager-75f462e8e1d0",
+    "enabled": true,
+    "platforms": [
+      "macos",
+      "linux"
+    ],
+    "actions": [
+      {
+        "id": "open",
+        "title": "Open plugin manager",
+        "contexts": [
+          "workspace"
+        ],
+        "command": [
+          "bash",
+          "-c",
+          "exec \"${HERDR_BIN_PATH:-herdr}\" plugin pane open --plugin ray.plugin-manager --entrypoint manager --placement popup --focus"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "manager",
+        "title": "Plugin Manager",
+        "placement": "popup",
+        "width": 82,
+        "height": 28,
+        "command": [
+          "bash",
+          "-c",
+          "exec bash \"$HERDR_PLUGIN_ROOT/bin/manager.sh\""
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "speardragon",
+      "repo": "herdr-plugin-manager",
+      "resolved_commit": "e4fef2693728a36cbb389af033a389cad2257869",
+      "managed_path": "/Users/andrew/.config/herdr/plugins/github/ray.plugin-manager-75f462e8e1d0",
+      "installed_unix_ms": 1790606186806
     }
   }
 ]
