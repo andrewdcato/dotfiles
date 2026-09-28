@@ -102,13 +102,7 @@ static inline void memory_update(struct memory* mem) {
     snprintf(color, 16, "%s", getenv("LABEL_COLOR"));
   }
 
-  snprintf(mem->command, 256, "--push memory.used %.2f "
-                              "--push memory.compressed %.2f "
-                              "--set memory.top label='%s' "
-                              "--set memory.percent label=%.0f%% label.color=%s ",
-                              used_perc,
-                              compressed_perc,
-                              topproc,
+  snprintf(mem->command, 256, "--set memory.percent label=%.0f%% label.color=%s ",
                               total_perc * 100.,
                               color);
 }
