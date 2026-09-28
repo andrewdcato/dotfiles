@@ -6,8 +6,6 @@ tap "idoavrah/homebrew"
 tap "indirect/tap"
 tap "jandedobbeleer/oh-my-posh"
 tap "khanhas/tap"
-tap "koekeishiya/formulae"
-tap "mongodb/brew"
 tap "ngrok/ngrok"
 tap "nikitabobko/tap"
 tap "rigellute/tap"
@@ -55,7 +53,7 @@ brew "ghostscript"
 brew "git"
 brew "git-delta"
 brew "git-filter-repo"
-brew "git-flow-avh"
+brew "git-flow-next"
 brew "git-recent"
 brew "gnu-sed"
 brew "gnu-tar"
@@ -136,9 +134,6 @@ brew "felixkratz/formulae/sketchybar"
 brew "hashicorp/tap/terraform-ls"
 brew "idoavrah/homebrew/tftui"
 brew "jandedobbeleer/oh-my-posh/oh-my-posh"
-brew "koekeishiya/formulae/skhd"
-brew "koekeishiya/formulae/yabai", args: ["HEAD"]
-brew "mongodb/brew/mongodb-community@6.0"
 brew "teamookla/speedtest/speedtest"
 cask "1password"
 cask "1password-cli"
@@ -179,7 +174,6 @@ cask "kap"
 cask "karabiner-elements"
 cask "logi-options+"
 cask "logitune"
-cask "mongodb-compass"
 cask "ngrok"
 cask "obsidian"
 cask "onyx"
@@ -195,27 +189,20 @@ cask "signal"
 cask "slack"
 cask "steam"
 cask "synology-drive"
-cask "thunderbird"
 cask "utm"
 cask "vagrant"
 cask "via"
 cask "virtualbox"
 cask "visual-studio-code"
-cask "wezterm"
 cask "wifiman"
 cask "zoom"
-mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
-mas "Auto HD FPS for YouTube", id: 1546729687
 mas "CARROTweather", id: 993487541
 mas "Developer", id: 640199958
 mas "Fantastical", id: 975937182
 mas "Home Assistant", id: 1099568401
-mas "Klack", id: 6446206067
 mas "Numbers", id: 409203825
 mas "Parcel Classic", id: 639968404
-mas "PayPal Honey", id: 1472777122
-mas "PocketTube", id: 1533703891
 mas "Quiver", id: 866773894
 mas "The Unarchiver", id: 425424353
 mas "WireGuard", id: 1451685025
