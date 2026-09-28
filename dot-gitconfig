@@ -12,7 +12,7 @@
 [user]
   name = Andrew Cato
   email = andrewdcato@gmail.com
-	signingkey = /Users/andrewcato/.ssh/github.pub
+	signingkey = /Users/andrew/.ssh/github.pub
 
 [core]
   compression = 9
@@ -87,3 +87,7 @@
 
 [url "git@github.com:andrewdcato/"]
   insteadOf = "ac:"
+
+[url "git@github.com:balance-HQ/"]
+  insteadOf = "bhq:"
+
