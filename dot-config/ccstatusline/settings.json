@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "lines": [
     [
       {
@@ -22,14 +22,14 @@
       {
         "id": "28842038-ce96-4920-9a8b-322bd1ab6ae7",
         "type": "session-usage",
-        "rawValue": false,
-        "color": "brightCyan"
+        "color": "brightCyan",
+        "rawValue": false
       },
       {
         "id": "61027e1c-7569-435d-8da7-65e3cac070b7",
         "type": "weekly-usage",
-        "rawValue": false,
-        "color": "yellow"
+        "color": "yellow",
+        "rawValue": false
       }
     ],
     []
@@ -38,9 +38,12 @@
   "compactThreshold": 60,
   "colorLevel": 3,
   "defaultPadding": " ",
+  "defaultPaddingSide": "both",
   "inheritSeparatorColors": false,
   "globalBold": false,
   "gitCacheTtlSeconds": 5,
+  "terminalWidthCacheTtlSeconds": 5,
+  "customCommandCacheTtlSeconds": 0,
   "minimalistMode": false,
   "powerline": {
     "enabled": false,
@@ -60,6 +63,6 @@
   },
   "installation": {
     "method": "pinned",
-    "installedVersion": "2.2.22"
+    "installedVersion": "2.2.30"
   }
 }
