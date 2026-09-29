@@ -1,3 +1,4 @@
+config-version = 2
 # Startup command
 start-at-login = true
 
@@ -30,7 +31,7 @@ outer.left = 10
 outer.bottom = 10
 outer.top = [
   { monitor.'LG HDR 4K' = 50 },
-  # { monitor."Built-in Retina Display" = 50 },
+  { monitor."Built-in Retina Display" = 50 },
   15,
 ] # TODO: make this dynamically work for LG vs builtin vs builtin w/notch
 outer.right = 10
@@ -166,6 +167,11 @@ run = "layout floating"
 [[on-window-detected]]
 if.app-id = "com.apple.Safari"
 if.window-title-regex-substring = "General|Tabs?|Passwords?|Website|Extensions?|AutoFill|Search|Security|Privacy|Advanced"
+run = "layout floating"
+
+[[on-window-detected]]
+if.app-id = "com.quicken.Quicken"
+if.window-title-regex-substring = "Co(py|nnection Status)|Reconcile"
 run = "layout floating"
 
 # NOTE: Lock apps to workspaces. General philosophy is:

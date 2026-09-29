@@ -5,8 +5,8 @@
     "version": "0.2.0",
     "min_herdr_version": "0.7.4",
     "description": "Open lazygit as a session-modal Herdr popup over the active pane.",
-    "manifest_path": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1/herdr-plugin.toml",
-    "plugin_root": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1",
+    "manifest_path": "/Users/andrewcato/code/dotfiles/dot-config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1/herdr-plugin.toml",
+    "plugin_root": "/Users/andrewcato/code/dotfiles/dot-config/herdr/plugins/github/beomjungil.lazygit-overlay-1fcadde0aed1",
     "enabled": true,
     "platforms": [
       "macos",
@@ -96,8 +96,8 @@
     "version": "0.1.0",
     "min_herdr_version": "0.7.0",
     "description": "Ctrl+h/j/k/l across herdr panes and Neovim splits, without a per-key process for detection",
-    "manifest_path": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/herdr-nvim-nav-37d546a0d32b/herdr-plugin.toml",
-    "plugin_root": "/Users/andrew/code/dotfiles/dot-config/herdr/plugins/github/herdr-nvim-nav-37d546a0d32b",
+    "manifest_path": "/Users/andrewcato/code/dotfiles/dot-config/herdr/plugins/github/herdr-nvim-nav-37d546a0d32b/herdr-plugin.toml",
+    "plugin_root": "/Users/andrewcato/code/dotfiles/dot-config/herdr/plugins/github/herdr-nvim-nav-37d546a0d32b",
     "enabled": true,
     "platforms": [
       "macos",
