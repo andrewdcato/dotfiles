@@ -29,11 +29,7 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-outer.top = [
-  { monitor.'LG HDR 4K' = 50 },
-  { monitor."Built-in Retina Display" = 50 },
-  15,
-] # TODO: make this dynamically work for LG vs builtin vs builtin w/notch
+outer.top = [ { monitor.'LG HDR 4K' = 50 }, 15 ] 
 outer.right = 10
 
 [mode.service.binding]
@@ -160,6 +156,10 @@ if.app-name-regex-substring = "YouTube Music"
 run = "layout floating"
 
 [[on-window-detected]]
+if.app-id="com.valvesoftware.steam.helper"
+run="layout floating"
+
+[[on-window-detected]]
 if.app-id = "com.apple.finder"
 if.window-title-regex-substring = "Co(py|nnect)|Move|Info|Pref"
 run = "layout floating"
@@ -215,3 +215,16 @@ run = ['move-node-to-workspace 4', 'exec-and-forget ${XDG_CONFIG_HOME:-$HOME/.co
 [[on-window-detected]]
 if.app-id = "org.mozilla.thunderbird"
 run = ['move-node-to-workspace 5', 'exec-and-forget ${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace-workspace-refresh.sh 5']
+
+[[on-window-detected]]
+if.app-id = "com.apple.mail"
+run = ['move-node-to-workspace 5', 'exec-and-forget ${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace-workspace-refresh.sh 5']
+
+[[on-window-detected]]
+if.app-id = "com.quicken.Quicken"
+run = ['move-node-to-workspace 6', 'exec-and-forget ${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace-workspace-refresh.sh 5']
+
+[[on-window-detected]]
+if.app-id = "tv.plex.desktop"
+run = ['move-node-to-workspace 7', 'exec-and-forget ${XDG_CONFIG_HOME:-$HOME/.config}/aerospace/aerospace-workspace-refresh.sh 5']
+
