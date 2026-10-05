@@ -2,6 +2,7 @@
 Include ./config.home
 
 Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   SetEnv TERM=screen-256color
 
 Host github.com
@@ -13,7 +14,3 @@ Host bitbucket.org
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/bitbucket
-
-
-Host *
-  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
