@@ -9,3 +9,6 @@ wire_api = "responses"
 
 [projects."/Users/andrew/code/dotfiles"]
 trust_level = "trusted"
+
+[features]
+hooks = true
