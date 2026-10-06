@@ -64,3 +64,4 @@ Library/Application Support/BetterTouchTool/Logs/*
 /dot-config/acli
 /dot-config/herdr/herdr.sock.agent
 /dot-config/herdr/session-snapshots
+/dot-config/tfenv/versions/1.7.5/terraform
