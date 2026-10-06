@@ -1,0 +1,77 @@
+---
+$schema: https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+console_title_template: "{{ .Shell }} in {{ .Folder }}"
+version: 4
+final_space: true
+
+secondary_prompt:
+  template: "➜ "
+  foreground: blue
+  background: transparent
+
+transient_prompt:
+  template: "➜ "
+  background: transparent
+  foreground_templates:
+    - "{{if gt .Code 0}}red{{end}}"
+    - "{{if eq .Code 0}}green{{end}}"
+
+# terminal_features:
+#   progress:
+#     - ghostty
+
+blocks:
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - template: "{{ .Path }}"
+        foreground: cyan
+        background: transparent
+        type: path
+        style: plain
+        options:
+          style: full
+      - template:
+          " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}   {{
+          end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }} {{ if gt .Ahead 0 }}⇡{{
+          end }}</>"
+        foreground: magenta
+        background: transparent
+        type: git
+        style: plain
+        options:
+          branch_icon: " "
+          commit_icon: "@"
+
+  - type: prompt
+    alignment: right
+    segments:
+      - type: gcp
+        style: plain
+        foreground: green
+        background: transparent
+        template: " 󱇶  {{.Project}} :: {{.Account}}"
+
+  - type: rprompt
+    overflow: hidden
+    segments:
+      - template: Took {{ .FormattedMs }}
+        foreground: yellow
+        background: transparent
+        type: executiontime
+        style: plain
+        options:
+          threshold: 5000
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - template: ➜
+        background: transparent
+        type: text
+        style: plain
+        foreground_templates:
+          - "{{if gt .Code 0}}red{{end}}"
+          - "{{if eq .Code 0}}green{{end}}"
