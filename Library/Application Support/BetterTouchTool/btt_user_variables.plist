@@ -3,8 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>BTTCurrentAudioInputDevice</key>
-	<string>Yeti Stereo Microphone</string>
+	<string>MacBook Pro Microphone</string>
 	<key>BTTCurrentAudioOutputDevice</key>
-	<string>CalDigit Thunderbolt 3 Audio</string>
+	<string>MacBook Pro Speakers</string>
 </dict>
 </plist>
