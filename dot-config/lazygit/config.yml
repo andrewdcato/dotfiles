@@ -30,6 +30,22 @@ gui:
       - bold
     defaultFgColor:
       - default
+    authorColors:
+      "Andrew Cato": "cyan"
+      "Andrew Loutfi": "green"
+      "Aloutfi": "green"
+      "GregGlickert": "magenta"
+      "Gregory Glickert": "magenta"
+      "latimerb": "blue"
+      "Ben Latimer": "blue"
+      "dependabot[bot]": "red"
+      "*": "white"
+    branchColorPatterns:
+      "^feature/\\*\\*(/|$)": "green"
+      "^bugfix/\\*\\*(/|$)": "red"
+      "^develop(/|$)": "yellow"
+      "^main(/|$)": "magenta"
+      "^master(/|$)": "magenta"
   commitLength:
     show: true
   mouseEvents: true
@@ -45,22 +61,6 @@ gui:
   splitDiff: "auto" # one of 'auto' | 'always'
   skipRewordInEditorWarning: false # for skipping the confirmation before launching the reword editor
   border: "rounded" # one of 'single' | 'double' | 'rounded' | 'hidden'
-  authorColors:
-    "Andrew Cato": "cyan"
-    "Andrew Loutfi": "green"
-    "Aloutfi": "green"
-    "GregGlickert": "magenta"
-    "Gregory Glickert": "magenta"
-    "latimerb": "blue"
-    "Ben Latimer": "blue"
-    "dependabot[bot]": "red"
-    "*": "white"
-  branchColors:
-    "feature/**": "green"
-    "bugfix/**": "red"
-    "develop": "yellow"
-    "main": "magenta"
-    "master": "magenta"
 git:
   diffRenderers:
     - colorArg: always
@@ -243,8 +243,10 @@ customCommands:
     command: >
       repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name }} && base={{ .CheckedOutBranch.Name }} &&  if git show-ref --verify --quiet refs/heads/$branch; then
 
+
         git worktree add .claude/worktrees/${repo}-$branch $branch;
       else
+
 
         git worktree add .claude/worktrees/${repo}-$branch -b $branch $base;
       fi && echo "✔ ${repo}-$branch (from $base)"
@@ -260,8 +262,10 @@ customCommands:
     command: >
       repo=$(basename $(git rev-parse --show-toplevel)) && branch={{ .Form.Name }} && base={{ .SelectedLocalBranch.Name }} && if git show-ref --verify --quiet refs/heads/$branch; then
 
+
         git worktree add .claude/worktrees/${repo}-$branch $branch;
       else
+
 
         git worktree add .claude/worktrees/${repo}-$branch -b $branch $base;
       fi && echo "✔ ${repo}-$branch (from $base)"
