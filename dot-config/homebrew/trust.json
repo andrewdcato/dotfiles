@@ -17,5 +17,8 @@
   ],
   "trustedformulae": [
     "textfuel/tap/lazyjira"
+  ],
+  "trustedcasks": [
+    "notprotonnot/notproton/notproton"
   ]
 }
