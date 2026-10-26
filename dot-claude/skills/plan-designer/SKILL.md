@@ -1,20 +1,16 @@
 ---
 name: plan-designer
 description: >-
-  Design a task implementation plan from a Jira ticket or GitHub issue. Pulls
-  the ticket/issue details (Atlassian MCP for Jira, gh CLI for GitHub), analyzes
-  the codebase, agrees on an approach with the user, then writes a structured
-  implementation plan (including test coverage and a final test run) to
-  .claude/plans/<IDENTIFIER>/. Use when the user wants to plan, scope, or design
-  an implementation for a ticket/issue (e.g. "/plan-designer LPP-123",
+  Design a task implementation plan from a Jira ticket or GitHub issue. Pulls the ticket/issue details (acli for Jira, 
+  gh CLI for GitHub), analyzes the codebase, agrees on an approach with the user, then writes a structured
+  implementation plan (including test coverage and a final test run) to .claude/plans/<IDENTIFIER>/. Use when the 
+  user wants to plan, scope, or design an implementation for a ticket/issue (e.g. "/plan-designer LPP-123",
   "plan out issue 456", "design an implementation plan for this branch").
 ---
 
 # Plan Designer
 
-Turn a tracker item into an agreed, test-aware implementation plan stored in the
-repo. The flow is deliberately **collaborative** — do not skip ahead to writing
-the plan before the approach is agreed.
+Turn a tracker item into an agreed, test-aware implementation plan stored in the repo. The flow is deliberately **collaborative** — do not skip ahead to writing the plan before the approach is agreed.
 
 ## 0. Resolve the identifier
 
@@ -28,17 +24,16 @@ Determine what to plan for, in this order:
 
 **Classify the identifier by pattern:**
 
-| Pattern | Source |
-| --- | --- |
-| `LETTERS-DIGITS` (e.g. `LPP-123`, `PROJ-7`) | **Jira** → Atlassian MCP |
+| Pattern                                                   | Source                |
+| --------------------------------------------------------- | --------------------- |
+| `LETTERS-DIGITS` (e.g. `LPP-123`, `PROJ-7`)               | **Jira** → `acli`     |
 | bare digits, optionally `#`-prefixed (e.g. `456`, `#456`) | **GitHub** → `gh` CLI |
 
-Normalize the identifier (uppercase Jira tags; strip a leading `#` from GitHub
-numbers). The normalized identifier is used for the plan directory name later.
+Normalize the identifier (uppercase Jira tags; strip a leading `#` from GitHub numbers). The normalized identifier is used for the plan directory name later.
 
 ## 1. Fetch details (and, for Jira, move to In Progress)
 
-### Jira (Atlassian MCP)
+### Jira (acli)
 
 1. Get the cloud id via `getAccessibleAtlassianResources` (cache/reuse it).
 2. Fetch the issue with `getJiraIssue` (summary, description, acceptance
@@ -87,6 +82,7 @@ Record the resolved command in the plan so the final step is unambiguous.
 
 Create `.claude/plans/<IDENTIFIER>/plan.md` (project-local `.claude`, not the
 global one). Use the normalized identifier as the subdirectory:
+
 - Jira → the tag, e.g. `.claude/plans/LPP-123/plan.md`
 - GitHub → `issue-<number>`, e.g. `.claude/plans/issue-456/plan.md`
 
@@ -99,36 +95,40 @@ Use this structure:
 > Test command: <resolved command>
 
 ## Summary
+
 What the ticket asks for, in your own words.
 
 ## Context & affected areas
+
 Key files/modules/patterns this change touches (with paths).
 
 ## Agreed approach
+
 The approach settled on in step 3, including decisions made and alternatives
 rejected (and why).
 
 ## Implementation steps
+
 Ordered, concrete steps. Each step names the files involved and the change.
 
 ## Test plan
+
 - **Unit tests:** what to add/extend, where.
 - **e2e tests:** what to add/extend, where.
 - (Integration tests if applicable.)
 
 ## Verification
+
 Conclude by running the full suite: `<resolved command>`
 (unit + integration + e2e). The task is not done until this passes.
 
 ## Open questions / risks
+
 Anything still uncertain.
 ```
 
-The plan **must** explicitly include unit test coverage, e2e test coverage, and
-a concluding full test run using the resolved command.
+The plan **must** explicitly include unit test coverage, e2e test coverage, and a concluding full test run using the resolved command.
 
 ## 6. Await feedback
 
-After writing the plan, summarize it briefly, give the file path, and **stop** —
-wait for the user's feedback before implementing anything. This skill produces a
-plan; it does not execute it.
+After writing the plan, summarize it briefly, give the file path, and **stop** — wait for the user's feedback before implementing anything. This skill produces a plan; it does not execute it.
