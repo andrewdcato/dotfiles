@@ -33,55 +33,46 @@ Normalize the identifier (uppercase Jira tags; strip a leading `#` from GitHub n
 
 ## 1. Fetch details (and, for Jira, move to In Progress)
 
+If the fetch fails (auth, missing CLI, unknown id), report the exact error and stop — do not guess at ticket contents.
+
 ### Jira (acli)
 
-1. Get the cloud id via `getAccessibleAtlassianResources` (cache/reuse it).
-2. Fetch the issue with `getJiraIssue` (summary, description, acceptance
-   criteria, comments, linked issues, labels).
-3. **Move to "In Progress":** call `getTransitionsForJiraIssue`, find the
-   transition whose target status is `In Progress`. If the issue is not already
-   in that status, apply it with `transitionJiraIssue`. If no such transition is
-   available, note it and continue (do not block planning).
+1. Fetch the issue with `acli jira workitem view <KEY> --fields assignee,summary,description,status,labels,comment --json`.
+2. **Move to "In Progress":** call `acli jira workitem transition --key <KEY> --status "In Progress" --yes`, find the transition whose target status is `In Progress`. If the issue is not already in that status, apply it with the `--transition` flag. If no such transition is available, note it and continue (do not block planning).
+3. **User Assignment:**
+   - **if the issue is currently unassigned:** call `acli jira workitem assign -k <KEY> -a @me -y`.
+   - **if the issue is already assigned to the user** (`.fields.assignee.emailAddress` matches the authenticated acli user, from `acli jira auth status`): do nothing.
+   - **if the issue is assigned to someone else** (`.fields.assignee` is not `null` and is not the user):
+     1. note who the issue is assigned to - read `.fields.assignee.displayName` from the step 1 output
+     2. prompt the user with the `AskUserQuestion` tool for how to proceed: leave the assignment alone, or reassign it to the user with `acli jira workitem assign -k <KEY> -a @me -y`?
 
 ### GitHub (`gh` CLI)
 
-1. Fetch the issue:
-   `gh issue view <number> --json number,title,body,labels,assignees,comments,url`
-2. **Do not** change the issue's status, labels, or assignment — GitHub issues
-   are read-only context for this skill.
-
-If the fetch fails (auth, missing MCP, unknown id), report the exact error and
-stop — do not guess at ticket contents.
+1. Fetch the issue: `gh issue view <number> --json number,title,body,labels,assignees,comments,url`
+2. **Do not** change the issue's status, labels, or assignment — GitHub issues are read-only context for this skill.
 
 ## 2. Understand the work
 
 - Read the ticket/issue fully, including acceptance criteria and comments.
-- Analyze the codebase to ground the request in real files: locate the modules,
-  patterns, and tests the change will touch. Use search/Explore liberally.
+- Analyze the codebase to ground the request in real files: locate the modules, patterns, and tests the change will touch. Use search/Explore liberally.
 - Form a concrete mental model of the change and where it lands.
 
 ## 3. Align on approach (do not skip)
 
-Surface clarifying and architectural questions **before** writing the plan. Use
-the `AskUserQuestion` tool for crisp, decision-shaping choices (data model,
-boundaries, edge cases, scope cuts, trade-offs). Iterate until the user and you
-agree on the approach. If there are genuinely no open questions, briefly state
-the approach and confirm it before proceeding.
+Surface clarifying and architectural questions **before** writing the plan. Use the `AskUserQuestion` tool for crisp, decision-shaping choices (data model, boundaries, edge cases, scope cuts, trade-offs). Iterate until the user and you agree on the approach. If there are genuinely no open questions, briefly state the approach and confirm it before proceeding.
 
 ## 4. Determine the test command
 
 The plan must conclude with a full test run. Resolve the command in this order:
 
-1. Read the project's `CLAUDE.md` (repo root, then `.claude/CLAUDE.md`) for the
-   documented test command(s) — prefer one that runs unit + integration + e2e.
+1. Read the project's `CLAUDE.md` (repo root, then `.claude/CLAUDE.md`) for the documented test command(s) — prefer one that runs unit + integration + e2e.
 2. Fall back to `npm test` if `CLAUDE.md` documents nothing.
 
 Record the resolved command in the plan so the final step is unambiguous.
 
 ## 5. Write the plan
 
-Create `.claude/plans/<IDENTIFIER>/plan.md` (project-local `.claude`, not the
-global one). Use the normalized identifier as the subdirectory:
+Create `.claude/plans/<IDENTIFIER>/plan.md` (project-local `.claude`, not the global one). Use the normalized identifier as the subdirectory:
 
 - Jira → the tag, e.g. `.claude/plans/LPP-123/plan.md`
 - GitHub → `issue-<number>`, e.g. `.claude/plans/issue-456/plan.md`
