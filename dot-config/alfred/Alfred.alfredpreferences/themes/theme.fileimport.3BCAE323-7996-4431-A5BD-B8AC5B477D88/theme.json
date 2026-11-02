@@ -1,0 +1,64 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 5,
+      "subtext" : {
+        "size" : 12,
+        "colorSelected" : "#A6ADC8FF",
+        "font" : "OperatorMonoLig Nerd Font",
+        "color" : "#BAC2DEFF"
+      },
+      "shortcut" : {
+        "size" : 16,
+        "colorSelected" : "#EC8696FF",
+        "font" : "OperatorMonoLig Nerd Font",
+        "color" : "#8BD4CAFF"
+      },
+      "backgroundSelected" : "#585B70D8",
+      "text" : {
+        "size" : 20,
+        "colorSelected" : "#8BD4CAFF",
+        "font" : "OperatorMonoLig Nerd Font",
+        "color" : "#BAC2DEFF"
+      },
+      "iconPaddingHorizontal" : 7,
+      "roundness" : 8,
+      "paddingVertical" : 8,
+      "iconSize" : 48
+    },
+    "search" : {
+      "backgroundSelected" : "#585B70FF",
+      "paddingHorizontal" : 16,
+      "spacing" : 16,
+      "text" : {
+        "size" : 40,
+        "colorSelected" : "#CDD6F4FF",
+        "font" : "OperatorMonoLig Nerd Font",
+        "color" : "#CDD6F4FF"
+      },
+      "background" : "#181825BF",
+      "roundness" : 8,
+      "paddingVertical" : 0
+    },
+    "window" : {
+      "color" : "#181825D8",
+      "paddingHorizontal" : 16,
+      "width" : 700,
+      "borderPadding" : 0,
+      "borderColor" : "#11111BFF",
+      "blur" : 31,
+      "roundness" : 16,
+      "paddingVertical" : 16
+    },
+    "credit" : "Catppuccin Org",
+    "separator" : {
+      "color" : "#6C7086FF",
+      "thickness" : 0
+    },
+    "scrollbar" : {
+      "color" : "#6C7086FF",
+      "thickness" : 2
+    },
+    "name" : "Catppuccin Modern - Mocha"
+  }
+}

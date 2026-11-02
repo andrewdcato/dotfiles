@@ -1,0 +1,64 @@
+{
+  "alfredtheme" : {
+    "result" : {
+      "textSpacing" : 8,
+      "subtext" : {
+        "size" : 15,
+        "colorSelected" : "#D8DEE9FF",
+        "font" : "Operator Mono Book Italic",
+        "color" : "#D8DEE999"
+      },
+      "shortcut" : {
+        "size" : 12,
+        "colorSelected" : "#D8DEE9FF",
+        "font" : "OperatorMonoLig Nerd Font",
+        "color" : "#D8DEE9FF"
+      },
+      "backgroundSelected" : "#4C566AFF",
+      "text" : {
+        "size" : 24,
+        "colorSelected" : "#88C0D0FF",
+        "font" : "OperatorMonoLig Nerd Font",
+        "color" : "#D8DEE9DD"
+      },
+      "iconPaddingHorizontal" : 12,
+      "roundness" : 0,
+      "paddingVertical" : 4,
+      "iconSize" : 24
+    },
+    "search" : {
+      "backgroundSelected" : "#2E3440FF",
+      "paddingHorizontal" : 8,
+      "spacing" : 4,
+      "text" : {
+        "size" : 40,
+        "colorSelected" : "#B46EADFF",
+        "font" : "OperatorMonoLig Nerd Font",
+        "color" : "#E1E1E2FF"
+      },
+      "background" : "#2E3440FF",
+      "roundness" : 0,
+      "paddingVertical" : 2
+    },
+    "window" : {
+      "color" : "#2E3440FF",
+      "paddingHorizontal" : 0,
+      "width" : 700,
+      "borderPadding" : 0,
+      "borderColor" : "#2E3440FF",
+      "blur" : 40,
+      "roundness" : 4,
+      "paddingVertical" : 2
+    },
+    "credit" : "David Zhang",
+    "separator" : {
+      "color" : "#2E3440FF",
+      "thickness" : 1
+    },
+    "scrollbar" : {
+      "color" : "#81AFC1FF",
+      "thickness" : 2
+    },
+    "name" : "Nord"
+  }
+}

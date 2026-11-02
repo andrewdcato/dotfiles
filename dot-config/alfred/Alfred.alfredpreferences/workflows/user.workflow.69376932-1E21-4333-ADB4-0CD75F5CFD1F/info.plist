@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.dnnsmnstrr.btt</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>A1600322-14D8-4BB5-9F74-BC9D0868CFF7</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>4FE9C384-1D9F-40C5-A565-A31B2EB0D36B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>B34BAC7C-6DAD-493B-B0C9-C3C5D489EEE4</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F21EE34E-4CE3-474A-A37D-704ECF9D2090</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Dennis Muensterer</string>
+	<key>description</key>
+	<string>Run named triggers and actions in BetterTouchTool</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>BTT</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<true/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>keyword</key>
+				<string>btt</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Loading named triggers...</string>
+				<key>script</key>
+				<string>ObjC.import('stdlib')
+
+function run(argv) {
+  var query = argv[0];
+  var shared_secret = $.getenv('BTT_SHARED_SECRET') || ''
+  const DEBUG = false
+  try {
+    let BetterTouchTool = Application('BetterTouchTool');
+    let namedTriggerId = 643
+    const namedTriggersObject = { trigger_id: namedTriggerId }
+    if (!!shared_secret) {
+      namedTriggersObject.shared_secret = shared_secret
+    }
+    let allNamedTriggersJSONString = BetterTouchTool.get_triggers(namedTriggersObject);
+    if (!allNamedTriggersJSONString || allNamedTriggersJSONString.includes('error: ')) {
+        return JSON.stringify({ items: [{ title: allNamedTriggersJSONString || 'Error', subtitle: 'Please make sure external scripting is enabled in BTT and the shared secret is configured properly' }] })
+    }
+    let allTriggers = JSON.parse(allNamedTriggersJSONString);
+    const items = allTriggers.map(trigger =&gt; {
+      const triggerUrl = `btt://trigger_named/?trigger_name=${encodeURIComponent(trigger.BTTTriggerName)}${shared_secret ? '&amp;shared_secret=' + shared_secret : ''}`
+      return {
+        uid: trigger.BTTUUID,
+        title: trigger.BTTTriggerName,
+        subtitle: trigger.BTTPredefinedActionName,
+        autocomplete: trigger.BTTTriggerName,
+        arg: trigger.BTTTriggerName,
+        text: {
+          copy: JSON.stringify(trigger),
+          largetype: trigger.BTTGestureNotes || trigger.BTTGenericActionConfig
+        },
+        quicklookurl: triggerUrl
+      }
+    })
+
+    return JSON.stringify({ items });
+  } catch (err) {
+    const items = [{ title: 'Error', subtitle: err.message }]
+    return JSON.stringify({ items: DEBUG ? items : [] })
+  }
+}</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search and run your named triggers</string>
+				<key>title</key>
+				<string>Run named trigger</string>
+				<key>type</key>
+				<integer>7</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>A1600322-14D8-4BB5-9F74-BC9D0868CFF7</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+  set theQuery to item 1 of argv
+  set theSecret to (system attribute "BTT_SHARED_SECRET")
+
+  tell application "BetterTouchTool"
+    try      trigger_named_async_without_response theQuery shared_secret theSecret    on error      display notification "Could not execute named trigger." with title "Error"    end try
+  end tell
+  return theQuery
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>4FE9C384-1D9F-40C5-A565-A31B2EB0D36B</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>68</integer>
+				<key>script</key>
+				<string>on run argv
+  set theQuery to item 1 of argv
+  set theSecret to (system attribute "BTT_SHARED_SECRET")
+  set theAction to "{\"BTTPredefinedActionType\": " &amp; theQuery &amp; "}"
+  tell application "BetterTouchTool"	try		trigger_action theAction shared_secret theSecret	on error		display notification "Could not execute named trigger." with title "Error"	end try	  end tell
+  return theAction
+end run</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>6</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>F21EE34E-4CE3-474A-A37D-704ECF9D2090</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>fixedorder</key>
+				<false/>
+				<key>items</key>
+				<string>[{"title":"No Action","arg":"-1","subtitle":"BTTPredefinedActionNOAction"},{"title":"Apple Default","arg":"0","subtitle":"BTTPredefinedActionAppleDefault"},{"title":"Middle Click","arg":"1","subtitle":"BTTPredefinedActionMiddleClick"},{"title":"CMD Click","arg":"2","subtitle":"BTTPredefinedActionCMDClick"},{"title":"Left Click","arg":"3","subtitle":"BTTPredefinedActionLeftClick"},{"title":"Right Click","arg":"4","subtitle":"BTTPredefinedActionRightClick"},{"title":"Expose","arg":"5","subtitle":"BTTPredefinedActionExpose"},{"title":"App Expose","arg":"6","subtitle":"BTTPredefinedActionAppExpose"},{"title":"Spaces","arg":"7","subtitle":"BTTPredefinedActionSpaces"},{"title":"Dashboard","arg":"8","subtitle":"BTTPredefinedActionDashboard"},{"title":"Login Screen","arg":"9","subtitle":"BTTPredefinedActionLoginScreen"},{"title":"Finder","arg":"10","subtitle":"BTTPredefinedActionFinder"},{"title":"Zoom In","arg":"11","subtitle":"BTTPredefinedActionZoomIn"},{"title":"Zoom Out","arg":"12","subtitle":"BTTPredefinedActionZoomOut"},{"title":"Sleep Display","arg":"13","subtitle":"BTTPredefinedActionSleepDisplay"},{"title":"Sleep Computer","arg":"14","subtitle":"BTTPredefinedActionSleepComputer"},{"title":"Logout","arg":"15","subtitle":"BTTPredefinedActionLogout"},{"title":"Hidden Files","arg":"16","subtitle":"BTTPredefinedActionHiddenFiles"},{"title":"Move Window Left","arg":"17","subtitle":"BTTPredefinedActionMoveWindowLeft"},{"title":"Move Window Right","arg":"18","subtitle":"BTTPredefinedActionMoveWindowRight"},{"title":"Max Window Left","arg":"19","subtitle":"BTTPredefinedActionMaxWindowLeft"},{"title":"Max Window Right","arg":"20","subtitle":"BTTPredefinedActionMaxWindowRight"},{"title":"Max Window","arg":"21","subtitle":"BTTPredefinedActionMaxWindow"},{"title":"Mute","arg":"22","subtitle":"BTTPredefinedActionMute"},{"title":"Play","arg":"23","subtitle":"BTTPredefinedActionPlay"},{"title":"Volume Up","arg":"24","subtitle":"BTTPredefinedActionVolumeUp"},{"title":"Volume Down","arg":"25","subtitle":"BTTPredefinedActionVolumeDown"},{"title":"Backwards","arg":"26","subtitle":"BTTPredefinedActionBackwards"},{"title":"Forward","arg":"27","subtitle":"BTTPredefinedActionForward"},{"title":"Brightness Up","arg":"28","subtitle":"BTTPredefinedActionBrightnessUp"},{"title":"Brightness Down","arg":"29","subtitle":"BTTPredefinedActionBrightnessDown"},{"title":"Eject","arg":"30","subtitle":"BTTPredefinedActionEject"},{"title":"Illumination Up","arg":"31","subtitle":"BTTPredefinedActionIlluminationUp"},{"title":"Illumination Down","arg":"32","subtitle":"BTTPredefinedActionIlluminationDown"},{"title":"F1","arg":"33","subtitle":"BTTPredefinedActionF1"},{"title":"F2","arg":"34","subtitle":"BTTPredefinedActionF2"},{"title":"F3","arg":"35","subtitle":"BTTPredefinedActionF3"},{"title":"F4","arg":"36","subtitle":"BTTPredefinedActionF4"},{"title":"F5","arg":"37","subtitle":"BTTPredefinedActionF5"},{"title":"F6","arg":"38","subtitle":"BTTPredefinedActionF6"},{"title":"F7","arg":"39","subtitle":"BTTPredefinedActionF7"},{"title":"F8","arg":"40","subtitle":"BTTPredefinedActionF8"},{"title":"F9","arg":"41","subtitle":"BTTPredefinedActionF9"},{"title":"F10","arg":"42","subtitle":"BTTPredefinedActionF10"},{"title":"F11","arg":"43","subtitle":"BTTPredefinedActionF11"},{"title":"F12","arg":"44","subtitle":"BTTPredefinedActionF12"},{"title":"Desktop","arg":"45","subtitle":"BTTPredefinedActionDesktop"},{"title":"App Switcher","arg":"46","subtitle":"BTTPredefinedActionAppSwitcher"},{"title":"Next Monitor","arg":"47","subtitle":"BTTPredefinedActionNextMonitor"},{"title":"Max Next Monitor","arg":"48","subtitle":"BTTPredefinedActionMaxNextMonitor"},{"title":"Launch App","arg":"49","subtitle":"BTTPredefinedActionLaunchApp"},{"title":"Hide All Windows","arg":"50","subtitle":"BTTPredefinedActionHideAllWindows"},{"title":"Page Forward","arg":"51","subtitle":"BTTPredefinedActionPageForward"},{"title":"Page Backward","arg":"52","subtitle":"BTTPredefinedActionPageBackward"},{"title":"Hide All But Active","arg":"53","subtitle":"BTTPredefinedActionHideAllButActive"},{"title":"Double Click","arg":"54","subtitle":"BTTPredefinedActionDoubleClick"},{"title":"Restart BTT","arg":"55","subtitle":"BTTPredefinedActionRestartBTT"},{"title":"Quit BTT","arg":"56","subtitle":"BTTPredefinedActionQuitBTT"},{"title":"Open BTT Preferences","arg":"57","subtitle":"BTTPredefinedActionOpenBTTPreferences"},{"title":"One Finger Search","arg":"58","subtitle":"BTTPredefinedActionOneFingerSearch"},{"title":"Open URL","arg":"59","subtitle":"BTTPredefinedActionOpenURL"},{"title":"Page Up","arg":"60","subtitle":"BTTPredefinedActionPageUp"},{"title":"Page Down","arg":"61","subtitle":"BTTPredefinedActionPageDown"},{"title":"Home","arg":"62","subtitle":"BTTPredefinedActionHome"},{"title":"End","arg":"63","subtitle":"BTTPredefinedActionEnd"},{"title":"Forward Delete","arg":"64","subtitle":"BTTPredefinedActionForwardDelete"},{"title":"Start Drag","arg":"65","subtitle":"BTTPredefinedActionStartDrag"},{"title":"Stop Drag","arg":"66","subtitle":"BTTPredefinedActionStopDrag"},{"title":"Move Tablet","arg":"67","subtitle":"BTTPredefinedActionMoveTablet"},{"title":"Toggle Magic Mouse Touchpad Mode","arg":"68","subtitle":"BTTPredefinedActionToggleMagicMouseTouchpadMode"},{"title":"Start Moving Windows","arg":"69","subtitle":"BTTPredefinedActionStartMovingWindows"},{"title":"Stop Moving Windows","arg":"70","subtitle":"BTTPredefinedActionStopMovingWindows"},{"title":"Start Resizing Windows","arg":"71","subtitle":"BTTPredefinedActionStartResizingWindows"},{"title":"Stop Resizing Windows","arg":"72","subtitle":"BTTPredefinedActionStopResizingWindows"},{"title":"Toggle Resizing Windows","arg":"73","subtitle":"BTTPredefinedActionToggleResizingWindows"},{"title":"Toggle Moving Windows","arg":"74","subtitle":"BTTPredefinedActionToggleMovingWindows"},{"title":"Begin Gesture","arg":"75","subtitle":"BTTPredefinedActionBeginGesture"},{"title":"End Gesture","arg":"76","subtitle":"BTTPredefinedActionEndGesture"},{"title":"Swipe Left","arg":"77","subtitle":"BTTPredefinedActionSwipeLeft"},{"title":"Swipe Right","arg":"78","subtitle":"BTTPredefinedActionSwipeRight"},{"title":"Swipe Up","arg":"79","subtitle":"BTTPredefinedActionSwipeUp"},{"title":"Swipe Down","arg":"80","subtitle":"BTTPredefinedActionSwipeDown"},{"title":"Rotate Left","arg":"81","subtitle":"BTTPredefinedActionRotateLeft"},{"title":"Rotate Right","arg":"82","subtitle":"BTTPredefinedActionRotateRight"},{"title":"End Gesture Immediately","arg":"83","subtitle":"BTTPredefinedActionEndGestureImmediately"},{"title":"Restore Old Window Size","arg":"84","subtitle":"BTTPredefinedActionRestoreOldWindowSize"},{"title":"Create New File","arg":"85","subtitle":"BTTPredefinedActionCreateNewFile"},{"title":"Free Menubar","arg":"86","subtitle":"BTTPredefinedActionFreeMenubar"},{"title":"Ctrl Click","arg":"87","subtitle":"BTTPredefinedActionCtrlClick"},{"title":"Alt Click","arg":"88","subtitle":"BTTPredefinedActionAltClick"},{"title":"Shift Click","arg":"89","subtitle":"BTTPredefinedActionShiftClick"},{"title":"Resize To Top Left Quarter","arg":"90","subtitle":"BTTPredefinedActionResizeToTopLeftQuarter"},{"title":"Resize To Bottom Left Quarter","arg":"91","subtitle":"BTTPredefinedActionResizeToBottomLeftQuarter"},{"title":"Resize To Top Right Quarter","arg":"92","subtitle":"BTTPredefinedActionResizeToTopRightQuarter"},{"title":"Resize To Bottom Right Quarter","arg":"93","subtitle":"BTTPredefinedActionResizeToBottomRightQuarter"},{"title":"Show Color Picker","arg":"94","subtitle":"BTTPredefinedActionShowColorPicker"},{"title":"Move Bottom Half","arg":"95","subtitle":"BTTPredefinedActionMoveBottomHalf"},{"title":"Move Top Half","arg":"96","subtitle":"BTTPredefinedActionMoveTopHalf"},{"title":"Center","arg":"97","subtitle":"BTTPredefinedActionCenter"},{"title":"Center Next","arg":"98","subtitle":"BTTPredefinedActionCenterNext"},{"title":"Window Switcher","arg":"99","subtitle":"BTTPredefinedActionWindowSwitcher"},{"title":"Window Switcher All Apps","arg":"100","subtitle":"BTTPredefinedActionWindowSwitcherAllApps"},{"title":"Toggle BTT","arg":"101","subtitle":"BTTPredefinedActionToggleBTT"},{"title":"Close Window Under Cursor","arg":"102","subtitle":"BTTPredefinedActionCloseWindowUnderCursor"},{"title":"Expose And Sort","arg":"103","subtitle":"BTTPredefinedActionExposeAndSort"},{"title":"Terminate BTT Immediately","arg":"104","subtitle":"BTTPredefinedActionTerminateBTTImmediately"},{"title":"Show BTT Preferences","arg":"105","subtitle":"BTTPredefinedActionShowBTTPreferences"},{"title":"Minimize Window Under Cursor","arg":"106","subtitle":"BTTPredefinedActionMinimizeWindowUnderCursor"},{"title":"Zoom Window Under Cursor","arg":"107","subtitle":"BTTPredefinedActionZoomWindowUnderCursor"},{"title":"Resize To Left Third","arg":"108","subtitle":"BTTPredefinedActionResizeToLeftThird"},{"title":"Resize To Middle Third","arg":"109","subtitle":"BTTPredefinedActionResizeToMiddleThird"},{"title":"Resize To Right Third","arg":"110","subtitle":"BTTPredefinedActionResizeToRightThird"},{"title":"CMD Shift Click","arg":"111","subtitle":"BTTPredefinedActionCMDShiftClick"},{"title":"Full Screen","arg":"112","subtitle":"BTTPredefinedActionFullScreen"},{"title":"Switch Space Left","arg":"113","subtitle":"BTTPredefinedActionSwitchSpaceLeft"},{"title":"Switch Space Right","arg":"114","subtitle":"BTTPredefinedActionSwitchSpaceRight"},{"title":"Launchpad","arg":"115","subtitle":"BTTPredefinedActionLaunchpad"},{"title":"Lookup","arg":"116","subtitle":"BTTPredefinedActionLookup"},{"title":"Smart Zoom","arg":"117","subtitle":"BTTPredefinedActionSmartZoom"},{"title":"Paste String","arg":"118","subtitle":"BTTPredefinedActionPasteString"},{"title":"Custom Click","arg":"119","subtitle":"BTTPredefinedActionCustomClick"},{"title":"Brightness Up On External","arg":"120","subtitle":"BTTPredefinedActionBrightnessUpOnExternal"},{"title":"Brightness Down On External","arg":"121","subtitle":"BTTPredefinedActionBrightnessDownOnExternal"},{"title":"Notification Center","arg":"122","subtitle":"BTTPredefinedActionNotificationCenter"},{"title":"Toggle Cursor Size","arg":"123","subtitle":"BTTPredefinedActionToggleCursorSize"},{"title":"Trigger Menu Item","arg":"124","subtitle":"BTTPredefinedActionTriggerMenuItem"},{"title":"Show Menubar In ContextMenu","arg":"125","subtitle":"BTTPredefinedActionShowMenubarInContextMenu"},{"title":"Toggle Mouse Speed","arg":"126","subtitle":"BTTPredefinedActionToggleMouseSpeed"},{"title":"Airplay Mirroring","arg":"127","subtitle":"BTTPredefinedActionAirplayMirroring"},{"title":"Send Shortcut To Specific App","arg":"128","subtitle":"BTTPredefinedActionSendShortcutToSpecificApp"},{"title":"Action Delay","arg":"129","subtitle":"BTTPredefinedActionDelay"},{"title":"F13","arg":"130","subtitle":"BTTPredefinedActionF13"},{"title":"F14","arg":"131","subtitle":"BTTPredefinedActionF14"},{"title":"F15","arg":"132","subtitle":"BTTPredefinedActionF15"},{"title":"F16","arg":"133","subtitle":"BTTPredefinedActionF16"},{"title":"F17","arg":"134","subtitle":"BTTPredefinedActionF17"},{"title":"F18","arg":"135","subtitle":"BTTPredefinedActionF18"},{"title":"Post Distributed Notification","arg":"136","subtitle":"BTTPredefinedActionPostDistributedNotification"},{"title":"Terminal Command","arg":"137","subtitle":"BTTPredefinedActionTerminalCommand"},{"title":"Automator Workflow","arg":"138","subtitle":"BTTPredefinedActionAutomatorWorkflow"},{"title":"Switch To Preset","arg":"139","subtitle":"BTTPredefinedActionSwitchToPreset"},{"title":"Toggle Mouse Cursor Hidden","arg":"140","subtitle":"BTTPredefinedActionToggleMouseCursorHidden"},{"title":"Toggle Leap","arg":"141","subtitle":"BTTPredefinedActionToggleLeap"},{"title":"App Switcher Backward","arg":"142","subtitle":"BTTPredefinedActionAppSwitcherBackward"},{"title":"Enabled Leap Mouse Control","arg":"143","subtitle":"BTTPredefinedActionEnabledLeapMouseControl"},{"title":"Disable GestureRecognition","arg":"144","subtitle":"BTTPredefinedActionDisableGestureRecognition"},{"title":"Dock Quit App","arg":"145","subtitle":"BTTPredefinedActionDockQuitApp"},{"title":"Dock Minimize","arg":"146","subtitle":"BTTPredefinedActionDockMinimize"},{"title":"Dock Application Expose","arg":"147","subtitle":"BTTPredefinedActionDockApplicationExpose"},{"title":"Dock Send Keyboard Shortcut","arg":"148","subtitle":"BTTPredefinedActionDockSendKeyboardShortcut"},{"title":"CMD Double Click","arg":"149","subtitle":"BTTPredefinedActionCMDDoubleClick"},{"title":"If Mouse Hovers Dock Icon Enable It","arg":"150","subtitle":"BTTPredefinedActionIfMouseHoversDockIconEnableIt"},{"title":"Move Window To Left Space","arg":"151","subtitle":"BTTPredefinedActionMoveWindowToLeftSpace"},{"title":"Move Window To Right Space","arg":"152","subtitle":"BTTPredefinedActionMoveWindowToRightSpace"},{"title":"Change Mouse Position","arg":"153","subtitle":"BTTPredefinedActionChangeMousePosition"},{"title":"Save Current Mouse Position","arg":"154","subtitle":"BTTPredefinedActionSaveCurrentMousePosition"},{"title":"Restore Saved Mouse Position","arg":"155","subtitle":"BTTPredefinedActionRestoreSavedMousePosition"},{"title":"Empty Trash","arg":"156","subtitle":"BTTPredefinedActionEmptyTrash"},{"title":"Open Finder Selection With App","arg":"157","subtitle":"BTTPredefinedActionOpenFinderSelectionWithApp"},{"title":"Lock Screen","arg":"158","subtitle":"BTTPredefinedActionLockScreen"},{"title":"Unlock Screen","arg":"159","subtitle":"BTTPredefinedActionUnlockScreen"},{"title":"Start Recording Mouse Gesture","arg":"160","subtitle":"BTTPredefinedActionStartRecordingMouseGesture"},{"title":"Stop Recording Mouse Gesture","arg":"161","subtitle":"BTTPredefinedActionStopRecordingMouseGesture"},{"title":"Trigger Context Menu Item","arg":"162","subtitle":"BTTPredefinedActionTriggerContextMenuItem"},{"title":"El Capitan Split Screen Left","arg":"163","subtitle":"BTTPredefinedActionElCapitanSplitScreenLeft"},{"title":"El Capitan Split Screen Right","arg":"164","subtitle":"BTTPredefinedActionElCapitanSplitScreenRight"},{"title":"Mission Control And Show Desktop Preview","arg":"165","subtitle":"BTTPredefinedActionMissionControlAndShowDesktopPreview"},{"title":"Toggle Siri Remote Touchpad Mode","arg":"166","subtitle":"BTTPredefinedActionToggleSiriRemoteTouchpadMode"},{"title":"Show Character Palette","arg":"167","subtitle":"BTTPredefinedActionShowCharacterPalette"},{"title":"Trigger SnapArea","arg":"168","subtitle":"BTTPredefinedActionTriggerSnapArea"},{"title":"Screenshot","arg":"169","subtitle":"BTTPredefinedActionScreenshot"},{"title":"Screenshot Window","arg":"170","subtitle":"BTTPredefinedActionScreenshotWindow"},{"title":"Screenshot And Edit","arg":"171","subtitle":"BTTPredefinedActionScreenshotAndEdit"},{"title":"Run Apple Script String","arg":"172","subtitle":"BTTPredefinedActionRunAppleScriptString"},{"title":"Start Siri","arg":"173","subtitle":"BTTPredefinedActionStartSiri"},{"title":"Resize To Left Two Third","arg":"174","subtitle":"BTTPredefinedActionResizeToLeftTwoThird"},{"title":"Resize To Right Two Third","arg":"175","subtitle":"BTTPredefinedActionResizeToRightTwoThird"},{"title":"Open Selected Folder With App","arg":"176","subtitle":"BTTPredefinedActionOpenSelectedFolderWithApp"},{"title":"Show \/ Hide Specific App","arg":"177","subtitle":"BTTPredefinedActionShowHideSpecificApp"},{"title":"Mod Shift Down","arg":"178","subtitle":"BTTPredefinedActionModShiftDown"},{"title":"Mod Shift Up","arg":"179","subtitle":"BTTPredefinedActionModShiftUp"},{"title":"Mod FN Down","arg":"180","subtitle":"BTTPredefinedActionModFNDown"},{"title":"Mod FN Up","arg":"181","subtitle":"BTTPredefinedActionModFNUp"},{"title":"Mod Ctrl Down","arg":"182","subtitle":"BTTPredefinedActionModCtrlDown"},{"title":"Mod Ctrl Up","arg":"183","subtitle":"BTTPredefinedActionModCtrlUp"},{"title":"Mod Opt Down","arg":"184","subtitle":"BTTPredefinedActionModOptDown"},{"title":"Mod Opt Up","arg":"185","subtitle":"BTTPredefinedActionModOptUp"},{"title":"Mod CMD Down","arg":"186","subtitle":"BTTPredefinedActionModCMDDown"},{"title":"Mod CMD Up","arg":"187","subtitle":"BTTPredefinedActionModCMDUp"},{"title":"Toggle TouchBar","arg":"188","subtitle":"BTTPredefinedActionToggleTouchBar"},{"title":"ESC","arg":"189","subtitle":"BTTPredefinedActionESC"},{"title":"Toggle Show Global TouchBar","arg":"190","subtitle":"BTTPredefinedActionToggleShowGlobalTouchBar"},{"title":"Close Current Touch Bar Group","arg":"191","subtitle":"BTTPredefinedActionCloseCurrentTouchBarGroup"},{"title":"Type String","arg":"193","subtitle":"BTTPredefinedActionTypeString"},{"title":"Toggle Caps Lock","arg":"194","subtitle":"BTTPredefinedActionToggleCapsLock"},{"title":"Run Apple Script In Background String","arg":"195","subtitle":"BTTPredefinedActionRunAppleScriptInBackgroundString"},{"title":"Add New Space","arg":"196","subtitle":"BTTPredefinedActionAddNewSpace"},{"title":"Toggle Dark Mode","arg":"197","subtitle":"BTTPredefinedActionToggleDarkMode"},{"title":"Volume Up Little","arg":"198","subtitle":"BTTPredefinedActionVolumeUpLittle"},{"title":"Volume Down Little","arg":"199","subtitle":"BTTPredefinedActionVolumeDownLittle"},{"title":"Toggle Do Not Disturb","arg":"200","subtitle":"BTTPredefinedActionToggleDoNotDisturb"},{"title":"Toggle Night Shift","arg":"201","subtitle":"BTTPredefinedActionToggleNightShift"},{"title":"Start Screen Saver","arg":"202","subtitle":"BTTPredefinedActionStartScreenSaver"},{"title":"Show Clipboard Manager","arg":"203","subtitle":"BTTPredefinedActionShowClipboardManager"},{"title":"Bring Window Under Cursor To Front","arg":"204","subtitle":"BTTPredefinedActionBringWindowUnderCursorToFront"},{"title":"Open Touch Bar Group With Name","arg":"205","subtitle":"BTTPredefinedActionOpenTouchBarGroupWithName"},{"title":"Shell Task","arg":"206","subtitle":"BTTPredefinedActionShellTask"},{"title":"Switch To Desktop 1","arg":"207","subtitle":"BTTPredefinedActionSwitchToDesktop1"},{"title":"Switch To Desktop 2","arg":"208","subtitle":"BTTPredefinedActionSwitchToDesktop2"},{"title":"Switch To Desktop 3","arg":"209","subtitle":"BTTPredefinedActionSwitchToDesktop3"},{"title":"Switch To Desktop 4","arg":"210","subtitle":"BTTPredefinedActionSwitchToDesktop4"},{"title":"Switch To Desktop 5","arg":"211","subtitle":"BTTPredefinedActionSwitchToDesktop5"},{"title":"Switch To Desktop 6","arg":"212","subtitle":"BTTPredefinedActionSwitchToDesktop6"},{"title":"Switch To Desktop 7","arg":"213","subtitle":"BTTPredefinedActionSwitchToDesktop7"},{"title":"Switch To Desktop 8","arg":"214","subtitle":"BTTPredefinedActionSwitchToDesktop8"},{"title":"Switch To Desktop 9","arg":"215","subtitle":"BTTPredefinedActionSwitchToDesktop9"},{"title":"Move Window To Desktop 1","arg":"216","subtitle":"BTTPredefinedActionMoveWindowToDesktop1"},{"title":"Move Window To Desktop 2","arg":"217","subtitle":"BTTPredefinedActionMoveWindowToDesktop2"},{"title":"Move Window To Desktop 3","arg":"218","subtitle":"BTTPredefinedActionMoveWindowToDesktop3"},{"title":"Move Window To Desktop 4","arg":"219","subtitle":"BTTPredefinedActionMoveWindowToDesktop4"},{"title":"Move Window To Desktop 5","arg":"220","subtitle":"BTTPredefinedActionMoveWindowToDesktop5"},{"title":"Move Window To Desktop 6","arg":"222","subtitle":"BTTPredefinedActionMoveWindowToDesktop6"},{"title":"Move Window To Desktop 7","arg":"223","subtitle":"BTTPredefinedActionMoveWindowToDesktop7"},{"title":"Move Window To Desktop 8","arg":"224","subtitle":"BTTPredefinedActionMoveWindowToDesktop8"},{"title":"Move Window To Desktop 9","arg":"225","subtitle":"BTTPredefinedActionMoveWindowToDesktop9"},{"title":"Switch To Desktop 10","arg":"226","subtitle":"BTTPredefinedActionSwitchToDesktop10"},{"title":"Switch To Desktop 11","arg":"227","subtitle":"BTTPredefinedActionSwitchToDesktop11"},{"title":"Switch To Desktop 12","arg":"228","subtitle":"BTTPredefinedActionSwitchToDesktop12"},{"title":"Switch To Desktop 13","arg":"229","subtitle":"BTTPredefinedActionSwitchToDesktop13"},{"title":"Switch To Desktop 14","arg":"230","subtitle":"BTTPredefinedActionSwitchToDesktop14"},{"title":"Switch To Desktop 15","arg":"231","subtitle":"BTTPredefinedActionSwitchToDesktop15"},{"title":"Switch To Desktop 16","arg":"232","subtitle":"BTTPredefinedActionSwitchToDesktop16"},{"title":"Switch To Desktop 17","arg":"233","subtitle":"BTTPredefinedActionSwitchToDesktop17"},{"title":"Switch To Desktop 18","arg":"234","subtitle":"BTTPredefinedActionSwitchToDesktop18"},{"title":"Switch To Desktop 19","arg":"235","subtitle":"BTTPredefinedActionSwitchToDesktop19"},{"title":"Move Window To Desktop 10","arg":"236","subtitle":"BTTPredefinedActionMoveWindowToDesktop10"},{"title":"Move Window To Desktop 11","arg":"237","subtitle":"BTTPredefinedActionMoveWindowToDesktop11"},{"title":"Move Window To Desktop 12","arg":"238","subtitle":"BTTPredefinedActionMoveWindowToDesktop12"},{"title":"Move Window To Desktop 13","arg":"239","subtitle":"BTTPredefinedActionMoveWindowToDesktop13"},{"title":"Move Window To Desktop 14","arg":"240","subtitle":"BTTPredefinedActionMoveWindowToDesktop14"},{"title":"Move Window To Desktop 15","arg":"241","subtitle":"BTTPredefinedActionMoveWindowToDesktop15"},{"title":"Move Window To Desktop 16","arg":"242","subtitle":"BTTPredefinedActionMoveWindowToDesktop16"},{"title":"Move Window To Desktop 17","arg":"243","subtitle":"BTTPredefinedActionMoveWindowToDesktop17"},{"title":"Move Window To Desktop 18","arg":"244","subtitle":"BTTPredefinedActionMoveWindowToDesktop18"},{"title":"Move Window To Desktop 19","arg":"245","subtitle":"BTTPredefinedActionMoveWindowToDesktop19"},{"title":"Terminal Command Blocking","arg":"246","subtitle":"BTTPredefinedActionTerminalCommandBlocking"},{"title":"Quit App Under Cursor","arg":"247","subtitle":"BTTPredefinedActionQuitAppUnderCursor"},{"title":"Trigger Named Trigger","arg":"248","subtitle":"BTTPredefinedActionTriggerNamedTrigger"},{"title":"Show Floating Web View","arg":"249","subtitle":"BTTPredefinedActionShowFloatingWebView"},{"title":"Custom Paste","arg":"250","subtitle":"BTTPredefinedActionCustomPaste"},{"title":"Custom Move Resize","arg":"251","subtitle":"BTTPredefinedActionCustomMoveResize"},{"title":"Run JavaScript In Background String","arg":"252","subtitle":"BTTPredefinedActionRunJavaScriptInBackgroundString"},{"title":"Run JavaScript On Main Thread String","arg":"253","subtitle":"BTTPredefinedActionRunJavaScriptOnMainThreadString"},{"title":"Show HUD","arg":"254","subtitle":"BTTPredefinedActionShowHUD"},{"title":"Haptic Feedback","arg":"255","subtitle":"BTTPredefinedActionHapticFeedback"},{"title":"Save Selected Text To Variable","arg":"256","subtitle":"BTTPredefinedActionSaveSelectedTextToVariable"},{"title":"Toggle True Tone","arg":"257","subtitle":"BTTPredefinedActionToggleTrueTone"},{"title":"Toggle Preset","arg":"258","subtitle":"BTTPredefinedActionTogglePreset"},{"title":"Brightness Up Little","arg":"259","subtitle":"BTTPredefinedActionBrightnessUpLittle"},{"title":"Brightness Down Little","arg":"260","subtitle":"BTTPredefinedActionBrightnessDownLittle"},{"title":"Brightness External Up Little","arg":"261","subtitle":"BTTPredefinedActionBrightnessExternalUpLittle"},{"title":"Brightness External Down Little","arg":"262","subtitle":"BTTPredefinedActionBrightnessExternalDownLittle"},{"title":"Take Screenshot Or Video","arg":"263","subtitle":"BTTPredefinedActionTakeScreenshotOrVideo"},{"title":"Keyboard Shortcut","arg":"264","subtitle":"BTTPredefinedActionKeyboardShortcut"},{"title":"Hide Menubar Extras","arg":"265","subtitle":"BTTPredefinedActionHideMenubarExtras"},{"title":"Toggle Mirroring","arg":"266","subtitle":"BTTPredefinedActionToggleMirroring"},{"title":"Move All Windows To Mouse Display","arg":"267","subtitle":"BTTPredefinedActionMoveAllWindowsToMouseDisplay"},{"title":"Restore Saved Window Layout","arg":"268","subtitle":"BTTPredefinedActionRestoreSavedWindowLayout"},{"title":"Save Current Window Layout","arg":"269","subtitle":"BTTPredefinedActionSaveCurrentWindowLayout"},{"title":"Restore Current Window Layout","arg":"270","subtitle":"BTTPredefinedActionRestoreCurrentWindowLayout"},{"title":"Connect MIDI Device","arg":"271","subtitle":"BTTPredefinedActionConnectMIDIDevice"},{"title":"Scroll","arg":"272","subtitle":"BTTPredefinedActionScroll"},{"title":"Show Custom Context Menu","arg":"273","subtitle":"BTTPredefinedActionShowCustomContextMenu"},{"title":"Connect Bluetooth Device","arg":"274","subtitle":"BTTPredefinedActionConnectBluetoothDevice"},{"title":"Disconnect Bluetooth Device","arg":"275","subtitle":"BTTPredefinedActionDisconnectBluetoothDevice"},{"title":"Toggle Bluetooth Device","arg":"276","subtitle":"BTTPredefinedActionToggleBluetoothDevice"},{"title":"Enable Bluetooth","arg":"277","subtitle":"BTTPredefinedActionEnableBluetooth"},{"title":"Disable Bluetooth","arg":"278","subtitle":"BTTPredefinedActionDisableBluetooth"},{"title":"Toggle Bluetooth","arg":"279","subtitle":"BTTPredefinedActionToggleBluetooth"},{"title":"Plugin","arg":"280","subtitle":"BTTPredefinedActionPlugin"},{"title":"Run Core JavaScript","arg":"281","subtitle":"BTTPredefinedActionRunCoreJavaScript"}]</string>
+				<key>keyword</key>
+				<string>btt</string>
+				<key>matchmode</key>
+				<integer>0</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Select a predefined action to run in BTT</string>
+				<key>title</key>
+				<string>Run action</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.listfilter</string>
+			<key>uid</key>
+			<string>B34BAC7C-6DAD-493B-B0C9-C3C5D489EEE4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>This workflow uses the scripting interface of BetterTouchTool to allow searching and running named triggers or actions within BTT.
+
+To get the list of named triggers, it uses the get_triggers function, which is available starting at version 4.034 of BTT.
+
+Make sure to allow external scripting in the BTT settings under "Scripting BTT" and configure the workflow with your shared secret if you have it set.</string>
+	<key>uidata</key>
+	<dict>
+		<key>4FE9C384-1D9F-40C5-A565-A31B2EB0D36B</key>
+		<dict>
+			<key>note</key>
+			<string>Run named trigger</string>
+			<key>xpos</key>
+			<real>630</real>
+			<key>ypos</key>
+			<real>235</real>
+		</dict>
+		<key>A1600322-14D8-4BB5-9F74-BC9D0868CFF7</key>
+		<dict>
+			<key>note</key>
+			<string>Named Triggers</string>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>235</real>
+		</dict>
+		<key>B34BAC7C-6DAD-493B-B0C9-C3C5D489EEE4</key>
+		<dict>
+			<key>note</key>
+			<string>Actions</string>
+			<key>xpos</key>
+			<real>390</real>
+			<key>ypos</key>
+			<real>460</real>
+		</dict>
+		<key>F21EE34E-4CE3-474A-A37D-704ECF9D2090</key>
+		<dict>
+			<key>note</key>
+			<string>Run action</string>
+			<key>xpos</key>
+			<real>630</real>
+			<key>ypos</key>
+			<real>460</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>If you have set a shared secret, enter it here to allow running triggers via scripting url.</string>
+			<key>label</key>
+			<string>Shared Secret for Scripting</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>BTT_SHARED_SECRET</string>
+		</dict>
+	</array>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.1.0</string>
+	<key>webaddress</key>
+	<string>dnnsmnstrr.github.io</string>
+</dict>
+</plist>
